@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+BIN_NODE_COMMAND=ng exec $(dirname $0)/node "$@"

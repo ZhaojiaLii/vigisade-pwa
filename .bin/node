@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e
+
+BIN_NODE_COMMAND="${BIN_NODE_COMMAND:-node}"
+
+DOCKER_RUN_OPTIONS="$DOCKER_RUN_OPTIONS"
+if [ -t 0 ]; then
+    DOCKER_RUN_OPTIONS="$DOCKER_RUN_OPTIONS -t"
+fi
+
+if [[ "$OSTYPE" = "darwin"* ]]; then
+    USER_ID=1000
+    GROUP_ID=1000
+    VOLUME_OPTION=delegated
+else
+    DOCKER_RUN_OPTIONS="$DOCKER_RUN_OPTIONS --net host"
+    USER_ID=$(id -u)
+    GROUP_ID=$(id -g)
+    VOLUME_OPTION=rw
+fi
+
+USER_HOME="$HOME"
+PROJECT_PATH=$(realpath "$(dirname $0)/..")
+
+source "$PROJECT_PATH/.docker/env"
+
+set -x
+exec docker run --rm -i --init \
+    $DOCKER_RUN_OPTIONS \
+    -v "$USER_HOME/.ssh:$USER_HOME/.ssh:$VOLUME_OPTION" \
+    -v "$USER_HOME/.npm:$USER_HOME/.npm:$VOLUME_OPTION" \
+    -v "$USER_HOME/.config:$USER_HOME/.config:$VOLUME_OPTION" \
+    -v "$USER_HOME/.cache:$USER_HOME/.cache:$VOLUME_OPTION" \
+    -v "$USER_HOME/.local:$USER_HOME/.local:$VOLUME_OPTION" \
+    -v "$PROJECT_PATH:$PROJECT_PATH:$VOLUME_OPTION" \
+    -w "$PWD" \
+    -e "HOME=$HOME" \
+    -e "AUTO_NPM_INSTALL=Off" \
+    -e "NODE_ENV=$NODE_ENV" \
+    -u "$USER_ID:$GROUP_ID" \
+    "$IMAGE_PWA_NODE" \
+    $BIN_NODE_COMMAND "$@"
+
+# vim: ts=4 sts=4 sw=4 et:
