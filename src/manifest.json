@@ -1,6 +1,6 @@
 {
-  "name": "vigisade-pwa",
-  "short_name": "vigisade-pwa",
+  "name": "Vigisade",
+  "short_name": "Vigisade",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
