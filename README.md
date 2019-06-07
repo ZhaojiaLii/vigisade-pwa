@@ -37,15 +37,39 @@ foobar/
   └ pipes/
   └ resources/
   └ services/
+  └ store/
   └ types/
 ```
 
 * `components`: contains children components. Each of them must also follow these rules;
 * `containers`: contains files of the current component (i.e. `foobar.component.ts`, html or scss);
 * `data`: contains all helpers functions which don't fit with other directories;
-* `resources/`: contains special assets for the component;
+* `resources`: contains special assets for the component;
 * `directives`, `interfaces`, `types`: `pipes`, `services`: contains related Angular items. You mai required additional directories for some components.
+* `store` contains files related to the NgRx store;
 
+### Store
+
+Store items must be separated into dedicated files:
+
+```
+store/
+  └ component-name.actions.ts
+  └ component-name.effects.ts
+  └ component-name.module.ts 
+  └ component-name.reducer.ts
+  └ component-name.selectors.ts 
+  └ component-name.state.ts 
+```
+
+You should split any of them into several files. Then you must create a directory:
+
+```
+store/
+  └ actions/
+    └ component-name-foo.actions.ts 
+    └ component-name-bar.actions.ts 
+```
 
 ## Angular CLI
 
