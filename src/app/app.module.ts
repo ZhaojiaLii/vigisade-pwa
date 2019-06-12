@@ -13,14 +13,17 @@ import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from "./store/app.reducer";
 import { AppEffects } from "./store/app.effects";
 import { LoginComponent } from './components/login/containers/login.component';
-import {MatButtonModule, MatIconModule, MatListModule, MatToolbarModule} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
+import { HomepageComponent } from './components/homepage/containers/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TutorialComponent
+    TutorialComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,8 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
     MatToolbarModule,
     MatListModule,
     MatIconModule,
+    MatCardModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
