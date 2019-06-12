@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-tutorial',
   templateUrl: './tutorial.component.html',
-  styleUrls: ['./tutorial.component.scss']
+  styleUrls: ['./tutorial.component.scss'],
 })
 export class TutorialComponent implements OnInit {
 
@@ -15,12 +15,12 @@ export class TutorialComponent implements OnInit {
       id: 0
     },
     {
-      contents: 'Sans object / Non nv',
+      contents: 'No object / Not viewed',
       icons: 'speaker_notes_off',
       id: 1
     },
     {
-      contents: 'Non conforme',
+      contents: 'Not conform',
       icons: 'thumb_down_alt',
       id: 2
     },
@@ -30,7 +30,7 @@ export class TutorialComponent implements OnInit {
       id: 3
     },
     {
-      contents: 'Situation dangeureuse',
+      contents: 'Dangerous situation',
       icons: 'priority_high',
       id: 4
     }
@@ -40,7 +40,7 @@ export class TutorialComponent implements OnInit {
 
   ngOnInit() {
   }
-  backClicked() {
+  clickBack() {
     this.location.back();
   }
 

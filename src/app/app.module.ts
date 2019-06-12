@@ -12,9 +12,9 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from "./store/app.reducer";
 import { AppEffects } from "./store/app.effects";
-import { LoginComponent } from './login/containers/login.component';
+import { LoginComponent } from './components/login/containers/login.component';
 import {MatButtonModule, MatIconModule, MatListModule, MatToolbarModule} from '@angular/material';
-import { TutorialComponent } from './tutorial/containers/tutorial.component';
+import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 
 @NgModule({
   declarations: [
