@@ -1,0 +1,52 @@
+div.container{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+
+  img{
+    width: 200px;
+    margin-left: -100px ;
+    margin-bottom: 30px;
+  }
+
+  button{
+    width: 300px;
+    margin-left: -150px;
+    background: #0288d1;
+    color: white;
+  }
+
+  p{
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+    margin-left: -50%;
+    font-size: 13px;
+    text-decoration: underline;
+
+  }
+  div.container-input-field{
+    input.username{
+      width: 200px;
+      height: 25px;
+      position: absolute;
+      margin-left: -100px;
+    }
+    input.password{
+      width: 200px;
+      height: 25px;
+      position: absolute;
+      margin-top: 30px;
+      margin-left: -100px;
+    }
+    button{
+      background: #0288d1;
+      color: white;
+      width: 200px;
+      position: absolute;
+      margin-top: 80px;
+      margin-left: -100px;
+    }
+  }
+
+}

@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <i class="material-icons" (click)="backClicked()">keyboard_return</i>
+    <p>Tutorial</p>
+  </mat-toolbar>
+  <mat-list>
+    <mat-list-item *ngFor="let content of ListContent">
+      <mat-icon matListIcon>{{content.icons}}</mat-icon>
+      <h3 matLine> {{content.contents}} </h3>
+    </mat-list-item>
+  </mat-list>
+</div>
