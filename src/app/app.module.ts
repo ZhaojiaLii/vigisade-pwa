@@ -12,15 +12,20 @@ import { environment } from '../environments/environment';
 import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from "./store/app.reducer";
 import { AppEffects } from "./store/app.effects";
+import { LoginComponent } from './components/login/containers/login.component';
+import {MatButtonModule, MatIconModule, MatListModule, MatToolbarModule} from '@angular/material';
+import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 15,
@@ -28,8 +33,12 @@ import { AppEffects } from "./store/app.effects";
     }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AppEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     SharedModule.forRoot(),
+    MatButtonModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
