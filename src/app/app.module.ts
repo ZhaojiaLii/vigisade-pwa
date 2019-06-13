@@ -17,13 +17,15 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatToolba
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
+import { MenuComponent } from './components/menu/containers/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TutorialComponent,
-    HomepageComponent
+    HomepageComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

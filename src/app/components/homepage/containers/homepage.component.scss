@@ -10,10 +10,6 @@ div.container{
     @include mat-elevation(4);
     height: 10%;
     width: 100%;
-    i{
-      color: white;
-      position: absolute;
-    }
     p{
       color: white;
       position: absolute;
@@ -21,6 +17,14 @@ div.container{
       font-size: 30px;
       text-align: center;
       margin: 0;
+      font-family: AvenirNext, sans-serif;
+    }
+    a{
+      mat-icon{
+        color: white;
+        position: absolute;
+        margin-top: -3%;
+      }
     }
   }
 
@@ -34,8 +38,10 @@ div.container{
       background: white;
       padding: 15px;
       border-radius: 1px;
+      font-family: AvenirNext, sans-serif;
       @include mat-elevation(4);
       .welcome-detail-text{
+        font-family: AvenirNext, sans-serif;
         display: block;
         background: white;
         font-size: 14px;
@@ -46,7 +52,7 @@ div.container{
     #welcome-actions-to-handle{
       @include mat-elevation(4);
       position: absolute;
-      margin-top: 30px;
+      margin-top: 40px;
       height: 60px;
       width: 90%;
       margin-left: 5%;
@@ -56,10 +62,11 @@ div.container{
       #welcome-actions-to-handle-text{
         font-size: 30px;
         padding-top:15px;
+        font-family: AvenirNext, sans-serif;
       }
     }
     div.welcome-down-small-cards{
-      margin-top: 120px;
+      margin-top: 140px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -71,18 +78,22 @@ div.container{
         justify-content: center;
         .welcome-visit-card{
           border-radius: 30px;
-          width: 50px;
-          height: 50px;
+          width: 46px;
+          height: 46px;
           background: white;
           .welcome-visit-card-number{
-            font-size: 40px;
+            position: absolute;
+            font-size: 30px;
             font-weight: bolder;
-            margin-left: 15px;
+            margin-left: 14px;
+            margin-top: 5px;
+            font-family: AvenirNext, sans-serif;
           }
         }
         .welcome-visit-card-text{
           margin-top: 10px;
           color: #7f7f7f;
+          font-family: AvenirNext, sans-serif;
         }
       }
 
@@ -109,6 +120,7 @@ div.container{
     .welcome-down-btn-text{
       font-size: 20px;
       color: white;
+      font-family: AvenirNext, sans-serif;
     }
     .welcome-down-btn-avatar{
       height: 30px;
