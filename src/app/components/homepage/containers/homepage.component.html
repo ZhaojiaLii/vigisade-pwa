@@ -1,0 +1,53 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <mat-toolbar class="toolbar">
+    <p>Vigisade</p>
+    <a>
+      <mat-icon routerLink="/menu">menu</mat-icon>
+    </a>
+
+
+  </mat-toolbar>
+
+
+  <div class="container-down-content">
+    <mat-card >
+      <mat-card-subtitle>May 2019</mat-card-subtitle>
+      <mat-card-title class="welcome-detail-text">
+        A la Bridoire, la SADE consruira. pour la communauté de communes du Lac d'Aiguebelette, une station d'épuration intercommunale d'eaux usées(10 000 EH extensible à 12 000 EH)
+      </mat-card-title>
+    </mat-card>
+    <div id="welcome-actions-to-handle">
+      <div id="welcome-actions-to-handle-text">
+        {{actionsToHandle}} Actions to handle
+      </div>
+    </div>
+
+    <div class="welcome-down-small-cards">
+      <div class="welcome-down-small-cards-content" id="welcome-down-small-cards-content-1">
+        <div class="welcome-visit-card">
+          <span class="welcome-visit-card-number">{{visitsThisMonth}}</span>
+        </div>
+        <span class="welcome-visit-card-text"> Visits this month</span>
+      </div>
+      <div class="welcome-down-small-cards-content" id="welcome-down-small-cards-content-2">
+        <div class="welcome-visit-card">
+          <span class="welcome-visit-card-number">{{visitsLastMonth}}</span>
+        </div>
+        <span class="welcome-visit-card-text"> Visits last month</span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container-welcome-down-content">
+    <button mat-raised-button id="welcome-down-btn-1" class="welcome-down-btn">
+      <img src="../../../../assets/images/homepage/toHandle.png" alt="" class="welcome-down-btn-avatar">
+      <span class="welcome-down-btn-text">New visit</span>
+    </button>
+    <button mat-raised-button id="welcome-down-btn-2" class="welcome-down-btn">
+      <img src="../../../../assets/images/homepage/attention.png" alt="" class="welcome-down-btn-avatar">
+      <span class="welcome-down-btn-text">Dangerous situation</span>
+    </button>
+  </div>
+</div>

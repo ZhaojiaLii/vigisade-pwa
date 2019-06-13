@@ -1,0 +1,85 @@
+div.container{
+  background: #dcdcdc;
+  overflow: hidden;
+  div.container-toolbar{
+
+    mat-toolbar{
+      background: #dcdcdc;
+      position: absolute;
+      height: 100px;
+      mat-icon{
+      }
+
+      #menu-title-img{
+        height: 30px;
+        width: 70px;
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+      }
+    }
+  }
+
+  div.container-list{
+    background: #dcdcdc;
+    position: absolute;
+    //margin-top: 15%;
+    //padding-top:30%;
+    height: 90%;
+    width: 100%;
+    bottom: 0;
+
+    mat-list{
+      .menu-list-item{
+        padding-top: 20px;
+      }
+      .menu-list-avatar{
+        height: 30px;
+        width: 30px;
+      }
+      .menu-list-content{
+        padding-left: 35px;
+        font-size: 25px;
+        font-family: AvenirNext, sans-serif;
+      }
+    }
+  }
+
+  div.container-menu-down-content{
+    position: absolute;
+    bottom: 5%;
+    height: 25%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .menu-down-btn{
+      position: absolute;
+      margin-left: 5%;
+      height: 35%;
+      width: 90%;
+      text-align: center;
+    }
+    .menu-down-btn-text{
+      font-size: 20px;
+      color: white;
+      font-family: AvenirNext, sans-serif;
+    }
+    .menu-down-btn-avatar{
+      height: 30px;
+      width: 30px;
+      color: white;
+      padding-right: 15px;
+    }
+    #menu-down-btn-1{
+      background: #01579b;
+      margin-top: 20px;
+
+    }
+    #menu-down-btn-2{
+      background: #d18200;
+      bottom: 0;
+    }
+  }
+}

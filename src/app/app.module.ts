@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatButtonModule, MatIconModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,12 +16,16 @@ import { metaReducers, reducers } from './store/app.reducer';
 import { AppEffects } from './store/app.effects';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
+import { HomepageComponent } from './components/homepage/containers/homepage.component';
+import { MenuComponent } from './components/menu/containers/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TutorialComponent,
+    HomepageComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +44,8 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
     MatToolbarModule,
     MatListModule,
     MatIconModule,
+    MatCardModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
