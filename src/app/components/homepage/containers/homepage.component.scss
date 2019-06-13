@@ -4,19 +4,20 @@ div.container{
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background: #f5f5f5;
   mat-toolbar{
     background: #008ac9;
     position: absolute;
     @include mat-elevation(4);
     height: 10%;
     width: 100%;
-    p{
+    img{
       color: white;
       position: absolute;
-      width: 100%;
-      font-size: 30px;
-      text-align: center;
-      margin: 0;
+      height: 30px;
+      width: 111px;
+      left: 50%;
+      margin-left: -55px;
       font-family: AvenirNext, sans-serif;
     }
     a{
@@ -29,7 +30,7 @@ div.container{
   }
 
   div.container-down-content{
-    background: #eeeeee;
+    background: #f5f5f5;
     position: absolute;
     height: 90%;
     width: 100%;
@@ -48,7 +49,6 @@ div.container{
       }
     }
 
-
     #welcome-actions-to-handle{
       @include mat-elevation(4);
       position: absolute;
@@ -60,9 +60,12 @@ div.container{
       background: white;
       color: #0288d1;
       #welcome-actions-to-handle-text{
-        font-size: 30px;
-        padding-top:15px;
+        font-size: 25px;
+        padding-top:20px;
         font-family: AvenirNext, sans-serif;
+        .welcome-actions-to-handle-number{
+          font-weight: bolder;
+        }
       }
     }
     div.welcome-down-small-cards{
@@ -85,15 +88,16 @@ div.container{
             position: absolute;
             font-size: 30px;
             font-weight: bolder;
-            margin-left: 14px;
-            margin-top: 5px;
+            margin-left: 13px;
+            margin-top: 7px;
             font-family: AvenirNext, sans-serif;
           }
         }
         .welcome-visit-card-text{
           margin-top: 10px;
-          color: #7f7f7f;
+          color: #363636;
           font-family: AvenirNext, sans-serif;
+          font-size: 18px;
         }
       }
 
@@ -123,18 +127,15 @@ div.container{
       font-family: AvenirNext, sans-serif;
     }
     .welcome-down-btn-avatar{
-      height: 30px;
-      width: 30px;
-      color: white;
       padding-right: 15px;
     }
     #welcome-down-btn-1{
-      background: #01579b;
+      background: #3884a5;
       margin-top: 20px;
 
     }
     #welcome-down-btn-2{
-      background: #d18200;
+      background: #f89d4f;
       bottom: 0;
     }
   }
