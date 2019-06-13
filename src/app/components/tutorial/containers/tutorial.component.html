@@ -1,11 +1,12 @@
 <div class="container">
   <mat-toolbar class="toolbar">
-    <i class="material-icons" (click)="clickBack()">keyboard_return</i>
+    <img src="../../../../assets/icons/return.svg" alt="" (click)="clickBack()">
+<!--    <i class="material-icons" (click)="clickBack()">keyboard_return</i>-->
     <p>Tutorial</p>
   </mat-toolbar>
   <mat-list>
     <mat-list-item *ngFor="let content of ListContent">
-      <mat-icon matListIcon>{{content.icons}}</mat-icon>
+      <img src="{{content.iconsUrl}}" alt="" class="tutorial-icons" matListIcon>
       <h3 matLine> {{content.contents}} </h3>
     </mat-list-item>
   </mat-list>

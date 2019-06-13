@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,40 +6,38 @@ import { Location } from '@angular/common';
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.scss'],
 })
-export class TutorialComponent implements OnInit {
+export class TutorialComponent {
 
   ListContent = [
     {
-      contents: 'Conform',
-      icons: 'thumb_up_alt',
-      id: 0
+      contents: 'Proper',
+      iconsUrl: '../../../../assets/icons/tutorial/proper.svg',
+      id: 'proper'
     },
     {
       contents: 'No object / Not viewed',
-      icons: 'speaker_notes_off',
-      id: 1
+      iconsUrl: '../../../../assets/icons/tutorial/noObject.svg',
+      id: 'noObject'
     },
     {
-      contents: 'Not conform',
-      icons: 'thumb_down_alt',
-      id: 2
+      contents: 'Improper',
+      iconsUrl: '../../../../assets/icons/tutorial/improper.svg',
+      id: 'improper'
     },
     {
-      contents: 'Action corrective',
-      icons: 'settings icon',
-      id: 3
+      contents: 'Corrective action',
+      iconsUrl: '../../../../assets/icons/tutorial/proper.svg',
+      id: 'correctiveAction'
     },
     {
-      contents: 'Dangerous situation',
-      icons: 'priority_high',
-      id: 4
-    }
+      contents: 'Dangerous Situation',
+      iconsUrl: '../../../../assets/icons/tutorial/dangerousSituation.svg',
+      id: 'dangerousSituation'
+    },
   ];
 
   constructor(private location: Location) { }
 
-  ngOnInit() {
-  }
   clickBack() {
     this.location.back();
   }
