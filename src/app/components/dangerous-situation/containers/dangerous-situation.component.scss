@@ -1,0 +1,91 @@
+@import '~@angular/material/theming';
+.container{
+  background: #f5f5f5;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  .situation-dangerous-toolbar{
+    mat-toolbar{
+      background: #008ac9;
+      position: absolute;
+      height:50px;
+      @include mat-elevation(4);
+      i{
+        color: white;
+        position: absolute;
+      }
+      p{
+        position: absolute;
+        color: white;
+        margin: 0 0 0 55px;
+        font-family: AvenirNext, sans-serif;
+      }
+    }
+  }
+  .situation-dangerous-content{
+    position: absolute;
+    background: #ffffff;
+    height: 447px;
+    width: 100%;
+    top: 55px;
+    overflow: hidden;
+
+    .situation-dangerous-content-title{
+      margin: 30px 0 0 20px;
+      img{
+        height: 60px;
+        width: 60px;
+      }
+      span{
+        position: absolute;
+        margin-top: 20px;
+        font-family: AvenirNext, sans-serif;
+        font-size: 24px;
+        font-weight: bolder;
+      }
+    }
+    .situation-dangerous-content-form{
+      border-radius: 5px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      width: 96%;
+      margin-left: 2%;
+      .situation-dangerous-content-form-field1{
+        width: 96%;
+        margin-left: 2%;
+        margin-top: 20px;
+        .situation-dangerous-content-form-select{
+        }
+      }
+      .situation-dangerous-content-form-input{
+        border: solid 1px #e0e0e0;
+        width: 96%;
+        margin-left: 2%;
+      }
+      .situation-dangerous-content-form-valid{
+        width: 76%;
+        height: 40px;
+        margin-left: 12%;
+        margin-top: 18px;
+        border-radius: 2px;
+        margin-bottom: 20px;
+        img{
+          padding-right: 14px;
+        }
+      }
+    }
+  }
+  .situation-dangerous-content-valid{
+    position: absolute;
+    border-radius: 2px;
+    color: white;
+    font-size: 20px;
+    background: #3884a5;
+    width: 80%;
+    height: 55px;
+    margin-left: 10%;
+    bottom: 45px;
+  }
+}

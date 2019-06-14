@@ -43,7 +43,7 @@ import { DangerousSituationComponent } from './components/dangerous-situation/co
       name: 'Vigisade',
     }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([ AppEffects ]),
+    EffectsModule.forRoot([AppEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
     MatButtonModule,
