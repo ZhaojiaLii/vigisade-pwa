@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-// tslint:disable-next-line:max-line-length
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatListModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -21,7 +20,6 @@ import { HomepageComponent } from './components/homepage/containers/homepage.com
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DangerousSituationComponent } from './components/dangerous-situation/containers/dangerous-situation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +29,6 @@ import { DangerousSituationComponent } from './components/dangerous-situation/co
     HomepageComponent,
     MenuComponent,
     ProfileComponent,
-    DangerousSituationComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,8 +51,7 @@ import { DangerousSituationComponent } from './components/dangerous-situation/co
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
-    ReactiveFormsModule,
-    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
