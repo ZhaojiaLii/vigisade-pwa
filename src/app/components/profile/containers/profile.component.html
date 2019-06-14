@@ -1,0 +1,39 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <i class="material-icons" routerLink="/menu">menu</i>
+    <p>My Profile</p>
+  </mat-toolbar>
+  <div class="container-profile-content-show">
+    <img src="../../../../assets/images/profile/brocelia.jpeg" alt="" class="container-profile-content-image">
+    <p class="container-profile-content-name">Name: Brocelia</p>
+    <p class="container-profile-content-email">E-mail: vigisade@brocelia.fr</p>
+  </div>
+  <div class="container-profile-content-select">
+    <form class="container-select" [formGroup]="options">
+      <mat-form-field class="container-select-item">
+        <mat-select placeholder="Language">
+          <mat-option value="english">English</mat-option>
+          <mat-option value="french">French</mat-option>
+          <mat-option value="dutch">Dutch</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="container-select-item">
+        <mat-select placeholder="Direction">
+          <mat-option value="france">France</mat-option>
+          <mat-option value="netherlands">Netherlands</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="container-select-item">
+        <mat-select placeholder="Zone">
+          <mat-option value="west france">West France</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="container-select-item">
+        <mat-select placeholder="Entity">
+          <mat-option value="rouen">Rouen</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+  </div>
+</div>
