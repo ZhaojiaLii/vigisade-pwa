@@ -5,15 +5,35 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
+import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 
 const extraOptions: ExtraOptions = {};
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'tutorial', component: TutorialComponent},
-  {path: 'home', component: HomepageComponent},
-  {path: 'menu', component: MenuComponent},
-  {path: 'profile', component: ProfileComponent},
+  {
+    path: '',
+    component: LoginComponent,
+  },
+  {
+    path: 'tutorial',
+    component: TutorialComponent,
+  },
+  {
+    path: 'home',
+    component: HomepageComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
+  {
+    path: 'dangerous',
+    component: DangerousComponent,
+  },
 ];
 
 @NgModule({
