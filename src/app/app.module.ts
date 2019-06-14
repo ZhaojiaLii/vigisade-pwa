@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-// tslint:disable-next-line:max-line-length
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatListModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
@@ -34,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 15,
@@ -42,7 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AppEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
     MatButtonModule,
     MatToolbarModule,
