@@ -1,6 +1,6 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
   <mat-toolbar class="toolbar">
-    <p>Vigisade</p>
+    <img src="../../../../assets/images/homepage/logo.svg" alt="">
     <a>
       <mat-icon routerLink="/menu">menu</mat-icon>
     </a>
@@ -18,7 +18,7 @@
     </mat-card>
     <div id="welcome-actions-to-handle">
       <div id="welcome-actions-to-handle-text">
-        {{actionsToHandle}} Actions to handle
+        <span class="welcome-actions-to-handle-number">{{actionsToHandle}}</span> Actions to handle
       </div>
     </div>
 
@@ -42,11 +42,11 @@
 
   <div class="container-welcome-down-content">
     <button mat-raised-button id="welcome-down-btn-1" class="welcome-down-btn">
-      <img src="../../../../assets/images/homepage/toHandle.png" alt="" class="welcome-down-btn-avatar">
+      <img src="../../../../assets/icons/homepage/list.svg" alt="" class="welcome-down-btn-avatar">
       <span class="welcome-down-btn-text">New visit</span>
     </button>
     <button mat-raised-button id="welcome-down-btn-2" class="welcome-down-btn">
-      <img src="../../../../assets/images/homepage/attention.png" alt="" class="welcome-down-btn-avatar">
+      <img src="../../../../assets/icons/homepage/alert.svg" alt="" class="welcome-down-btn-avatar">
       <span class="welcome-down-btn-text">Dangerous situation</span>
     </button>
   </div>
