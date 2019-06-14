@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatListModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -20,6 +20,7 @@ import { HomepageComponent } from './components/homepage/containers/homepage.com
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomepageComponent,
     MenuComponent,
     ProfileComponent,
+    DangerousComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       name: 'Vigisade',
     }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([ AppEffects ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
     MatButtonModule,
@@ -51,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

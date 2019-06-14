@@ -5,7 +5,7 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
-import { DangerousSituationComponent } from './components/dangerous-situation/containers/dangerous-situation.component';
+import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'dangerous',
-    component: DangerousSituationComponent,
+    component: DangerousComponent,
   },
 ];
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DangerousSituationComponent } from './dangerous-situation.component';
+import { DangerousComponent } from './dangerous.component';
 
-describe('DangerousSituationComponent', () => {
-  let component: DangerousSituationComponent;
-  let fixture: ComponentFixture<DangerousSituationComponent>;
+describe('DangerousComponent', () => {
+  let component: DangerousComponent;
+  let fixture: ComponentFixture<DangerousComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DangerousSituationComponent ]
+      declarations: [ DangerousComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DangerousSituationComponent);
+    fixture = TestBed.createComponent(DangerousComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
