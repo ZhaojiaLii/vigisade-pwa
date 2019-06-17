@@ -1,142 +1,142 @@
-@import '~@angular/material/theming';
-div.container{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background: #f5f5f5;
-  mat-toolbar{
-    background: #008ac9;
-    position: absolute;
-    @include mat-elevation(4);
-    height: 10%;
-    width: 100%;
-    img{
-      color: white;
-      position: absolute;
-      height: 30px;
-      width: 111px;
-      left: 50%;
-      margin-left: -55px;
-      font-family: AvenirNext, sans-serif;
-    }
-    a{
-      mat-icon{
-        color: white;
-        position: absolute;
-        margin-top: -3%;
-      }
-    }
-  }
+// @import '~@angular/material/theming';
+// div.container{
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+//   overflow: hidden;
+//   background: #f5f5f5;
+//   mat-toolbar{
+//     background: #008ac9;
+//     position: absolute;
+//     @include mat-elevation(4);
+//     height: 10%;
+//     width: 100%;
+//     img{
+//       color: white;
+//       position: absolute;
+//       height: 30px;
+//       width: 111px;
+//       left: 50%;
+//       margin-left: -55px;
+//       font-family: AvenirNext, sans-serif;
+//     }
+//     a{
+//       mat-icon{
+//         color: white;
+//         position: absolute;
+//         margin-top: -3%;
+//       }
+//     }
+//   }
 
-  div.container-down-content{
-    background: #f5f5f5;
-    position: absolute;
-    height: 90%;
-    width: 100%;
-    margin-top: 20%;
-    mat-card{
-      background: white;
-      padding: 15px;
-      border-radius: 1px;
-      font-family: AvenirNext, sans-serif;
-      @include mat-elevation(4);
-      .welcome-detail-text{
-        font-family: AvenirNext, sans-serif;
-        display: block;
-        background: white;
-        font-size: 14px;
-      }
-    }
+//   div.container-down-content{
+//     background: #f5f5f5;
+//     position: absolute;
+//     height: 90%;
+//     width: 100%;
+//     margin-top: 20%;
+//     mat-card{
+//       background: white;
+//       padding: 15px;
+//       border-radius: 1px;
+//       font-family: AvenirNext, sans-serif;
+//       @include mat-elevation(4);
+//       .welcome-detail-text{
+//         font-family: AvenirNext, sans-serif;
+//         display: block;
+//         background: white;
+//         font-size: 14px;
+//       }
+//     }
 
-    #welcome-actions-to-handle{
-      @include mat-elevation(4);
-      position: absolute;
-      margin-top: 40px;
-      height: 60px;
-      width: 90%;
-      margin-left: 5%;
-      text-align: center;
-      background: white;
-      color: #0288d1;
-      #welcome-actions-to-handle-text{
-        font-size: 25px;
-        padding-top:20px;
-        font-family: AvenirNext, sans-serif;
-        .welcome-actions-to-handle-number{
-          font-weight: bolder;
-        }
-      }
-    }
-    div.welcome-down-small-cards{
-      margin-top: 140px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+//     #welcome-actions-to-handle{
+//       @include mat-elevation(4);
+//       position: absolute;
+//       margin-top: 40px;
+//       height: 60px;
+//       width: 90%;
+//       margin-left: 5%;
+//       text-align: center;
+//       background: white;
+//       color: #0288d1;
+//       #welcome-actions-to-handle-text{
+//         font-size: 25px;
+//         padding-top:20px;
+//         font-family: AvenirNext, sans-serif;
+//         .welcome-actions-to-handle-number{
+//           font-weight: bolder;
+//         }
+//       }
+//     }
+//     div.welcome-down-small-cards{
+//       margin-top: 140px;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-around;
 
-      div.welcome-down-small-cards-content{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .welcome-visit-card{
-          border-radius: 30px;
-          width: 46px;
-          height: 46px;
-          background: white;
-          .welcome-visit-card-number{
-            position: absolute;
-            font-size: 30px;
-            font-weight: bolder;
-            margin-left: 13px;
-            margin-top: 7px;
-            font-family: AvenirNext, sans-serif;
-          }
-        }
-        .welcome-visit-card-text{
-          margin-top: 10px;
-          color: #363636;
-          font-family: AvenirNext, sans-serif;
-          font-size: 18px;
-        }
-      }
+//       div.welcome-down-small-cards-content{
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
+//         .welcome-visit-card{
+//           border-radius: 30px;
+//           width: 46px;
+//           height: 46px;
+//           background: white;
+//           .welcome-visit-card-number{
+//             position: absolute;
+//             font-size: 30px;
+//             font-weight: bolder;
+//             margin-left: 13px;
+//             margin-top: 7px;
+//             font-family: AvenirNext, sans-serif;
+//           }
+//         }
+//         .welcome-visit-card-text{
+//           margin-top: 10px;
+//           color: #363636;
+//           font-family: AvenirNext, sans-serif;
+//           font-size: 18px;
+//         }
+//       }
 
-    }
+//     }
 
-  }
+//   }
 
-  div.container-welcome-down-content{
-    position: absolute;
-    bottom: 10%;
-    height: 25%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+//   div.container-welcome-down-content{
+//     position: absolute;
+//     bottom: 10%;
+//     height: 25%;
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     overflow: hidden;
 
-    .welcome-down-btn{
-      position: absolute;
-      margin-left: 5%;
-      height: 35%;
-      width: 90%;
-      text-align: center;
-    }
-    .welcome-down-btn-text{
-      font-size: 20px;
-      color: white;
-      font-family: AvenirNext, sans-serif;
-    }
-    .welcome-down-btn-avatar{
-      padding-right: 15px;
-    }
-    #welcome-down-btn-1{
-      background: #3884a5;
-      margin-top: 20px;
+//     .welcome-down-btn{
+//       position: absolute;
+//       margin-left: 5%;
+//       height: 35%;
+//       width: 90%;
+//       text-align: center;
+//     }
+//     .welcome-down-btn-text{
+//       font-size: 20px;
+//       color: white;
+//       font-family: AvenirNext, sans-serif;
+//     }
+//     .welcome-down-btn-avatar{
+//       padding-right: 15px;
+//     }
+//     #welcome-down-btn-1{
+//       background: #3884a5;
+//       margin-top: 20px;
 
-    }
-    #welcome-down-btn-2{
-      background: #f89d4f;
-      bottom: 0;
-    }
-  }
-}
+//     }
+//     #welcome-down-btn-2{
+//       background: #f89d4f;
+//       bottom: 0;
+//     }
+//   }
+// }

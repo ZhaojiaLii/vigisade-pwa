@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule, MatToolbarModule, MatNativeDateModule } from '@angular/material';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule} from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -22,6 +24,7 @@ import { ProfileComponent } from './components/profile/containers/profile.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { VisitComponent } from './components/visit/containers/visit.component';
     EffectsModule.forRoot([ AppEffects ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
