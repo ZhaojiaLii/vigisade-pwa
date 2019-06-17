@@ -26,6 +26,7 @@ import { DangerousComponent } from './components/dangerous/containers/dangerous.
 import { VisitComponent } from './components/visit/containers/visit.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
