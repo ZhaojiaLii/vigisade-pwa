@@ -7,8 +7,21 @@ html {
 }
 body {
   height: 100%;
+  font-family: AvenirNext;
+  letter-spacing: -0.6px;
+  background-color: #f5f5f5;
 }
 app-root, app-login {
   height: 100%;
   display: block;
+}
+
+.mb-50 {
+  margin-bottom: 3.125rem;
+}
+.font-25 {
+  font-size: 1.5625rem;
+}
+.font-30 {
+  font-size: 1.875rem;
 }
