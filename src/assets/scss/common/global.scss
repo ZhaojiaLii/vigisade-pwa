@@ -2,26 +2,81 @@
   font-family: AvenirNext;
   src: url(../../assets/fonts/AvenirNextLTPro-Regular.otf) format('opentype');
 }
+@font-face {
+  font-family: AvenirNext-Bold;
+  src: url(../../assets/fonts/AvenirNextLTPro-Bold.otf) format('opentype');
+}
+@font-face {
+  font-family: AvenirNext-UltraLight;
+  src: url(../../assets/fonts/AvenirNextLTPro-It.otf) format('opentype');
+}
+
 html {
   height: 100%;
 }
 body {
   height: 100%;
   font-family: AvenirNext;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
   letter-spacing: -0.6px;
   background-color: #f5f5f5;
+  color: #363636;
 }
+
+strong {
+  font-family: AvenirNext-Bold;
+}
+.btn {
+  height: 55px;
+}
+.btn-warning, .btn-warning:hover {
+  color: #fff;
+} 
 app-root, app-login {
   height: 100%;
   display: block;
 }
-
+.light-grey {
+  color: #8a8a8a;
+}
+.light-font {
+  font-family: AvenirNext-UltraLight;
+}
 .mb-50 {
   margin-bottom: 3.125rem;
 }
+.mb-30 {
+  margin-bottom: 1.875rem;
+}
+
+.font-12 {
+  @include font-size(12);
+}
+.font-14 {
+  @include font-size(14);
+}
 .font-25 {
-  font-size: 1.5625rem;
+  @include font-size(25);
 }
 .font-30 {
-  font-size: 1.875rem;
+  @include font-size(30);
+}
+
+.circle-white {
+  box-sizing: border-box;
+  min-width: 46px;
+  height: 46px;
+  padding: 5px 11px 0 9px;
+  border-radius: 500px;
+  vertical-align: middle;
+  font-size: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
 }
