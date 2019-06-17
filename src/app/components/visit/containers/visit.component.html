@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="container-toolbar">
+    <mat-toolbar class="toolbar">
+      <img src="../../../../assets/icons/visit/menu.svg" alt="" id="visit-menu" routerLink="/menu">
+      <p>Visite</p>
+      <img src="../../../../assets/icons/visit/dangerousSituation.svg" alt="" id="visit-dangerous" routerLink="/dangerous">
+    </mat-toolbar>
+  </div>
+  <div class="container-content">
+    <div class="title">
+      <p>DR NORMANDIE</p>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="form-child">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option>None</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="form-child">
+        <label><input matInput placeholder="Lieu du chantier"></label>
+      </mat-form-field>
+      <mat-form-field class="form-child">
+        <label><input matInput placeholder="Client"></label>
+      </mat-form-field>
+      <mat-form-field class="form-child">
+        <label>
+          <input matInput [matDatepicker]="picker" placeholder="Date de la visite">
+        </label>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="group-control">
+      <p class="group-control-title">Équipe contrôlée</p>
+      <div class="group-control-subtitle">
+        <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
+        <img src="../../../../assets/icons/visit/plus.svg" alt="">
+      </div>
+
+      <button mat-raised-button class="group-control-valid"><span>Valider</span></button>
+    </div>
+  </div>
+  <div class="container-down-toolbar">
+    <div class="down-bar-left"><span>50/57</span></div>
+    <div class="down-bar-right">
+      <div class="down-bar-right-content">Visite 0/9</div>
+      <img src="../../../../assets/icons/visit/arrow.svg" alt="">
+    </div>
+  </div>
+</div>
