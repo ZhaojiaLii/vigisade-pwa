@@ -1,50 +1,50 @@
-@import '~@angular/material/theming';
-.container{
-  background: #e7e7e7;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  .toolbar{
-    background: #0188d9;
-    height: 8%;
-    @include mat-elevation(4);
-    i{
-      color: white;
-    }
-    p{
-      color: white;
-      padding-left: 20px;
-      font-family: AvenirNext, sans-serif;
-      font-size: 18px;
-    }
-  }
-  .container-profile-content-show{
-    width: 100%;
-    height: 35%;
-    margin-top: 15%;
-    text-align: center;
-    .container-profile-content-image{
-      height: 100px;
-      width: 100px;
-      border-radius: 50%;
-      @include mat-elevation(4);
-    }
-    .container-profile-content-name{
-      font-size: 20px;
-      font-weight: bolder;
-    }
-    .container-profile-content-email{
-      font-size: 18px;
-      color: #575757;
-    }
-  }
-  .container-profile-content-select{
-    width: 100%;
-    height: 50%;
-    .container-select-item{
-      width: 90%;
-      margin-left: 5%;
-    }
-  }
-}
+// @import '~@angular/material/theming';
+// .container{
+//   background: #e7e7e7;
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+//   overflow: hidden;
+//   .toolbar{
+//     background: #0188d9;
+//     height: 8%;
+//     @include mat-elevation(4);
+//     i{
+//       color: white;
+//     }
+//     p{
+//       color: white;
+//       padding-left: 20px;
+//       font-family: AvenirNext, sans-serif;
+//       font-size: 18px;
+//     }
+//   }
+//   .container-profile-content-show{
+//     width: 100%;
+//     height: 35%;
+//     margin-top: 15%;
+//     text-align: center;
+//     .container-profile-content-image{
+//       height: 100px;
+//       width: 100px;
+//       border-radius: 50%;
+//       @include mat-elevation(4);
+//     }
+//     .container-profile-content-name{
+//       font-size: 20px;
+//       font-weight: bolder;
+//     }
+//     .container-profile-content-email{
+//       font-size: 18px;
+//       color: #575757;
+//     }
+//   }
+//   .container-profile-content-select{
+//     width: 100%;
+//     height: 50%;
+//     .container-select-item{
+//       width: 90%;
+//       margin-left: 5%;
+//     }
+//   }
+// }

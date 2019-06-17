@@ -1,0 +1,14 @@
+@font-face {
+  font-family: AvenirNext;
+  src: url(../../assets/fonts/AvenirNextLTPro-Regular.otf) format('opentype');
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+app-root, app-login {
+  height: 100%;
+  display: block;
+}
