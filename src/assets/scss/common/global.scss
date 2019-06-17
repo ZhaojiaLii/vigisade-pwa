@@ -1,14 +1,14 @@
 @font-face {
   font-family: AvenirNext;
-  src: url(../../assets/fonts/AvenirNextLTPro-Regular.otf) format('opentype');
+  src: url("../../assets/fonts/AvenirNext-Regular.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-Regular.woff") format("woff");
 }
 @font-face {
   font-family: AvenirNext-Bold;
-  src: url(../../assets/fonts/AvenirNextLTPro-Bold.otf) format('opentype');
+  src: url("../../assets/fonts/AvenirNext-Bold.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-Bold.woff") format("woff");
 }
 @font-face {
   font-family: AvenirNext-UltraLight;
-  src: url(../../assets/fonts/AvenirNextLTPro-It.otf) format('opentype');
+  src: url("../../assets/fonts/AvenirNext-UltraLight.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-UltraLight.woff") format("woff");
 }
 
 html {
@@ -34,8 +34,14 @@ strong {
 }
 .btn-warning, .btn-warning:hover {
   color: #fff;
-} 
-app-root, app-login {
+}
+.btn-primary {
+  box-shadow: 0 0 10px 0 rgba(56, 132, 165, 0.5);
+}
+.btn-warning {
+  box-shadow: 0 0 10px 0 rgba(222, 169, 84, 0.1);
+}
+app-root, app-login, app-menu {
   height: 100%;
   display: block;
 }
@@ -44,6 +50,9 @@ app-root, app-login {
 }
 .light-font {
   font-family: AvenirNext-UltraLight;
+}
+.w-60px {
+  width: 60px;
 }
 .mb-50 {
   margin-bottom: 3.125rem;
