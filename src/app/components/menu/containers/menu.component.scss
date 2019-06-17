@@ -1,4 +1,7 @@
 div.container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
   background: #dfdfdf;
   overflow: hidden;
   div.container-toolbar{
@@ -6,26 +9,27 @@ div.container{
     mat-toolbar{
       background: #dfdfdf;
       position: absolute;
-      height: 100px;
+      height: 60px;
       mat-icon{
+        position: absolute;
       }
 
       #menu-title-img{
         height: 30px;
-        width: 70px;
+        width: 111px;
         position: absolute;
         left: 50%;
-        margin-left: -35px;
+        margin-left: -55px;
       }
     }
   }
 
   div.container-list{
-    background: #dcdcdc;
+    background: #dfdfdf;
     position: absolute;
     //margin-top: 15%;
     //padding-top:30%;
-    height: 90%;
+    height: 91%;
     width: 100%;
     bottom: 0;
 
@@ -34,8 +38,9 @@ div.container{
         padding-top: 20px;
       }
       .menu-list-avatar{
-        height: 30px;
-        width: 30px;
+        height: 25px;
+        width: 25px;
+        margin-bottom: 5px;
       }
       .menu-list-content{
         padding-left: 35px;
@@ -67,8 +72,8 @@ div.container{
       font-family: AvenirNext, sans-serif;
     }
     .menu-down-btn-avatar{
-      height: 30px;
-      width: 30px;
+      height: 25px;
+      width: 25px;
       color: white;
       padding-right: 15px;
     }

@@ -1,0 +1,112 @@
+.container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #f5f5f5;
+  font-family: AvenirNext, sans-serif;
+  .container-toolbar{
+    .toolbar{
+      height: 50px;
+      background: #008ac9;
+      #visit-menu{
+        height: 15px;
+        width: 18px;
+      }
+      p{
+        font-family: AvenirNext, sans-serif;
+        font-weight: bolder;
+        font-size: 18px;
+        color: #ffffff;
+        position: absolute;
+        margin: 0 0 0 55px;
+      }
+      #visit-dangerous{
+        position: absolute;
+        right: 15px;
+        height: 55px;
+        width: 55px;
+      }
+    }
+  }
+
+  .container-content{
+    .title{
+      font-family: AvenirNext, sans-serif;
+      font-size: 26px;
+      font-weight: bolder;
+      margin: 12px 0 0 15px;
+    }
+    .form-group{
+      margin-top: 30px;
+      .form-child{
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 20px;
+      }
+    }
+    .group-control{
+      .group-control-title{
+        font-family: AvenirNext, sans-serif;
+        color: #1e272e;
+        margin: 0 0 10px 15px;
+        font-size: 22px;
+      }
+      .group-control-subtitle{
+        display: flex;
+        flex-direction: row;
+        .group-control-subtitle-text{
+          font-family: AvenirNext, sans-serif;
+          font-size: 16px;
+          margin: 0 0 0 15px;
+          padding-top: 10px;
+        }
+        img{
+          height: 35px;
+          width: 35px;
+          position: absolute;
+          right: 15px;
+        }
+      }
+      .group-control-valid{
+        position: absolute;
+        height: 55px;
+        width: 80%;
+        bottom: 75px;
+        margin-left: 10%;
+        background: #3884a5;
+        span{
+          font-family: AvenirNext, sans-serif;
+          font-size: 20px;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .container-down-toolbar{
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    background: #ffffff;
+    .down-bar-left{
+      margin-left: 27px;
+      margin-top: 15px;
+    }
+    .down-bar-right{
+      margin-top: 13px;
+      .down-bar-right-content{
+        position: absolute;
+        right:70px;
+      }
+      img{
+        position: absolute;
+        right: 29px;
+        margin-top: 5px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+}

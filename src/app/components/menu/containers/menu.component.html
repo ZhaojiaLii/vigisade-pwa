@@ -1,30 +1,30 @@
 <div class="container">
   <div class="container-toolbar">
     <mat-toolbar>
-      <mat-icon (click)="clickBack()">close</mat-icon>
-      <img src="../../../../assets/images/menu/pwa.png" alt="" id="menu-title-img">
+      <mat-icon routerLink="/home">close</mat-icon>
+      <img src="../../../../assets/icons/menu/logo.svg" alt="" id="menu-title-img">
     </mat-toolbar>
   </div>
   <div class="container-list">
     <mat-list>
       <mat-list-item class="menu-list-item" routerLink="/home">
-        <img src="../../../../assets/images/menu/home.png" alt="" class="menu-list-avatar">
+        <img src="../../../../assets/icons/menu/homepage.svg" alt="" class="menu-list-avatar">
         <p class="menu-list-content">Homepage</p>
       </mat-list-item>
-      <mat-list-item class="menu-list-item" routerLink="/dangerous">
-        <img src="../../../../assets/images/menu/toHandle.png" alt="" class="menu-list-avatar">
+      <mat-list-item class="menu-list-item">
+        <img src="../../../../assets/icons/menu/toHandle.svg" alt="" class="menu-list-avatar">
         <p class="menu-list-content">To handle</p>
       </mat-list-item>
-      <mat-list-item class="menu-list-item">
-        <img src="../../../../assets/images/menu/history.png" alt="" class="menu-list-avatar">
+      <mat-list-item class="menu-list-item" routerLink="/visit">
+        <img src="../../../../assets/icons/menu/history.svg" alt="" class="menu-list-avatar">
         <p class="menu-list-content">History of visits</p>
       </mat-list-item>
       <mat-list-item class="menu-list-item" routerLink="/profile">
-        <img src="../../../../assets/images/menu/profile.png" alt="" class="menu-list-avatar">
+        <img src="../../../../assets/icons/menu/profile.svg" alt="" class="menu-list-avatar">
         <p class="menu-list-content">My profile</p>
       </mat-list-item>
       <mat-list-item class="menu-list-item" routerLink="/tutorial">
-        <img src="../../../../assets/images/menu/info.png" alt="" class="menu-list-avatar">
+        <img src="../../../../assets/icons/menu/tutorial.svg" alt="" class="menu-list-avatar">
         <p class="menu-list-content">Tutorial</p>
       </mat-list-item>
     </mat-list>
@@ -32,11 +32,11 @@
 
   <div class="container-menu-down-content">
     <button mat-raised-button id="menu-down-btn-1" class="menu-down-btn">
-      <img src="../../../../assets/images/homepage/toHandle.png" alt="" class="menu-down-btn-avatar">
+      <img src="../../../../assets/icons/menu/list.svg" alt="" class="menu-down-btn-avatar">
       <span class="menu-down-btn-text">New visit</span>
     </button>
     <button mat-raised-button id="menu-down-btn-2" class="menu-down-btn">
-      <img src="../../../../assets/images/homepage/attention.png" alt="" class="menu-down-btn-avatar">
+      <img src="../../../../assets/icons/menu/alert.svg" alt="" class="menu-down-btn-avatar">
       <span class="menu-down-btn-text">Dangerous situation</span>
     </button>
   </div>
