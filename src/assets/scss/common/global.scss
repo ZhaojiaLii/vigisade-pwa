@@ -10,7 +10,10 @@
   font-family: AvenirNext-UltraLight;
   src: url("../../assets/fonts/AvenirNext-UltraLight.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-UltraLight.woff") format("woff");
 }
-
+@font-face {
+  font-family: AvenirNext-Medium;
+  src: url("../../assets/fonts/AvenirNext-Medium.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-Medium.woff") format("woff");
+}
 html {
   height: 100%;
 }
@@ -26,9 +29,19 @@ body {
   color: #363636;
 }
 
-strong {
+strong, .font-bold {
   font-family: AvenirNext-Bold;
 }
+.font-medium {
+  font-family: AvenirNext-Medium;
+}
+.font-regular {
+  font-family: AvenirNext;
+}
+.font-ultaLight {
+  font-family: AvenirNext-UltraLight;
+}
+
 .btn {
   height: 55px;
 }
@@ -38,7 +51,7 @@ strong {
 .btn-primary {
   box-shadow: 0 0 10px 0 rgba(56, 132, 165, 0.5);
 }
-.btn-warning {
+.btn-warning, .shadow-01 {
   box-shadow: 0 0 10px 0 rgba(222, 169, 84, 0.1);
 }
 app-root, app-login, app-menu {
@@ -51,6 +64,7 @@ app-root, app-login, app-menu {
 .light-font {
   font-family: AvenirNext-UltraLight;
 }
+
 .w-60px {
   width: 60px;
 }
@@ -84,6 +98,7 @@ app-root, app-login, app-menu {
   font-weight: 600;
 }
 .circle-white {
+  @extend .d-inline-flex;
   box-sizing: border-box;
   min-width: 46px;
   height: 46px;
@@ -91,7 +106,21 @@ app-root, app-login, app-menu {
   border-radius: 500px;
   vertical-align: middle;
   font-size: 30px;
-  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+}
+
+.circle-white-icon {
+  @extend .d-inline-flex;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border-radius: 500px;
+  vertical-align: middle;
+  font-size: 30px;
   justify-content: center;
   align-items: center;
   font-weight: bold;
