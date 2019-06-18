@@ -1,7 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { HighlightDirective } from './directives/highlight.directive';
 
 const sharedComponents = [];
-const sharedDirectives = [];
+const sharedDirectives = [
+  HighlightDirective,
+];
 const sharedPipes = [];
 
 @NgModule({

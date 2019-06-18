@@ -71,13 +71,18 @@ app-root, app-login, app-menu {
 .font-14 {
   @include font-size(14);
 }
+.font-24 {
+  @include font-size(24);
+}
 .font-25 {
   @include font-size(25);
 }
 .font-30 {
   @include font-size(30);
 }
-
+.font-weight-600 {
+  font-weight: 600;
+}
 .circle-white {
   box-sizing: border-box;
   min-width: 46px;

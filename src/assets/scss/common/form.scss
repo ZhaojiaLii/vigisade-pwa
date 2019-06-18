@@ -1,0 +1,133 @@
+$input-padding-horizontal: $grid-gutter-width / 3;
+$input-padding-vertical: $grid-gutter-width / 3;
+
+// Basic form styling
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMSIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgMTEgNiI+ICAgIDxwYXRoIGZpbGw9IiMzODg0QTUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTExIDEuMjM4TDUuNSA2IDAgMS4xMzQgMS4zNzcgMCA1LjUgNC4wNzUgOS40NjcgMHoiLz48L3N2Zz4=);
+  background-size: 11px 6px;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+.form-row {
+  margin-left: -$grid-gutter-width / 2;
+  margin-right: -$grid-gutter-width / 2;
+  .form-group {
+    padding: $grid-gutter-width / 2 $grid-gutter-width / 2 0;
+    align-self: flex-end;
+  }
+}
+
+.form-group {
+  position: relative;
+  padding-top: $grid-gutter-width / 2;
+  margin-bottom: $grid-gutter-width;
+}
+
+.form-control {
+  border: 0;
+  border-radius: 0;
+  padding: 0;  
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+  font-size: 1rem;
+  font-weight: 600;
+  &:not(textarea) {
+    height: 44px;
+  }
+  
+  + label {
+    position: absolute;
+    z-index: 1;
+    top: $input-padding-vertical + $grid-gutter-width / 2;
+    margin: 0;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+    left: $input-padding-horizontal;
+    right: $input-padding-horizontal;
+  }
+  
+  &:focus {
+    box-shadow: none;
+    background-color: transparent;
+  }
+  
+  &:focus {
+    + label {
+      color: $primary;
+    }
+  }
+  
+  &:focus, &.has-value {
+    
+    + label {
+      font-size: 0.75rem;
+      top: 0;
+    }
+    
+  }
+  
+}
+
+// Position labels for when javascript is disabled
+.no-js {
+  .form-control + label {
+    font-size: 0.75rem;
+    top: 0;
+  }
+}
+
+.form-row {
+  .form-control {
+    + label {
+      left: $grid-gutter-width / 2;
+      right: $grid-gutter-width / 2;
+    }
+    option {
+      padding: 0 $grid-gutter-width / 2;
+    }
+  }
+  .line {
+    left: $grid-gutter-width / 2;
+    right: $grid-gutter-width / 2;
+  }
+}
+
+.line {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  // @include horizontal-gradient($primary,$secondary);
+  background: #e0e0e0;
+  &:after {
+    content: "";
+    height: 1px;
+    position: absolute;
+    display: block;
+    background: $primary;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transition: transform 0.2s ease-in-out;
+    transform-origin: 0 0;
+  }
+}
+
+.form-control:focus {
+  ~ .line {
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// Remove Bootstrap 4 height from select
+select.form-control:not([size]):not([multiple]) {
+  height: 44px;
+}
