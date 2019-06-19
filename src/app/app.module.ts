@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/containers/profile.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/action-corrective.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { VisitComponent } from './components/visit/containers/visit.component';
     ProfileComponent,
     DangerousComponent,
     VisitComponent,
+    ActionCorrectiveComponent,
   ],
   imports: [
     BrowserModule,
