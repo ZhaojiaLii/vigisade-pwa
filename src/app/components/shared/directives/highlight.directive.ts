@@ -30,9 +30,9 @@ export class HighlightDirective implements OnChanges {
     //     }
     // }
 
-    // @HostListener('mouseleave', ['$event']) onMouseLeave(event: Event) {
-    //     this.checkValue();
-    // }
+    @HostListener('mouseleave', ['$event']) onMouseLeave(event: Event) {
+        this.checkValue();
+    }
 
     checkValue() {
         console.log(this.el.nativeElement.value);
