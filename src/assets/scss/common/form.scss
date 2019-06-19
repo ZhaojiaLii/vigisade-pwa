@@ -11,6 +11,15 @@ select {
   background-position: right center;
   background-repeat: no-repeat;
 }
+[bsDatepicker] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyMCAyMiI+ICAgIDxkZWZzPiAgICAgICAgPHBhdGggaWQ9ImEiIGQ9Ik0xOCA4VjVhMSAxIDAgMCAwLTEtMWgtMnYxYTEgMSAwIDAgMS0yIDBWNEg3djFhMSAxIDAgMSAxLTIgMFY0SDNhMSAxIDAgMCAwLTEgMXYzaDE2em0wIDJIMnY5YTEgMSAwIDAgMCAxIDFoMTRhMSAxIDAgMCAwIDEtMXYtOXpNNyAyaDZWMWExIDEgMCAwIDEgMiAwdjFoMmEzIDMgMCAwIDEgMyAzdjE0YTMgMyAwIDAgMS0zIDNIM2EzIDMgMCAwIDEtMy0zVjVhMyAzIDAgMCAxIDMtM2gyVjFhMSAxIDAgMSAxIDIgMHYxeiIvPiAgICA8L2RlZnM+ICAgIDx1c2UgZmlsbD0iIzM4ODRBNSIgZmlsbC1ydWxlPSJldmVub2RkIiB4bGluazpocmVmPSIjYSIvPjwvc3ZnPg==);
+  background-size: 20px 22px;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
 .form-row {
   margin-left: -$grid-gutter-width / 2;
   margin-right: -$grid-gutter-width / 2;

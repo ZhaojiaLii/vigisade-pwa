@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-dangerous',
   templateUrl: './dangerous.component.html',
-  styleUrls: ['./dangerous.component.scss'],
 })
 export class DangerousComponent {
 

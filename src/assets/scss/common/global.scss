@@ -51,8 +51,15 @@ strong, .font-bold {
 .btn-primary {
   box-shadow: 0 0 10px 0 rgba(56, 132, 165, 0.5);
 }
-.btn-warning, .shadow-01 {
+.btn-info {
+  box-shadow: 0 0 10px 0 rgba(56, 132, 165, 0.5);
+}
+.btn-warning, .shadow-warning {
   box-shadow: 0 0 10px 0 rgba(222, 169, 84, 0.1);
+}
+
+.shadow-01 {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 app-root, app-login, app-menu {
   height: 100%;
@@ -64,7 +71,10 @@ app-root, app-login, app-menu {
 .light-font {
   font-family: AvenirNext-UltraLight;
 }
-
+.wh-35px {
+  width: 35px!important;
+  height: 35px!important;
+}
 .w-60px {
   width: 60px;
 }
@@ -72,18 +82,39 @@ app-root, app-login, app-menu {
   width: 118px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.24);
 }
+.p-15 {
+  padding: 15px;
+}
+.pr-15 {
+  padding-right: 15px;
+}
+.mx-30 {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.mb-90 {
+  margin-bottom: 5.625rem;
+}
 .mb-50 {
   margin-bottom: 3.125rem;
 }
 .mb-30 {
   margin-bottom: 1.875rem;
 }
-
+.mb-12 {
+  margin-bottom: 0.75rem;
+}
 .font-12 {
   @include font-size(12);
 }
 .font-14 {
   @include font-size(14);
+}
+.font-18 {
+  @include font-size(18);
+}
+.font-22 {
+  @include font-size(22);
 }
 .font-24 {
   @include font-size(24);
@@ -97,6 +128,7 @@ app-root, app-login, app-menu {
 .font-weight-600 {
   font-weight: 600;
 }
+
 .circle-white {
   @extend .d-inline-flex;
   box-sizing: border-box;
@@ -126,4 +158,9 @@ app-root, app-login, app-menu {
   font-weight: bold;
   text-align: center;
   background-color: #fff;
+}
+
+.add-btn {
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
