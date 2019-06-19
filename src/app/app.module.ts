@@ -20,6 +20,7 @@ import { DangerousComponent } from './components/dangerous/containers/dangerous.
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HttpClientModule } from '@angular/common/http';
+import { surveyFeature } from './components/visit/store/survey.feature';
 
 const mainComponents = [
   LoginComponent,
@@ -33,6 +34,7 @@ const mainComponents = [
 
 const ngrxFeatures = [
   loginFeature,
+  surveyFeature,
 ];
 
 @NgModule({
