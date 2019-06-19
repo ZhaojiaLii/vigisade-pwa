@@ -52,7 +52,7 @@ strong, .font-bold {
 .btn {
   height: 55px;
 }
-.btn-warning, .btn-warning:hover {
+.btn-warning, .btn-warning:hover, .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active, .show > .btn-warning.dropdown-toggle {
   color: #fff;
 }
 .btn-primary {
