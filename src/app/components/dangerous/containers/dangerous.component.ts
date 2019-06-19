@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dangerous',
@@ -17,6 +18,12 @@ export class DangerousComponent {
     }
   ];
 
-  constructor() { }
+  options: FormGroup;
+  constructor(fb: FormBuilder) {
+    this.options = fb.group({
+      color: 'French',
+    });
+  }
+
 
 }

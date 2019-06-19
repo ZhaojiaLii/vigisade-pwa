@@ -14,6 +14,10 @@
   font-family: AvenirNext-Medium;
   src: url("../../assets/fonts/AvenirNext-Medium.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-Medium.woff") format("woff");
 }
+@font-face {
+  font-family: AvenirNext-DemiBold;
+  src: url("../../assets/fonts/AvenirNext-DemiBold.woff2") format("woff2"),url("../../assets/fonts/AvenirNext-DemiBold.woff") format("woff");
+}
 html {
   height: 100%;
 }
@@ -31,6 +35,9 @@ body {
 
 strong, .font-bold {
   font-family: AvenirNext-Bold;
+}
+.font-demiBold {
+  font-family: AvenirNext-DemiBold;
 }
 .font-medium {
   font-family: AvenirNext-Medium;
@@ -101,8 +108,15 @@ app-root, app-login, app-menu {
 .mb-30 {
   margin-bottom: 1.875rem;
 }
+.mb-25 {
+  margin-bottom: 1.5625rem;
+}
 .mb-12 {
   margin-bottom: 0.75rem;
+}
+.my-45 {
+  margin-bottom: 2.8125rem;
+  margin-top: 2.8125rem;
 }
 .font-12 {
   @include font-size(12);

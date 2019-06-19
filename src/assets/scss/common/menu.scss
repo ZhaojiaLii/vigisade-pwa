@@ -8,9 +8,9 @@
   color: #fff;
   height: 50px;
   > span, .d-flex > span {
+    @extend .font-demiBold;
     margin-left: 3.5rem;
     font-size: 18px;
-    font-weight: 600;
   }
   &.justify-content-center > span {
     margin: 0;

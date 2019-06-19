@@ -103,6 +103,21 @@ select {
     left: $grid-gutter-width / 2;
     right: $grid-gutter-width / 2;
   }
+  textarea.form-control {
+    border: solid 1px #e0e0e0;
+    padding: 15px;
+    + label {
+      left: 30px;
+    }
+    &:focus {
+      border-color: $primary;
+    }
+    &:focus, &.has-value {
+      + label {
+        left: 15px;
+      }
+    }
+  }
 }
 
 .line {
@@ -140,3 +155,4 @@ select {
 select.form-control:not([size]):not([multiple]) {
   height: 44px;
 }
+
