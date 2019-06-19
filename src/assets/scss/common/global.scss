@@ -75,9 +75,7 @@ app-root, app-login, app-menu {
 .light-grey {
   color: #8a8a8a;
 }
-.light-font {
-  font-family: AvenirNext-UltraLight;
-}
+
 .wh-35px {
   width: 35px!important;
   height: 35px!important;
@@ -95,6 +93,14 @@ app-root, app-login, app-menu {
 .pr-15 {
   padding-right: 15px;
 }
+.px-30 {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .mx-30 {
   margin-left: 30px;
   margin-right: 30px;
@@ -111,8 +117,14 @@ app-root, app-login, app-menu {
 .mb-25 {
   margin-bottom: 1.5625rem;
 }
+.mb-20 {
+  margin-bottom: 1.25rem;
+}
 .mb-12 {
   margin-bottom: 0.75rem;
+}
+.mb-10 {
+  margin-bottom: 0.625rem;
 }
 .my-45 {
   margin-bottom: 2.8125rem;
@@ -142,7 +154,9 @@ app-root, app-login, app-menu {
 .font-weight-600 {
   font-weight: 600;
 }
-
+.lineH-24px {
+  line-height: 1.71;
+}
 .circle-white {
   @extend .d-inline-flex;
   box-sizing: border-box;
