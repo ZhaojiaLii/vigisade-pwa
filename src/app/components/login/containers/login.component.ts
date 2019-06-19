@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../services/login.service';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
-  constructor() { }
+  /** Detects login success. */
+  isLogged$ = this.loginService.isLogged().pipe(
+    take(1),
+    tap(() => console.log('LOGIN SUCCESS'))
+  );
 
+  constructor(
+    private loginService: LoginService,
+  ) { }
+
+  login(): void {
+    this.loginService.login('username', 'password');
+  }
 }
