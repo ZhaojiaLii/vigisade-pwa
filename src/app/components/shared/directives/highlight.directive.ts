@@ -35,8 +35,6 @@ export class HighlightDirective implements OnChanges {
     }
 
     checkValue() {
-        console.log(this.el.nativeElement.value);
-
         if (this.el.nativeElement.value !== '') {
             this.renderer.addClass(this.el.nativeElement, 'has-value');
         } else {
