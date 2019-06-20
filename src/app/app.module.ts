@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/action-corrective.component';
+import { SecuriteComponent } from './components/securite/securite.component';
 
 
 
@@ -39,7 +40,8 @@ import { ActionCorrectiveComponent } from './components/action-corrective/action
     ProfileComponent,
     DangerousComponent,
     VisitComponent,
-    ActionCorrectiveComponent
+    ActionCorrectiveComponent,
+    SecuriteComponent
   ],
   imports: [
     BrowserModule,

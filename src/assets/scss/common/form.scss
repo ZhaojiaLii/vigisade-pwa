@@ -156,3 +156,39 @@ select.form-control:not([size]):not([multiple]) {
   height: 44px;
 }
 
+.checkcontainer {
+  cursor: pointer;
+  input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    &:checked ~ .radiobtn {
+      background: #363636;
+      path {
+       stroke: #fff;
+       fill: #fff;
+     }
+      &.svg-green {
+        background: $success;
+         path {
+          stroke: #fff;
+          fill: #fff;
+        }
+      }
+      &.svg-warning {
+        background: $warning;
+         path {
+          stroke: #fff;
+          fill: #fff;
+        }
+      }
+      &.svg-danger {
+        background: $danger;
+         path {
+          stroke: #fff;
+          fill: #fff;
+        }
+      }
+    }
+  }
+}
