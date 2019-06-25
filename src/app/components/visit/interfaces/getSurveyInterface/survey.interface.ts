@@ -1,8 +1,10 @@
 import { Category } from './category.interface';
 
 export interface Survey {
-  title: string;
-  categories: Category[];
+  email: string;
+  direction: string;
+  group?: string;  // equipe
+  categories: Category[]; // rubrique
   bestPracticeLabel: string;
   bestPracticeHelp: string;
 }

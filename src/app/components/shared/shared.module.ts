@@ -2,6 +2,8 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../../interceptors/token-interceptor.service';
 
 const sharedComponents = [];
 const sharedDirectives = [];
@@ -39,7 +41,9 @@ const materialModules = [
     ...sharedDirectives,
     ...sharedPipes,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

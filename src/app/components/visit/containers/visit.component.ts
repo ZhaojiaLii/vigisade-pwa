@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SurveyService } from '../services/survey.service';
 
 @Component({
   selector: 'app-visit',
@@ -8,6 +9,18 @@ import { Component } from '@angular/core';
 export class VisitComponent {
 
   selected = 'option2';
-  constructor() { }
+  constructor(private surveyService: SurveyService) { }
+
+  getSurvey() {
+    this.surveyService.getSurvey();
+  }
+
+  getResults() {
+    this.surveyService.getResults();
+  }
+
+  getResultByID() {
+    this.surveyService.getResult();
+  }
 
 }

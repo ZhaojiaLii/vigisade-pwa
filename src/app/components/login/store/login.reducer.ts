@@ -6,5 +6,5 @@ export const loginReducer = createReducer(
   loginInitialState,
   on(login, state => state),
   on(loginSuccess, (state, {token}) => ({...state, token})),
-  on(loginFail, state => ({...state, token: 'test'})),
+  on(loginFail, state => ({...state, token: 'test for login'})),
 );
