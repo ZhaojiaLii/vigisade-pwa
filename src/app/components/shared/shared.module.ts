@@ -1,10 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { HighlightDirective } from './directives/highlight.directive';
 import { MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const sharedComponents = [];
-const sharedDirectives = [];
+const sharedDirectives = [
+  HighlightDirective,
+];
 const sharedPipes = [];
 
 const materialModules = [

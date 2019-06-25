@@ -1,56 +1,83 @@
-<div class="container">
-  <div class="container-toolbar">
-    <mat-toolbar class="toolbar">
-      <img src="../../../../assets/icons/visit/menu.svg" alt="" id="visit-menu" routerLink="/menu">
-      <p>Visite</p>
-      <img src="../../../../assets/icons/visit/dangerousSituation.svg" alt="" id="visit-dangerous" routerLink="/dangerous">
-    </mat-toolbar>
+<div class="menu-bar bg-primary justify-content-between mb-12">
+  <div class="d-flex align-items-center">
+    <a class="menu-icon" routerLink="/menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
+        <path fill="#FFF" fill-rule="evenodd" d="M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z"/>
+      </svg>
+    </a>
+    <span>Visite</span>
   </div>
-  <div class="container-content">
-    <div class="title">
-      <p>DR NORMANDIE</p>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="form-child">
-        <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option>None</mat-option>
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="form-child">
-        <label><input matInput placeholder="Lieu du chantier"></label>
-      </mat-form-field>
-      <mat-form-field class="form-child">
-        <label><input matInput placeholder="Client"></label>
-      </mat-form-field>
-      <mat-form-field class="form-child">
-        <label>
-          <input matInput [matDatepicker]="picker" placeholder="Date de la visite">
-        </label>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div class="group-control">
-      <p class="group-control-title">Équipe contrôlée</p>
-      <div class="group-control-subtitle">
-        <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
-        <img src="../../../../assets/icons/visit/plus.svg" alt="">
+  <div>
+    <a routerLink="/dangerous" class="circle-white-icon shadow-01 bg-warning mr-3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="10 10 40 40">
+        <g fill="none" fill-rule="evenodd">
+          <path fill="#FFF" d="M30.714 31.784c0 .45-.32.816-.714.816-.395 0-.714-.365-.714-.816 0-.45.32-.816.714-.816.395 0 .714.365.714.816zm-.251-2.415c-.019.29-.223.511-.463.511-.012 0-.024 0-.036-.002-.229-.02-.41-.237-.428-.51l-.25-4.029c-.02-.47.282-.872.676-.898a.623.623 0 0 1 .04-.001c.366 0 .676.333.71.773.003.042.003.084 0 .126l-.25 4.03z"></path>
+          <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M30 18.417L40.338 35.64H19.662L30 18.417z"></path>
+        </g>
+      </svg>
+    </a>
+  </div>
+</div>
+<div class="container mb-90">
+  <div class="row">
+    <div class="card card-full-width mb-10 shadow-none">
+      <div class="card-body px-30">
+        <div class="row align-items-center light-grey mb-20">
+            <div class="col-6 font-demiBold">Qualité</div>
+            <div class="col-6 text-right font-12">12/05/2019</div>
+        </div>
+        <p class="font-demiBold">
+          23 Boulevard Charner<br>
+          22000 Saint-Brieuc
+        </p>
       </div>
-
-      <button mat-raised-button class="group-control-valid"><span>Valider</span></button>
+    </div>
+    <div class="card card-full-width mb-10 shadow-none lineH-24px">
+      <div class="card-body">
+        <p class="mb-30">
+            Equipements de Protection Collective <span class="light-grey font-14">(signalisation, blindage, échaffaudage, dérivation, pompage,…)</span>
+        </p>
+        <p class="px-10 font-14 mb-30">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat metus id urna maximus porttitor. Suspendisse fermentum faucibus mi quis malesuada. Nam sit amet vulputate ipsum.
+        </p>
+        <img src="../../../assets/images/img-test-correction.jpg" class="img-fluid w-100"/>
+      </div>
+    </div>
+    <div class="card card-full-width shadow-none p-15">
+      <div class="font-22 font-demiBold">Correctif</div>
+      <form [formGroup]="options">
+        <div class="form-row">
+          <div class="form-group col-12">
+            <textarea appHighlight class="form-control" id="commentaire" rows="3"></textarea>
+            <label for="commentaire" class="light-grey font-14">Commentaire correction</label>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="mx-30 mb-25">
+          <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
+                <g fill="#363636" fill-rule="evenodd" stroke="#363636">
+                    <path d="M2.42 4.549a.71.71 0 0 0-.71.708v10.647a.71.71 0 0 0 .71.709H21.58a.71.71 0 0 0 .71-.71V5.258a.71.71 0 0 0-.71-.708h-4.4a.352.352 0 0 1-.274-.13L14.67 1.71H9.328L7.093 4.42a.355.355 0 0 1-.274.13h-4.4zM21.58 17.322H2.42A1.42 1.42 0 0 1 1 15.904V5.256a1.42 1.42 0 0 1 1.42-1.419h4.232L8.887 1.13a.355.355 0 0 1 .274-.128h5.677c.106 0 .206.046.274.128l2.235 2.71h4.234c.782 0 1.42.636 1.42 1.418v10.646c0 .782-.638 1.42-1.42 1.42z"/>
+                    <path d="M12 5.258a4.618 4.618 0 0 0-4.613 4.613A4.619 4.619 0 0 0 12 14.484a4.618 4.618 0 0 0 4.613-4.613A4.618 4.618 0 0 0 12 5.258m0 9.936a5.33 5.33 0 0 1-5.323-5.323A5.328 5.328 0 0 1 12 4.549a5.327 5.327 0 0 1 5.322 5.322A5.328 5.328 0 0 1 12 15.194M19.807 7.742a.71.71 0 1 1 0-1.42.71.71 0 0 1 0 1.42"/>
+                    <path d="M12 8.097c-.978 0-1.774.796-1.774 1.774s.796 1.774 1.774 1.774 1.774-.796 1.774-1.774S12.978 8.097 12 8.097m0 4.258A2.486 2.486 0 0 1 9.516 9.87 2.486 2.486 0 0 1 12 7.387a2.486 2.486 0 0 1 2.483 2.484A2.486 2.486 0 0 1 12 12.355"/>
+                </g>
+              </svg>
+              <span class="ml-3">Ajouter une photo</span>
+            </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="container-down-toolbar">
-    <div class="down-bar-left"><span>50/57</span></div>
-    <div class="down-bar-right">
-      <div class="down-bar-right-content">Visite 0/9</div>
-      <img src="../../../../assets/icons/visit/arrow.svg" alt="">
-    </div>
+  <div class="mx-30 my-45">
+    <button class="btn btn-info d-block w-100">Valider</button>
+  </div>
+</div>
+<div class="fixed-footer">
+  <div class=""><span class="font-bold">50</span>/57</div>
+  <div class="d-flex align-items-center">
+    <div class="mr-2"><span class="font-bold">Visite 0</span>/9</div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
+      <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"/>
+  </svg>
   </div>
 </div>

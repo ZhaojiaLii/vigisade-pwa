@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-tutorial',
   templateUrl: './tutorial.component.html',
-  styleUrls: ['./tutorial.component.scss'],
 })
 export class TutorialComponent {
 

@@ -1,0 +1,46 @@
+.menu-bar {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .py-3;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.24);
+  color: #fff;
+  height: 50px;
+  > span, .d-flex > span {
+    @extend .font-demiBold;
+    margin-left: 3.5rem;
+    font-size: 18px;
+  }
+  &.justify-content-center > span {
+    margin: 0;
+  }
+  .menu-icon {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-center;
+  }
+  .circle-white-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+app-menu {
+  background: #dfdfdf;
+
+  a.nav-link {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 1.5rem 0;
+    color: #606060;
+    &:hover {
+      color: #606060;
+    }
+  }
+  
+}

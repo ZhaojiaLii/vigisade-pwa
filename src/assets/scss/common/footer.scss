@@ -1,0 +1,14 @@
+.fixed-footer {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .bg-white;
+  @extend .shadow-01;
+  @extend .justify-content-between;
+  @extend .fixed-bottom;
+  height: 40px;
+  padding: 10px 30px;
+  font-size: 1.125rem;
+  svg {
+    transform: rotate(180deg);
+  }
+}
