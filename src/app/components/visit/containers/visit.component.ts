@@ -4,10 +4,8 @@ import { SurveyService } from '../services/survey.service';
 @Component({
   selector: 'app-visit',
   templateUrl: './visit.component.html',
-  styleUrls: ['./visit.component.scss'],
 })
 export class VisitComponent {
-
   selected = 'option2';
   constructor(private surveyService: SurveyService) { }
 
@@ -22,5 +20,4 @@ export class VisitComponent {
   getResultByID() {
     this.surveyService.getResult();
   }
-
 }

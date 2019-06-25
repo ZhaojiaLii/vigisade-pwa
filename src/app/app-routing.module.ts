@@ -7,6 +7,8 @@ import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/action-corrective.component';
+import { SecuriteComponent } from './components/securite/securite.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -38,6 +40,14 @@ const routes: Routes = [
   {
     path: 'visit',
     component: VisitComponent,
+  },
+  {
+    path: 'correction',
+    component: ActionCorrectiveComponent,
+  },
+  {
+    path: 'securite',
+    component: SecuriteComponent,
   }
 ];
 

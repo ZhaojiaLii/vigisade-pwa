@@ -1,0 +1,59 @@
+@mixin lhCrop($line-height) {
+  &::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: calc((1 - #{$line-height}) * 0.5em);
+  }
+  &::after {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-bottom: calc((1 - #{$line-height}) * 0.5em);
+  }
+}
+
+
+/**
+ * Text
+ */
+
+@mixin font-size($fontSize) {
+  font-size: ($fontSize / 16) + rem;
+}
+
+@mixin text-block($fontSize: "", $lineHeight: "") {
+  @if $fontSize != "" {
+      font-size: ($fontSize / 16) + rem;
+  }
+
+  @if $lineHeight != "" {
+      line-height: $lineHeight;
+  }
+
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+
+/**
+* Convertor
+*/
+
+@mixin px-rem($property, $value) {
+  #{ $property }: ($value / 16) + rem;
+}
+
+// Linear Gradient Mixin
+@mixin horizontal-gradient($from, $to, $stop: 100%) {
+  background-color: $from;
+  background-image: -moz-linear-gradient(left, $from 0%, $to $stop);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, $from), color-stop($stop, $to));
+  background-image: -webkit-linear-gradient(left, $from 0%, $to $stop);
+  background-image: -o-linear-gradient(left, $from 0%, $to $stop);
+  background: -ms-linear-gradient(left, $from 0%, $to $stop);
+  background: linear-gradient(to right, $from 0%, $to $stop);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 );
+}
