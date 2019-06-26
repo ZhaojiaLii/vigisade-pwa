@@ -163,6 +163,7 @@ select.form-control:not([size]):not([multiple]) {
     opacity: 0;
     cursor: pointer;
     &:checked ~ .radiobtn {
+      box-shadow: none;
       background: #363636;
       path {
        stroke: #fff;
