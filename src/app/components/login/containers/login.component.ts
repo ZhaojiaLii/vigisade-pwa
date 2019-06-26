@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   /** Detects login success. */
-
+  username = '';
+  password = '';
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -24,9 +25,12 @@ export class LoginComponent implements OnInit {
     ).subscribe();
   }
 
-  login(): void {
-    // @todo: get username and passworm from forms.
-    this.loginService.login('username', 'password');
+  login(username: string, password: string): void {
+    // @todo: get username and password from forms.
+    this.username = username;
+    this.password = password;
+    this.loginService.login(this.username, this.password);
+    console.log('login with username: ' + this.username + ' ,password: ' + this.password);
     // @todo: add a spinner.
   }
 }

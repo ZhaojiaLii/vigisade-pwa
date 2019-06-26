@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule, MatToolbarModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatSelectModule, MatToolbarModule, MatNativeDateModule, MatProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule} from 'ngx-bootstrap/modal';
@@ -25,7 +25,7 @@ import { ProfileComponent } from './components/profile/containers/profile.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
-import { ActionCorrectiveComponent } from './components/action-corrective/action-corrective.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HttpClientModule } from '@angular/common/http';
@@ -68,16 +68,16 @@ const ngrxFeatures = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 15,
       name: 'Vigisade',
     }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([ AppEffects ]),
+    EffectsModule.forRoot([AppEffects]),
     ...ngrxFeatures,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -95,6 +95,7 @@ const ngrxFeatures = [
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

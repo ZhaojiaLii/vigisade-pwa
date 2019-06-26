@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseUrl: 'http://www-dev.vigisade.com',
+  baseUrl: 'http://127.0.24.1',
   production: false
 };
 

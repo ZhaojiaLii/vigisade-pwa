@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GetUser } from '../interfaces/getUser';
 import { environment } from '../../../../environments/environment';
@@ -23,9 +23,7 @@ export class ProfileApiService {
   }
 
   Test() {
-    const url = this.baseUrl + '/api/user/';
-    return this.http.get<GetUser>(url, {
-      responseType: 'json',
-      observe: 'response'});
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<GetUser>('http://127.0.24.1/api/user/');
   }
 }
