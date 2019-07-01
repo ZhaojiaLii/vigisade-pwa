@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule} from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,6 +32,8 @@ import { loginFeature } from './components/login/store/login.feature';
 import { HttpClientModule } from '@angular/common/http';
 import { getResultFeature, getResultsFeature, surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
+import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
+
 
 const mainComponents = [
   LoginComponent,
@@ -62,7 +65,8 @@ const ngrxFeatures = [
     DangerousComponent,
     VisitComponent,
     ActionCorrectiveComponent,
-    SecuriteComponent
+    SecuriteComponent,
+    BonnePratiqueComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ const ngrxFeatures = [
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    CollapseModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     MatButtonModule,

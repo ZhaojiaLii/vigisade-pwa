@@ -9,6 +9,7 @@ import { DangerousComponent } from './components/dangerous/containers/dangerous.
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/securite.component';
+import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'security',
     component: SecuriteComponent,
+  },
+  {
+    path: 'bonne-pratique',
+    component: BonnePratiqueComponent,
   }
 ];
 
