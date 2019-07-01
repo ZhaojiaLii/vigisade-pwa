@@ -1,5 +1,5 @@
 import { StoreModule } from '@ngrx/store';
-import { getResultReducer, getResultsReducer, surveyReducer } from './survey.reducer';
+import { createResultReducer, getResultReducer, getResultsReducer, surveyReducer, updateResultReducer } from './survey.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { SurveyEffects } from './survey.effects';
 
@@ -17,3 +17,14 @@ export const getResultFeature = [
   StoreModule.forFeature('result', getResultReducer),
   EffectsModule.forFeature([SurveyEffects]),
 ];
+
+export const createResultFeature = [
+  StoreModule.forFeature('create', createResultReducer),
+  EffectsModule.forFeature([SurveyEffects]),
+];
+
+export const updateResultFeature = [
+  StoreModule.forFeature('update', updateResultReducer),
+  EffectsModule.forFeature([SurveyEffects]),
+];
+

@@ -16,4 +16,8 @@ export class ActionCorrectiveComponent implements OnInit {
   ngOnInit() {
   }
 
+  clickBack() {
+    history.go(-1);
+  }
+
 }

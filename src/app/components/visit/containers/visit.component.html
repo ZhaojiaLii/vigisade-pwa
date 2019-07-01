@@ -23,10 +23,10 @@
     <div class="font-bold font-25">
       DR NORMANDIE
     </div>
-    <form [formGroup]="options">
+    <form [formGroup]="main">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <select class="form-control" appHighlight id="agenceSelect">
+          <select class="form-control" appHighlight id="agenceSelect" formControlName="entity">
             <option value=""></option>
             <option value="Agence lorem ipsum">Agence lorem ipsum</option>
           </select>
@@ -34,19 +34,19 @@
           <div class="line"></div>
         </div>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" appHighlight id="chantierSelect">
+          <input type="text" class="form-control" appHighlight id="chantierSelect" formControlName="place">
           <label for="chantierSelect">Lieu du chantier</label>
           <div class="line"></div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" appHighlight id="clientSelect">
+          <input type="text" class="form-control" appHighlight id="clientSelect" formControlName="client">
           <label for="clientSelect">Client</label>
           <div class="line"></div>
         </div>
         <div class="form-group col-md-6">
-          <input type="text" bsDatepicker  (bsValueChange)="updateInput()" class="form-control" appHighlight [input]="inputVal" id="dateSelect">
+          <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect" formControlName="date">
           <label for="dateSelect">Date de la visite <span class="light-grey">(jour, mois, année)</span></label>
           <div class="line"></div>
         </div>
@@ -57,27 +57,36 @@
 
     <div class="row">
       <div class="card card-full-width shadow-none p-15">
-        <a href="" class="circle-white-icon shadow-01 suppr">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="-12 -19 40 40">
-            <path d="M1 2h14a1 1 0 0 0 0-2H1a1 1 0 1 0 0 2z" fill="#3884A5"/>
-          </svg>
-        </a>
-        <form [formGroup]="options">
+        <div (click)="addTeamMember()">
+          <div class="circle-white-icon shadow-01 bg-info suppr" *ngIf="buttonShowAdd">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+              <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
+            </svg>
+          </div>
+        </div>
+        <div (click)="removeTeamMember()">
+          <div class="circle-white-icon shadow-01 suppr" *ngIf="buttonHShowMinus">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="-12 -19 40 40">
+              <path d="M1 2h14a1 1 0 0 0 0-2H1a1 1 0 1 0 0 2z" fill="#3884A5"></path>
+            </svg>
+          </div>
+        </div>
+        <form [formGroup]="teamMember" *ngIf="hasTeamMember">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <input type="text" class="form-control" appHighlight id="prenomSelect">
+              <input type="text" class="form-control" appHighlight id="prenomSelect" formControlName="firstName">
               <label for="prenomSelect">Prénom</label>
               <div class="line"></div>
             </div>
             <div class="form-group col-md-6">
-              <input type="text" class="form-control" appHighlight id="clientSelect">
-              <label for="clientSelect">Client</label>
+              <input type="text" class="form-control" appHighlight id="nomSelect" formControlName="lastName">
+              <label for="nomSelect">Nom</label>
               <div class="line"></div>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <select class="form-control" appHighlight id="qualiteSelect">
+              <select class="form-control" appHighlight id="qualiteSelect" formControlName="quality">
                 <option value=""></option>
                 <option value="interimaire">Intérimaire</option>
               </select>
@@ -88,17 +97,21 @@
         </form>
       </div>
     </div>
-
-    <div class="d-flex align-items-center justify-content-end add-btn">
-      <div class="mr-1">Ajouter</div>
-      <a href="" class="circle-white-icon shadow-01 bg-info wh-35px">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"/>
-        </svg>
-      </a>
+    <div (click)="loadTeamComponent()">
+      <div class="d-flex align-items-center justify-content-end add-btn">
+<!--        <div class="mr-1">Ajouter</div>-->
+        <div>
+          <div class="circle-white-icon shadow-01 bg-info suppr">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+              <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
+    <ng-template appAddMemberDirective></ng-template>
     <div class="mx-30">
-      <button class="btn btn-info d-block w-100">Valider</button>
+      <button class="btn btn-info d-block w-100 mt-5" (click)="createResult()">Valider</button>
     </div>
     
     

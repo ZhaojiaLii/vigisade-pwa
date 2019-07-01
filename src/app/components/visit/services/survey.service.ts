@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
-import { getResult, getResults, getSurvey } from '../store/survey.actions';
+import { createResult, getResult, getResults, getSurvey, updateResult } from '../store/survey.actions';
+import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { take } from 'rxjs-compat/operator/take';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
-
+  survey: any;
   constructor(private store: Store<State>) { }
 
-  getSurvey(): void {
+  getSurvey(): any {
     this.store.dispatch(getSurvey());
   }
 
@@ -20,5 +23,13 @@ export class SurveyService {
 
   getResult(): void {
     this.store.dispatch(getResult());
+  }
+
+  createResult(createResultPayload: CreateResult): void {
+    this.store.dispatch(createResult({createResultPayload}));
+  }
+
+  updateResult(updateResultPayload: UpdateResult): void {
+    this.store.dispatch(updateResult({updateResultPayload}));
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { GetUser } from '../interfaces/getUser';
 import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class ProfileApiService {
    */
   getUser(): Observable<GetUser> {
     const url = this.baseUrl + '/api/user/';
-    // @todo: you must add the auth token via interceptor to run this endpoint.
     return this.http.get<GetUser>(url);
   }
 

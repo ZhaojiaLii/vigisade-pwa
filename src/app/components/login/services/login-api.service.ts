@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { error } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +17,11 @@ export class LoginApiService {
     return this.http.post(
       '/api/login_check/',
       {username, password},
-      {observe: 'response'},
     ).pipe(
       tap((response: HttpResponse<{token: string}>) => {
         if (response.body && response.body.token) {
-          return;
+            console.log(response);
+            return;
         }
 
         // @todo: throw error

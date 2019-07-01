@@ -1,0 +1,63 @@
+<div>
+    <div class="row" id="{{formGroup[formNum].formNum}}">
+        <div class="card card-full-width shadow-none p-15">
+            <div>
+                <div class="circle-white-icon shadow-01 bg-info suppr" *ngIf="buttonPlusInit">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
+                    </svg>
+                </div>
+            </div>
+            <div>
+                <div class="circle-white-icon shadow-01 suppr" *ngIf="buttonMinusInit">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="-12 -19 40 40">
+                        <path d="M1 2h14a1 1 0 0 0 0-2H1a1 1 0 1 0 0 2z" fill="#3884A5"></path>
+                    </svg>
+                </div>
+            </div>
+            <form [formGroup]="teamMember">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" appHighlight id="prenomSelect" formControlName="firstName">
+                        <label for="prenomSelect">Prénom</label>
+                        <div class="line"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" appHighlight id="nomSelect" formControlName="lastName">
+                        <label for="nomSelect">Nom</label>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select class="form-control" appHighlight id="qualiteSelect" formControlName="quality">
+                            <option value=""></option>
+                            <option value="interimaire">Intérimaire</option>
+                        </select>
+                        <label for="qualiteSelect">Qualité</label>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template appAddMemberDirective></ng-template>
+    <div (click)="loadTeamComponent()">
+        <div class="d-flex align-items-center justify-content-end add-btn">
+            <div (click)="addTeamMember()">
+                <div class="circle-white-icon shadow-01 bg-info suppr">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
+                    </svg>
+                </div>
+            </div>
+            <div (click)="removeTeamMember()">
+                <div class="circle-white-icon shadow-01 suppr">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="-12 -19 40 40">
+                        <path d="M1 2h14a1 1 0 0 0 0-2H1a1 1 0 1 0 0 2z" fill="#3884A5"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

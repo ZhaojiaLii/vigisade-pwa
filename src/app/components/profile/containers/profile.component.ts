@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProfileService } from '../services/profile.service';
 import { ProfileApiService } from '../services/profile-api.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',

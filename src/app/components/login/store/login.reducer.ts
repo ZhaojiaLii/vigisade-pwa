@@ -1,6 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
 import { loginInitialState } from './login.state';
 import { login, loginFail, loginSuccess } from './login.actions';
+import { createReducer, on } from '@ngrx/store';
 
 export const loginReducer = createReducer(
   loginInitialState,

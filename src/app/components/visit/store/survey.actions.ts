@@ -2,6 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { Survey } from '../interfaces/getSurveyInterface/survey.interface';
 import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
 import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
+import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
 /***
  * get survey data (GET: api/survey/)
@@ -53,11 +55,14 @@ export const getResultFail = createAction(
 /***
  * create a result data (POST: api/survey/create)
  */
-export const createResult = createAction('[Survey] Create a Result');
+export const createResult = createAction(
+    '[Survey] Create a Result',
+    props<{createResultPayload: CreateResult}>()
+);
 
 export const createResultSuccess = createAction(
   '[Survey] Create a Result Success',
-  props<{success: string}>(),
+  props<{status: number}>(),
 );
 
 export const createResultFail = createAction(
@@ -68,11 +73,14 @@ export const createResultFail = createAction(
 /***
  * update a result data (POST: api/survey/update)
  */
-export const updateResult = createAction('[Survey] Update a Result');
+export const updateResult = createAction(
+    '[Survey] Update a Result',
+    props<{updateResultPayload: UpdateResult}>()
+);
 
 export const updateResultSuccess = createAction(
   '[Survey] Update a Result Success',
-  props<{success: string}>(),
+  props<{status: number}>(),
 );
 
 export const updateResultFail = createAction(

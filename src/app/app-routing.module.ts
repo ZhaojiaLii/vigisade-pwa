@@ -8,7 +8,7 @@ import { ProfileComponent } from './components/profile/containers/profile.compon
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
-import { SecuriteComponent } from './components/securite/securite.component';
+import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
 
 const extraOptions: ExtraOptions = {};
 

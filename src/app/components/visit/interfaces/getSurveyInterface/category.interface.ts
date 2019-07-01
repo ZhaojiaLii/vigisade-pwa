@@ -1,6 +1,6 @@
 import { Question } from './question.interface';
 
 export interface Category {
-  title: string;
+  category_title: string;
   questions: Question[];
 }

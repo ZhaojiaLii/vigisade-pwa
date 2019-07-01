@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { getResultInitialState, getResultsInitialState, surveyInitialState } from './survey.state';
-import { getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess } from './survey.actions';
+import { createResultInitialState, getResultInitialState, getResultsInitialState, surveyInitialState, updateResultInitialState } from './survey.state';
+import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 
 export const surveyReducer = createReducer(
   surveyInitialState,
@@ -21,4 +21,18 @@ export const getResultReducer = createReducer(
   on(getResult,  state => state),
   on(getResultSuccess, (state, {result}) => ({...state, result})),
   on(getResultFail, state => state),
+);
+
+export const createResultReducer = createReducer(
+    createResultInitialState,
+    on(createResult, state => state),
+    on(createResultSuccess, (state, {status}) => ({...state, status})),
+    on(createResultFail, state => state),
+);
+
+export const updateResultReducer = createReducer(
+    updateResultInitialState,
+    on(updateResult, state => state),
+    on(updateResultSuccess, (state, {status}) => ({...state, status})),
+    on(updateResultFail, state => state),
 );

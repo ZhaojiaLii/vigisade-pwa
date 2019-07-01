@@ -1,6 +1,5 @@
 import { Category } from './category.interface';
 import { TeamMembers } from './teamMembers.interface';
-import { BestPractice } from './bestPractice.interface';
 
 
 export interface CreateResult {
@@ -9,10 +8,12 @@ export interface CreateResult {
   area: string;
   entity: string;
   date: string;
-  place: string;
+  place: string;  // lieu
   client: string;
   validated: boolean;
   teamMembers?: TeamMembers[];
   categories: Category[];
-  bestPractice: BestPractice[];
+  bestPracticeDone: boolean;
+  bestPracticeComment: string;
+  bestPracticePhoto: string;
 }

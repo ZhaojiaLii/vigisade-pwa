@@ -1,5 +1,6 @@
-import { createAction, props } from '@ngrx/store';
+
 import { GetUser } from '../interfaces/getUser';
+import { createAction, props } from '@ngrx/store';
 
 export const getUser = createAction(
   '[GetUser] Gets User data'
