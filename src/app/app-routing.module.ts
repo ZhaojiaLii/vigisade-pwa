@@ -7,8 +7,10 @@ import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
-import { ActionCorrectiveComponent } from './components/action-corrective/action-corrective.component';
-import { SecuriteComponent } from './components/securite/securite.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
+import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
+import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
+import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -46,8 +48,16 @@ const routes: Routes = [
     component: ActionCorrectiveComponent,
   },
   {
-    path: 'securite',
+    path: 'security',
     component: SecuriteComponent,
+  },
+  {
+    path: 'bestPractice',
+    component: BonnePratiqueComponent,
+  },
+  {
+    path: 'history',
+    component: HistoriqueVisitesComponent,
   }
 ];
 

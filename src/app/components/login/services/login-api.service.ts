@@ -17,11 +17,11 @@ export class LoginApiService {
     return this.http.post(
       '/api/login_check/',
       {username, password},
-      {observe: 'response'},
     ).pipe(
       tap((response: HttpResponse<{token: string}>) => {
         if (response.body && response.body.token) {
-          return;
+            console.log(response);
+            return;
         }
 
         // @todo: throw error

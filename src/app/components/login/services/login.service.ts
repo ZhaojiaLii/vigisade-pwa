@@ -1,10 +1,13 @@
+
+import { login } from '../store/login.actions';
+
+
+import { State } from '../../../store/app.state';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { login } from '../store/login.actions';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { getToken } from '../store/login.selectors';
-import { map } from 'rxjs/operators';
-import { State } from '../../../store/app.state';
 
 @Injectable({
   providedIn: 'root',

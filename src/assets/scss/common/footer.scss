@@ -1,14 +1,51 @@
 .fixed-footer {
-  @extend .d-flex;
-  @extend .align-items-center;
-  @extend .bg-white;
-  @extend .shadow-01;
-  @extend .justify-content-between;
   @extend .fixed-bottom;
-  height: 40px;
-  padding: 10px 30px;
-  font-size: 1.125rem;
-  svg {
+  @extend .shadow-01;
+  .footer-btn {
+    @extend .bg-white;
+    position: relative;
+    z-index: 2;
+    padding: 10px 30px;
+    font-size: 1.125rem;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-between;
+  }
+  [aria-expanded="true"] svg.scroll-top {
     transform: rotate(180deg);
+  }
+  #collapseBasic {
+    @extend .bg-white;
+    padding: 60px 15px 30px;
+    position: relative;
+    z-index: 2;
+    > div {
+      padding-bottom: 20px;
+      margin-bottom: 35px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .note-label {
+      font-size: 24px;
+      font-weight: 600;   
+    }
+    .note {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+  .overlay-collapse {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    opacity: 0;
+    z-index: 1;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+  }
+  .collapse.in.show + .overlay-collapse {
+    opacity: 0.6;
+    top: 0;
   }
 }
