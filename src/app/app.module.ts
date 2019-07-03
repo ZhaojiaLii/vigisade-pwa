@@ -31,6 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { createResultFeature, getResultFeature, getResultsFeature, surveyFeature, updateResultFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { SecurityTemplateComponent } from './components/visit/securite/containers/security-template.component';
+import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { FormsModule } from '@angular/forms';
+
 
 const mainComponents = [
   LoginComponent,
@@ -66,6 +70,7 @@ const ngrxFeatures = [
     ActionCorrectiveComponent,
     SecuriteComponent,
     SecurityTemplateComponent,
+    BonnePratiqueComponent,
   ],
     imports: [
         BrowserModule,
@@ -100,6 +105,8 @@ const ngrxFeatures = [
         MatNativeDateModule,
         MatProgressSpinnerModule,
         MatTooltipModule,
+        CollapseModule,
+        FormsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

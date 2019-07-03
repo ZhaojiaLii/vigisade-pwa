@@ -120,12 +120,16 @@ app-root, app-login, app-menu {
 .mb-20 {
   margin-bottom: 1.25rem;
 }
+.mb-15 {
+  margin-bottom: 0.9375rem!important;
+}
 .mb-12 {
   margin-bottom: 0.75rem;
 }
 .mb-10 {
   margin-bottom: 0.625rem;
 }
+
 .my-45 {
   margin-bottom: 2.8125rem;
   margin-top: 2.8125rem;
@@ -157,6 +161,7 @@ app-root, app-login, app-menu {
 .lineH-24px {
   line-height: 1.71;
 }
+
 .circle-white {
   @extend .d-inline-flex;
   box-sizing: border-box;

@@ -1,14 +1,9 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../../services/survey.service';
 import { select, Store } from '@ngrx/store';
 import { State } from '../../../../store/app.state';
 import 'rxjs-compat/add/operator/skip';
-import { MatDialog } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AddSecurityDirective } from '../../../shared/directives/addSecirity.directive';
-import { SecurityTemplateComponent } from './security-template.component';
-import { SecurityDataForm } from '../../interfaces/securityDataForm';
-import { AddData } from './addData';
 import { SurveyApiService } from '../../services/survey-api.service';
 
 @Component({
@@ -17,9 +12,7 @@ import { SurveyApiService } from '../../services/survey-api.service';
 })
 
 export class SecuriteComponent implements OnInit {
-  @Input() data: AddData;
-  @ViewChild(AddSecurityDirective, {static: true}) appAddSecurityDirective: AddSecurityDirective;
-
+  loadingPage = true;
   survey: any;
   surveyTitle = '';
   surveyBestPracticeLabel = '';
@@ -27,28 +20,25 @@ export class SecuriteComponent implements OnInit {
   surveyCategories = [];
   categoryNum = 0;
   questionNum = 0;
+  questionsNum = 0;
   categoryTitle = [];
   categoryQuestions = [];
   questionLabel = [];
   questionHelp = [];
   separateQuestions = [];
+  tempTable = [];
+  data = [];
 
   visitForm = new FormGroup({
-    choice: new FormGroup({
-      good: new FormControl(''),
-      no_object: new FormControl(''),
-      bad: new FormControl(''),
-      action_corrective: new FormControl(''),
-    }),
+    selection: new FormControl(''),
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
+
   constructor(
       private surveyService: SurveyService,
       private surveyApiService: SurveyApiService,
       private store: Store<State>,
-      public dialog: MatDialog,
-      private componentFactoryResolver: ComponentFactoryResolver,
       ) {
   }
 
@@ -73,40 +63,49 @@ export class SecuriteComponent implements OnInit {
         this.categoryTitle.push(category.title);
         this.categoryQuestions.push(category.questions);
         this.questionNum = category.questions.length;
+        this.questionsNum = this.questionsNum + this.questionNum;
         this.separateQuestions.push(this.questionNum);
         for (const question of category.questions) {
           this.questionLabel.push(question.label);
           this.questionHelp.push(question.help);
-          this.data = new AddData(SecurityTemplateComponent, {label: question.label, help: question.help});
-          // add visit form blocks
-          const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SecurityTemplateComponent);
-          const componentRef = this.appAddSecurityDirective.viewContainerRef.createComponent(componentFactory);
-          componentRef.instance.data = this.data.data;
-          componentRef.changeDetectorRef.detectChanges();
+          this.data.push({label: question.label, selection: '', comment: '', photo: ''});
         }
       }
-      // console.log('question number is: ' + this.separateQuestions);
+      for (let i = 0; i < this.questionsNum; i++) {
+        this.tempTable.push(i);
+      }
+      this.loadingPage = false;
     });
   }
 
-  openHelp() {
-    this.dialog.open(DialogComponent, {
-      data: {
-        help: this.questionHelp[0]
+  validVisit() {
+    console.log(this.data);
+  }
+
+  getSelection(selection) {
+    this.data.forEach((data) => {
+      if (selection.label === data.label) {
+        data.selection = selection.selection;
+        // console.log(data);
+      }
+    });
+  }
+  getComment(comment) {
+    this.data.forEach((data) => {
+      if (comment.label === data.label) {
+        data.comment = comment.comment;
+        // console.log(data);
+      }
+    });
+  }
+  getPhoto(photo) {
+    this.data.forEach((data) => {
+      if (photo.label === data.label) {
+        data.photo = photo.photo;
+        // console.log(data);
       }
     });
   }
 
-
-  onFileChanged(event) {
-    console.log(event);
-  }
-
 }
-@Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-})
-export class DialogComponent {
-  constructor() {}
-}
+

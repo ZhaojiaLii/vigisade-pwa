@@ -1,7 +1,7 @@
 import { SurveyService } from '../services/survey.service';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component, ComponentFactoryResolver, ElementRef, Injector, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { AddTeamMemberDirective } from '../../shared/directives/addTeamMember.directive';
 import { MemberComponent } from './member.component';
@@ -13,7 +13,7 @@ import { MemberComponent } from './member.component';
 export class VisitComponent {
 
   @ViewChild(AddTeamMemberDirective, {static: true}) appAddMemberDirective: AddTeamMemberDirective;
-
+  isCollapsed = false;
   createResultPayload: CreateResult;
   updateResultPayload: UpdateResult;
   buttonShowAdd = true;
