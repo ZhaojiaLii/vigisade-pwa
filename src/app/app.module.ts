@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { getResultFeature, getResultsFeature, surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
+import { HistoriqueVisitesComponent } from './components/historique-visites/historique-visites.component';
 
 
 const mainComponents = [
@@ -66,7 +67,8 @@ const ngrxFeatures = [
     VisitComponent,
     ActionCorrectiveComponent,
     SecuriteComponent,
-    BonnePratiqueComponent
+    BonnePratiqueComponent,
+    HistoriqueVisitesComponent
   ],
   imports: [
     BrowserModule,
