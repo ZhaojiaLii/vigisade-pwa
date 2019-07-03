@@ -12,6 +12,7 @@ import { SurveyApiService } from '../../services/survey-api.service';
 })
 
 export class SecuriteComponent implements OnInit {
+  isCollapsed = false;
   loadingPage = true;
   survey: any;
   surveyTitle = '';

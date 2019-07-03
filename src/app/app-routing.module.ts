@@ -9,7 +9,8 @@ import { DangerousComponent } from './components/dangerous/containers/dangerous.
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
-import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
+import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
+import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -51,8 +52,12 @@ const routes: Routes = [
     component: SecuriteComponent,
   },
   {
-    path: 'bonne-pratique',
+    path: 'bestPractice',
     component: BonnePratiqueComponent,
+  },
+  {
+    path: 'history',
+    component: HistoriqueVisitesComponent,
   }
 ];
 

@@ -31,9 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { createResultFeature, getResultFeature, getResultsFeature, surveyFeature, updateResultFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { SecurityTemplateComponent } from './components/visit/securite/containers/security-template.component';
-import { BonnePratiqueComponent } from './components/bonne-pratique/bonne-pratique.component';
+import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
+import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 
 
 const mainComponents = [
@@ -71,42 +72,45 @@ const ngrxFeatures = [
     SecuriteComponent,
     SecurityTemplateComponent,
     BonnePratiqueComponent,
+    BonnePratiqueComponent,
+    HistoriqueVisitesComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        StoreModule.forRoot(reducers, {metaReducers}),
-        StoreDevtoolsModule.instrument({
-            logOnly: environment.production,
-            maxAge: 15,
-            name: 'Vigisade',
-        }),
-        StoreRouterConnectingModule.forRoot(),
-        EffectsModule.forRoot([AppEffects]),
-        ...ngrxFeatures,
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        SharedModule.forRoot(),
-        TooltipModule.forRoot(),
-        ModalModule.forRoot(),
-        BrowserAnimationsModule,
-        BsDatepickerModule.forRoot(),
-        MatButtonModule,
-        MatToolbarModule,
-        MatListModule,
-        MatIconModule,
-        MatCardModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatProgressSpinnerModule,
-        MatTooltipModule,
-        CollapseModule,
-        FormsModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production,
+      maxAge: 15,
+      name: 'Vigisade',
+    }),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([AppEffects]),
+    ...ngrxFeatures,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    SharedModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    CollapseModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    MatButtonModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatCardModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    CollapseModule,
+    FormsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
