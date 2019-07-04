@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import {FormControl, FormGroup} from '@angular/forms';
     templateUrl: './member.component.html',
 })
 
-export class MemberComponent {
+export class MemberComponent implements OnInit {
     @Input() memberID;
     @Output() FirstName = new EventEmitter<object>();
     @Output() LastName = new EventEmitter<object>();
@@ -18,14 +18,10 @@ export class MemberComponent {
         quality: new FormControl(''),
     });
 
-    firstName = this.teamMember.value.firstName;
-    lastName = this.teamMember.value.lastName;
-    quality = this.teamMember.value.quality;
-
     constructor() {}
 
     deleteMember() {
-        this.DELETE.emit({memberID: this.memberID, index: -1});
+        this.DELETE.emit({memberID: this.memberID});
     }
 
     firstNameChanged() {
@@ -36,5 +32,9 @@ export class MemberComponent {
     }
     qualityChanged() {
         this.Quality.emit({memberID: this.memberID, quality: this.teamMember.value.quality});
+    }
+
+    ngOnInit(): void {
+        console.log(this.memberID + 'created');
     }
 }

@@ -1,7 +1,7 @@
 import {SurveyService} from '../services/survey.service';
 import {CreateResult} from '../interfaces/createResultInterface/createResult.interface';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Component, ComponentFactoryResolver, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {UpdateResult} from '../interfaces/updateResultInterface/updateResult.interface';
 import {AddTeamMemberDirective} from '../../shared/directives/addTeamMember.directive';
 
@@ -15,31 +15,30 @@ export class VisitComponent {
   isCollapsed = false;
   createResultPayload: CreateResult;
   updateResultPayload: UpdateResult;
-  buttonShowAdd = true;
-  buttonHShowMinus = false;
-  hasTeamMember = false;
-  hideText = true;
-  showText = false;
+  /**
+   *  add/remove group member
+   */
   teamGroup = [];
   teamGroupIndex = [];
   clicked = 0;
 
-  main = new FormGroup({
+  /**
+   *  valid form content
+   */
+  form = [];
+
+  /**
+   *  form control
+   */
+  mainForm = new FormGroup({
     entity: new FormControl(''),
     place: new FormControl(''),
     client: new FormControl(''),
     date: new FormControl(''),
   });
 
-  teamMember = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    quality: new FormControl(''),
-  });
-
   constructor(
       private surveyService: SurveyService,
-      private componentFactoryResolver: ComponentFactoryResolver,
       ) {
   }
 
@@ -99,12 +98,25 @@ export class VisitComponent {
   }
 
   deleteTeamMember(index) {
+    let countIndex = 0;
     this.teamGroup.forEach((data) => {
+      console.log(index.memberID + ' deleted');
       if (index.memberID === data.memberID) {
-        this.teamGroup.splice(index.memberID, 1);
+        this.teamGroup.splice(countIndex, 1);
+        this.teamGroupIndex.splice(countIndex, 1);
       }
+      countIndex++;
     });
     console.log(this.teamGroup);
+  }
+
+  validForm() {
+    const entity = this.mainForm.value.entity;
+    const place = this.mainForm.value.place;
+    const client = this.mainForm.value.client;
+    const date = this.mainForm.value.date;
+    this.form.push({Entity: entity, Place: place, Client: client, Date: date, Group: this.teamGroup});
+    console.log(this.form);
   }
 }
 

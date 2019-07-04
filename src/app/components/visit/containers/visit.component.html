@@ -23,7 +23,7 @@
     <div class="font-bold font-25">
       DR NORMANDIE
     </div>
-    <form [formGroup]="main">
+    <form [formGroup]="mainForm">
       <div class="form-row">
         <div class="form-group col-md-6">
           <select class="form-control" appHighlight id="agenceSelect" formControlName="entity">
@@ -54,38 +54,23 @@
     </form>
     <p class="font-medium font-22">Équipe contrôlée</p>
     <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
-
-    <div class="row">
-      <app-member
-              *ngFor="let index of teamGroupIndex"
-              [memberID]="index"
-              (FirstName)="updateFirstName($event)"
-              (LastName)="updateLastName($event)"
-              (Quality)="updateQuality($event)"
-              (DELETE)="deleteTeamMember($event)"
-      ></app-member>
-      <div (click)="addTeamMember()" class="p-15">
-        <div class="circle-white-icon shadow-01 bg-info suppr">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-            <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
-          </svg>
-        </div>
+    <app-member
+            *ngFor="let index of teamGroupIndex"
+            [memberID]="index"
+            (FirstName)="updateFirstName($event)"
+            (LastName)="updateLastName($event)"
+            (Quality)="updateQuality($event)"
+            (DELETE)="deleteTeamMember($event)"
+    ></app-member>
+    <div (click)="addTeamMember()" class="card-full-width d-flex justify-content-end mr-2 mt-2">
+      <div class="circle-white-icon shadow-01 bg-info suppr">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
+        </svg>
       </div>
     </div>
-<!--    <div (click)="loadTeamComponent()">-->
-<!--      <div class="d-flex align-items-center justify-content-end add-btn">-->
-<!--&lt;!&ndash;        <div class="mr-1">Ajouter</div>&ndash;&gt;-->
-<!--        <div>-->
-<!--          <div class="circle-white-icon shadow-01 bg-info suppr">-->
-<!--            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">-->
-<!--              <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>-->
-<!--            </svg>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="mx-30">
-      <button class="btn btn-info d-block w-100 mt-5" (click)="createResult()">Valider</button>
+      <button class="btn btn-info d-block w-100 mt-5" (click)="validForm()">Valider</button>
     </div>
   </div>
 </div>
