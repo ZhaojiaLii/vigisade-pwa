@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
-import { createResult, getResult, getResults, getSurvey, updateResult } from '../store/survey.actions';
+import {createResult, getResult, getResults, getSurvey, openMenu, updateResult} from '../store/survey.actions';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { take } from 'rxjs-compat/operator/take';
@@ -10,7 +10,6 @@ import { take } from 'rxjs-compat/operator/take';
   providedIn: 'root'
 })
 export class SurveyService {
-  survey: any;
   constructor(private store: Store<State>) { }
 
   getSurvey(): any {
@@ -31,5 +30,9 @@ export class SurveyService {
 
   updateResult(updateResultPayload: UpdateResult): void {
     this.store.dispatch(updateResult({updateResultPayload}));
+  }
+
+  openMenu(): void {
+    this.store.dispatch(openMenu());
   }
 }

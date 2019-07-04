@@ -1,10 +1,9 @@
-import { SurveyService } from '../services/survey.service';
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
-import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
-import { AddTeamMemberDirective } from '../../shared/directives/addTeamMember.directive';
-import { MemberComponent } from './member.component';
+import {SurveyService} from '../services/survey.service';
+import {CreateResult} from '../interfaces/createResultInterface/createResult.interface';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Component, ComponentFactoryResolver, ViewChild} from '@angular/core';
+import {UpdateResult} from '../interfaces/updateResultInterface/updateResult.interface';
+import {AddTeamMemberDirective} from '../../shared/directives/addTeamMember.directive';
 
 @Component({
   selector: 'app-visit',
@@ -21,8 +20,9 @@ export class VisitComponent {
   hasTeamMember = false;
   hideText = true;
   showText = false;
-  buttonGroup = [];
-  teamMemberNum = this.buttonGroup.length;
+  teamGroup = [];
+  teamGroupIndex = [];
+  clicked = 0;
 
   main = new FormGroup({
     entity: new FormControl(''),
@@ -64,30 +64,47 @@ export class VisitComponent {
   }
 
   addTeamMember() {
-    this.teamMemberNum++;
-    // this.buttonGroup[this.teamMemberNum].status = false;
-    this.hasTeamMember = true;
-    this.hideText = true;
-    this.buttonShowAdd = false;
-    this.buttonHShowMinus = true;
-    console.log(this.buttonGroup);
-    console.log('new member added');
+    this.teamGroupIndex.push(this.clicked);
+    this.teamGroup.push({memberID: this.clicked, firstName: '', lastName: '', quality: '' });
+    this.clicked++;
+    console.log(this.teamGroupIndex);
+    console.log(this.teamGroup);
   }
 
-  removeTeamMember() {
-    this.teamMemberNum--;
-    this.buttonGroup.splice(this.teamMemberNum, 1);
-    this.hasTeamMember = false;
-    this.buttonShowAdd = true;
-    this.buttonHShowMinus = false;
-    console.log(this.buttonGroup);
-    console.log('member removed');
+  updateFirstName(firstName) {
+    this.teamGroup.forEach((data) => {
+      if (firstName.memberID === data.memberID) {
+        data.firstName = firstName.firstName;
+        console.log(data);
+      }
+    });
   }
 
-  loadTeamComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(MemberComponent);
-    const componentRef = this.appAddMemberDirective.viewContainerRef.createComponent(componentFactory);
-    componentRef.changeDetectorRef.detectChanges();
+  updateLastName(lastName) {
+    this.teamGroup.forEach((data) => {
+      if (lastName.memberID === data.memberID) {
+        data.lastName = lastName.lastName;
+        console.log(data);
+      }
+    });
+  }
+
+  updateQuality(quality) {
+    this.teamGroup.forEach((data) => {
+      if (quality.memberID === data.memberID) {
+        data.quality = quality.quality;
+        console.log(data);
+      }
+    });
+  }
+
+  deleteTeamMember(index) {
+    this.teamGroup.forEach((data) => {
+      if (index.memberID === data.memberID) {
+        this.teamGroup.splice(index.memberID, 1);
+      }
+    });
+    console.log(this.teamGroup);
   }
 }
 

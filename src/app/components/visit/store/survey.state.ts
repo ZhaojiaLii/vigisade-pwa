@@ -58,3 +58,11 @@ export interface UpdateResultState {
 export const updateResultInitialState = {
   createResult: null
 };
+
+export interface OpenMenuState {
+  menuOpen: boolean;
+}
+
+export const openMenuInitialState = {
+  menuOpen: false
+};

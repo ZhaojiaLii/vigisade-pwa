@@ -1,6 +1,30 @@
 import { createReducer, on } from '@ngrx/store';
-import { createResultInitialState, getResultInitialState, getResultsInitialState, surveyInitialState, updateResultInitialState } from './survey.state';
-import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
+import {
+  createResultInitialState,
+  getResultInitialState,
+  getResultsInitialState,
+  openMenuInitialState,
+  surveyInitialState,
+  updateResultInitialState
+} from './survey.state';
+import {
+  createResult,
+  createResultFail,
+  createResultSuccess,
+  getResult,
+  getResultFail,
+  getResults,
+  getResultsFail,
+  getResultsSuccess,
+  getResultSuccess,
+  getSurvey,
+  getSurveyFail,
+  getSurveySuccess,
+  openMenu,
+  updateResult,
+  updateResultFail,
+  updateResultSuccess
+} from './survey.actions';
 
 export const surveyReducer = createReducer(
   surveyInitialState,
@@ -35,4 +59,9 @@ export const updateResultReducer = createReducer(
     on(updateResult, state => state),
     on(updateResultSuccess, (state, {status}) => ({...state, status})),
     on(updateResultFail, state => state),
+);
+
+export const openMenuReducer = createReducer(
+  openMenuInitialState,
+  on(openMenu, state => state),
 );

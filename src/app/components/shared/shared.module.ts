@@ -7,14 +7,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../../interceptors/token-interceptor.service';
 import { AddTeamMemberDirective } from './directives/addTeamMember.directive';
 import { MemberComponent } from '../visit/containers/member.component';
-import { HandleTeamFormComponent } from '../visit/containers/handleTeamForm.component';
 import { AddSecurityDirective } from './directives/addSecirity.directive';
 import { SecurityTemplateComponent } from '../visit/securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
 
 const sharedComponents = [
   MemberComponent,
-  HandleTeamFormComponent,
 ];
 const sharedDirectives = [
   HighlightDirective,
