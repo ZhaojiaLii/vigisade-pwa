@@ -9,52 +9,17 @@ import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.i
  */
 export interface SurveyState {
   survey: Survey | null;
+  getResults: GetResults | null;
+  getResult: GetResult | null;
+  createResult: CreateResult | null;
+  updateResult: UpdateResult | null;
 }
 
 export const surveyInitialState = {
   survey: null,
+  getResults: null,
+  getResult: null,
+  createResult: null,
+  updateResult: null
 };
 
-/**
- * GetResults state
- */
-export interface GetResultsState {
-  getResults: GetResults | null;
-}
-
-export const getResultsInitialState = {
-  getResults: null
-};
-
-/**
- *  GetResult state
- */
-export interface GetResultState {
-  getResult: GetResult | null;
-}
-
-export const getResultInitialState = {
-  getResult: null
-};
-
-/**
- *  CreateResult state
- */
-export interface CreateResultState {
-  createResult: CreateResult | null;
-}
-
-export const createResultInitialState = {
-  createResult: null
-};
-
-/**
- *  UpdateResult state
- */
-export interface UpdateResultState {
-  createResult: UpdateResult | null;
-}
-
-export const updateResultInitialState = {
-  createResult: null
-};
