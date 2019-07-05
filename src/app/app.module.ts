@@ -28,7 +28,7 @@ import { ActionCorrectiveComponent } from './components/action-corrective/contai
 import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HttpClientModule } from '@angular/common/http';
-import { createResultFeature, getResultFeature, getResultsFeature, surveyFeature, updateResultFeature } from './components/visit/store/survey.feature';
+import { surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { SecurityTemplateComponent } from './components/visit/securite/containers/security-template.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
@@ -53,16 +53,9 @@ const mainComponents = [
 ];
 
 const ngrxFeatures = [
-  loginFeature,
-  surveyFeature,
-  getResultsFeature,
-  getResultFeature,
-  createResultFeature,
-  updateResultFeature,
-  profileFeature,
-  getCorrectionFeature,
-  updateCorrectionFeature,
-  createCorrectionFeature,
+    loginFeature,
+    surveyFeature,
+    profileFeature,
 ];
 
 @NgModule({

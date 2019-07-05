@@ -1,11 +1,15 @@
-import { loginInitialState } from './login.state';
+import { loginInitialState, LoginState } from './login.state';
 import { login, loginFail, loginSuccess } from './login.actions';
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 
-export const loginReducer = createReducer(
+const createLoginReducer = createReducer(
   loginInitialState,
   on(login, state => state),
   on(loginSuccess, (state, {token}) => ({...state, token})),
   // on(loginFail, state => ({...state, token: 'test for login'})),
   on(loginFail, state => state),
 );
+
+export function loginReducer(state: LoginState | undefined, action: Action) {
+  return createLoginReducer(state, action);
+}
