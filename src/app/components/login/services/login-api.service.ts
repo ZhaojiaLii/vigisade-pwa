@@ -15,7 +15,7 @@ export class LoginApiService {
    */
   login(username: string, password: string): Observable<string> {
     return this.http.post(
-      'https://vigisade.dev.brocelia.net/api/login_check',
+      '/api/login_check',
       {username, password},
       {observe: 'response'}
     ).pipe(

@@ -22,10 +22,13 @@ export class LoginService {
     this.store.dispatch(login({ username, password }));
   }
 
+  getToken(): Observable<string> {
+    return this.store.pipe(select(getToken));
+  }
+
   isLogged(): Observable<boolean> {
-    return this.store.pipe(
-      select(getToken),
-      map(token => !!token),
+    return this.getToken().pipe(
+      map(token => !!token)
     );
   }
 }
