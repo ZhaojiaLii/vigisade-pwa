@@ -32,7 +32,7 @@ export class SecurityTemplateComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
+    // console.log('changes', changes);
   }
 
   selectionChanged(event: any) {
