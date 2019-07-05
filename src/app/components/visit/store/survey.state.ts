@@ -22,4 +22,3 @@ export const surveyInitialState = {
   createResult: null,
   updateResult: null
 };
-

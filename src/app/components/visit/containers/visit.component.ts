@@ -1,10 +1,9 @@
-import { SurveyService } from '../services/survey.service';
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
-import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
-import { AddTeamMemberDirective } from '../../shared/directives/addTeamMember.directive';
-import { MemberComponent } from './member.component';
+import {SurveyService} from '../services/survey.service';
+import {CreateResult} from '../interfaces/createResultInterface/createResult.interface';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {UpdateResult} from '../interfaces/updateResultInterface/updateResult.interface';
+import {AddTeamMemberDirective} from '../../shared/directives/addTeamMember.directive';
 
 @Component({
   selector: 'app-visit',
@@ -16,30 +15,30 @@ export class VisitComponent {
   isCollapsed = false;
   createResultPayload: CreateResult;
   updateResultPayload: UpdateResult;
-  buttonShowAdd = true;
-  buttonHShowMinus = false;
-  hasTeamMember = false;
-  hideText = true;
-  showText = false;
-  buttonGroup = [];
-  teamMemberNum = this.buttonGroup.length;
+  /**
+   *  add/remove group member
+   */
+  teamGroup = [];
+  teamGroupIndex = [];
+  clicked = 0;
 
-  main = new FormGroup({
+  /**
+   *  valid form content
+   */
+  form = [];
+
+  /**
+   *  form control
+   */
+  mainForm = new FormGroup({
     entity: new FormControl(''),
     place: new FormControl(''),
     client: new FormControl(''),
     date: new FormControl(''),
   });
 
-  teamMember = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    quality: new FormControl(''),
-  });
-
   constructor(
       private surveyService: SurveyService,
-      private componentFactoryResolver: ComponentFactoryResolver,
       ) {
   }
 
@@ -64,30 +63,60 @@ export class VisitComponent {
   }
 
   addTeamMember() {
-    this.teamMemberNum++;
-    // this.buttonGroup[this.teamMemberNum].status = false;
-    this.hasTeamMember = true;
-    this.hideText = true;
-    this.buttonShowAdd = false;
-    this.buttonHShowMinus = true;
-    console.log(this.buttonGroup);
-    console.log('new member added');
+    this.teamGroupIndex.push(this.clicked);
+    this.teamGroup.push({memberID: this.clicked, firstName: '', lastName: '', quality: '' });
+    this.clicked++;
+    console.log(this.teamGroupIndex);
+    console.log(this.teamGroup);
   }
 
-  removeTeamMember() {
-    this.teamMemberNum--;
-    this.buttonGroup.splice(this.teamMemberNum, 1);
-    this.hasTeamMember = false;
-    this.buttonShowAdd = true;
-    this.buttonHShowMinus = false;
-    console.log(this.buttonGroup);
-    console.log('member removed');
+  updateFirstName(firstName) {
+    this.teamGroup.forEach((data) => {
+      if (firstName.memberID === data.memberID) {
+        data.firstName = firstName.firstName;
+        console.log(data);
+      }
+    });
   }
 
-  loadTeamComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(MemberComponent);
-    const componentRef = this.appAddMemberDirective.viewContainerRef.createComponent(componentFactory);
-    componentRef.changeDetectorRef.detectChanges();
+  updateLastName(lastName) {
+    this.teamGroup.forEach((data) => {
+      if (lastName.memberID === data.memberID) {
+        data.lastName = lastName.lastName;
+        console.log(data);
+      }
+    });
+  }
+
+  updateQuality(quality) {
+    this.teamGroup.forEach((data) => {
+      if (quality.memberID === data.memberID) {
+        data.quality = quality.quality;
+        console.log(data);
+      }
+    });
+  }
+
+  deleteTeamMember(index) {
+    let countIndex = 0;
+    this.teamGroup.forEach((data) => {
+      console.log(index.memberID + ' deleted');
+      if (index.memberID === data.memberID) {
+        this.teamGroup.splice(countIndex, 1);
+        this.teamGroupIndex.splice(countIndex, 1);
+      }
+      countIndex++;
+    });
+    console.log(this.teamGroup);
+  }
+
+  validForm() {
+    const entity = this.mainForm.value.entity;
+    const place = this.mainForm.value.place;
+    const client = this.mainForm.value.client;
+    const date = this.mainForm.value.date;
+    this.form.push({Entity: entity, Place: place, Client: client, Date: date, Group: this.teamGroup});
+    console.log(this.form);
   }
 }
 

@@ -24,3 +24,4 @@ export const createSurveyReducer = createReducer(
 export function surveyReducer(state: SurveyState | undefined, action: Action) {
   return createSurveyReducer(state, action);
 }
+

@@ -1,63 +1,40 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AddTeamMemberDirective } from '../../shared/directives/addTeamMember.directive';
-import { Form } from './handleTeamForm.component';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-member',
     templateUrl: './member.component.html',
 })
 
-export class MemberComponent {
-
-    @ViewChild(AddTeamMemberDirective, {static: true}) appAddMemberDirective: AddTeamMemberDirective;
-
+export class MemberComponent implements OnInit {
+    @Input() memberID;
+    @Output() FirstName = new EventEmitter<object>();
+    @Output() LastName = new EventEmitter<object>();
+    @Output() Quality = new EventEmitter<object>();
+    @Output() DELETE = new EventEmitter<object>();
     teamMember = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
         quality: new FormControl(''),
     });
 
-    firstName = this.teamMember.get('firstName').value;
-    lastName = this.teamMember.get('lastName').value;
-    quality = this.teamMember.get('quality').value;
-    buttonMinusClicked = true;  // close the form and show plus button
-    buttonPlusShow = true;
-    buttonPlusInit = false;
-    buttonMinusShow = true;
-    buttonMinusInit = true;
-    formGroup = [];
-    formNum = 0;
+    constructor() {}
 
-    constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
-        ) {}
-
-    showMinusHidePlus() {
-        this.buttonMinusShow = true;
-        this.buttonPlusShow = false;
+    deleteMember() {
+        this.DELETE.emit({memberID: this.memberID});
     }
 
-    showPlusHideMinus() {
-        this.buttonMinusShow = false;
-        this.buttonPlusShow = true;
+    firstNameChanged() {
+        this.FirstName.emit({memberID: this.memberID , firstName: this.teamMember.value.firstName});
+    }
+    lastNameChanged() {
+        this.LastName.emit({memberID: this.memberID, lastName: this.teamMember.value.lastName});
+    }
+    qualityChanged() {
+        this.Quality.emit({memberID: this.memberID, quality: this.teamMember.value.quality});
     }
 
-    addTeamMember() {
-        this.formNum++;
-        this.formGroup.push(new Form(true, this.formNum, {firstName: '', lastName: '', quality: ''}));
-        console.log('new member added with empty input');
-    }
-
-    removeTeamMember() {
-        this.formNum--;
-        this.formGroup.splice(this.formNum, 1);
-        console.log('the last empty member removed');
-    }
-
-    loadTeamComponent() {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(MemberComponent);
-        const componentRef = this.appAddMemberDirective.viewContainerRef.createComponent(componentFactory);
-        componentRef.changeDetectorRef.detectChanges();
+    ngOnInit(): void {
+        console.log(this.memberID + 'created');
     }
 }

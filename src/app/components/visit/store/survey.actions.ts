@@ -87,3 +87,7 @@ export const updateResultFail = createAction(
   '[Survey] Update a Result Fail',
   props<{error: any}>(),
 );
+
+export const openMenu = createAction(
+  '[Menu] Open Menu',
+);
