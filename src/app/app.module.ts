@@ -35,11 +35,7 @@ import { BonnePratiqueComponent } from './components/bonne-pratique/containers/b
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
-import {
-  createCorrectionFeature,
-  getCorrectionFeature,
-  updateCorrectionFeature
-} from './components/action-corrective/store/correction.features';
+import { correctionFeature } from './components/action-corrective/store/correction.features';
 
 
 const mainComponents = [
@@ -53,9 +49,10 @@ const mainComponents = [
 ];
 
 const ngrxFeatures = [
-    loginFeature,
-    surveyFeature,
-    profileFeature,
+  loginFeature,
+  surveyFeature,
+  correctionFeature,
+  profileFeature,
 ];
 
 @NgModule({

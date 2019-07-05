@@ -1,9 +1,5 @@
-import {createReducer, on} from '@ngrx/store';
-import {
-  createCorrectionInitialState,
-  getCorrectionInitialState,
-  updateCorrectionInitialState
-} from './correction.states';
+import {Action, createReducer, on} from '@ngrx/store';
+import {correctionInitialState, CorrectionState} from './correction.states';
 import {
   createCorrection,
   createCorrectionFail,
@@ -16,24 +12,19 @@ import {
   updateCorrectionSuccess
 } from './correction.actions';
 
-export const getCorrectionReducer = createReducer(
-  getCorrectionInitialState,
+export const createCorrectionReducer = createReducer(
+  correctionInitialState,
   on(getCorrection, state => state),
   on(getCorrectionSuccess, (state, {correction}) => ({...state, correction})),
   on(getCorrectionFail, state => state),
-);
-
-export const updateCorrectionReducer = createReducer(
-  updateCorrectionInitialState,
+  on(createCorrection, state => state),
+  on(createCorrectionSuccess, (state, {status}) => ({...state, status})),
+  on(createCorrectionFail, state => state),
   on(updateCorrection, state => state),
   on(updateCorrectionSuccess, (state, {status}) => ({...state, status})),
   on(updateCorrectionFail, state => state),
 );
 
-export const createCorrectionReducer = createReducer(
-  createCorrectionInitialState,
-  on(createCorrection, state => state),
-  on(createCorrectionSuccess, (state, {status}) => ({...state, status})),
-  on(createCorrectionFail, state => state),
-);
-
+export function correctionReducer(state: CorrectionState | undefined, action: Action) {
+  return createCorrectionReducer(state, action);
+}

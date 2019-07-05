@@ -1,6 +1,6 @@
-import {Action, createReducer, on} from '@ngrx/store';
-import {surveyInitialState, SurveyState} from './survey.state';
-import {createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess, updateResult, updateResultFail, updateResultSuccess} from './survey.actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import { surveyInitialState, SurveyState } from './survey.state';
+import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 
 export const createSurveyReducer = createReducer(
   surveyInitialState,
