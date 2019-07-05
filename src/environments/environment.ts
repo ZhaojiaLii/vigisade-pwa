@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  baseUrl: 'http://127.0.24.1',
+  baseUrl: 'https://vigisade.dev.brocelia.net',
   production: false
 };
 

@@ -8,7 +8,7 @@ export interface CreateResult {
   area: string;
   entity: string;
   date: string;
-  place: string;  // lieu
+  place: string;
   client: string;
   validated: boolean;
   teamMembers?: TeamMembers[];
