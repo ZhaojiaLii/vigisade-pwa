@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import { ProfileService } from '../services/profile.service';
 import { getUser, getUserFail, getUserSuccess } from './profile.action';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -18,7 +17,7 @@ export class ProfileEffects {
   @Effect()
   getUser$ = createEffect(() => this.actions$.pipe(
     ofType(getUser),
-    switchMap(action => {
+    switchMap(() => {
       return this.profileService.getUser().pipe(
         map(user => getUserSuccess({user})),
         catchError(error => of(getUserFail({error: error.message}))),

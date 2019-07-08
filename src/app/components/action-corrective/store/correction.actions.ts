@@ -1,8 +1,7 @@
-import {createAction, props} from '@ngrx/store';
-import {LoginPayload} from '../../login/interfaces/login-payload.interface';
-import {GetCorrection} from '../interfaces/getCorrection/getCorrection.interface';
-import {UpdateCorrection} from '../interfaces/updateCorrection/updateCorrection.interface';
-import {CreateCorrection} from '../interfaces/createCorrection/createCorrection.interface';
+import { createAction, props } from '@ngrx/store';
+import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
+import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
+import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 
 export const getCorrection = createAction(
     '[correction] Get Correction',
