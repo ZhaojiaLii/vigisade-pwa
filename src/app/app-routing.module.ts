@@ -11,6 +11,7 @@ import { ActionCorrectiveComponent } from './components/action-corrective/contai
 import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
+import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
 
 const extraOptions: ExtraOptions = {};
 
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'history',
     component: HistoriqueVisitesComponent,
+  },
+  {
+    path: 'history/detail',
+    component: DetailVisitComponent,
   }
 ];
 

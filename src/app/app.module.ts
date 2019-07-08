@@ -37,6 +37,7 @@ import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
 import { TokenInterceptor } from './services/token-interceptor.service';
+import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
 
 const mainComponents = [
   LoginComponent,
@@ -72,6 +73,7 @@ const ngrxFeatures = [
     BonnePratiqueComponent,
     BonnePratiqueComponent,
     HistoriqueVisitesComponent,
+    DetailVisitComponent,
   ],
   imports: [
     BrowserModule,

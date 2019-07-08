@@ -48,4 +48,8 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  onSelectionChanged() {
+    console.log(this.userProfile.value);
+  }
+
 }

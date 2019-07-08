@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +17,10 @@ import { CreateCorrection } from '../interfaces/createCorrection/createCorrectio
 export class ActionCorrectiveApiService {
 
   constructor(private http: HttpClient) { }
-
   updateCorrection(updateCorrectionPayload: UpdateCorrection): Observable<any> {
     return this.http.post(
         '/api/corrective-action/update/',
-      updateCorrectionPayload,
+      JSON.stringify(updateCorrectionPayload),
     ).pipe();
   }
 
@@ -23,6 +28,7 @@ export class ActionCorrectiveApiService {
     return this.http.post(
       '/api/corrective-action/create/',
       createCorrectionPayload,
+      httpOptions,
     ).pipe();
   }
 

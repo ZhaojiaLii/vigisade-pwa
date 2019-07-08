@@ -1,10 +1,12 @@
 export interface UpdateCorrection {
   id: number;
-  user: string;
-  survey: string;
-  category: string;
+  user_id: number;
+  survey_id: number;
+  category_id: number;
+  question_id: number;
   dateControl: string;
-  question: string;
-  comment: string;
-  photo: string;
+  place: string;
+  status: string;
+  // comment: string;
+  // photo: string;
 }

@@ -9,8 +9,10 @@ import { SurveyService } from '../../services/survey.service';
 })
 export class HistoriqueVisitesComponent implements OnInit {
   results: any;
-  date = [];
-  place = [];
+  id = 0;
+  clients = [];
+  dates = [];
+  places = [];
   status = [];
   historyNum = 0;
   constructor(
@@ -32,5 +34,4 @@ export class HistoriqueVisitesComponent implements OnInit {
       this.historyNum = keys.length;
     });
   }
-
 }

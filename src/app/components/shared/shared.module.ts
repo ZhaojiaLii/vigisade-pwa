@@ -18,9 +18,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MemberComponent } from '../visit/containers/member.component';
 import { SecurityTemplateComponent } from '../visit/securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
+import { DetailMemberComponent } from '../visit/detail-visit/containers/member.component';
 
 const sharedComponents = [
   MemberComponent,
+  DetailMemberComponent,
 ];
 const sharedDirectives = [
   HighlightDirective,
@@ -55,6 +57,7 @@ const materialModules = [
   ],
   entryComponents: [
     MemberComponent,
+    DetailMemberComponent,
     SecurityTemplateComponent,
   ],
   exports: [
