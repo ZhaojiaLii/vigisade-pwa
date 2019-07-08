@@ -14,7 +14,7 @@ export const GetUserState = createFeatureSelector<ProfileState>('getUser');
 export const getUserInfo = createSelector(
   GetUserState,
   (state: ProfileState) => {
-    return state.getUser;
+    return state.user;
   }
 );
 

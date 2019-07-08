@@ -1,24 +1,29 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { HighlightDirective } from './directives/highlight.directive';
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from '../../interceptors/token-interceptor.service';
-import { AddTeamMemberDirective } from './directives/addTeamMember.directive';
 import { MemberComponent } from '../visit/containers/member.component';
-import { AddSecurityDirective } from './directives/addSecirity.directive';
 import { SecurityTemplateComponent } from '../visit/securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
-import { BaseUrlInterceptor } from '../../interceptors/base-url-interceptor.service';
 
 const sharedComponents = [
   MemberComponent,
 ];
 const sharedDirectives = [
   HighlightDirective,
-  AddTeamMemberDirective,
-  AddSecurityDirective,
 ];
 const sharedPipes = [];
 
@@ -60,10 +65,6 @@ const materialModules = [
     ...sharedComponents,
     ...sharedDirectives,
     ...sharedPipes,
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true},
   ],
 })
 export class SharedModule {

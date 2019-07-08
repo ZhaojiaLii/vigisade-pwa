@@ -15,16 +15,15 @@ export class LoginApiService {
    */
   login(username: string, password: string): Observable<string> {
     return this.http.post(
-      '/api/login_check/',
+      '/api/login_check',
       {username, password},
+      {observe: 'response'}
     ).pipe(
       tap((response: HttpResponse<{token: string}>) => {
-        if (response.body && response.body.token) {
-            console.log(response);
+        if (response.status === 200 && response.body && response.body.token) {
             return;
         }
 
-        // @todo: throw error
         throw new Error('Bad credentials.');
       }),
       map(response => response.body.token)

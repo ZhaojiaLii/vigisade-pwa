@@ -27,7 +27,7 @@ import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { SecurityTemplateComponent } from './components/visit/securite/containers/security-template.component';
@@ -36,8 +36,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
-
-
+import { TokenInterceptor } from './services/token-interceptor.service';
 
 const mainComponents = [
   LoginComponent,
@@ -110,8 +109,10 @@ const ngrxFeatures = [
     MatTooltipModule,
     CollapseModule,
     FormsModule,
-    ],
-  providers: [],
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
