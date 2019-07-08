@@ -1,7 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, getSurvey, getSurveyFail, getSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
+import {
+  createResult,
+  createResultFail,
+  createResultSuccess,
+  getResult,
+  getResultFail,
+  getResults,
+  getResultsFail,
+  getResultsSuccess,
+  getResultSuccess,
+  getSurvey,
+  getSurveyFail,
+  getSurveySuccess,
+  updateResult,
+  updateResultFail,
+  updateResultSuccess
+} from './survey.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 

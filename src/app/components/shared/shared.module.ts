@@ -10,6 +10,7 @@ import { MemberComponent } from '../visit/containers/member.component';
 import { AddSecurityDirective } from './directives/addSecirity.directive';
 import { SecurityTemplateComponent } from '../visit/securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
+import { BaseUrlInterceptor } from '../../interceptors/base-url-interceptor.service';
 
 const sharedComponents = [
   MemberComponent,
@@ -62,6 +63,7 @@ const materialModules = [
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true},
   ],
 })
 export class SharedModule {

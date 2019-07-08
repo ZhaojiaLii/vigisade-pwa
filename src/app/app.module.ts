@@ -34,8 +34,9 @@ import { SecurityTemplateComponent } from './components/visit/securite/container
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
-import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
+import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
+
 
 
 const mainComponents = [

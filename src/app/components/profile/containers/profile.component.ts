@@ -1,37 +1,51 @@
 import { ProfileService } from '../services/profile.service';
-import { ProfileApiService } from '../services/profile-api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from '../../../store/app.state';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  test$: object;
-  options: FormGroup;
+  user: any;
+  userFirstName = '';
+  userLastName = '';
+  userMail = '';
+  userDirection = '';
+  userZone = '';
+  userEntity = '';
+  userLanguage = '';
+  userPhoto = '';
+  userProfile = new FormGroup({
+    language: new FormControl(''),
+    direction: new FormControl(''),
+    zone: new FormControl(''),
+    entity: new FormControl(''),
+  });
   constructor(
-    private fb: FormBuilder,
     private profileService: ProfileService,
-    private test12: ProfileApiService,
+    private store: Store<State>,
   ) {
-    this.options = fb.group({
-      color: 'French',
-    });
   }
 
-  getUser() {
+  ngOnInit(): void {
     this.profileService.getUser();
-    console.log('clicked');
-  }
-
-  test() {
-    this.test12.Test().subscribe((data) => {
-      console.log('data', data);
-      this.test$ = {...data};
-      console.log(this.test$);
-    });
+    this.store.select('profile').skip(2).subscribe(
+      profile => {
+        this.user = profile.user;
+        this.userFirstName = this.user.firstName;
+        this.userLastName = this.user.lastName;
+        this.userMail = this.user.mail;
+        this.userPhoto = this.user.photo;
+        this.userDirection = this.user.direction;
+        this.userZone = this.user.zone;
+        this.userEntity = this.user.entity;
+        this.userLanguage = this.user.language;
+      }
+    );
   }
 
 }
