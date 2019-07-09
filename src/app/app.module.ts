@@ -96,7 +96,11 @@ const ngrxFeatures = [
     CollapseModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-center-center',
+      preventDuplicates: true,
+    }),
     MatButtonModule,
     MatToolbarModule,
     MatListModule,

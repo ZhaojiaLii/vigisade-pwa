@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
-import {createResult, getResult, getResults, getSurvey, openMenu, updateResult} from '../store/survey.actions';
+import { createResult, getResult, getResults, getSurvey, openMenu, updateResult } from '../store/survey.actions';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
-import { take } from 'rxjs-compat/operator/take';
 
 @Injectable({
   providedIn: 'root'

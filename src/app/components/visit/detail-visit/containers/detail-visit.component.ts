@@ -155,11 +155,11 @@ export class DetailVisitComponent implements OnInit {
       this.nextResultId = 0;
       this.router.navigate(['/history', this.nextResultId]);
       window.scroll(0, 0);
-      this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId, {timeOut: 1000});
+      this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
     } else {
       this.router.navigate(['/history', this.nextResultId]);
       window.scroll(0, 0);
-      this.toastrService.success('Succèss', 'Visite: ' + this.nextResultId, {timeOut: 1000});
+      this.toastrService.success('Succèss', 'Visite: ' + this.nextResultId);
     }
   }
 
