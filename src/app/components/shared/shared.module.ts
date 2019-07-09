@@ -20,11 +20,13 @@ import { SecurityTemplateComponent } from '../visit/securite/containers/security
 import { CommonModule } from '@angular/common';
 import { DetailMemberComponent } from '../visit/detail-visit/containers/member.component';
 import { HistoryElementComponent } from '../visit/historique-visites/containers/history-element.component';
+import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 
 const sharedComponents = [
   MemberComponent,
   DetailMemberComponent,
   HistoryElementComponent,
+  ATraiterElementComponent,
 ];
 const sharedDirectives = [
   HighlightDirective,
@@ -62,6 +64,7 @@ const materialModules = [
     DetailMemberComponent,
     SecurityTemplateComponent,
     HistoryElementComponent,
+    ATraiterElementComponent,
   ],
   exports: [
     BrowserAnimationsModule,

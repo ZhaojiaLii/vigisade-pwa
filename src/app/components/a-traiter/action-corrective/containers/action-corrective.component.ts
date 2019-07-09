@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-action-corrective',
@@ -9,6 +11,7 @@ import { CreateCorrection } from '../interfaces/createCorrection/createCorrectio
 })
 export class ActionCorrectiveComponent implements OnInit {
   imgURL: any;
+  selectedId: number;
   fakeData: CreateCorrection = {
     id: 0,
     user_id: 0,
@@ -24,12 +27,17 @@ export class ActionCorrectiveComponent implements OnInit {
     photo: new FormControl(''),
   });
   constructor(
-    private actionCorrectionService: ActionCorrectiveService
+    private actionCorrectionService: ActionCorrectiveService,
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
+    private router: Router,
   ) {
   }
 
   ngOnInit() {
-    this.actionCorrectionService.createCorrection(this.fakeData);
+    this.route.paramMap.subscribe(params => {
+      this.selectedId = +params.get('id');
+    });
   }
 
   clickBack() {
@@ -48,6 +56,14 @@ export class ActionCorrectiveComponent implements OnInit {
   }
 
   validForm() {
+    if (this.correction.value.comment === '' || this.correction.value.photo === '') {
+      this.toastrService.error('champs vide');
+    } else {
+      this.actionCorrectionService.createCorrection(this.fakeData);
+      this.toastrService.success('maj succèss');
+      this.router.navigate(['/atraiter']);
+      window.scroll(0, 0);
+    }
     console.log(this.correction.value);
   }
 

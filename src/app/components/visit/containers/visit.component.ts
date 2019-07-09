@@ -34,6 +34,7 @@ export class VisitComponent {
     date: new FormControl(''),
   });
 
+  date = 'Tue Jul 02 2019 17:24:05 GMT+0200 (heure d’été d’Europe centrale)';
   constructor(
       private surveyService: SurveyService,
       ) {

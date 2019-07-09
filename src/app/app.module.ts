@@ -24,7 +24,7 @@ import { ProfileComponent } from './components/profile/containers/profile.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
-import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
+import { ActionCorrectiveComponent } from './components/a-traiter/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -35,10 +35,11 @@ import { BonnePratiqueComponent } from './components/bonne-pratique/containers/b
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
-import { correctionFeature } from './components/action-corrective/store/correction.features';
+import { correctionFeature } from './components/a-traiter/action-corrective/store/correction.features';
 import { TokenInterceptor } from './services/token-interceptor.service';
 import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
 
 const mainComponents = [
   LoginComponent,
@@ -75,6 +76,7 @@ const ngrxFeatures = [
     BonnePratiqueComponent,
     HistoriqueVisitesComponent,
     DetailVisitComponent,
+    ATraiterComponent,
   ],
   imports: [
     BrowserModule,

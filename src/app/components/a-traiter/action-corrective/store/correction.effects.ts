@@ -26,7 +26,7 @@ export class CorrectionEffects {
   @Effect()
   getCorrection$ = createEffect(() => this.actions$.pipe(
     ofType(getCorrection),
-    switchMap(action => {
+    switchMap(() => {
       return this.correctionApi.getCorrection().pipe(
         map(correction => getCorrectionSuccess({correction})),
         catchError(error => of(getCorrectionFail({error: error.message}))),
