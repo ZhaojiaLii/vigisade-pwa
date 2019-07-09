@@ -1,7 +1,4 @@
-
 import { login } from '../store/login.actions';
-
-
 import { State } from '../../../store/app.state';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';

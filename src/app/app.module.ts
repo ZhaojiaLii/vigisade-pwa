@@ -19,7 +19,6 @@ import { AppEffects } from './store/app.effects';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
-import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
@@ -40,8 +39,10 @@ import { TokenInterceptor } from './services/token-interceptor.service';
 import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
+import { layoutFeature } from './store/layout/layout.feature';
+import { MenuComponent } from './components/shared/components/menu/containers/menu.component';
 
-const mainComponents = [
+const pageComponents = [
   LoginComponent,
   TutorialComponent,
   HomepageComponent,
@@ -52,20 +53,20 @@ const mainComponents = [
 ];
 
 const ngrxFeatures = [
-  loginFeature,
-  surveyFeature,
+  layoutFeature,
   correctionFeature,
+  loginFeature,
   profileFeature,
+  surveyFeature,
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...mainComponents,
+    ...pageComponents,
     LoginComponent,
     TutorialComponent,
     HomepageComponent,
-    MenuComponent,
     ProfileComponent,
     DangerousComponent,
     VisitComponent,
