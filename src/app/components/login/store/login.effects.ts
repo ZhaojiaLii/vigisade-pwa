@@ -8,12 +8,6 @@ import { of } from 'rxjs';
 @Injectable()
 export class LoginEffects {
 
-  constructor(
-    private actions$: Actions,
-    private loginApiService: LoginApiService,
-  ) {}
-
-  @Effect()
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
     switchMap(action => {
@@ -23,4 +17,9 @@ export class LoginEffects {
       );
     }),
   ));
+
+  constructor(
+    private actions$: Actions,
+    private loginApiService: LoginApiService,
+  ) {}
 }

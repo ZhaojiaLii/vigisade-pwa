@@ -19,7 +19,6 @@ import { AppEffects } from './store/app.effects';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
-import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
@@ -36,31 +35,31 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 import { TokenInterceptor } from './services/token-interceptor.service';
+import { layoutFeature } from './store/layout/layout.feature';
 
-const mainComponents = [
+const pageComponents = [
   LoginComponent,
   TutorialComponent,
   HomepageComponent,
-  MenuComponent,
   ProfileComponent,
   DangerousComponent,
   VisitComponent,
 ];
 
 const ngrxFeatures = [
-    loginFeature,
-    surveyFeature,
-    profileFeature,
+  layoutFeature,
+  loginFeature,
+  profileFeature,
+  surveyFeature,
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...mainComponents,
+    ...pageComponents,
     LoginComponent,
     TutorialComponent,
     HomepageComponent,
-    MenuComponent,
     ProfileComponent,
     DangerousComponent,
     VisitComponent,

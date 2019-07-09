@@ -3,7 +3,6 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
-import { MenuComponent } from './components/menu/containers/menu.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
@@ -26,10 +25,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomepageComponent,
-  },
-  {
-    path: 'menu',
-    component: MenuComponent,
   },
   {
     path: 'profile',

@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  // @todo: on changes:
+  //   - check if the token is available and OK
+  //   - redirect if necessary,
+
   constructor(
     private loginService: LoginService,
     private router: Router,

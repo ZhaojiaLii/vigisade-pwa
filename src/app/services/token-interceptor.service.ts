@@ -22,7 +22,6 @@ export class TokenInterceptor implements HttpInterceptor {
       switchMap((token: string) => {
 
         const host = window.location.protocol + '//' + window.location.host;
-        console.log('host', host, req.url);
 
         return next.handle(
           req.clone({
