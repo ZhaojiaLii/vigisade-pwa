@@ -26,29 +26,34 @@
     <div class="form-row">
       <div class="ml-3 mt-3 col-md-6">
         <span class="font-12">Agence</span>
-        <div><span>Agence lorem ipsum</span></div>
+        <div><span>{{entity}}</span></div>
       </div>
       <div class="ml-3 my-2 col-md-6">
         <span class="font-12">Lieu du chantier</span>
-        <div><span>Lieu du chantier lorem ipsum</span></div>
+        <div><span>{{place}}</span></div>
 
       </div>
     </div>
     <div class="form-row">
       <div class="ml-3 my-2 col-md-6">
         <span class="font-12">Client</span>
-        <div><span>Nom du client</span></div>
+        <div><span>{{client}}</span></div>
       </div>
       <div class="ml-3 mt-2 mb-3 col-md-6">
         <span class="font-12">Date de la visite<span class="light-grey">(jour, mois, année)</span></span>
-        <div><span>12/05/2019</span></div>
+        <div><span>{{date}}</span></div>
       </div>
     </div>
     <p class="font-medium font-22">Équipe contrôlée</p>
     <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
-    <app-detail-member></app-detail-member>
+    <app-detail-member
+        *ngFor="let index of index"
+        [firstName]="firstName[index]"
+        [lastName]="lastName[index]"
+        [role]="role[index]"
+    ></app-detail-member>
     <div class="mx-30">
-      <button class="btn btn-info d-block w-100 mt-5">Suivant</button>
+      <button class="btn btn-info d-block w-100 mt-5" (click)="nextResult()">Suivant</button>
     </div>
   </div>
 </div>

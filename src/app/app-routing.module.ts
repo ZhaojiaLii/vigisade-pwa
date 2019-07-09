@@ -61,7 +61,7 @@ const routes: Routes = [
     component: HistoriqueVisitesComponent,
   },
   {
-    path: 'history/detail',
+    path: 'history/:id',
     component: DetailVisitComponent,
   }
 ];

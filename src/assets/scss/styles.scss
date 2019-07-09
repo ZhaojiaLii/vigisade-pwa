@@ -7,3 +7,9 @@
 @import "common/card";
 @import "common/form";
 @import "common/footer";
+
+@import "../../../node_modules/ngx-toastr/toastr.css";
+.toast-top-center {
+  top: 12px;
+  margin: 0 auto;
+}

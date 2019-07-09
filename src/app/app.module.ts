@@ -38,6 +38,7 @@ import { HistoriqueVisitesComponent } from './components/visit/historique-visite
 import { correctionFeature } from './components/action-corrective/store/correction.features';
 import { TokenInterceptor } from './services/token-interceptor.service';
 import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const mainComponents = [
   LoginComponent,
@@ -95,6 +96,7 @@ const ngrxFeatures = [
     CollapseModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot(),
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
