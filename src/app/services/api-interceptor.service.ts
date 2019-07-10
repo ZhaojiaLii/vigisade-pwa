@@ -7,7 +7,7 @@ import 'rxjs-compat/add/operator/mergeMap';
 import 'rxjs-compat/add/operator/catch';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class ApiInterceptor implements HttpInterceptor {
 
   constructor(
     private loginService: LoginService,

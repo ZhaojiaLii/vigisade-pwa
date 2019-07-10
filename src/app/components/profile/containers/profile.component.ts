@@ -1,7 +1,8 @@
 import { ProfileService } from '../services/profile.service';
-import { ProfileApiService } from '../services/profile-api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-profile',
@@ -9,29 +10,16 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
-  test$: object;
   options: FormGroup;
+
+  user$: Observable<User> = this.profileService.getUser();
+
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
-    private test12: ProfileApiService,
   ) {
     this.options = fb.group({
       color: 'French',
     });
   }
-
-  getUser() {
-    this.profileService.getUser();
-    console.log('clicked');
-  }
-
-  test() {
-    this.test12.Test().subscribe((data) => {
-      console.log('data', data);
-      this.test$ = {...data};
-      console.log(this.test$);
-    });
-  }
-
 }

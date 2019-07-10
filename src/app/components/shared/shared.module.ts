@@ -8,8 +8,11 @@ import { MemberComponent } from '../visit/containers/member.component';
 import { AddSecurityDirective } from './directives/addSecirity.directive';
 import { SecurityTemplateComponent } from '../visit/securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from './components/menu/containers/menu.component';
+import { RouterModule } from '@angular/router';
 
 const sharedComponents = [
+  MenuComponent,
   MemberComponent,
 ];
 const sharedDirectives = [
@@ -44,6 +47,7 @@ const materialModules = [
     ...materialModules,
     MatDialogModule,
     CommonModule,
+    RouterModule,
   ],
   entryComponents: [
     MemberComponent,

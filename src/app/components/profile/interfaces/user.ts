@@ -1,9 +1,8 @@
-
-export interface GetUser {
+export interface User {
   mail: string;
-  direction: string;
-  zone: string;
-  entity: string;
+  directionId: number;
+  zoneId: number;
+  entityId: number;
   language: string;
   firstName: string;
   lastName: string;

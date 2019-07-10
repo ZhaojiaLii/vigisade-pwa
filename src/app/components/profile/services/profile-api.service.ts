@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GetUser } from '../interfaces/getUser';
-import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileApiService {
 
-  // private headers = new Headers({'Content-Type': 'application/json'});
-  baseUrl = environment.baseUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  /**
-   * Gets survey data from API
-   */
-  getUser(): Observable<GetUser> {
-    const url = this.baseUrl + '/api/user/';
-    return this.http.get<GetUser>(url);
-  }
-
-  Test() {
-    // tslint:disable-next-line:max-line-length
-    return this.http.get<GetUser>('http://127.0.24.1/api/user/');
+  getUser(): Observable<User> {
+    return this.http.get<User>('/api/user/').pipe(
+      // @todo: remove this MAP when the API is OK
+      map(() => ({
+        mail: 'admin_0@gmail.com',
+        directionId: 1,
+        zoneId: 1,
+        entityId: 1,
+        language: 'Français',
+        firstName: 'Admin',
+        lastName: 'Test',
+        photo: 'https://via.placeholder.com/300x300',
+        countRemainingActions: 2,
+        countCurrentMonthVisits: 3,
+        countLastMonthVisits: 4,
+      })),
+    );
   }
 }
