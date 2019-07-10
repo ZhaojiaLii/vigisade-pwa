@@ -35,15 +35,22 @@ export class SurveyApiService {
     );
   }
 
-  getResult(): Observable<GetResult> {
-    const id = 1;
+  getResult(id: number): Observable<GetResult> {
     return this.http.get<GetResult>('/api/survey/history/' + id + '/').pipe(
-        tap((response) => {
-            if (response) {
-                // console.log(response);
-                return;
-            }
-        })
+        map(() => ({
+          id: 1,
+          surveyId: 1,
+          userId: 2,
+          directionId: 1,
+          zoneId: 11,
+          entityId: 1,
+          date: '2019-07-02',
+          place: 'Paris',
+          client: 'zhli',
+          bestPracticeDone: true,
+          bestPracticeComment: '111',
+          bestPracticePhoto: 'bestPracticePhoto',
+        }))
     );
   }
 

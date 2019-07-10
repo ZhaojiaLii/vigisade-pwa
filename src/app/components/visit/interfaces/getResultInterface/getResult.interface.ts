@@ -1,17 +1,16 @@
-import { TeamMember } from './teamMember.interface';
-import { Category } from './category.interface';
-import { BestPractice } from './bestPractice.interface';
-
 export interface GetResult {
-  mail: string;
   id: number;
-  direction: string;
-  area: string;
-  entity: string;
+  surveyId: number;
+  userId: number;
+  directionId: number;
+  zoneId: number;
+  entityId: number;
   date: string;
   place: string;
   client: string;
-  teamMembers: TeamMember[];
-  categories: Category[];
-  bestPractice: BestPractice[];
+  // questions: Question[];
+  // teamMembers: TeamMember[];
+  bestPracticeDone: boolean;
+  bestPracticeComment: string;
+  bestPracticePhoto: string;
 }

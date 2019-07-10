@@ -1,5 +1,9 @@
 
 
 export interface TeamMember {
-  member: string;
+  id: number;
+  resultId: number;
+  firstName: string;
+  lastName: string;
+  role: string;
 }

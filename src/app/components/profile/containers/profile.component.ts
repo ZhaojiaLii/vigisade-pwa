@@ -11,15 +11,17 @@ import { User } from '../interfaces/user';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  user: any;
-  userFirstName = '';
-  userLastName = '';
-  userMail = '';
-  userDirection = '';
-  userZone = '';
-  userEntity = '';
-  userLanguage = '';
-  userPhoto = '';
+  userFirstName: string;
+  userLastName: string;
+  userMail: string;
+  userDirectionId: number;
+  userZoneId: number;
+  userEntityId: number;
+  userLanguage: string;
+  userPhoto: string;
+  countCurrentMonthVisits: number;
+  countLastMonthVisits: number;
+  countRemainingActions: number;
   userProfile = new FormGroup({
     language: new FormControl(''),
     direction: new FormControl(''),
@@ -35,20 +37,22 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.profileService.getUser();
-    // this.store.select('profile').skip(2).subscribe(
-    //   profile => {
-    //     this.user = profile.user;
-    //     this.userFirstName = this.user.firstName;
-    //     this.userLastName = this.user.lastName;
-    //     this.userMail = this.user.mail;
-    //     this.userPhoto = this.user.photo;
-    //     this.userDirection = this.user.direction;
-    //     this.userZone = this.user.zone;
-    //     this.userEntity = this.user.entity;
-    //     this.userLanguage = this.user.language;
-    //   }
-    // );
+    this.profileService.loadUser();
+    this.user$.skip(2).pipe(
+    ).subscribe(user => {
+      console.log(user);
+      this.userFirstName = user.firstName;
+      this.userLastName = user.lastName;
+      this.userMail = user.mail;
+      this.userPhoto = user.photo;
+      this.userDirectionId = user.directionId;
+      this.userZoneId = user.zoneId;
+      this.userEntityId = user.entityId;
+      this.userLanguage = user.language;
+      this.countCurrentMonthVisits = user.countCurrentMonthVisits;
+      this.countLastMonthVisits = user.countLastMonthVisits;
+      this.countRemainingActions = user.countRemainingActions;
+    });
   }
 
   onSelectionChanged() {

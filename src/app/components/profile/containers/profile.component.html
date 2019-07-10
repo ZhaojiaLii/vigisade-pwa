@@ -7,7 +7,7 @@
   <form [formGroup]="userProfile">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select class="form-control" appHighlight id="langueSelect" formControlName="language">
+        <select class="form-control has-value" appHighlight id="langueSelect" formControlName="language">
           <option value="">{{userLanguage}}</option>
           <option value="french">Français</option>
           <option value="english">Anglais</option>
@@ -17,8 +17,8 @@
         <div class="line"></div>
       </div>
       <div class="form-group col-md-6">
-        <select class="form-control" appHighlight id="paysSelect" formControlName="direction">
-          <option value="">{{userDirection}}</option>
+        <select class="form-control has-value" appHighlight id="paysSelect" formControlName="direction">
+          <option value="">{{userDirectionId}}</option>
           <option value="france">France</option>
           <option value="netherlands">Pays-Bas</option>
         </select>
@@ -28,16 +28,16 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select class="form-control" appHighlight id="regionSelect" formControlName="zone">
-          <option value="">{{userZone}}</option>
+        <select class="form-control has-value" appHighlight id="regionSelect" formControlName="zone">
+          <option value="">{{userZoneId}}</option>
           <option value="west-france">Ouest France</option>
         </select>
         <label for="regionSelect">Zone</label>
         <div class="line"></div>
       </div>
       <div class="form-group col-md-6">
-        <select class="form-control" appHighlight id="entiteSelect" formControlName="entity">
-          <option value="">{{userEntity}}</option>
+        <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
+          <option value="">{{userEntityId}}</option>
           <option value="rouen">Rouen</option>
         </select>
         <label for="entiteSelect">Entité</label>

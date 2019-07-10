@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionCorrectiveService } from '../action-corrective/services/action-corrective.service';
 
 @Component({
   selector: 'app-a-traiter',
@@ -49,17 +50,49 @@ export class ATraiterComponent implements OnInit {
       date: '15/05/2019',
     },
   ];
+  data = [];
   id = [];
+  surveyId = [];
+  categoryId = [];
+  resultId = [];
+  questionId = [];
+  images = [];
+  commentQuestions = [];
   clients = [];
   dates = [];
   places = [];
   index = [];
   i = 0;
   aTraiterNum = 0;
-  constructor() { }
+  constructor(
+    private correctionService: ActionCorrectiveService,
+  ) { }
 
   ngOnInit() {
-    this.test();
+    this.correctionService.loadCorrection();
+    this.surveyId = [];
+    this.questionId = [];
+    this.categoryId = [];
+    this.resultId = [];
+    this.images = [];
+    this.commentQuestions = [];
+    this.index = [];
+    this.correctionService.getCorrection().skip(2).subscribe(
+      actionCorrectives => {
+        this.data.push(actionCorrectives);
+        this.aTraiterNum = this.data[0].length;
+        for (const actionCorrective of this.data[0]) {
+          this.surveyId.push(actionCorrective.survey_id);
+          this.questionId.push(actionCorrective.question_id);
+          this.categoryId.push(actionCorrective.category_id);
+          this.resultId.push(actionCorrective.result_id);
+          this.images.push(actionCorrective.image);
+          this.commentQuestions.push(actionCorrective.comment_question);
+          this.index.push(actionCorrective.id - 1);
+        }
+        console.log(this.commentQuestions);
+      }
+    );
   }
 
   test() {

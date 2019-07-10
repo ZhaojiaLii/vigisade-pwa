@@ -1,19 +1,20 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import {
   createCorrection,
   createCorrectionFail,
   createCorrectionSuccess,
-  getCorrection,
-  getCorrectionFail,
-  getCorrectionSuccess,
+  loadCorrection,
+  loadCorrectionFail,
+  loadCorrectionSuccess,
   updateCorrection,
   updateCorrectionFail,
   updateCorrectionSuccess
 } from './correction.actions';
-import {ActionCorrectiveApiService} from '../services/action-corrective-api.service';
-import {catchError, map, switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import { ActionCorrectiveApiService } from '../services/action-corrective-api.service';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { getResult, getResultFail, getResultSuccess } from '../../../visit/store/survey.actions';
 
 @Injectable()
 export class CorrectionEffects {
@@ -24,12 +25,23 @@ export class CorrectionEffects {
   ) {}
 
   @Effect()
-  getCorrection$ = createEffect(() => this.actions$.pipe(
-    ofType(getCorrection),
+  loadCorrection$ = createEffect(() => this.actions$.pipe(
+    ofType(loadCorrection),
     switchMap(() => {
-      return this.correctionApi.getCorrection().pipe(
-        map(correction => getCorrectionSuccess({correction})),
-        catchError(error => of(getCorrectionFail({error: error.message}))),
+      return this.correctionApi.loadCorrection().pipe(
+        map(correction => loadCorrectionSuccess({correction})),
+        catchError(error => of(loadCorrectionFail({error: error.message}))),
+      );
+    })
+  ));
+
+  @Effect()
+  loadResult$ = createEffect(() => this.actions$.pipe(
+    ofType(getResult),
+    switchMap(action => {
+      return this.correctionApi.loadResult(action.id).pipe(
+        map(result => getResultSuccess({result})),
+        catchError(error => of(getResultFail({error: error.message})))
       );
     })
   ));

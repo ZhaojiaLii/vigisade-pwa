@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Store} from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {State} from '../../../../store/app.state';
-import {createCorrection, getCorrection, updateCorrection} from '../store/correction.actions';
+import { createCorrection, loadCorrection, updateCorrection } from '../store/correction.actions';
 import {UpdateCorrection} from '../interfaces/updateCorrection/updateCorrection.interface';
 import {CreateCorrection} from '../interfaces/createCorrection/createCorrection.interface';
+import { Observable } from 'rxjs';
+import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
+import { getCorrection } from '../store/correction.selector';
+import { getResult } from '../../../visit/store/survey.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +16,16 @@ export class ActionCorrectiveService {
 
   constructor(private store: Store<State>) { }
 
-  getCorrection(): any {
-    this.store.dispatch(getCorrection());
+  loadCorrection(): void {
+    this.store.dispatch(loadCorrection());
+  }
+
+  getCorrection(): Observable<GetCorrection> {
+    return this.store.pipe(select(getCorrection));
+  }
+
+  loadResult(id: number): void {
+    this.store.dispatch(getResult({id}));
   }
 
   updateCorrection(updateCorrectionPayload: UpdateCorrection): void {

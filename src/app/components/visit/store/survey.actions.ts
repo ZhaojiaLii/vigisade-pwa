@@ -40,7 +40,10 @@ export const getResultsFail = createAction(
 /***
  * get one single history(result) detail (GET: api/survey/history/{id})
  */
-export const getResult = createAction('[Survey] Get One Result');
+export const getResult = createAction(
+  '[Survey] Get One Result',
+  props<{id: number}>(),
+);
 
 export const getResultSuccess = createAction(
   '[Survey] Get One Result Success',

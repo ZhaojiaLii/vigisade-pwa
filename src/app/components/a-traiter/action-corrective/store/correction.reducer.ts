@@ -4,9 +4,9 @@ import {
   createCorrection,
   createCorrectionFail,
   createCorrectionSuccess,
-  getCorrection,
-  getCorrectionFail,
-  getCorrectionSuccess,
+  loadCorrection,
+  loadCorrectionFail,
+  loadCorrectionSuccess,
   updateCorrection,
   updateCorrectionFail,
   updateCorrectionSuccess
@@ -14,9 +14,9 @@ import {
 
 export const createCorrectionReducer = createReducer(
   correctionInitialState,
-  on(getCorrection, state => state),
-  on(getCorrectionSuccess, (state, {correction}) => ({...state, correction})),
-  on(getCorrectionFail, state => state),
+  on(loadCorrection, state => state),
+  on(loadCorrectionSuccess, (state, {correction}) => ({...state, correction})),
+  on(loadCorrectionFail, state => state),
   on(createCorrection, state => state),
   on(createCorrectionSuccess, (state, {status}) => ({...state, status})),
   on(createCorrectionFail, state => state),

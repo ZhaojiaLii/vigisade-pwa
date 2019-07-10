@@ -1,6 +1,6 @@
 import {Correction} from './correction.interface';
 
 export interface GetCorrection {
-  id: number;
-  correction: Correction[];
+  user_id: number;
+  Correction: Correction[];
 }

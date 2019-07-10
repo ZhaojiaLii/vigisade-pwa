@@ -3,17 +3,17 @@ import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interfa
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 
-export const getCorrection = createAction(
-    '[correction] Get Correction',
+export const loadCorrection = createAction(
+    '[correction] Load Correction',
 );
 
-export const getCorrectionSuccess = createAction(
-    '[correction] Get Correction Success',
+export const loadCorrectionSuccess = createAction(
+    '[correction] Load Correction Success',
     props<{ correction: GetCorrection }>(),
 );
 
-export const getCorrectionFail = createAction(
-    '[correction] Get Correction fail',
+export const loadCorrectionFail = createAction(
+    '[correction] Load Correction fail',
     props<{ error: any }>(),
 );
 
