@@ -40,13 +40,11 @@ import { DetailVisitComponent } from './components/visit/detail-visit/containers
 import { ToastrModule } from 'ngx-toastr';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
 import { layoutFeature } from './store/layout/layout.feature';
-import { MenuComponent } from './components/shared/components/menu/containers/menu.component';
 
 const pageComponents = [
   LoginComponent,
   TutorialComponent,
   HomepageComponent,
-  MenuComponent,
   ProfileComponent,
   DangerousComponent,
   VisitComponent,
