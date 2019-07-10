@@ -37,22 +37,22 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.loadUser();
-    this.user$.skip(2).pipe(
-    ).subscribe(user => {
-      console.log(user);
-      this.userFirstName = user.firstName;
-      this.userLastName = user.lastName;
-      this.userMail = user.mail;
-      this.userPhoto = user.photo;
-      this.userDirectionId = user.directionId;
-      this.userZoneId = user.zoneId;
-      this.userEntityId = user.entityId;
-      this.userLanguage = user.language;
-      this.countCurrentMonthVisits = user.countCurrentMonthVisits;
-      this.countLastMonthVisits = user.countLastMonthVisits;
-      this.countRemainingActions = user.countRemainingActions;
-    });
+    // this.profileService.loadUser();
+    // this.user$.pipe(
+    // ).subscribe(user => {
+    //   console.log(user);
+    //   this.userFirstName = user.firstName;
+    //   this.userLastName = user.lastName;
+    //   this.userMail = user.mail;
+    //   this.userPhoto = user.photo;
+    //   this.userDirectionId = user.directionId;
+    //   this.userZoneId = user.zoneId;
+    //   this.userEntityId = user.entityId;
+    //   this.userLanguage = user.language;
+    //   this.countCurrentMonthVisits = user.countCurrentMonthVisits;
+    //   this.countLastMonthVisits = user.countLastMonthVisits;
+    //   this.countRemainingActions = user.countRemainingActions;
+    // });
   }
 
   onSelectionChanged() {

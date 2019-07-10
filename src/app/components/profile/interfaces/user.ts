@@ -1,7 +1,7 @@
 export interface User {
   mail: string;
   directionId: number;
-  areaId: number;
+  zoneId: number;
   entityId: number;
   language: string;
   firstName: string;
