@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { getAreas, getDirections, getEntities } from '../store/data/data.selectors';
 import { Area } from '../components/shared/interfaces/area.interface';
 import { Entity } from '../components/shared/interfaces/entity.interface';
+import { loadData } from '../store/data/data.actions';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,10 @@ export class DataService {
   constructor(
     private store: Store<DataState>,
   ) {}
+
+  loadData(): void {
+    this.store.dispatch(loadData());
+  }
 
   getDirections(): Observable<Direction[]> {
     return this.store.pipe(select(getDirections));
