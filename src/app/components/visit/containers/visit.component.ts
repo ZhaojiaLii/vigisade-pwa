@@ -1,14 +1,19 @@
 import { SurveyService } from '../services/survey.service';
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { Survey } from '../interfaces/survey.interface';
+import { Observable } from 'rxjs';
+import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 
 @Component({
   selector: 'app-visit',
   templateUrl: './visit.component.html',
 })
 export class VisitComponent {
+
+  // @ViewChild(AddTeamMemberDirective, {static: true}) appAddMemberDirective: AddTeamMemberDirective;
+
   isCollapsed = false;
   createResultPayload: CreateResult;
   updateResultPayload: UpdateResult;
@@ -35,34 +40,32 @@ export class VisitComponent {
   });
 
   date = 'Tue Jul 02 2019 17:24:05 GMT+0200 (heure d’été d’Europe centrale)';
-  constructor(
-      private surveyService: SurveyService,
-      ) {
-  }
 
-  getSurvey() {
-      this.surveyService.getSurvey();
-  }
+  survey$: Observable<Survey> = this.surveyService.getSurvey();
+
+  constructor(
+    private surveyService: SurveyService,
+  ) {}
 
   getResults() {
-      this.surveyService.getResults();
+    this.surveyService.getResults();
   }
 
   getResultByID() {
-      this.surveyService.getResult();
+    this.surveyService.getResult();
   }
 
   createResult() {
-      this.surveyService.createResult(this.createResultPayload);
+    this.surveyService.createResult(this.createResultPayload);
   }
 
   updateResult() {
-      this.surveyService.updateResult(this.updateResultPayload);
+    this.surveyService.updateResult(this.updateResultPayload);
   }
 
   addTeamMember() {
     this.teamGroupIndex.push(this.clicked);
-    this.teamGroup.push({memberID: this.clicked, firstName: '', lastName: '', quality: '' });
+    this.teamGroup.push({memberID: this.clicked, firstName: '', lastName: '', quality: ''});
     this.clicked++;
     console.log(this.teamGroupIndex);
     console.log(this.teamGroup);

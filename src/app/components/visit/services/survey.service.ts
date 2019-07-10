@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from '../../../store/app.state';
-import { createResult, getResult, getResults, getSurvey, openMenu, updateResult } from '../store/survey.actions';
+import { select, Store } from '@ngrx/store';
+import {createResult, getResult, getResults, loadSurvey, updateResult} from '../store/survey.actions';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { Observable } from 'rxjs';
+import { SurveyState } from '../store/survey.state';
+import { Survey } from '../interfaces/survey.interface';
+import { getSurvey } from '../store/survey.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
-  constructor(private store: Store<State>) { }
 
-  getSurvey(): any {
-    this.store.dispatch(getSurvey());
+  constructor(private store: Store<SurveyState>) { }
+
+  loadSurvey(): void {
+    this.store.dispatch(loadSurvey());
+  }
+
+  getSurvey(): Observable<Survey> {
+    return this.store.pipe(select(getSurvey));
   }
 
   getResults(): void {
@@ -29,9 +37,5 @@ export class SurveyService {
 
   updateResult(updateResultPayload: UpdateResult): void {
     this.store.dispatch(updateResult({updateResultPayload}));
-  }
-
-  openMenu(): void {
-    this.store.dispatch(openMenu());
   }
 }

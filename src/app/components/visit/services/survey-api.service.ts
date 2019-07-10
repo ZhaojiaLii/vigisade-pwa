@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Survey } from '../interfaces/getSurveyInterface/survey.interface';
+import { Survey } from '../interfaces/survey.interface';
 import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
 import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
@@ -12,15 +12,30 @@ import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.i
   providedIn: 'root',
 })
 export class SurveyApiService {
+
   constructor(private http: HttpClient) {}
 
   getSurvey(): Observable<Survey> {
-    return this.http.get<Survey>('/api/survey/').skip(0).pipe(
-        tap((survey) => {
-            if (survey) {
-                // console.log(response);
-            }
-        })
+    return this.http.get<Survey>('/api/survey/').pipe(
+      map(() => ({
+        title: 'Titre Questionnaire',
+        categories: [
+          {
+            title: 'Titre Catégorie',
+            questions: [
+              {
+                label: 'Label Question 1',
+                help: 'Aide Question 1'
+              },
+              {
+                label: 'Label Question 2',
+              },
+            ],
+          },
+        ],
+        bestPracticeLabel: 'Bonne pratique',
+        bestPracticeHelp: 'Aide bonne pratique',
+      })),
     );
   }
 
