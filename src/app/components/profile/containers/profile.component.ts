@@ -35,20 +35,20 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getUser();
-    this.store.select('profile').skip(2).subscribe(
-      profile => {
-        this.user = profile.user;
-        this.userFirstName = this.user.firstName;
-        this.userLastName = this.user.lastName;
-        this.userMail = this.user.mail;
-        this.userPhoto = this.user.photo;
-        this.userDirection = this.user.direction;
-        this.userZone = this.user.zone;
-        this.userEntity = this.user.entity;
-        this.userLanguage = this.user.language;
-      }
-    );
+    // this.profileService.getUser();
+    // this.store.select('profile').skip(2).subscribe(
+    //   profile => {
+    //     this.user = profile.user;
+    //     this.userFirstName = this.user.firstName;
+    //     this.userLastName = this.user.lastName;
+    //     this.userMail = this.user.mail;
+    //     this.userPhoto = this.user.photo;
+    //     this.userDirection = this.user.direction;
+    //     this.userZone = this.user.zone;
+    //     this.userEntity = this.user.entity;
+    //     this.userLanguage = this.user.language;
+    //   }
+    // );
   }
 
   onSelectionChanged() {
