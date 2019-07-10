@@ -13,9 +13,23 @@ export class DataApiService {
   getData(): Observable<DataApi> {
     // @todo: call API
     return of({
-      directions: [],
-      areas: [],
-      entities: [],
+      directions: [
+        {id: 1, name: 'Direction 1'},
+        {id: 2, name: 'Direction 2'},
+      ],
+      areas: [
+        {id: 1, name: 'Area 1', directionId: 1},
+        {id: 2, name: 'Area 2', directionId: 1},
+        {id: 3, name: 'Area 3', directionId: 2},
+        {id: 4, name: 'Area 4', directionId: 2},
+      ],
+      entities: [
+        {id: 1, name: 'Entity 1', areaId: 1},
+        {id: 2, name: 'Entity 2', areaId: 1},
+        {id: 3, name: 'Entity 3', areaId: 2},
+        {id: 4, name: 'Entity 4', areaId: 3},
+        {id: 5, name: 'Entity 5', areaId: 4},
+      ],
     });
   }
 }

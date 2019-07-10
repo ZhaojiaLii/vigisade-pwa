@@ -1,29 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { surveyInitialState, SurveyState } from './survey.state';
-import {
-  createResult,
-  createResultFail,
-  createResultSuccess,
-  getResult,
-  getResultFail,
-  getResults,
-  getResultsFail,
-  getResultsSuccess,
-  getResultSuccess,
-  getSurvey,
-  getSurveyFail,
-  getSurveySuccess,
-  openMenu,
-  updateResult,
-  updateResultFail,
-  updateResultSuccess
-} from './survey.actions';
+import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, loadSurvey, loadSurveyFail, loadSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 
 export const createSurveyReducer = createReducer(
   surveyInitialState,
-  on(getSurvey, state => state),
-  on(getSurveySuccess, (state, {survey}) => ({...state, survey})),
-  on(getSurveyFail, state => state),
+  on(loadSurvey, state => ({...state})),
+  on(loadSurveySuccess, (state, {survey}) => ({...state, survey})),
+  on(loadSurveyFail, state => ({...state})),
   on(getResults, state => state),
   on(getResultsSuccess, (state, {results}) => ({...state, results})),
   on(getResultsFail, (state => state)),
@@ -36,7 +19,6 @@ export const createSurveyReducer = createReducer(
   on(updateResult, state => state),
   on(updateResultSuccess, (state, {status}) => ({...state, status})),
   on(updateResultFail, state => state),
-  on(openMenu, state => state),
 );
 
 export function surveyReducer(state: SurveyState | undefined, action: Action) {

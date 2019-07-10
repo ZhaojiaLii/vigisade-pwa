@@ -1,21 +1,16 @@
 import { createAction, props } from '@ngrx/store';
-import { Survey } from '../interfaces/getSurveyInterface/survey.interface';
+import { Survey } from '../interfaces/survey.interface';
 import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
 import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
-/***
- * get survey data (GET: api/survey/)
- */
-export const getSurvey = createAction('[Survey] Gets Survey data');
-
-export const getSurveySuccess = createAction(
+export const loadSurvey = createAction('[Survey] Load Survey');
+export const loadSurveySuccess = createAction(
   '[Survey] Gets survey Success',
   props<{survey: Survey}>(),
 );
-
-export const getSurveyFail = createAction(
+export const loadSurveyFail = createAction(
   '[Survey] Gets survey Fail',
   props<{error: any}>(),
 );

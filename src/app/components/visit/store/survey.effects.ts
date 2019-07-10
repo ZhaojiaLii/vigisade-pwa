@@ -1,23 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import {
-  createResult,
-  createResultFail,
-  createResultSuccess,
-  getResult,
-  getResultFail,
-  getResults,
-  getResultsFail,
-  getResultsSuccess,
-  getResultSuccess,
-  getSurvey,
-  getSurveyFail,
-  getSurveySuccess,
-  updateResult,
-  updateResultFail,
-  updateResultSuccess
-} from './survey.actions';
+import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, loadSurvey, loadSurveyFail, loadSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -30,12 +14,12 @@ export class SurveyEffects {
   ) {}
 
   @Effect()
-  getSurvey$ = createEffect(() => this.actions$.pipe(
-    ofType(getSurvey),
-    switchMap(action => {
+  loadSurvey$ = createEffect(() => this.actions$.pipe(
+    ofType(loadSurvey),
+    switchMap(() => {
       return this.surveyApi.getSurvey().pipe(
-        map(survey => getSurveySuccess({survey})),
-        catchError(error => of(getSurveyFail({error: error.message}))),
+        map(survey => loadSurveySuccess({survey})),
+        catchError(error => of(loadSurveyFail({error: error.message}))),
       );
     })
   ));
@@ -43,7 +27,7 @@ export class SurveyEffects {
   @Effect()
   getResults$ = createEffect(() => this.actions$.pipe(
     ofType(getResults),
-    switchMap(action => {
+    switchMap(() => {
       return this.surveyApi.getResults().pipe(
         map(results => getResultsSuccess({results})),
         catchError(error => of(getResultsFail({error: error.message}))),
@@ -55,7 +39,7 @@ export class SurveyEffects {
   getResult$ = createEffect(() => this.actions$.pipe(
     ofType(getResult),
     switchMap(action => {
-      return this.surveyApi.getResult().pipe(
+      return this.surveyApi.getResult(action.id).pipe(
         map(result => getResultSuccess({result})),
         catchError(error => of(getResultFail({error: error.message}))),
       );
