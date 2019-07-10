@@ -1,9 +1,9 @@
-import { GetUser } from '../interfaces/getUser';
+import { User } from '../interfaces/user';
 
 export interface ProfileState {
-  user: GetUser | null;
+  user: User | null;
 }
 
-export const profileInitialState = {
+export const initialProfileState = {
   user: null,
 };

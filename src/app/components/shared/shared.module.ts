@@ -21,8 +21,11 @@ import { CommonModule } from '@angular/common';
 import { DetailMemberComponent } from '../visit/detail-visit/containers/member.component';
 import { HistoryElementComponent } from '../visit/historique-visites/containers/history-element.component';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
+import { MenuComponent } from './components/menu/containers/menu.component';
+import { RouterModule } from '@angular/router';
 
 const sharedComponents = [
+  MenuComponent,
   MemberComponent,
   DetailMemberComponent,
   HistoryElementComponent,
@@ -58,6 +61,7 @@ const materialModules = [
     ...materialModules,
     MatDialogModule,
     CommonModule,
+    RouterModule,
   ],
   entryComponents: [
     MemberComponent,

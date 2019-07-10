@@ -1,25 +1,25 @@
-
-import { State } from '../../../store/app.state';
-import { getUser } from '../store/profile.action';
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-
+import { loadUser } from '../store/profile.action';
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { ProfileState } from '../store/profile.state';
+import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
+import { getUser } from '../store/profile.selector';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ProfileService implements OnInit {
+export class ProfileService {
+
   constructor(
-    private http: HttpClient,
-    private store: Store<State>,
-  ) { }
+    private store: Store<ProfileState>,
+  ) {}
 
-  getUser(): void {
-    this.store.dispatch(getUser());
+  loadUser(): void {
+    this.store.dispatch(loadUser());
   }
 
-  ngOnInit() {
+  getUser(): Observable<User> {
+    return this.store.pipe(select(getUser));
   }
-
 }

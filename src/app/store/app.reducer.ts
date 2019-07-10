@@ -7,8 +7,10 @@ import { surveyReducer } from '../components/visit/store/survey.reducer';
 import { profileReducer } from '../components/profile/store/profile.reducer';
 import { correctionReducer } from '../components/a-traiter/action-corrective/store/correction.reducer';
 import { layoutReducer } from './layout/layout.reducer';
+import { dataReducer } from './data/data.reducer';
 
 export const reducers: ActionReducerMap<State> = {
+    data: dataReducer,
     layout: layoutReducer,
     login: loginReducer,
     profile: profileReducer,

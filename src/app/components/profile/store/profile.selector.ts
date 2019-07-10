@@ -1,20 +1,10 @@
-
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileState } from './profile.state';
 
-/**
- * Gets the Profile GET state.
- */
-export const GetUserState = createFeatureSelector<ProfileState>('getUser');
+export const getProfileState = createFeatureSelector<ProfileState>('profile');
 
-/**
- * Gets the user information
- */
-
-export const getUserInfo = createSelector(
-  GetUserState,
-  (state: ProfileState) => {
-    return state.user;
-  }
+export const getUser = createSelector(
+  getProfileState,
+  (state: ProfileState) => state.user,
 );
 

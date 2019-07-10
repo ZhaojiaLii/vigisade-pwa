@@ -1,17 +1,16 @@
-
-import { GetUser } from '../interfaces/getUser';
+import { User } from '../interfaces/user';
 import { createAction, props } from '@ngrx/store';
 
-export const getUser = createAction(
-  '[GetUser] Gets User data'
+export const loadUser = createAction(
+  '[GetUser] Gets User data',
 );
 
-export const getUserSuccess = createAction(
+export const loadUserSuccess = createAction(
   '[GetUser] Gets User data Success',
-  props<{user: GetUser}>(),
-  );
+  props<{ user: User }>(),
+);
 
-export const getUserFail = createAction(
+export const loadUserFail = createAction(
   '[GetUser] Gets User data Fail',
-  props<{error: any}>(),
+  props<{ error: any }>(),
 );

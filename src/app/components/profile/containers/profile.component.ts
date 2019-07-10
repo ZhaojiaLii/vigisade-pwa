@@ -3,13 +3,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
+import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-
   user: any;
   userFirstName = '';
   userLastName = '';
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit {
     zone: new FormControl(''),
     entity: new FormControl(''),
   });
+
+  user$: Observable<User> = this.profileService.getUser();
   constructor(
     private profileService: ProfileService,
     private store: Store<State>,

@@ -8,14 +8,12 @@ import { ModalModule} from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './containers/app.component';
 import { environment } from '../environments/environment';
 import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from './store/app.reducer';
-import { AppEffects } from './store/app.effects';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
@@ -35,11 +33,13 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
 import { correctionFeature } from './components/a-traiter/action-corrective/store/correction.features';
-import { TokenInterceptor } from './services/token-interceptor.service';
 import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
+import { ApiInterceptor } from './services/api-interceptor.service';
 import { layoutFeature } from './store/layout/layout.feature';
+import { dataFeature } from './store/data/data.feature';
+import { EffectsModule } from '@ngrx/effects';
 
 const pageComponents = [
   LoginComponent,
@@ -51,6 +51,7 @@ const pageComponents = [
 ];
 
 const ngrxFeatures = [
+  dataFeature,
   layoutFeature,
   correctionFeature,
   loginFeature,
@@ -82,14 +83,14 @@ const ngrxFeatures = [
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, {metaReducers}),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    ...ngrxFeatures,
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 15,
       name: 'Vigisade',
     }),
-    StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([AppEffects]),
-    ...ngrxFeatures,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
@@ -120,7 +121,7 @@ const ngrxFeatures = [
     FormsModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HomepageService } from '../services/homepage.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,6 +11,9 @@ export class HomepageComponent {
   visitsThisMonth = 3;
   visitsLastMonth = 4;
 
-  constructor() { }
-
+  constructor(
+    private homepageService: HomepageService,
+  ) {
+    this.homepageService.loadRequiredData();
+  }
 }
