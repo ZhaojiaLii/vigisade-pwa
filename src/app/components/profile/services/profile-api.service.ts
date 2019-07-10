@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProfileApiService {
-
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<User> {

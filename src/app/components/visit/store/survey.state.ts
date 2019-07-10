@@ -13,6 +13,7 @@ export interface SurveyState {
   getResult: GetResult | null;
   createResult: CreateResult | null;
   updateResult: UpdateResult | null;
+  openMenu: boolean;
 }
 
 export const surveyInitialState = {
@@ -20,5 +21,6 @@ export const surveyInitialState = {
   getResults: null,
   getResult: null,
   createResult: null,
-  updateResult: null
+  updateResult: null,
+  openMenu: false,
 };

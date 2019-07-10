@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-security-template',
@@ -13,13 +13,29 @@ export class SecurityTemplateComponent implements OnChanges {
   @Output() Photo = new EventEmitter<object>();
   isCollapsed = false;
   imgURL: any;
+  visitForm: FormGroup;
+  formErrors = {
+    selection: '',
+    comment: '',
+    photo: '',
+  };
+  validationMessage = {
+    selection: {
+      required: 'Cette question est obligatoire',
+    },
+    comment: {
+      minlength: 'length minimum 1',
+      required: 'Cette question est obligatoire',
+    },
+    photo: {
+      required: 'Cette question est obligatoire',
+    },
+  };
+  showError = false;
   constructor() {
+    this.buildForm();
   }
-  visitForm = new FormGroup({
-    selection: new FormControl(''),
-    comment: new FormControl(''),
-    photo: new FormControl(''),
-  });
+
   preview(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -32,7 +48,7 @@ export class SecurityTemplateComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
+    // console.log('changes', changes);
   }
 
   selectionChanged(event: any) {
@@ -43,5 +59,47 @@ export class SecurityTemplateComponent implements OnChanges {
   }
   photoChanged() {
     this.Photo.emit({label: this.questionLabel, photo: this.visitForm.value.photo});
+  }
+
+  buildForm() {
+    this.visitForm = new FormGroup({
+      selection: new FormControl(
+        '',
+        [Validators.required],
+      ),
+      comment: new FormControl(
+        '',
+        [Validators.required, Validators.minLength(1)],
+      ),
+      photo: new FormControl(
+        '',
+        [Validators.required],
+      ),
+    });
+    this.visitForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.onValueChanged();
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.visitForm) { return; }
+    const form = this.visitForm;
+    for (const field of Object.keys(this.formErrors)) {
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      // have control && control not been modified && control is invalided
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessage[field];
+        for (const key of Object.keys(control.errors)) {
+          // combine all error mistakes
+          this.formErrors[field] += messages[key] + '\n';
+        }
+      }
+    }
+    this.showErrorMessage();
+    console.log(this.showError);
+  }
+
+  showErrorMessage() {
+    this.showError = !(this.formErrors.comment === '' && this.formErrors.photo === '' && this.formErrors.selection === '');
   }
 }

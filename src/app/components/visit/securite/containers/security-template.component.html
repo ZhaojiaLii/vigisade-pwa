@@ -1,6 +1,7 @@
 <div class="row">
-  <div class="card card-full-width shadow-none">
+  <div class="card card-full-width shadow-none" [style.border]="showError ? 'solid red 1px' : ''">
     <div class="card-body ml-3 mr-3">
+      <p style="color: red" *ngIf="showError">{{formErrors.comment}}</p>
       <div class="d-flex">
         <p class=" mb-10 lineH-24px">
 <!--          Equipements de Protection Collective <span class="light-grey font-14">(signalisation, blindage, échaffaudage, dérivation, pompage,…)</span>-->
@@ -56,7 +57,7 @@
         </div>
         <div class="form-row">
           <div class="form-group col-12">
-            <textarea appHighlight class="form-control" id="commentaire" rows="3" formControlName="comment" (keyup)="commentChanged()"></textarea>
+            <textarea appHighlight class="form-control" id="commentaire" rows="3" formControlName="comment" (keyup)="commentChanged()" required></textarea>
             <label for="commentaire" class="light-grey font-14">Commentaire correction</label>
             <div class="line"></div>
           </div>
@@ -79,7 +80,6 @@
         </div>
       </form>
     </div>
-    <hr>
   </div>
 </div>
 

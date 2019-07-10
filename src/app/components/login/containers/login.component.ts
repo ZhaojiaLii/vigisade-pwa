@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   login(username: string, password: string): void {
     this.loginService.login(username, password);
-
     console.log('LoginComponent.login', username, password);
     // @todo: add a spinner.
   }
