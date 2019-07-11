@@ -6,7 +6,7 @@ import { HomepageComponent } from './components/homepage/containers/homepage.com
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
-import { ActionCorrectiveComponent } from './components/a-traiter/action-corrective/containers/action-corrective.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/containers/securite.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';

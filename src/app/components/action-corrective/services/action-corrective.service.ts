@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { State } from '../../../../store/app.state';
+import { State } from '../../../store/app.state';
 import { createCorrection, loadCorrection, updateCorrection } from '../store/correction.actions';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';

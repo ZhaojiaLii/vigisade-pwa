@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActionCorrectiveService } from '../services/action-corrective.service';
-import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { Observable } from 'rxjs';
-import { GetResult } from '../../../visit/interfaces/getResultInterface/getResult.interface';
-import { SurveyService } from '../../../visit/services/survey.service';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { SurveyService } from '../../visit/services/survey.service';
+import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+
 
 @Component({
   selector: 'app-action-corrective',
@@ -16,20 +17,12 @@ import { SurveyService } from '../../../visit/services/survey.service';
 export class ActionCorrectiveComponent implements OnInit {
   imgURL: any;
   selectedId: number;
-  fakeData: CreateCorrection = {
-    id: 0,
-    user_id: 0,
-    survey_id: 0,
-    category_id: 0,
-    question_id: 0,
-    dateControl: '2019',
-    place: 'Paris',
-    status: 'finish',
-  };
   correction = new FormGroup({
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
+  corrections = [];
+  thisCorrection: any;
   correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
   result$: Observable<GetResult> = this.surveyService.getResult();
   constructor(
@@ -46,6 +39,16 @@ export class ActionCorrectiveComponent implements OnInit {
       this.selectedId = +params.get('id');
       this.surveyService.loadResult(this.selectedId);
     });
+    this.correction$.subscribe(
+      corrections => {
+        this.corrections.push(corrections);
+        for (const correction of this.corrections[0]) {
+          if (correction.id === this.selectedId) {
+            this.thisCorrection = correction;
+          }
+        }
+      }
+    );
   }
 
   clickBack() {
@@ -67,7 +70,19 @@ export class ActionCorrectiveComponent implements OnInit {
     if (this.correction.value.comment === '' || this.correction.value.photo === '') {
       this.toastrService.error('champs vide');
     } else {
-      this.correctionService.createCorrection(this.fakeData);
+      const correctionPayload: CreateCorrection = {
+        id: this.thisCorrection.id,
+        user_id: 2,
+        survey_id: this.thisCorrection.survey_id,
+        category_id: this.thisCorrection.category_id,
+        question_id: this.thisCorrection.question_id,
+        result_id: this.thisCorrection.result_id,
+        status: 'Validé',
+        comment_question: this.correction.value.comment,
+        image: 'photo path',
+      };
+      console.log(correctionPayload);
+      this.correctionService.updateCorrection(correctionPayload);
       this.toastrService.success('maj succèss');
       this.router.navigate(['/atraiter']);
       window.scroll(0, 0);

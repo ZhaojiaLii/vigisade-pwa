@@ -1,12 +1,11 @@
-export interface UpdateCorrection {
+export interface CreateCorrection {
   id: number;
   user_id: number;
   survey_id: number;
   category_id: number;
   question_id: number;
-  dateControl: string;
-  place: string;
+  result_id: number;
   status: string;
-  // comment: string;
-  // photo: string;
+  comment_question: string;
+  image: string;
 }

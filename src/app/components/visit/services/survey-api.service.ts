@@ -29,6 +29,7 @@ export class SurveyApiService {
               },
               {
                 label: 'Label Question 2',
+                help: 'Aide Question 2'
               },
             ],
           },
@@ -60,8 +61,8 @@ export class SurveyApiService {
           zoneId: 11,
           entityId: 1,
           date: '2019-07-02',
-          place: 'Paris',
-          client: 'zhli',
+          place: '23 Boulevard Charner 22000 Saint-Brieuc',
+          client: 'Qualité',
           questions: [
             {
               id: 1,
