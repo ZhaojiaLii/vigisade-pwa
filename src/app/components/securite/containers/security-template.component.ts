@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-security-template',
   templateUrl: './security-template.component.html',
 })
-export class SecurityTemplateComponent implements OnChanges {
+export class SecurityTemplateComponent implements OnChanges, OnInit {
   @Input() questionLabel;
   @Input() questionHelp;
   @Output() Selection = new EventEmitter<object>();
@@ -34,6 +34,11 @@ export class SecurityTemplateComponent implements OnChanges {
   showError = false;
   constructor() {
     this.buildForm();
+  }
+  ngOnInit(): void {
+    if (this.questionHelp === '') {
+      this.questionHelp = 'Pas d\'aide ici';
+    }
   }
 
   preview(event: any) {
@@ -102,4 +107,5 @@ export class SecurityTemplateComponent implements OnChanges {
   showErrorMessage() {
     this.showError = !(this.formErrors.comment === '' && this.formErrors.photo === '' && this.formErrors.selection === '');
   }
+
 }

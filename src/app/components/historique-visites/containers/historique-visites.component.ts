@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from '../../../../store/app.state';
-import { SurveyService } from '../../services/survey.service';
+import { State } from '../../../store/app.state';
+import { SurveyService } from '../../visit/services/survey.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

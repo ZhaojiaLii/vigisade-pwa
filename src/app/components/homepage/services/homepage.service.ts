@@ -20,6 +20,7 @@ export class HomepageService {
    */
   loadRequiredData() {
     this.dataService.loadData();
+    this.dataService.loadHeader();
     this.profileService.loadUser();
     this.surveyService.loadSurvey();
   }
