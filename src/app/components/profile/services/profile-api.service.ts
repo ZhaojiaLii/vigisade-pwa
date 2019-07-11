@@ -16,7 +16,7 @@ export class ProfileApiService {
       map(() => ({
         mail: 'admin_0@gmail.com',
         directionId: 1,
-        zoneId: 1,
+        areaId: 1,
         entityId: 1,
         language: 'Français',
         firstName: 'Admin',

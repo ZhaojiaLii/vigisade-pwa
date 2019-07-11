@@ -4,6 +4,10 @@ import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
+import { Observable } from 'rxjs';
+import { GetResult } from '../../../visit/interfaces/getResultInterface/getResult.interface';
+import { SurveyService } from '../../../visit/services/survey.service';
 
 @Component({
   selector: 'app-action-corrective',
@@ -26,8 +30,11 @@ export class ActionCorrectiveComponent implements OnInit {
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
+  correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
+  result$: Observable<GetResult> = this.surveyService.getResult();
   constructor(
-    private actionCorrectionService: ActionCorrectiveService,
+    private correctionService: ActionCorrectiveService,
+    private surveyService: SurveyService,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private router: Router,
@@ -37,6 +44,7 @@ export class ActionCorrectiveComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.selectedId = +params.get('id');
+      this.surveyService.loadResult(this.selectedId);
     });
   }
 
@@ -59,7 +67,7 @@ export class ActionCorrectiveComponent implements OnInit {
     if (this.correction.value.comment === '' || this.correction.value.photo === '') {
       this.toastrService.error('champs vide');
     } else {
-      this.actionCorrectionService.createCorrection(this.fakeData);
+      this.correctionService.createCorrection(this.fakeData);
       this.toastrService.success('maj succèss');
       this.router.navigate(['/atraiter']);
       window.scroll(0, 0);

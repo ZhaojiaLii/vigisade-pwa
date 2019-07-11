@@ -33,7 +33,7 @@ export const getUserArea = createSelector(
       return null;
     }
 
-    return areas.find(area => area.id === user.zoneId);
+    return areas.find(area => area.id === user.areaId);
   },
 );
 

@@ -7,3 +7,10 @@ export const getSurvey = createSelector(
   getSurveyState,
   (state: SurveyState) => state.survey,
 );
+
+export const getResultState = createFeatureSelector<SurveyState>('survey');
+
+export const getResult = createSelector(
+  getResultState,
+  (state: SurveyState) => state.result,
+);

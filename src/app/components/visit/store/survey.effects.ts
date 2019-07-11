@@ -1,7 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import { createResult, createResultFail, createResultSuccess, getResult, getResultFail, getResults, getResultsFail, getResultsSuccess, getResultSuccess, loadSurvey, loadSurveyFail, loadSurveySuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
+import {
+  createResult,
+  createResultFail,
+  createResultSuccess,
+  getResults,
+  getResultsFail,
+  getResultsSuccess,
+  loadResult,
+  loadResultFail,
+  loadResultSuccess,
+  loadSurvey,
+  loadSurveyFail,
+  loadSurveySuccess,
+  updateResult,
+  updateResultFail,
+  updateResultSuccess
+} from './survey.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -36,12 +52,12 @@ export class SurveyEffects {
   ));
 
   @Effect()
-  getResult$ = createEffect(() => this.actions$.pipe(
-    ofType(getResult),
+  loadResult$ = createEffect(() => this.actions$.pipe(
+    ofType(loadResult),
     switchMap(action => {
       return this.surveyApi.getResult(action.id).pipe(
-        map(result => getResultSuccess({result})),
-        catchError(error => of(getResultFail({error: error.message}))),
+        map(result => loadResultSuccess({result})),
+        catchError(error => of(loadResultFail({error: error.message}))),
       );
     })
   ));

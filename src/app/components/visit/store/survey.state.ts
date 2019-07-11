@@ -10,7 +10,7 @@ import { Survey } from '../interfaces/survey.interface';
 export interface SurveyState {
   survey: Survey | null;
   getResults: GetResults | null;
-  getResult: GetResult | null;
+  result: GetResult | null;
   createResult: CreateResult | null;
   updateResult: UpdateResult | null;
 }
@@ -18,7 +18,7 @@ export interface SurveyState {
 export const surveyInitialState = {
   survey: null,
   getResults: null,
-  getResult: null,
+  result: null,
   createResult: null,
   updateResult: null
 };

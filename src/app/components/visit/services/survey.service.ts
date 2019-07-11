@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import {createResult, getResult, getResults, loadSurvey, updateResult} from '../store/survey.actions';
+import { createResult, getResults, loadResult, loadSurvey, updateResult } from '../store/survey.actions';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Observable } from 'rxjs';
 import { SurveyState } from '../store/survey.state';
 import { Survey } from '../interfaces/survey.interface';
-import { getSurvey } from '../store/survey.selectors';
+import { getResult, getSurvey } from '../store/survey.selectors';
+import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class SurveyService {
     this.store.dispatch(loadSurvey());
   }
 
+  loadResult(id: number): void {
+    this.store.dispatch(loadResult({id}));
+  }
+
   getSurvey(): Observable<Survey> {
     return this.store.pipe(select(getSurvey));
   }
@@ -27,8 +32,8 @@ export class SurveyService {
     this.store.dispatch(getResults());
   }
 
-  getResult(): void {
-    // this.store.dispatch(getResult());
+  getResult(): Observable<GetResult> {
+    return this.store.pipe(select(getResult));
   }
 
   createResult(createResultPayload: CreateResult): void {

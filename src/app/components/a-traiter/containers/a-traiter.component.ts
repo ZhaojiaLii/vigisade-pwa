@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionCorrectiveService } from '../action-corrective/services/action-corrective.service';
+import { Observable } from 'rxjs';
+import { GetCorrection } from '../action-corrective/interfaces/getCorrection/getCorrection.interface';
+import { SurveyService } from '../../visit/services/survey.service';
 
 @Component({
   selector: 'app-a-traiter',
@@ -52,6 +55,7 @@ export class ATraiterComponent implements OnInit {
   ];
   data = [];
   id = [];
+  ID: number;
   surveyId = [];
   categoryId = [];
   resultId = [];
@@ -62,10 +66,11 @@ export class ATraiterComponent implements OnInit {
   dates = [];
   places = [];
   index = [];
-  i = 0;
   aTraiterNum = 0;
+  correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
   constructor(
     private correctionService: ActionCorrectiveService,
+    private resultService: SurveyService,
   ) { }
 
   ngOnInit() {
@@ -77,34 +82,36 @@ export class ATraiterComponent implements OnInit {
     this.images = [];
     this.commentQuestions = [];
     this.index = [];
-    this.correctionService.getCorrection().skip(2).subscribe(
-      actionCorrectives => {
-        this.data.push(actionCorrectives);
+    this.correction$.skip(2).subscribe(
+      corrections => {
+        this.surveyId = [];
+        this.questionId = [];
+        this.categoryId = [];
+        this.resultId = [];
+        this.images = [];
+        this.commentQuestions = [];
+        this.index = [];
+        this.data = [];
+        this.data.push(corrections);
         this.aTraiterNum = this.data[0].length;
-        for (const actionCorrective of this.data[0]) {
-          this.surveyId.push(actionCorrective.survey_id);
-          this.questionId.push(actionCorrective.question_id);
-          this.categoryId.push(actionCorrective.category_id);
-          this.resultId.push(actionCorrective.result_id);
-          this.images.push(actionCorrective.image);
-          this.commentQuestions.push(actionCorrective.comment_question);
-          this.index.push(actionCorrective.id - 1);
+        for (const correction of this.data[0]) {
+          this.surveyId.push(correction.survey_id);
+          this.questionId.push(correction.question_id);
+          this.categoryId.push(correction.category_id);
+          this.resultId.push(correction.result_id);
+          this.images.push(correction.image);
+          this.commentQuestions.push(correction.comment_question);
+          this.index.push(correction.id - 1);
         }
-        console.log(this.commentQuestions);
+        console.log(this.images);
+        // for (const resultId of this.resultId) {
+        //   this.correctionService.loadResult(resultId);
+        //   this.result$.subscribe(result => {
+        //     result ? console.log(result.date) : console.log('result null');
+        //   });
+        // }
       }
     );
-  }
-
-  test() {
-    this.fakeData.forEach((data) => {
-      this.index.push(this.i);
-      this.places.push(data.place);
-      this.dates.push(data.date);
-      this.clients.push(data.client);
-      this.id.push(data.id);
-      this.i++;
-    });
-    this.aTraiterNum = this.places.length;
   }
 
   ScrollTop() {

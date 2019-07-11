@@ -5,23 +5,22 @@ import { Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
+import { Direction } from '../../shared/interfaces/direction.interface';
+import { DataService } from '../../../services/data.service';
+import { Area } from '../../shared/interfaces/area.interface';
+import { Entity } from '../../shared/interfaces/entity.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  userFirstName: string;
-  userLastName: string;
-  userMail: string;
   userDirectionId: number;
-  userZoneId: number;
+  userDirection: string;
+  userAreaId: number;
+  userArea: string;
   userEntityId: number;
-  userLanguage: string;
-  userPhoto: string;
-  countCurrentMonthVisits: number;
-  countLastMonthVisits: number;
-  countRemainingActions: number;
+  userEntity: string;
   userProfile = new FormGroup({
     language: new FormControl(''),
     direction: new FormControl(''),
@@ -30,13 +29,43 @@ export class ProfileComponent implements OnInit {
   });
 
   user$: Observable<User> = this.profileService.getUser();
+  direction$: Observable<Direction[]> = this.dataService.getDirections();
+  area$: Observable<Area[]> = this.dataService.getAreas();
+  entity$: Observable<Entity[]> = this.dataService.getEntities();
   constructor(
     private profileService: ProfileService,
+    private dataService: DataService,
     private store: Store<State>,
   ) {
   }
 
   ngOnInit(): void {
+    this.user$.subscribe(user => {
+        this.userDirectionId = user.directionId;
+        this.userAreaId = user.areaId;
+        this.userEntityId = user.entityId;
+    });
+    this.direction$.subscribe(directions => {
+      for (const direction of directions) {
+        if (direction.id === this.userDirectionId) {
+          this.userDirection = direction.name;
+        }
+      }
+    });
+    this.area$.subscribe(areas => {
+      for (const area of areas) {
+        if (area.id === this.userAreaId) {
+          this.userArea = area.name;
+        }
+      }
+    });
+    this.entity$.subscribe(entities => {
+      for (const entity of entities) {
+        if (entity.id === this.userEntityId) {
+          this.userEntity = entity.name;
+        }
+      }
+    });
     // this.profileService.loadUser();
     // this.user$.pipe(
     // ).subscribe(user => {

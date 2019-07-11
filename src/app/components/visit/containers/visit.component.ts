@@ -52,7 +52,7 @@ export class VisitComponent {
   }
 
   getResultByID() {
-    this.surveyService.getResult();
+    this.surveyService.loadSurvey();
   }
 
   createResult() {

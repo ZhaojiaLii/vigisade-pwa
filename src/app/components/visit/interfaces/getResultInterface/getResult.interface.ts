@@ -1,3 +1,5 @@
+import { Question } from './question.interface';
+
 export interface GetResult {
   id: number;
   surveyId: number;
@@ -8,7 +10,7 @@ export interface GetResult {
   date: string;
   place: string;
   client: string;
-  // questions: Question[];
+  questions: Question[];
   // teamMembers: TeamMember[];
   bestPracticeDone: boolean;
   bestPracticeComment: string;

@@ -14,7 +14,6 @@ import {
 import { ActionCorrectiveApiService } from '../services/action-corrective-api.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { getResult, getResultFail, getResultSuccess } from '../../../visit/store/survey.actions';
 
 @Injectable()
 export class CorrectionEffects {
@@ -31,17 +30,6 @@ export class CorrectionEffects {
       return this.correctionApi.loadCorrection().pipe(
         map(correction => loadCorrectionSuccess({correction})),
         catchError(error => of(loadCorrectionFail({error: error.message}))),
-      );
-    })
-  ));
-
-  @Effect()
-  loadResult$ = createEffect(() => this.actions$.pipe(
-    ofType(getResult),
-    switchMap(action => {
-      return this.correctionApi.loadResult(action.id).pipe(
-        map(result => getResultSuccess({result})),
-        catchError(error => of(getResultFail({error: error.message})))
       );
     })
   ));

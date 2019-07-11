@@ -12,20 +12,20 @@
 
   <div class="card card-block mb-30">
     <div class="card-body text-center text-info">
-      <span class="font-30 font-weight-bold mr-2"><strong>{{actionsToHandle}}</strong></span><span class="font-25">Actions à traiter</span>
+      <span class="font-30 font-weight-bold mr-2"><strong>{{(user$ | async)?.countRemainingActions}}</strong></span><span class="font-25">Actions à traiter</span>
     </div>
   </div>
 
   <div class="row text-center mb-30">
     <div class="col-6 ">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white"><strong>{{visitsThisMonth}}</strong></span>
+        <span class="circle-white"><strong>{{(user$ | async)?.countCurrentMonthVisits}}</strong></span>
       </div>
       <span class="font-18"> ce mois-ci</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white"><strong>{{visitsLastMonth}}</strong></span>
+        <span class="circle-white"><strong>{{(user$ | async)?.countLastMonthVisits}}</strong></span>
       </div>
       <span class="light-font font-18"> le mois dernier</span>
     </div>
