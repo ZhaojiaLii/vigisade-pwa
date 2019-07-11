@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DataApi } from '../../interfaces/api/data-api.interface';
+import { Header } from '../../interfaces/header.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +33,11 @@ export class DataApiService {
         {id: 5, name: 'Entity 5', areaId: 4},
       ],
     });
+  }
+
+  getHeader(): Observable<Header> {
+    return this.http.get<Header>('/api/header/').pipe(
+      map(header => header[0]),
+    );
   }
 }

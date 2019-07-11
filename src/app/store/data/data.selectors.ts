@@ -17,3 +17,8 @@ export const getEntities = createSelector(
   getDataState,
   (state: DataState) => state.entities,
 );
+
+export const getHeader = createSelector(
+  getDataState,
+  (state: DataState) => state.header,
+);
