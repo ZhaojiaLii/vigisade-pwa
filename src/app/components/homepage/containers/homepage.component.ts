@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HomepageService } from '../services/homepage.service';
+import { ProfileService } from '../../profile/services/profile.service';
+import { User } from '../../profile/interfaces/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
@@ -7,12 +10,11 @@ import { HomepageService } from '../services/homepage.service';
 })
 export class HomepageComponent {
 
-  actionsToHandle = 33;
-  visitsThisMonth = 3;
-  visitsLastMonth = 4;
+  user$: Observable<User> = this.profileService.getUser();
 
   constructor(
     private homepageService: HomepageService,
+    private profileService: ProfileService,
   ) {
     this.homepageService.loadRequiredData();
   }
