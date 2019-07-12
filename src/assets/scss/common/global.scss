@@ -205,3 +205,14 @@ app-root, app-login {
   padding: 24px 0 26px;
   width: 100%;
 }
+
+.mat-progress-spinner svg circle {
+  stroke: $primary;
+}
+
+.login-wrapper {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+}
