@@ -1,5 +1,5 @@
 import { Question } from './question.interface';
-import { TeamMember } from './teamMember.interface';
+import { TeamMember } from '../team-member.interface';
 
 export interface GetResult {
   id: number;

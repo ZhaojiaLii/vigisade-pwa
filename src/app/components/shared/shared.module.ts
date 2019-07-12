@@ -9,9 +9,9 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatNativeDateModule,
+  MatNativeDateModule, MatProgressSpinnerModule,
   MatSelectModule,
-  MatToolbarModule
+  MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +19,6 @@ import { MemberComponent } from '../visit/containers/member.component';
 import { SecurityTemplateComponent } from '../securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
 import { DetailMemberComponent } from '../detail-visit/containers/member.component';
-import { HistoryElementComponent } from '../historique-visites/containers/history-element.component';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
@@ -28,7 +27,6 @@ const sharedComponents = [
   MenuComponent,
   MemberComponent,
   DetailMemberComponent,
-  HistoryElementComponent,
   ATraiterElementComponent,
 ];
 const sharedDirectives = [
@@ -38,15 +36,17 @@ const sharedPipes = [];
 
 const materialModules = [
   MatButtonModule,
-  MatToolbarModule,
-  MatListModule,
-  MatIconModule,
   MatCardModule,
-  MatFormFieldModule,
-  MatSelectModule,
-  MatInputModule,
   MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
   MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatToolbarModule,
+  MatTooltipModule,
 ];
 
 @NgModule({
@@ -67,13 +67,13 @@ const materialModules = [
     MemberComponent,
     DetailMemberComponent,
     SecurityTemplateComponent,
-    HistoryElementComponent,
     ATraiterElementComponent,
   ],
   exports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CommonModule,
+    RouterModule,
     ...materialModules,
     ...sharedComponents,
     ...sharedDirectives,

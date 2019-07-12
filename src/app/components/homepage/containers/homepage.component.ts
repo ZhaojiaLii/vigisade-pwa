@@ -14,6 +14,7 @@ export class HomepageComponent {
 
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
+
   constructor(
     private dataService: DataService,
     private homepageService: HomepageService,

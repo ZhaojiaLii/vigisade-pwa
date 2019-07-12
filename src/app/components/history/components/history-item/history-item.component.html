@@ -1,0 +1,21 @@
+<div class="card card-full-width mb-10 shadow-none">
+    <div class="card-body px-30">
+        <div class="row align-items-center light-grey mb-20">
+            <div class="col-6 font-demiBold">{{result?.client}}</div>
+            <div class="col-6 text-right font-12">{{result?.date}}</div>
+        </div>
+        <div class="row align-items-end mb-2">
+            <div class="col-6 font-demiBold font-14">
+                {{result?.place}}
+            </div>
+            <div
+                *ngIf="result"
+                class="col-6 text-right font-weight-bold font-14"
+                [style.color]="result.status ? '#20a15f' : '#d94545'"
+            >
+                {{result.status ? 'Validé' : 'En cours' }}
+            </div>
+        </div>
+    </div>
+</div>
+

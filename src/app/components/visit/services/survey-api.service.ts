@@ -3,10 +3,10 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Survey } from '../interfaces/survey.interface';
-import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
 import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { Result } from '../interfaces/result.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,91 +40,89 @@ export class SurveyApiService {
     );
   }
 
-  getResults(): Observable<GetResults> {
-    return this.http.get<GetResults>('/api/survey/history/').pipe(
-        map(() => ({
-          results: [
-            {
-              id: 1,
-              surveyId: 1,
-              userId: 2,
-              directionId: 1,
-              zoneId: 11,
-              entityId: 1,
-              date: '2019-07-02',
-              place: '23 Boulevard Charner 22000 Saint-Brieuc',
-              client: 'Nom du client',
-              status: true,
-              teamMembers: [
-                {
-                  id: 1,
-                  resultId: 1,
-                  firstName: 'Jean-Pierre',
-                  lastName: 'Nomdefamille',
-                  role: 'admin',
-                },
-                {
-                  id: 2,
-                  resultId: 2,
-                  firstName: 'Jean-Pierre',
-                  lastName: 'Nomdefamille',
-                  role: 'admin',
-                },
-              ],
-              bestPracticeDone: true,
-              bestPracticeComment: '111',
-              bestPracticePhoto: 'bestPracticePhoto',
-            },
-            {
-              id: 2,
-              surveyId: 1,
-              userId: 2,
-              directionId: 1,
-              zoneId: 11,
-              entityId: 1,
-              date: '2019-07-03',
-              place: '32 Rue Ponthieu 75008 Paris',
-              client: 'Nom du client',
-              status: false,
-              teamMembers: [
-                {
-                  id: 1,
-                  resultId: 1,
-                  firstName: 'Jean-Pierre',
-                  lastName: 'Nomdefamille',
-                  role: 'admin',
-                },
-              ],
-              bestPracticeDone: true,
-              bestPracticeComment: '111',
-              bestPracticePhoto: 'bestPracticePhoto',
-            },
-            {
-              id: 3,
-              surveyId: 1,
-              userId: 2,
-              directionId: 1,
-              zoneId: 11,
-              entityId: 1,
-              date: '2019-07-03',
-              place: '33 Rue des 3 Bornes 75011 Paris',
-              client: 'Nom du client',
-              status: false,
-              teamMembers: [
-                {
-                  id: 1,
-                  resultId: 1,
-                  firstName: 'Jean-Pierre',
-                  lastName: 'Nomdefamille',
-                  role: 'admin',
-                },
-              ],
-              bestPracticeDone: true,
-              bestPracticeComment: '111',
-              bestPracticePhoto: 'bestPracticePhoto',
-            },
-          ],
-        }))
+  getHistory(): Observable<Result[]> {
+    return this.http.get<Result[]>('/api/survey/history/').pipe(
+        map(() => [
+          {
+            id: 1,
+            surveyId: 1,
+            userId: 2,
+            directionId: 1,
+            zoneId: 11,
+            entityId: 1,
+            date: '2019-07-02',
+            place: '23 Boulevard Charner 22000 Saint-Brieuc',
+            client: 'Nom du client',
+            status: true,
+            teamMembers: [
+              {
+                id: 1,
+                resultId: 1,
+                firstName: 'Jean-Pierre',
+                lastName: 'Nomdefamille',
+                role: 'admin',
+              },
+              {
+                id: 2,
+                resultId: 2,
+                firstName: 'Jean-Pierre',
+                lastName: 'Nomdefamille',
+                role: 'admin',
+              },
+            ],
+            bestPracticeDone: true,
+            bestPracticeComment: '111',
+            bestPracticePhoto: 'bestPracticePhoto',
+          },
+          {
+            id: 2,
+            surveyId: 1,
+            userId: 2,
+            directionId: 1,
+            zoneId: 11,
+            entityId: 1,
+            date: '2019-07-03',
+            place: '32 Rue Ponthieu 75008 Paris',
+            client: 'Nom du client',
+            status: false,
+            teamMembers: [
+              {
+                id: 1,
+                resultId: 1,
+                firstName: 'Jean-Pierre',
+                lastName: 'Nomdefamille',
+                role: 'admin',
+              },
+            ],
+            bestPracticeDone: true,
+            bestPracticeComment: '111',
+            bestPracticePhoto: 'bestPracticePhoto',
+          },
+          {
+            id: 3,
+            surveyId: 1,
+            userId: 2,
+            directionId: 1,
+            zoneId: 11,
+            entityId: 1,
+            date: '2019-07-03',
+            place: '33 Rue des 3 Bornes 75011 Paris',
+            client: 'Nom du client',
+            status: false,
+            teamMembers: [
+              {
+                id: 1,
+                resultId: 1,
+                firstName: 'Jean-Pierre',
+                lastName: 'Nomdefamille',
+                role: 'admin',
+              },
+            ],
+            bestPracticeDone: true,
+            bestPracticeComment: '111',
+            bestPracticePhoto: 'bestPracticePhoto',
+          },
+        ]),
     );
   }
 

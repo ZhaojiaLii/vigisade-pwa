@@ -61,7 +61,7 @@ export class VisitComponent implements OnInit {
   }
 
   getResults() {
-    this.surveyService.getResults();
+    this.surveyService.getHistory();
   }
 
   getResultByID() {

@@ -1,6 +1,6 @@
-import { TeamMember } from '../team-member.interface';
+import { TeamMember } from './team-member.interface';
 
-export interface Results {
+export interface Result {
   id: number;
   surveyId: number;
   userId: number;
@@ -11,7 +11,6 @@ export interface Results {
   place: string;
   client: string;
   status: boolean;
-  // questions: Question[];
   teamMembers: TeamMember[];
   bestPracticeDone: boolean;
   bestPracticeComment: string;

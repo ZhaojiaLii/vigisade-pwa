@@ -1,5 +1,3 @@
-
-
 export interface TeamMember {
   id: number;
   resultId: number;

@@ -23,7 +23,7 @@ export class DetailVisitComponent implements OnInit {
   resultsNum: any;
   result$: Observable<GetResult> = this.surveyService.getResult();
   teamMembers$: Observable<any> = this.surveyService.getTeamMembers();
-  resultsNum$: Observable<number> = this.surveyService.getResultsCount();
+  resultsNum$: Observable<number> = this.surveyService.countHistory();
   direction$: Observable<Direction[]> = this.dataService.getDirections();
   entity$: Observable<Entity[]> = this.dataService.getEntities();
   constructor(

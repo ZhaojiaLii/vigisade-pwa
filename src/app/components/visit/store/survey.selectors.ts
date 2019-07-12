@@ -17,28 +17,14 @@ export const getResult = createSelector(
   (state: SurveyState) => state.result,
 );
 
-export const Results = createSelector(
+export const getHistory = createSelector(
   getResultState,
-  (state: SurveyState) => state.results,
-);
-
-export const getResults = createSelector(
-  Results,
-  (results: GetResults) => {
-    return results ? results.results : null;
-  }
+  (state: SurveyState) => state.history,
 );
 
 export const getTeamMembers = createSelector(
   getResult,
   (result: GetResult) => {
     return result ? result.teamMembers : null;
-  }
-);
-
-export const getResultsCount = createSelector(
-  Results,
-  (results: GetResults) => {
-    return results ? results.results.length : 0;
   }
 );

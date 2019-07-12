@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { Survey } from '../interfaces/survey.interface';
-import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
 import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { Result } from '../interfaces/result.interface';
 
 export const loadSurvey = createAction('[Survey] Load Survey');
 export const loadSurveySuccess = createAction(
@@ -15,20 +15,13 @@ export const loadSurveyFail = createAction(
   props<{error: any}>(),
 );
 
-/***
- * get histories(results) from server (GET: api/survey/history)
- */
-export const loadResults = createAction(
-  '[Survey] Get Results',
+export const loadHistory = createAction('[Survey] Load History');
+export const loadHistorySuccess = createAction(
+  '[Survey] Load History Success',
+  props<{history: Result[]}>(),
 );
-
-export const loadResultsSuccess = createAction(
-  '[Survey] Get Results Success',
-  props<{results: GetResults}>(),
-);
-
 export const loadResultsFail = createAction(
-  '[Survey] Get Results Fail',
+  '[Survey] Load History Fail',
   props<{error: any}>(),
 );
 

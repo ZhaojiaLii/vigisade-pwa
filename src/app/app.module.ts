@@ -31,7 +31,6 @@ import { SecurityTemplateComponent } from './components/securite/containers/secu
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
-import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
 import { DetailVisitComponent } from './components/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -40,6 +39,7 @@ import { ApiInterceptor } from './services/interceptors/api-interceptor.service'
 import { layoutFeature } from './store/layout/layout.feature';
 import { dataFeature } from './store/data/data.feature';
 import { EffectsModule } from '@ngrx/effects';
+import { HistoryModule } from './components/history/history.module';
 
 const pageComponents = [
   LoginComponent,
@@ -48,6 +48,10 @@ const pageComponents = [
   ProfileComponent,
   DangerousComponent,
   VisitComponent,
+];
+
+const pageModules = [
+  HistoryModule,
 ];
 
 const ngrxFeatures = [
@@ -74,7 +78,6 @@ const ngrxFeatures = [
     SecurityTemplateComponent,
     BonnePratiqueComponent,
     BonnePratiqueComponent,
-    HistoriqueVisitesComponent,
     DetailVisitComponent,
     ATraiterComponent,
   ],
@@ -103,22 +106,11 @@ const ngrxFeatures = [
       positionClass: 'toast-center-center',
       preventDuplicates: true,
     }),
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatCardModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
     CollapseModule,
     FormsModule,
+    ...pageModules,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},

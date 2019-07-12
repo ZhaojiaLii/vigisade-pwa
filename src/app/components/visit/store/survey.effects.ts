@@ -7,9 +7,9 @@ import {
   createResultSuccess,
   loadResult,
   loadResultFail,
-  loadResults,
+  loadHistory,
   loadResultsFail,
-  loadResultsSuccess,
+  loadHistorySuccess,
   loadResultSuccess,
   loadSurvey,
   loadSurveyFail,
@@ -29,7 +29,6 @@ export class SurveyEffects {
     private surveyApi: SurveyApiService,
   ) {}
 
-  @Effect()
   loadSurvey$ = createEffect(() => this.actions$.pipe(
     ofType(loadSurvey),
     switchMap(() => {
@@ -40,12 +39,11 @@ export class SurveyEffects {
     })
   ));
 
-  @Effect()
-  loadResults$ = createEffect(() => this.actions$.pipe(
-    ofType(loadResults),
+  loadHistory$ = createEffect(() => this.actions$.pipe(
+    ofType(loadHistory),
     switchMap(() => {
-      return this.surveyApi.getResults().pipe(
-        map(results => loadResultsSuccess({results})),
+      return this.surveyApi.getHistory().pipe(
+        map(history => loadHistorySuccess({history})),
         catchError(error => of(loadResultsFail({error: error.message}))),
       );
     })
