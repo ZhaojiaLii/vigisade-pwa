@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import { loadUser, loadUserFail, loadUserSuccess } from './profile.action';
+import {
+  loadUser,
+  loadUserFail,
+  loadUserSuccess,
+  updateUser,
+  updateUserFail,
+  updateUserSuccess
+} from './profile.action';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ProfileApiService } from '../services/profile-api.service';
@@ -16,6 +23,17 @@ export class ProfileEffects {
       return this.profileApi.getUser().pipe(
         map(user => loadUserSuccess({user})),
         catchError(error => of(loadUserFail({error: error.message}))),
+      );
+    })
+  ));
+
+  @Effect()
+  updateUser$ = createEffect(() => this.actions$.pipe(
+    ofType(updateUser),
+    switchMap(action => {
+      return this.profileApi.updateUser(action.user).pipe(
+        map(status => updateUserSuccess({status})),
+        catchError(error => of(updateUserFail({error: error.message}))),
       );
     })
   ));

@@ -12,7 +12,7 @@ export class DataApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<DataApi> {
+  static getData(): Observable<DataApi> {
     // @todo: call API
     return of({
       directions: [
@@ -37,7 +37,7 @@ export class DataApiService {
 
   getHeader(): Observable<Header> {
     return this.http.get<Header>('/api/header/').pipe(
-      map(header => header[0]),
+      map(header => header),
     );
   }
 }
