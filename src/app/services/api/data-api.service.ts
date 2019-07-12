@@ -11,7 +11,7 @@ export class DataApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<DataApi> {
+  static getData(): Observable<DataApi> {
     // @todo: call API
     return of({
       directions: [

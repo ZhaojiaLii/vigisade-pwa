@@ -1,4 +1,4 @@
-import { loadUser } from '../store/profile.action';
+import { loadUser, updateUser } from '../store/profile.action';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ProfileState } from '../store/profile.state';
@@ -24,6 +24,10 @@ export class ProfileService {
 
   getUser(): Observable<User> {
     return this.store.pipe(select(getUser));
+  }
+
+  updateUser(updateUserPayload: User): void {
+    this.store.dispatch(updateUser({updateUserPayload}));
   }
 
   getUserDirection(): Observable<Direction> {

@@ -3,7 +3,6 @@ export interface User {
   directionId: number;
   areaId: number;
   entityId: number;
-  language: string;
   firstName: string;
   lastName: string;
   photo: string;

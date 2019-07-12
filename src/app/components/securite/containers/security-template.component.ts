@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-security-template',
   templateUrl: './security-template.component.html',
 })
-export class SecurityTemplateComponent implements OnChanges, OnInit {
+export class SecurityTemplateComponent implements OnInit {
   @Input() questionLabel;
   @Input() questionHelp;
   @Output() Selection = new EventEmitter<object>();
@@ -50,10 +50,6 @@ export class SecurityTemplateComponent implements OnChanges, OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.photoChanged();
     }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log('changes', changes);
   }
 
   selectionChanged(event: any) {
