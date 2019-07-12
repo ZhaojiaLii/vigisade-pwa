@@ -17,15 +17,15 @@
   <div class="container mb-90">
     <div class="row">
       <div class="total">
-        <strong>{{historyNum}}</strong> contrôle(s) trouvé(s)
+        <strong>{{ (resultsNum$ | async) }}</strong> contrôle(s) trouvé(s)
       </div>
       <app-history-element
-          *ngFor="let index of index"
-          [place]="places[index]"
-          [client]="clients[index]"
-          [date]="dates[index]"
-          [status]="status[index]"
-          [routerLink]="['/history',index]"
+          *ngFor="let result of results$ | async"
+          [place]="result.place"
+          [client]="result.client"
+          [date]="result.date"
+          [status]="result.status"
+          [routerLink]="['/history',result.id]"
           style="display: block; width: 100%;"
       ></app-history-element>
     </div>

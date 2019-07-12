@@ -18,16 +18,16 @@ export const loadSurveyFail = createAction(
 /***
  * get histories(results) from server (GET: api/survey/history)
  */
-export const getResults = createAction(
+export const loadResults = createAction(
   '[Survey] Get Results',
 );
 
-export const getResultsSuccess = createAction(
+export const loadResultsSuccess = createAction(
   '[Survey] Get Results Success',
   props<{results: GetResults}>(),
 );
 
-export const getResultsFail = createAction(
+export const loadResultsFail = createAction(
   '[Survey] Get Results Fail',
   props<{error: any}>(),
 );

@@ -20,8 +20,8 @@
         <strong>{{aTraiterNum}}</strong> contrôle(s) trouvé(s)
       </div>
       <app-a-traiter-element
-          *ngFor="let element of correction$ | async"
-          [resultId]="resultId[element.id-1]"
+          *ngFor="let element of (correction$ | async)"
+          [resultId]="resultId[element.id - 1]"
           [routerLink]="['/atraiter',element.id]"
           style="display: block; width: 100%;"
           (click)="ScrollTop()"

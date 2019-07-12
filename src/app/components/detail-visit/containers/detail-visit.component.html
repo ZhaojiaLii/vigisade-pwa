@@ -21,36 +21,36 @@
 <div class="container mb-90">
   <div class="container-content">
     <div class="font-bold font-25">
-      DR NORMANDIE
+      DR {{resultDirection | uppercase}}
     </div>
     <div class="form-row">
       <div class="ml-3 mt-3 col-md-6">
         <span class="font-12">Agence</span>
-        <div><span>{{entity}}</span></div>
+        <div><span>{{resultEntity}}</span></div>
       </div>
       <div class="ml-3 my-2 col-md-6">
         <span class="font-12">Lieu du chantier</span>
-        <div><span>{{place}}</span></div>
+        <div><span>{{(result$ | async)?.place}}</span></div>
 
       </div>
     </div>
     <div class="form-row">
       <div class="ml-3 my-2 col-md-6">
         <span class="font-12">Client</span>
-        <div><span>{{client}}</span></div>
+        <div><span>{{(result$ | async)?.client}}</span></div>
       </div>
       <div class="ml-3 mt-2 mb-3 col-md-6">
         <span class="font-12">Date de la visite<span class="light-grey">(jour, mois, année)</span></span>
-        <div><span>{{date}}</span></div>
+        <div><span>{{(result$ | async)?.date}}</span></div>
       </div>
     </div>
     <p class="font-medium font-22">Équipe contrôlée</p>
     <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
     <app-detail-member
-        *ngFor="let index of index"
-        [firstName]="firstName[index]"
-        [lastName]="lastName[index]"
-        [role]="role[index]"
+        *ngFor="let member of teamMembers$ | async"
+        [firstName]="member.firstName"
+        [lastName]="member.lastName"
+        [role]="member.role"
     ></app-detail-member>
     <div class="mx-30">
       <button class="btn btn-info d-block w-100 mt-5" (click)="nextResult()">Suivant</button>

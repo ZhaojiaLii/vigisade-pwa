@@ -9,9 +9,7 @@ import { GetCorrection } from '../../action-corrective/interfaces/getCorrection/
 })
 export class ATraiterComponent implements OnInit {
   data = [];
-  id = [];
   resultId = [];
-  index = [];
   aTraiterNum = 0;
   correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
   constructor(

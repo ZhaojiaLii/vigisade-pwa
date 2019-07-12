@@ -5,11 +5,11 @@ import {
   createResult,
   createResultFail,
   createResultSuccess,
-  getResults,
-  getResultsFail,
-  getResultsSuccess,
   loadResult,
   loadResultFail,
+  loadResults,
+  loadResultsFail,
+  loadResultsSuccess,
   loadResultSuccess,
   loadSurvey,
   loadSurveyFail,
@@ -41,12 +41,12 @@ export class SurveyEffects {
   ));
 
   @Effect()
-  getResults$ = createEffect(() => this.actions$.pipe(
-    ofType(getResults),
+  loadResults$ = createEffect(() => this.actions$.pipe(
+    ofType(loadResults),
     switchMap(() => {
       return this.surveyApi.getResults().pipe(
-        map(results => getResultsSuccess({results})),
-        catchError(error => of(getResultsFail({error: error.message}))),
+        map(results => loadResultsSuccess({results})),
+        catchError(error => of(loadResultsFail({error: error.message}))),
       );
     })
   ));
