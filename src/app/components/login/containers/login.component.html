@@ -23,7 +23,7 @@
       <button class="btn btn-info" (click)="login(username.value, password.value)">Connect me</button>
     </div>
   </div>
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  <mat-progress-spinner *ngIf="spinnerEnable" mode="indeterminate"></mat-progress-spinner>
 </div>
 
 

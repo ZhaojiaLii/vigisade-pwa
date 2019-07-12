@@ -1,4 +1,4 @@
-import { login } from '../store/login.actions';
+import { login, setToken } from '../store/login.actions';
 import { State } from '../../../store/app.state';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -17,6 +17,10 @@ export class LoginService {
 
   login(username: string, password: string): void {
     this.store.dispatch(login({ username, password }));
+  }
+
+  setToken(token: string): void {
+    this.store.dispatch(setToken({token}));
   }
 
   getToken(): Observable<string> {

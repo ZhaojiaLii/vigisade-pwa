@@ -36,7 +36,7 @@ import { correctionFeature } from './components/action-corrective/store/correcti
 import { DetailVisitComponent } from './components/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
-import { ApiInterceptor } from './services/api-interceptor.service';
+import { ApiInterceptor } from './services/interceptors/api-interceptor.service';
 import { layoutFeature } from './store/layout/layout.feature';
 import { dataFeature } from './store/data/data.feature';
 import { EffectsModule } from '@ngrx/effects';
