@@ -1,7 +1,7 @@
 <div>
   <div class="menu-bar bg-primary justify-content-between">
     <div class="d-flex align-items-center">
-      <span>A traiter</span>
+      <span>Historique des visites</span>
     </div>
     <div>
       <a routerLink="/dangerous" class="circle-white-icon shadow-01 bg-warning mr-3">
@@ -17,15 +17,18 @@
   <div class="container mb-90">
     <div class="row">
       <div class="total">
-        <strong>{{aTraiterNum}}</strong> contrôle(s) trouvé(s)
+        <strong>{{ (resultsNum$ | async) }}</strong> contrôle(s) trouvé(s)
       </div>
-      <app-a-traiter-element
-          *ngFor="let element of (correction$ | async)"
-          [resultId]="resultId[element.id - 1]"
-          [routerLink]="['/atraiter',element.id]"
+      <app-history-element
+          *ngFor="let result of results$ | async"
+          [place]="result.place"
+          [client]="result.client"
+          [date]="result.date"
+          [status]="result.status"
+          [routerLink]="['/history',result.id]"
           style="display: block; width: 100%;"
-          (click)="ScrollTop()"
-      ></app-a-traiter-element>
+      ></app-history-element>
     </div>
   </div>
 </div>
+

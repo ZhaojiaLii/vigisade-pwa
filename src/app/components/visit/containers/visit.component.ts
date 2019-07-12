@@ -1,16 +1,21 @@
 import { SurveyService } from '../services/survey.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey } from '../interfaces/survey.interface';
 import { Observable } from 'rxjs';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { User } from '../../profile/interfaces/user';
+import { ProfileService } from '../../profile/services/profile.service';
+import { DataService } from '../../../services/data.service';
+import { Area } from '../../shared/interfaces/area.interface';
+import { Entity } from '../../shared/interfaces/entity.interface';
 
 @Component({
   selector: 'app-visit',
   templateUrl: './visit.component.html',
 })
-export class VisitComponent {
+export class VisitComponent implements OnInit {
 
   // @ViewChild(AddTeamMemberDirective, {static: true}) appAddMemberDirective: AddTeamMemberDirective;
 
@@ -42,17 +47,25 @@ export class VisitComponent {
   date = 'Tue Jul 02 2019 17:24:05 GMT+0200 (heure d’été d’Europe centrale)';
 
   survey$: Observable<Survey> = this.surveyService.getSurvey();
+  user$: Observable<User> = this.profileService.getUser();
+  areas$: Observable<Area[]> = this.dataService.getAreas();
+  entities$: Observable<Entity[]> = this.dataService.getEntities();
 
   constructor(
     private surveyService: SurveyService,
+    private profileService: ProfileService,
+    private dataService: DataService,
   ) {}
+
+  ngOnInit() {
+  }
 
   getResults() {
     this.surveyService.getResults();
   }
 
   getResultByID() {
-    this.surveyService.getResult();
+    this.surveyService.loadSurvey();
   }
 
   createResult() {

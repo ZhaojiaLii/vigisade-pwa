@@ -6,11 +6,11 @@ import { HomepageComponent } from './components/homepage/containers/homepage.com
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
-import { ActionCorrectiveComponent } from './components/a-traiter/action-corrective/containers/action-corrective.component';
-import { SecuriteComponent } from './components/visit/securite/containers/securite.component';
+import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
+import { SecuriteComponent } from './components/securite/containers/securite.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
-import { HistoriqueVisitesComponent } from './components/visit/historique-visites/containers/historique-visites.component';
-import { DetailVisitComponent } from './components/visit/detail-visit/containers/detail-visit.component';
+import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
+import { DetailVisitComponent } from './components/detail-visit/containers/detail-visit.component';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
 
 const extraOptions: ExtraOptions = {};
