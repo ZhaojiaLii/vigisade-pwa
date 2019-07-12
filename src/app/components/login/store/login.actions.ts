@@ -15,3 +15,8 @@ export const loginFail = createAction(
   '[Login] Login fail',
   props<{ error: any }>(),
 );
+
+export const setToken = createAction(
+  '[Login] Set Token',
+  props<{ token: string}>(),
+);

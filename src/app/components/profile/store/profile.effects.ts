@@ -31,7 +31,7 @@ export class ProfileEffects {
   updateUser$ = createEffect(() => this.actions$.pipe(
     ofType(updateUser),
     switchMap(action => {
-      return this.profileApi.updateUser(action.user).pipe(
+      return this.profileApi.updateUser(action.updateUserPayload).pipe(
         map(status => updateUserSuccess({status})),
         catchError(error => of(updateUserFail({error: error.message}))),
       );

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { DataApi } from '../../interfaces/api/data-api.interface';
 import { Header } from '../../interfaces/header.interface';
 
@@ -36,8 +35,6 @@ export class DataApiService {
   }
 
   getHeader(): Observable<Header> {
-    return this.http.get<Header>('/api/header/').pipe(
-      map(header => header),
-    );
+    return this.http.get<Header>('/api/header/');
   }
 }

@@ -12,6 +12,7 @@ import { BonnePratiqueComponent } from './components/bonne-pratique/containers/b
 import { HistoriqueVisitesComponent } from './components/historique-visites/containers/historique-visites.component';
 import { DetailVisitComponent } from './components/detail-visit/containers/detail-visit.component';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
+import { TokenGuard } from './services/guards/token-guard.service';
 
 const extraOptions: ExtraOptions = {};
 
@@ -23,46 +24,57 @@ const routes: Routes = [
   {
     path: 'tutorial',
     component: TutorialComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'home',
     component: HomepageComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'dangerous',
     component: DangerousComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'visit',
     component: VisitComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'security',
     component: SecuriteComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'bestPractice',
     component: BonnePratiqueComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'history',
     component: HistoriqueVisitesComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'history/:id',
     component: DetailVisitComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'atraiter',
     component: ATraiterComponent,
+    canActivate: [TokenGuard],
   },
   {
     path: 'atraiter/:id',
     component: ActionCorrectiveComponent,
+    canActivate: [TokenGuard],
   }
 ];
 

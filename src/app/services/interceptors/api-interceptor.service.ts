@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHandler, HttpHeaderResponse, HttpInterceptor, HttpProgressEvent, HttpRequest, HttpResponse, HttpSentEvent, HttpUserEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { LoginService } from '../components/login/services/login.service';
+import { LoginService } from '../../components/login/services/login.service';
 import 'rxjs-compat/add/operator/mergeMap';
 import 'rxjs-compat/add/operator/catch';
 
