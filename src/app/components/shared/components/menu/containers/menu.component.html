@@ -7,7 +7,7 @@
   <img src="../../../../../../assets/images/homepage/logo.svg" alt="">
 </div>
 
-<div *ngIf="(isMenuOpen$|async)" class="menu-bar justify-content-center shadow-none mb-30">
+<div *ngIf="(isMenuOpen$|async)" class="menu-bar justify-content-center shadow-none mb-20">
   <a class="menu-icon" (click)="toggleMenu()">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
       <path d="M8 6h6a1 1 0 0 1 0 2H8v6a1 1 0 0 1-2 0V8H0a1 1 0 1 1 0-2h6V0a1 1 0 1 1 2 0v6z" fill="#363636"
@@ -28,7 +28,7 @@
 </div>
 
 <div *ngIf="(isMenuOpen$|async)" class="container">
-  <ul class="nav flex-column mb-30">
+  <ul class="nav flex-column mb-20">
     <li class="nav-item">
       <a class="nav-link d-flex align-items-center" routerLink="/home">
         <span class="d-flex justify-content-center w-60px flex-shrink-0">
@@ -82,6 +82,18 @@
           <span>Tutoriel</span>
         </a>
       </li>
+    <li class="nav-item">
+      <a class="nav-link d-flex align-items-center" routerLink="/tutorial">
+        <span class="d-flex justify-content-center w-60px flex-shrink-0">
+          <svg class="icon" viewBox="0 0 1080 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="23" height="23">
+            <defs><style type="text/css"></style></defs>
+            <path d="M885.33333312 192.00000031h-79.99999968v639.99999938H885.33333312v160.00000031H32V32h853.33333312v160.00000031zM111.99999969 111.99999969v800.00000062h693.33333375v-800.00000062h-693.33333375z"></path>
+            <path d="M850.02666687 471.99999969l-127.46666718-127.46666625L779.19999969 288.00000031l226.29333375 226.29333282-0.53333344 0.48 0.53333344 0.48-226.29333375 226.24000031-56.53333313-56.53333313L855.46666625 552.00000031h-463.46666625v-80.00000062h457.97333344z"></path>
+        </svg>
+        </span>
+        <span>Déconnexion</span>
+      </a>
+    </li>
     </ul>
 
   <div class="row">
