@@ -21,13 +21,13 @@
       <div class="welcome-visit-card mb-2">
         <span class="circle-white"><strong>{{visitsThisMonth}}</strong></span>
       </div>
-      <span class="font-18"> ce mois-ci</span>
+      <span class="font-18 font-ultaLight">Visite<ng-container *ngIf="(visitsThisMonth > 1)">s</ng-container> ce mois-ci</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
         <span class="circle-white"><strong>{{visitsLastMonth}}</strong></span>
       </div>
-      <span class="light-font font-18"> le mois dernier</span>
+      <span class="font-ultaLight font-18">visite<ng-container *ngIf="(visitsLastMonth > 1)">s</ng-container> le mois dernier</span>
     </div>
   </div>
 
