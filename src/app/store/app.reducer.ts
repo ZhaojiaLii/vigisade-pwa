@@ -8,6 +8,7 @@ import { profileReducer } from '../components/profile/store/profile.reducer';
 import { correctionReducer } from '../components/action-corrective/store/correction.reducer';
 import { layoutReducer } from './layout/layout.reducer';
 import { dataReducer } from './data/data.reducer';
+import { dangerousReducer } from '../components/dangerous/store/dangerous.reducer';
 
 export const reducers: ActionReducerMap<State> = {
     data: dataReducer,
@@ -15,6 +16,7 @@ export const reducers: ActionReducerMap<State> = {
     login: loginReducer,
     profile: profileReducer,
     correction: correctionReducer,
+    dangerous: dangerousReducer,
     survey: surveyReducer,
 };
 

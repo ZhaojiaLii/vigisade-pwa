@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   loadUser,
   loadUserFail,
@@ -15,8 +15,6 @@ import { ProfileApiService } from '../services/profile-api.service';
 
 @Injectable()
 export class ProfileEffects {
-
-  @Effect()
   getUser$ = createEffect(() => this.actions$.pipe(
     ofType(loadUser),
     switchMap(() => {
@@ -26,8 +24,6 @@ export class ProfileEffects {
       );
     })
   ));
-
-  @Effect()
   updateUser$ = createEffect(() => this.actions$.pipe(
     ofType(updateUser),
     switchMap(action => {

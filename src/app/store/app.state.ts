@@ -4,6 +4,7 @@ import { ProfileState } from '../components/profile/store/profile.state';
 import { CorrectionState } from '../components/action-corrective/store/correction.states';
 import { LayoutState } from './layout/layout.state';
 import { DataState } from './data/data.state';
+import { DangerousState } from '../components/dangerous/store/dangerous.states';
 
 export interface State {
     data: DataState;
@@ -11,6 +12,7 @@ export interface State {
     login: LoginState;
     profile: ProfileState;
     correction: CorrectionState;
+    dangerous: DangerousState;
     survey: SurveyState;
 }
 

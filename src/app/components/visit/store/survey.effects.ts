@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
 import {
   createResult,
   createResultFail,
   createResultSuccess,
+  loadHistory,
+  loadHistorySuccess,
   loadResult,
   loadResultFail,
-  loadHistory,
   loadResultsFail,
-  loadHistorySuccess,
   loadResultSuccess,
   loadSurvey,
   loadSurveyFail,
@@ -48,8 +48,6 @@ export class SurveyEffects {
       );
     })
   ));
-
-  @Effect()
   loadResult$ = createEffect(() => this.actions$.pipe(
     ofType(loadResult),
     switchMap(action => {
@@ -59,26 +57,23 @@ export class SurveyEffects {
       );
     })
   ));
+  createResult$ = createEffect(() => this.actions$.pipe(
+      ofType(createResult),
+      switchMap(action => {
+          return this.surveyApi.createResult(action.createResultPayload).pipe(
+              map(status => createResultSuccess({status})),
+              catchError(error => of(createResultFail({error: error.message}))),
+          );
+      })
+  ));
 
-  @Effect()
-    createResult$ = createEffect(() => this.actions$.pipe(
-        ofType(createResult),
-        switchMap(action => {
-            return this.surveyApi.createResult(action.createResultPayload).pipe(
-                map(status => createResultSuccess({status})),
-                catchError(error => of(createResultFail({error: error.message}))),
-            );
-        })
-    ));
-
-    @Effect()
-    updateResult$ = createEffect(() => this.actions$.pipe(
-        ofType(updateResult),
-        switchMap(action => {
-            return this.surveyApi.updateResult(action.updateResultPayload).pipe(
-                map(status => updateResultSuccess({status})),
-                catchError(error => of(updateResultFail({error: error.message}))),
-            );
-        })
-    ));
+  updateResult$ = createEffect(() => this.actions$.pipe(
+      ofType(updateResult),
+      switchMap(action => {
+          return this.surveyApi.updateResult(action.updateResultPayload).pipe(
+              map(status => updateResultSuccess({status})),
+              catchError(error => of(updateResultFail({error: error.message}))),
+          );
+      })
+  ));
 }
