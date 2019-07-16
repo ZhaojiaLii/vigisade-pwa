@@ -1,12 +1,9 @@
-import { CreateDangerous } from '../interfaces/createDangerous.interface';
-import { GetDangerousType } from '../interfaces/getDangerousType.interface';
+import { CreateDangerousSituation } from '../interfaces/create-dangerous-situation.interface';
 
 export interface DangerousState {
-  createDangerous: CreateDangerous | null;
-  dangerousType: GetDangerousType | null;
+  unsavedDangerousSituations: CreateDangerousSituation[];
 }
 
 export const dangerousInitialState = {
-  createDangerous: null,
-  dangerousType: null,
+  unsavedDangerousSituations: [],
 };

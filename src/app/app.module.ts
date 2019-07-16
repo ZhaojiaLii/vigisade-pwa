@@ -41,6 +41,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { HistoryModule } from './components/history/history.module';
 import { dangerousFeature } from './components/dangerous/store/dangerous.features';
 import localeFr from '@angular/common/locales/fr';
+import { DangerousSituationModule } from './components/dangerous/dangerous-situation.module';
+
 registerLocaleData(localeFr);
 
 const pageComponents = [
@@ -54,6 +56,7 @@ const pageComponents = [
 
 const pageModules = [
   HistoryModule,
+  DangerousSituationModule,
 ];
 
 const ngrxFeatures = [
@@ -74,7 +77,6 @@ const ngrxFeatures = [
     TutorialComponent,
     HomepageComponent,
     ProfileComponent,
-    DangerousComponent,
     VisitComponent,
     ActionCorrectiveComponent,
     SecuriteComponent,
@@ -95,7 +97,7 @@ const ngrxFeatures = [
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 15,
-      name: 'Vigisade',
+      name: 'Vigisade ' + (environment.production ? 'Prod' : 'Dev'),
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
@@ -117,7 +119,7 @@ const ngrxFeatures = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'fr-FR'},
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
   bootstrap: [AppComponent]
 })

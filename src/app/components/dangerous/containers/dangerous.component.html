@@ -16,7 +16,9 @@
         <div class="form-row">
           <div class="form-group col-12">
             <select class="form-control" appHighlight id="typeSelect" formControlName="dangerousType">
-              <option value="{{type}}" *ngFor="let type of (dangerousType$ | async)">{{type}}</option>
+              <option value="{{type.id}}" *ngFor="let type of (dangerousType$|async)">
+                {{type.label}}
+              </option>
             </select>
             <label for="typeSelect">Type</label>
             <div class="line"></div>

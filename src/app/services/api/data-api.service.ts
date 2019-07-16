@@ -31,6 +31,10 @@ export class DataApiService {
         {id: 4, name: 'Entity 4', areaId: 3},
         {id: 5, name: 'Entity 5', areaId: 4},
       ],
+      dangerousTypes: [
+        {id: 1, label: 'Type 1'},
+        {id: 2, label: 'Type 2'},
+      ],
     });
   }
 
