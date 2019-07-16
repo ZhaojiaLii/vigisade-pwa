@@ -206,13 +206,25 @@ app-root, app-login {
   width: 100%;
 }
 
-.mat-progress-spinner svg circle {
-  stroke: $primary;
-}
-
 .login-wrapper {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #fff;
   border-radius: 5px;
+}
+
+.spinner-container {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+  position: fixed;
+  top: 0;
+  bottom:0;
+  right:0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 99999999;
+  .mat-progress-spinner svg circle {
+    stroke: $primary;
+  }
 }
