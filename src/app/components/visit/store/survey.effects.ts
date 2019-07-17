@@ -1,23 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import {
-  createResult,
-  createResultFail,
-  createResultSuccess,
-  loadHistory,
-  loadHistorySuccess,
-  loadResult,
-  loadResultFail,
-  loadResultsFail,
-  loadResultSuccess,
-  loadSurvey,
-  loadSurveyFail,
-  loadSurveySuccess,
-  updateResult,
-  updateResultFail,
-  updateResultSuccess
-} from './survey.actions';
+import { createResult, createResultFail, createResultSuccess, loadSurveys, loadSurveysFail, loadSurveysSuccess, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -29,31 +13,12 @@ export class SurveyEffects {
     private surveyApi: SurveyApiService,
   ) {}
 
-  loadSurvey$ = createEffect(() => this.actions$.pipe(
-    ofType(loadSurvey),
+  loadSurveys$ = createEffect(() => this.actions$.pipe(
+    ofType(loadSurveys),
     switchMap(() => {
-      return this.surveyApi.getSurvey().pipe(
-        map(survey => loadSurveySuccess({survey})),
-        catchError(error => of(loadSurveyFail({error: error.message}))),
-      );
-    })
-  ));
-
-  loadHistory$ = createEffect(() => this.actions$.pipe(
-    ofType(loadHistory),
-    switchMap(() => {
-      return this.surveyApi.getHistory().pipe(
-        map(history => loadHistorySuccess({history})),
-        catchError(error => of(loadResultsFail({error: error.message}))),
-      );
-    })
-  ));
-  loadResult$ = createEffect(() => this.actions$.pipe(
-    ofType(loadResult),
-    switchMap(action => {
-      return this.surveyApi.getResult(action.id).pipe(
-        map(result => loadResultSuccess({result})),
-        catchError(error => of(loadResultFail({error: error.message}))),
+      return this.surveyApi.getSurveys().pipe(
+        map(surveys => loadSurveysSuccess({surveys})),
+        catchError(error => of(loadSurveysFail({error: error.message}))),
       );
     })
   ));

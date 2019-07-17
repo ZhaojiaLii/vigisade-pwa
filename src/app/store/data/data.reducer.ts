@@ -4,11 +4,12 @@ import { loadDataSuccess, loadHeaderSuccess } from './data.actions';
 
 const createDataReducer = createReducer(
   initialDataState,
-  on(loadDataSuccess, (state, {directions, areas, entities}) => ({
+  on(loadDataSuccess, (state, {directions, areas, entities, dangerousTypes}) => ({
     ...state,
     directions,
     areas,
     entities,
+    dangerousTypes,
   })),
   on(loadHeaderSuccess, (state, {header}) => ({...state, header})),
 );

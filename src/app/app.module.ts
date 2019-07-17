@@ -19,7 +19,6 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/containers/securite.component';
@@ -29,9 +28,7 @@ import { surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { SecurityTemplateComponent } from './components/securite/containers/security-template.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
-import { DetailVisitComponent } from './components/detail-visit/containers/detail-visit.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
 import { ApiInterceptor } from './services/interceptors/api-interceptor.service';
@@ -42,6 +39,8 @@ import { HistoryModule } from './components/history/history.module';
 import { dangerousFeature } from './components/dangerous/store/dangerous.features';
 import localeFr from '@angular/common/locales/fr';
 import { DangerousSituationModule } from './components/dangerous/dangerous-situation.module';
+import { HistoryDetailsModule } from './components/history-details/history-details.module';
+import { historyFeature } from './components/history/store/history.feature';
 
 registerLocaleData(localeFr);
 
@@ -50,20 +49,21 @@ const pageComponents = [
   TutorialComponent,
   HomepageComponent,
   ProfileComponent,
-  DangerousComponent,
   VisitComponent,
 ];
 
 const pageModules = [
-  HistoryModule,
   DangerousSituationModule,
+  HistoryModule,
+  HistoryDetailsModule,
 ];
 
 const ngrxFeatures = [
   dataFeature,
-  layoutFeature,
   correctionFeature,
   dangerousFeature,
+  historyFeature,
+  layoutFeature,
   loginFeature,
   profileFeature,
   surveyFeature,
@@ -83,7 +83,6 @@ const ngrxFeatures = [
     SecurityTemplateComponent,
     BonnePratiqueComponent,
     BonnePratiqueComponent,
-    DetailVisitComponent,
     ATraiterComponent,
   ],
   imports: [
@@ -103,7 +102,6 @@ const ngrxFeatures = [
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    CollapseModule.forRoot(),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
@@ -113,7 +111,6 @@ const ngrxFeatures = [
     }),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    CollapseModule,
     FormsModule,
     ...pageModules,
   ],

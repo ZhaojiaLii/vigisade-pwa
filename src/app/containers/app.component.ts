@@ -5,6 +5,8 @@ import { LayoutService } from '../services/layout.service';
 import { LoginService } from '../components/login/services/login.service';
 import { DataService } from '../services/data.service';
 import { ProfileService } from '../components/profile/services/profile.service';
+import { HistoryService } from '../components/history/services/history.service';
+import { SurveyService } from '../components/visit/services/survey.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ export class AppComponent implements OnInit {
     private loginService: LoginService,
     private dataService: DataService,
     private profileService: ProfileService,
+    private historyService: HistoryService,
+    private surveyService: SurveyService,
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +33,10 @@ export class AppComponent implements OnInit {
       filter(isLogged => isLogged),
       take(1),
     ).subscribe(() => {
+      this.surveyService.loadSurveys();
       this.dataService.loadData();
       this.profileService.loadUser();
+      this.historyService.loadHistory();
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SurveyService } from '../../visit/services/survey.service';
 import { Observable } from 'rxjs';
 import { Result } from '../../visit/interfaces/result.interface';
+import { HistoryService } from '../services/history.service';
 
 @Component({
   selector: 'app-history',
@@ -9,15 +9,15 @@ import { Result } from '../../visit/interfaces/result.interface';
 })
 export class HistoryComponent implements OnInit {
 
-  history$: Observable<Result[]> = this.surveyService.getHistory();
+  history$: Observable<Result[]> = this.historyService.getHistory();
 
-  countHistory$: Observable<number> = this.surveyService.countHistory();
+  countHistory$: Observable<number> = this.historyService.countHistory();
 
   constructor(
-    private surveyService: SurveyService,
+    private historyService: HistoryService,
   ) { }
 
   ngOnInit() {
-    this.surveyService.loadHistory();
+    this.historyService.loadHistory();
   }
 }

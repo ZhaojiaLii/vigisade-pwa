@@ -1,8 +1,5 @@
-
-
-export interface Question {
+export interface ResultQuestion {
   id: number;
-  resultId: number;
   questionId: number;
   notation: string;
   comment: string;

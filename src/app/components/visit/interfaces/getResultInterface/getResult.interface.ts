@@ -1,4 +1,4 @@
-import { Question } from './question.interface';
+import { ResultQuestion } from '../../../history/interfaces/result-question.interface';
 import { TeamMember } from '../team-member.interface';
 
 export interface GetResult {
@@ -11,7 +11,7 @@ export interface GetResult {
   date: string;
   place: string;
   client: string;
-  questions: Question[];
+  questions: ResultQuestion[];
   teamMembers: TeamMember[];
   bestPracticeDone: boolean;
   bestPracticeComment: string;

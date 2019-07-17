@@ -22,3 +22,8 @@ export const getHeader = createSelector(
   getDataState,
   (state: DataState) => state.header,
 );
+
+export const getDangerousTypes = createSelector(
+  getDataState,
+  (state: DataState) => state.dangerousTypes,
+);

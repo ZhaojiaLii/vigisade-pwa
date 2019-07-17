@@ -1,14 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Direction } from '../../components/shared/interfaces/direction.interface';
-import { Area } from '../../components/shared/interfaces/area.interface';
-import { Entity } from '../../components/shared/interfaces/entity.interface';
 import { Header } from '../../interfaces/header.interface';
+import { DataApi } from '../../interfaces/api/data-api.interface';
 
 export const loadData = createAction('[Data] Load data');
 
 export const loadDataSuccess = createAction(
   '[Data] Load data Success',
-  props<{ directions: Direction[], areas: Area[], entities: Entity[] }>(),
+  props<DataApi>(),
 );
 
 export const loadDataFail = createAction(

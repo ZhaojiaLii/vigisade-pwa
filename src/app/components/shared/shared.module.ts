@@ -18,15 +18,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MemberComponent } from '../visit/containers/member.component';
 import { SecurityTemplateComponent } from '../securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
-import { DetailMemberComponent } from '../detail-visit/containers/member.component';
+import { DetailsTeamMemberComponent } from '../history-details/components/details-team-member/details-team-member.component';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
+import { CollapseModule } from 'ngx-bootstrap';
 
 const sharedComponents = [
   MenuComponent,
   MemberComponent,
-  DetailMemberComponent,
+  DetailsTeamMemberComponent,
   ATraiterElementComponent,
 ];
 const sharedDirectives = [
@@ -62,10 +63,11 @@ const materialModules = [
     MatDialogModule,
     CommonModule,
     RouterModule,
+    CollapseModule.forRoot(),
   ],
   entryComponents: [
     MemberComponent,
-    DetailMemberComponent,
+    DetailsTeamMemberComponent,
     SecurityTemplateComponent,
     ATraiterElementComponent,
   ],
@@ -74,6 +76,7 @@ const materialModules = [
     ReactiveFormsModule,
     CommonModule,
     RouterModule,
+    CollapseModule,
     ...materialModules,
     ...sharedComponents,
     ...sharedDirectives,

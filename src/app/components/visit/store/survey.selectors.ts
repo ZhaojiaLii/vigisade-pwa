@@ -1,30 +1,28 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SurveyState } from './survey.state';
-import { GetResults } from '../interfaces/getResultsInterface/getResults.interface';
-import { GetResult } from '../interfaces/getResultInterface/getResult.interface';
+import { getUser } from '../../profile/store/profile.selector';
+import { User } from '../../profile/interfaces/user';
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
 
-export const getSurvey = createSelector(
+export const getSurveys = createSelector(
   getSurveyState,
-  (state: SurveyState) => state.survey,
-);
-
-export const getResultState = createFeatureSelector<SurveyState>('survey');
-
-export const getResult = createSelector(
-  getResultState,
-  (state: SurveyState) => state.result,
-);
-
-export const getHistory = createSelector(
-  getResultState,
-  (state: SurveyState) => state.history,
-);
-
-export const getTeamMembers = createSelector(
-  getResult,
-  (result: GetResult) => {
-    return result ? result.teamMembers : null;
+  (state: SurveyState) => {
+    return state.surveys;
   }
+);
+
+export const getSurveyOfUser = createSelector(
+  getSurveyState,
+  getUser,
+  (state: SurveyState, user: User) => {
+    if (!user || !user.directionId) {
+      return null;
+    }
+
+    const surveyOfUser = state.surveys
+      .find(survey => survey.directionId === user.directionId);
+
+    return surveyOfUser || null;
+  },
 );

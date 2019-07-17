@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SurveyService } from '../../visit/services/survey.service';
 import { Observable } from 'rxjs';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Survey } from '../../visit/interfaces/survey.interface';
+import { HistoryService } from '../../history/services/history.service';
+import { Result } from '../../visit/interfaces/result.interface';
 
 @Component({
   selector: 'app-a-traiter-element',
@@ -10,14 +11,15 @@ import { Survey } from '../../visit/interfaces/survey.interface';
 })
 export class ATraiterElementComponent implements OnInit {
   @Input() resultId;
-  result$: Observable<GetResult> = this.surveyService.getResult();
-  survey$: Observable<Survey> = this.surveyService.getSurvey();
+  result$: Observable<Result> = this.historyService.getSelectedResult();
+  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   constructor(
     private surveyService: SurveyService,
+    private historyService: HistoryService,
   ) { }
 
   ngOnInit() {
-    this.surveyService.loadResult(this.resultId) ;
+    this.historyService.loadResult(this.resultId) ;
   }
 
 }

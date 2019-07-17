@@ -22,7 +22,7 @@ export class SecuriteComponent implements OnInit {
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
-  survey$: Observable<Survey> = this.surveyService.getSurvey();
+  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   constructor(
       private surveyService: SurveyService,
       private surveyApiService: SurveyApiService,

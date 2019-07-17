@@ -10,6 +10,7 @@ import { ProfileService } from '../../profile/services/profile.service';
 import { DataService } from '../../../services/data.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
+import { HistoryService } from '../../history/services/history.service';
 
 @Component({
   selector: 'app-visit',
@@ -46,13 +47,14 @@ export class VisitComponent implements OnInit {
 
   date = 'Tue Jul 02 2019 17:24:05 GMT+0200 (heure d’été d’Europe centrale)';
 
-  survey$: Observable<Survey> = this.surveyService.getSurvey();
+  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   user$: Observable<User> = this.profileService.getUser();
   areas$: Observable<Area[]> = this.dataService.getAreas();
   entities$: Observable<Entity[]> = this.dataService.getEntities();
 
   constructor(
     private surveyService: SurveyService,
+    private historyService: HistoryService,
     private profileService: ProfileService,
     private dataService: DataService,
   ) {}
@@ -61,11 +63,11 @@ export class VisitComponent implements OnInit {
   }
 
   getResults() {
-    this.surveyService.getHistory();
+    this.historyService.getHistory();
   }
 
   getResultByID() {
-    this.surveyService.loadSurvey();
+    this.surveyService.loadSurveys();
   }
 
   createResult() {

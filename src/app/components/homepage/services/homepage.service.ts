@@ -22,6 +22,6 @@ export class HomepageService {
     this.dataService.loadData();
     this.dataService.loadHeader();
     this.profileService.loadUser();
-    this.surveyService.loadSurvey();
+    this.surveyService.loadSurveys();
   }
 }

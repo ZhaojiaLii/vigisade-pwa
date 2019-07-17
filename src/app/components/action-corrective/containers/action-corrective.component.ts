@@ -5,9 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { Observable } from 'rxjs';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+import { HistoryService } from '../../history/services/history.service';
+import { Result } from '../../visit/interfaces/result.interface';
 
 
 @Component({
@@ -24,10 +25,11 @@ export class ActionCorrectiveComponent implements OnInit {
   corrections = [];
   thisCorrection: any;
   correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
-  result$: Observable<GetResult> = this.surveyService.getResult();
+  result$: Observable<Result> = this.historyService.getResult();
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
+    private historyService: HistoryService,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private router: Router,
@@ -37,7 +39,7 @@ export class ActionCorrectiveComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.selectedId = +params.get('id');
-      this.surveyService.loadResult(this.selectedId);
+      this.historyService.loadResult(this.selectedId);
     });
     this.correction$.subscribe(
       corrections => {

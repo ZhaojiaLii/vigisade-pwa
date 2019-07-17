@@ -9,14 +9,16 @@ import { correctionReducer } from '../components/action-corrective/store/correct
 import { layoutReducer } from './layout/layout.reducer';
 import { dataReducer } from './data/data.reducer';
 import { dangerousReducer } from '../components/dangerous/store/dangerous.reducer';
+import { historyReducer } from '../components/history/store/history.reducer';
 
 export const reducers: ActionReducerMap<State> = {
+    dangerous: dangerousReducer,
     data: dataReducer,
+    history: historyReducer,
     layout: layoutReducer,
     login: loginReducer,
     profile: profileReducer,
     correction: correctionReducer,
-    dangerous: dangerousReducer,
     survey: surveyReducer,
 };
 

@@ -1,0 +1,94 @@
+<div *ngIf="(result$|async) === null || (resultSurvey$|async) === null">
+    SPINNER
+</div>
+<div *ngIf="(result$|async) && (resultSurvey$|async)" class="container mb-90">
+    <div class="container-content">
+        <div class="font-bold font-25">
+            {{(resultSurvey$|async).title|uppercase}}
+        </div>
+        <div class="form-row">
+            <div class="ml-3 mt-3 col-md-6">
+                <span class="font-12">Agence</span>
+                <div><span>{{(resultEntity$|async)?.name}}</span></div>
+            </div>
+            <div class="ml-3 my-2 col-md-6">
+                <span class="font-12">Lieu du chantier</span>
+                <div><span>{{(result$|async).place}}</span></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="ml-3 my-2 col-md-6">
+                <span class="font-12">Client</span>
+                <div><span>{{(result$|async).client}}</span></div>
+            </div>
+            <div class="ml-3 mt-2 mb-3 col-md-6">
+                <span class="font-12">Date de la visite<span class="light-grey">(jour, mois, année)</span></span>
+                <div><span>{{(result$|async).date}}</span></div>
+            </div>
+        </div>
+        <p class="font-medium font-22">Équipe contrôlée</p>
+        <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
+        <app-detail-member
+                *ngFor="let member of (result$|async).teamMembers"
+                [teamMember]="member"
+        ></app-detail-member>
+        <div class="mx-30">
+            <button class="btn btn-info d-block w-100 mt-5" (click)="nextResult()">Suivant</button>
+        </div>
+    </div>
+</div>
+<div class="container mb-90">
+    CATEGORIE
+</div>
+<div class="fixed-footer">
+    <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+         aria-controls="collapseBasic">
+        <div class=""><span class="font-bold">50</span>/57</div>
+        <div class="d-flex align-items-center">
+            <div class="mr-2"><span class="font-bold">Visite 0</span>/9</div>
+            <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
+                <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
+            </svg>
+        </div>
+    </div>
+    <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
+        <div class="d-flex align-items-center justify-content-between" routerLink="/visit">
+            <span class="note-label">Visite</span>
+            <span class="note text-success"><strong>9</strong>/9</span>
+        </div>
+        <div
+            *ngFor="let category of (resultSurvey$|async).categories"
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectCategory(category.id)"
+        >
+            <span class="note-label">{{category.title}}</span>
+            <span class="note success"><strong>X</strong>/X</span>
+<!--            <span class="note text-danger"><strong>9</strong>/9</span>-->
+        </div>
+        <div class="d-flex align-items-center justify-content-between" routerLink="/bestPractice">
+      <span class="d-flex align-items-center">
+        <svg class="flex-shrink-0 mr-2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+          <defs>
+              <filter id="a" width="110.7%" height="106%" x="-5.3%" y="-3%" filterUnits="objectBoundingBox">
+                  <feOffset in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                  <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"></feGaussianBlur>
+                  <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1"
+                                 values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+                  <feMerge>
+                      <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                      <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+              </filter>
+          </defs>
+          <path fill="#E3A300" fill-rule="evenodd"
+                d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z"
+                filter="url(#a)" transform=""></path>
+        </svg>
+        <span class="note-label">Bonne pratique</span>
+      </span>
+            <span class="note text-danger"><strong>9</strong>/9</span>
+        </div>
+    </div>
+    <div class="overlay-collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+         aria-controls="collapseBasic"></div>
+</div>
