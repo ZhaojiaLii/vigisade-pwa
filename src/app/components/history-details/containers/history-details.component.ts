@@ -7,6 +7,8 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Survey } from '../../visit/interfaces/survey.interface';
 import { Result } from '../../visit/interfaces/result.interface';
+import { Category } from '../../visit/interfaces/category.interface';
+import { ResultQuestion } from '../../history/interfaces/result-question.interface';
 
 @Component({
   selector: 'app-detail-visit',
@@ -21,6 +23,8 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   result$: Observable<Result> = this.historyService.getSelectedResult();
   resultSurvey$: Observable<Survey> = this.historyService.getSelectedResultSurvey();
   resultEntity$: Observable<Entity> = this.historyService.getSelectedResultEntity();
+  selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
+  selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
 
   constructor(
     private route: ActivatedRoute,
@@ -59,6 +63,6 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
 
   selectCategory(id: number): void {
     this.historyService.selectResultCategory(id);
-    this.isCollapsed = true;
+    this.isCollapsed = false;
   }
 }

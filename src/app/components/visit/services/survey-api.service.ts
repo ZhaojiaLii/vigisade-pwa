@@ -26,10 +26,12 @@ export class SurveyApiService {
             title: 'Titre Catégorie',
             questions: [
               {
+                id: 1,
                 label: 'Label Question 1',
                 help: 'Aide Question 1'
               },
               {
+                id: 2,
                 label: 'Label Question 2',
                 help: 'Aide Question 2'
               },

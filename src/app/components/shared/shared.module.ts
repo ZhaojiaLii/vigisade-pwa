@@ -18,7 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MemberComponent } from '../visit/containers/member.component';
 import { SecurityTemplateComponent } from '../securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
-import { DetailsTeamMemberComponent } from '../history-details/components/details-team-member/details-team-member.component';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
@@ -27,7 +26,6 @@ import { CollapseModule } from 'ngx-bootstrap';
 const sharedComponents = [
   MenuComponent,
   MemberComponent,
-  DetailsTeamMemberComponent,
   ATraiterElementComponent,
 ];
 const sharedDirectives = [
@@ -67,7 +65,6 @@ const materialModules = [
   ],
   entryComponents: [
     MemberComponent,
-    DetailsTeamMemberComponent,
     SecurityTemplateComponent,
     ATraiterElementComponent,
   ],

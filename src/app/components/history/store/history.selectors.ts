@@ -5,6 +5,9 @@ import { Survey } from '../../visit/interfaces/survey.interface';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
+import { Category } from '../../visit/interfaces/category.interface';
+import { Question } from '../../visit/interfaces/question.interface';
+import { ResultQuestion } from '../interfaces/result-question.interface';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
 
@@ -57,5 +60,36 @@ export const getSelectedResultEntity = createSelector(
     const resultEntity = entities.find(entity => entity.id === result.entityId);
 
     return resultEntity || null;
+  }
+);
+
+export const getSelectedResultCategory = createSelector(
+  getSelectedResultSurvey,
+  getHistoryState,
+  (survey: Survey, state: HistoryState) => {
+    if (!state.layout.selectedCategory || !survey || !survey.categories) {
+      return null;
+    }
+
+    const surveyCategory = survey.categories
+      .find(category => category.id === state.layout.selectedCategory);
+
+    return surveyCategory || null;
+  }
+);
+
+export const getSelectedResultQuestions = createSelector(
+  getSelectedResultCategory,
+  getSelectedResult,
+  (category: Category, result: Result) => {
+    return category.questions.map((categoryQuestion: Question) => {
+      const question = result.questions
+        .find((q: ResultQuestion) => q.questionId === categoryQuestion.id);
+
+      return {
+        ...question,
+        question: categoryQuestion,
+      };
+    });
   }
 );
