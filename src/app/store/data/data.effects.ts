@@ -11,8 +11,8 @@ export class DataEffects {
   loadData$ = createEffect(() => this.actions$.pipe(
     ofType(loadData),
     switchMap(() => {
-      return DataApiService.getData().pipe(
-        map(data => loadDataSuccess(data)),
+      return this.dataApi.getData().pipe(
+        map(data => loadDataSuccess({data})),
         catchError(error => of(loadDataFail({error: error.message}))),
       );
     }),

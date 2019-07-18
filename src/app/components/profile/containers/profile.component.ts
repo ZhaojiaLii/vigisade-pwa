@@ -59,6 +59,7 @@ export class ProfileComponent implements OnInit {
         this.usercountLastMonthVisits = user.countLastMonthVisits;
     });
     this.direction$.subscribe(directions => {
+      console.log(directions);
       this.Directions = [];
       for (const direction of directions) {
         if (direction.id === this.userDirectionId) {
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.area$.subscribe(areas => {
+      console.log(areas);
       this.Areas = [];
       for (const area of areas) {
         if (area.id === this.userAreaId) {
@@ -79,6 +81,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.entity$.subscribe(entities => {
+      console.log(entities);
       this.Entities = [];
       for (const entity of entities) {
         if (entity.id === this.userEntityId) {

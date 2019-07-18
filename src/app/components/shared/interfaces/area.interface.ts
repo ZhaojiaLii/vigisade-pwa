@@ -1,5 +1,8 @@
+import { Entity } from './entity.interface';
+
 export interface Area {
   id: number;
-  name: string;
   directionId: number;
+  name: string;
+  entities: Entity[];
 }

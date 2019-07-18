@@ -1,4 +1,6 @@
+import { TypeDangerousSituationTranslation } from '../../shared/interfaces/TypeDangerousSituationTranslation.interface';
+
 export interface DangerousType {
-  id: number;
-  label: string;
+  typeDangerousSituationsId: number;
+  typeDangerousSituationTranslation: TypeDangerousSituationTranslation[];
 }
