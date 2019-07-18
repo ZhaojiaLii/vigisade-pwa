@@ -118,6 +118,9 @@ app-login {
 .mb-50 {
   margin-bottom: 3.125rem;
 }
+.mb-40 {
+  margin-bottom: 2.5rem;
+}
 .mb-30 {
   margin-bottom: 1.875rem;
 }
@@ -234,5 +237,60 @@ app-login {
   z-index: 99999999;
   .mat-progress-spinner svg circle {
     stroke: $primary;
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+#notation {
+  &.1 {
+    .svg-green {
+      background: $success;
+      path {
+        stroke: #fff;
+        fill: #fff;
+      }
+    }
+    > div:not(.svg-green) {
+      opacity: 0.4;
+    }
+  }
+  &.2 {
+    .svg-black {
+      background: $black;
+      path {
+        stroke: #fff;
+        fill: #fff;
+      }
+    }
+    > div:not(.svg-black) {
+      opacity: 0.4;
+    }
+  }
+  &.3 {
+    .svg-danger {
+      background: $danger;
+      path {
+        stroke: #fff;
+        fill: #fff;
+      }
+    }
+    > div:not(.svg-danger) {
+      opacity: 0.4;
+    }
+  }
+  &.4 {
+    .svg-warning {
+      background: $warning;
+      path {
+        stroke: #fff;
+        fill: #fff;
+      }
+    }
+    > div:not(.svg-warning) {
+      opacity: 0.4;
+    }
   }
 }
