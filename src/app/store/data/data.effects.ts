@@ -12,7 +12,7 @@ export class DataEffects {
     ofType(loadData),
     switchMap(() => {
       return this.dataApi.getData().pipe(
-        map(data => loadDataSuccess({data})),
+        map(data => loadDataSuccess(data)),
         catchError(error => of(loadDataFail({error: error.message}))),
       );
     }),

@@ -2,6 +2,6 @@ import { Direction } from '../../components/shared/interfaces/direction.interfac
 import { DangerousType } from '../../components/dangerous/interfaces/dangerous-type.interface';
 
 export interface DataApi {
-  directions: Direction[];
-  dangerousTypes: DangerousType[];
+  direction: Direction[];
+  typeDangerousSituations: DangerousType[];
 }

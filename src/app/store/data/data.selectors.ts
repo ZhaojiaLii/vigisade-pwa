@@ -7,22 +7,38 @@ export const getDataState = createFeatureSelector<DataState>('data');
 
 export const getDirections = createSelector(
   getDataState,
-  (state: DataState) => state.directions,
+  (state: DataState) => state.direction,
 );
 
 export const getAreas = createSelector(
   getDirections,
-  (state: Direction) => state.areas,
+  (directions: Direction[]) => {
+    const areas = [];
+    directions.map(direction => {
+      if (direction.area[0]) {
+        areas.push(direction.area);
+      }
+    });
+    return areas;
+  }
 );
 
 export const getEntities = createSelector(
   getAreas,
-  (state: Area) => state.entities,
+  (areas: Area[]) => {
+    const entities = [];
+    areas.map(area => {
+      if (area[0]) {
+        entities.push(area.entity);
+      }
+    });
+    return entities;
+  },
 );
 
 export const getTypeDangerousSituations = createSelector(
   getDataState,
-  (state: DataState) => state.dangerousTypes,
+  (state: DataState) => state.typeDangerousSituations,
 );
 
 export const getHeader = createSelector(

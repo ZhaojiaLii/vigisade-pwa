@@ -6,7 +6,7 @@ export const loadData = createAction('[Data] Load data');
 
 export const loadDataSuccess = createAction(
   '[Data] Load data Success',
-  props<{data: DataApi}>(),
+  props<DataApi>(),
 );
 
 export const loadDataFail = createAction(

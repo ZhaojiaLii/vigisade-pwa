@@ -3,13 +3,13 @@ import { Header } from '../../interfaces/header.interface';
 import { DangerousType } from '../../components/dangerous/interfaces/dangerous-type.interface';
 
 export interface DataState {
-  directions: Direction[];
+  direction: Direction[];
   header: Header;
-  dangerousTypes: DangerousType[];
+  typeDangerousSituations: DangerousType[];
 }
 
 export const initialDataState = {
-  directions: [],
+  direction: [],
   header: null,
-  dangerousTypes: [],
+  typeDangerousSituations: [],
 };

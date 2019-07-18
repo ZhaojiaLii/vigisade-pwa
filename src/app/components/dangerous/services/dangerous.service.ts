@@ -5,10 +5,10 @@ import { State } from '../../../store/app.state';
 import { createDangerousSituation } from '../store/dangerous.action';
 import { Observable } from 'rxjs';
 import { DangerousType } from '../interfaces/dangerous-type.interface';
-import { getDangerousTypes } from '../../../store/data/data.selectors';
 import { DangerousSituation } from '../interfaces/dangerous-situation.interface';
 import { getUser } from '../../profile/store/profile.selector';
 import { User } from '../../profile/interfaces/user';
+import { getTypeDangerousSituations } from '../../../store/data/data.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,6 @@ export class DangerousService {
   }
 
   getDangerousTypes(): Observable<DangerousType[]> {
-    return this.store.pipe(select(getDangerousTypes));
+    return this.store.pipe(select(getTypeDangerousSituations));
   }
 }

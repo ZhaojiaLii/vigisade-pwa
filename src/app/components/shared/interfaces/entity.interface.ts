@@ -1,5 +1,5 @@
 export interface Entity {
   id: number;
-  areaId: number;
+  area_id: number;
   name: string;
 }

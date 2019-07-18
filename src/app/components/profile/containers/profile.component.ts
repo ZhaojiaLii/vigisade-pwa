@@ -8,13 +8,14 @@ import { DataService } from '../../../services/data.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
+import { UpdateUser } from '../interfaces/updateUser.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  userDirectionId: number; userAreaId: number; userEntityId: number;
+  userDirectionId: number; userAreaId: number; userEntityId: number; userId: number;
   userDirection: string; userArea: string; userEntity: string;
   Directions = []; Areas = []; Entities = [];
   currentLanguage = 'Français';
@@ -47,16 +48,18 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.user$.subscribe(user => {
-        this.userDirectionId = user.directionId;
-        this.userAreaId = user.areaId;
-        this.userEntityId = user.entityId;
-        this.userMail = user.mail;
-        this.userLastName = user.lastName;
-        this.userFirstName = user.firstName;
-        this.userPhoto = user.photo;
-        this.userCountCurrentMonthVisits = user.countCurrentMonthVisits;
-        this.userCountRemainingActions = user.countRemainingActions;
-        this.usercountLastMonthVisits = user.countLastMonthVisits;
+      console.log(user);
+      this.userId = user.id;
+      this.userDirectionId = user.directionId;
+      this.userAreaId = user.areaId;
+      this.userEntityId = user.entityId;
+      this.userMail = user.mail;
+      this.userLastName = user.lastName;
+      this.userFirstName = user.firstName;
+      this.userPhoto = user.photo;
+      this.userCountCurrentMonthVisits = user.countCurrentMonthVisits;
+      this.userCountRemainingActions = user.countRemainingActions;
+      this.usercountLastMonthVisits = user.countLastMonthVisits;
     });
     this.direction$.subscribe(directions => {
       console.log(directions);
@@ -70,18 +73,21 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.area$.subscribe(areas => {
-      console.log(areas);
       this.Areas = [];
       for (const area of areas) {
-        if (area.id === this.userAreaId) {
-          this.userArea = area.name;
-        } else {
-          this.Areas.push(area);
+        // console.log(area);
+        // @ts-ignore
+        for (const singleArea of area) {
+          if (singleArea.id === this.userAreaId) {
+            this.userArea = singleArea.name;
+          } else {
+            this.Areas.push(singleArea);
+          }
         }
       }
     });
     this.entity$.subscribe(entities => {
-      console.log(entities);
+      // console.log(entities);
       this.Entities = [];
       for (const entity of entities) {
         if (entity.id === this.userEntityId) {
@@ -111,17 +117,13 @@ export class ProfileComponent implements OnInit {
         } else {
           this.changedEntityId = this.userEntityId;
         }
-        const POST: User = {
-          mail: this.userMail,
-          directionId: this.changedDirectionId as number,
-          areaId: this.changedAreaId,
-          entityId: this.changedEntityId,
-          firstName: this.userFirstName,
-          lastName: this.userLastName,
-          photo: this.userPhoto,
-          countRemainingActions: this.userCountRemainingActions,
-          countCurrentMonthVisits: this.userCountCurrentMonthVisits,
-          countLastMonthVisits: this.usercountLastMonthVisits,
+        const POST: UpdateUser = {
+          firstname: this.userFirstName,
+          lastname: this.userLastName,
+          direction_id: this.changedDirectionId as number,
+          area_id: this.changedAreaId,
+          entity_id: this.changedEntityId,
+          image: this.userPhoto,
         };
         console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
