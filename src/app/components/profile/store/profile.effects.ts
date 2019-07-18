@@ -24,15 +24,17 @@ export class ProfileEffects {
       );
     })
   ));
-  updateUser$ = createEffect(() => this.actions$.pipe(
-    ofType(updateUser),
-    switchMap(action => {
-      return this.profileApi.updateUser(action.updateUserPayload).pipe(
-        map(status => updateUserSuccess({status})),
-        catchError(error => of(updateUserFail({error: error.message}))),
-      );
-    })
-  ));
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUser),
+      switchMap(action => {
+        return this.profileApi.updateUser(action.updateUserPayload).pipe(
+          map(status => updateUserSuccess({status})),
+          catchError(error => of(updateUserFail({error: error.message}))),
+        );
+      })
+    );
+  });
 
   constructor(
     private actions$: Actions,
