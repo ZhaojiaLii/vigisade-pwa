@@ -8,6 +8,7 @@ import { getUser, getUserArea, getUserDirection, getUserEntity } from '../store/
 import { Direction } from '../../shared/interfaces/direction.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
+import { UpdateUser } from '../interfaces/updateUser.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class ProfileService {
     return this.store.pipe(select(getUser));
   }
 
-  updateUser(updateUserPayload: User): void {
+  updateUser(updateUserPayload: UpdateUser): void {
     this.store.dispatch(updateUser({updateUserPayload}));
   }
 
