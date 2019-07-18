@@ -29,7 +29,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <select class="form-control has-value" appHighlight id="regionSelect" formControlName="area">
-          <option value="{{userArea}}">{{userArea}}</option>
+          <option value="{{userAreaId}}">{{userArea}}</option>
           <option *ngFor="let area of Areas" value="{{area.id}}">{{area.name}}</option>
         </select>
         <label for="regionSelect">Zone</label>
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group col-md-6">
         <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
-          <option value="{{userEntity}}">{{userEntity}}</option>
+          <option value="{{userEntityId}}">{{userEntity}}</option>
           <option *ngFor="let entity of Entities" value="{{entity.id}}">{{entity.name}}</option>
         </select>
         <label for="entiteSelect">Entité</label>

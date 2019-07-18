@@ -43,7 +43,7 @@ export const getSelectedResultSurvey = createSelector(
       return null;
     }
 
-    const resultSurvey = surveys.find(survey => survey.id === result.surveyId);
+    const resultSurvey = surveys.find(survey => survey.surveyId === result.surveyId);
 
     return resultSurvey || null;
   }
@@ -67,12 +67,12 @@ export const getSelectedResultCategory = createSelector(
   getSelectedResultSurvey,
   getHistoryState,
   (survey: Survey, state: HistoryState) => {
-    if (!state.layout.selectedCategory || !survey || !survey.categories) {
+    if (!state.layout.selectedCategory || !survey || !survey.surveyCategories) {
       return null;
     }
 
-    const surveyCategory = survey.categories
-      .find(category => category.id === state.layout.selectedCategory);
+    const surveyCategory = survey.surveyCategories
+      .find(category => category.surveyCategoryId === state.layout.selectedCategory);
 
     return surveyCategory || null;
   }
@@ -82,9 +82,9 @@ export const getSelectedResultQuestions = createSelector(
   getSelectedResultCategory,
   getSelectedResult,
   (category: Category, result: Result) => {
-    return category.questions.map((categoryQuestion: Question) => {
+    return category.surveyQuestion.map((categoryQuestion: Question) => {
       const question = result.questions
-        .find((q: ResultQuestion) => q.questionId === categoryQuestion.id);
+        .find((q: ResultQuestion) => q.questionId === categoryQuestion.surveyQuestionId);
 
       return {
         ...question,
