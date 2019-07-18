@@ -8,19 +8,19 @@ import { DataService } from '../../../services/data.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateUser } from '../interfaces/updateUser.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  userDirectionId: number; userAreaId: number; userEntityId: number; userId: number;
+  userDirectionId: number; userAreaId: number; userEntityId: number;
   userDirection: string; userArea: string; userEntity: string;
   Directions = []; Areas = []; Entities = [];
   currentLanguage = 'Français';
   Languages = ['Français', 'Anglais', 'Espagnol'];
   userMail: string; userFirstName: string; userLastName: string; userPhoto: string;
+  userCountRemainingActions: number; userCountCurrentMonthVisits: number; usercountLastMonthVisits: number;
   language = new FormGroup({
     language: new FormControl(''),
   });
@@ -47,18 +47,18 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.user$.subscribe(user => {
-      console.log(user);
-      this.userId = user.id;
-      this.userDirectionId = user.directionId;
-      this.userAreaId = user.areaId;
-      this.userEntityId = user.entityId;
-      this.userMail = user.mail;
-      this.userLastName = user.lastName;
-      this.userFirstName = user.firstName;
-      this.userPhoto = user.photo;
+        this.userDirectionId = user.directionId;
+        this.userAreaId = user.areaId;
+        this.userEntityId = user.entityId;
+        this.userMail = user.mail;
+        this.userLastName = user.lastName;
+        this.userFirstName = user.firstName;
+        this.userPhoto = user.photo;
+        this.userCountCurrentMonthVisits = user.countCurrentMonthVisits;
+        this.userCountRemainingActions = user.countRemainingActions;
+        this.usercountLastMonthVisits = user.countLastMonthVisits;
     });
     this.direction$.subscribe(directions => {
-      console.log(directions);
       this.Directions = [];
       for (const direction of directions) {
         if (direction.id === this.userDirectionId) {
@@ -71,19 +71,14 @@ export class ProfileComponent implements OnInit {
     this.area$.subscribe(areas => {
       this.Areas = [];
       for (const area of areas) {
-        // console.log(area);
-        // @ts-ignore
-        for (const singleArea of area) {
-          if (singleArea.id === this.userAreaId) {
-            this.userArea = singleArea.name;
-          } else {
-            this.Areas.push(singleArea);
-          }
+        if (area.id === this.userAreaId) {
+          this.userArea = area.name;
+        } else {
+          this.Areas.push(area);
         }
       }
     });
     this.entity$.subscribe(entities => {
-      // console.log(entities);
       this.Entities = [];
       for (const entity of entities) {
         if (entity.id === this.userEntityId) {
@@ -113,13 +108,17 @@ export class ProfileComponent implements OnInit {
         } else {
           this.changedEntityId = this.userEntityId;
         }
-        const POST: UpdateUser = {
-          firstname: this.userFirstName,
-          lastname: this.userLastName,
-          direction_id: this.changedDirectionId as number,
-          area_id: this.changedAreaId,
-          entity_id: this.changedEntityId,
-          image: this.userPhoto,
+        const POST: User = {
+          mail: this.userMail,
+          directionId: this.changedDirectionId as number,
+          areaId: this.changedAreaId,
+          entityId: this.changedEntityId,
+          firstName: this.userFirstName,
+          lastName: this.userLastName,
+          photo: this.userPhoto,
+          countRemainingActions: this.userCountRemainingActions,
+          countCurrentMonthVisits: this.userCountCurrentMonthVisits,
+          countLastMonthVisits: this.usercountLastMonthVisits,
         };
         console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);

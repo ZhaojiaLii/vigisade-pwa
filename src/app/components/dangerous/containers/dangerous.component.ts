@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DangerousService } from '../services/dangerous.service';
+import { formatDate } from '@angular/common';
 import { DangerousType } from '../interfaces/dangerous-type.interface';
 import { DangerousSituation } from '../interfaces/dangerous-situation.interface';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dangerous',
   templateUrl: './dangerous.component.html',
 })
-export class DangerousComponent implements OnInit {
+export class DangerousComponent {
+
   imgURL: any;
   date = new Date();
   postDangerous = new FormGroup({
@@ -19,29 +19,12 @@ export class DangerousComponent implements OnInit {
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
-  typeSelected: number;
-  comment: string;
-  photo: string;
-  type = [];
+
   dangerousType$: Observable<DangerousType[]> = this.dangerousService.getDangerousTypes();
 
   constructor(
     private dangerousService: DangerousService,
-    private toastrService: ToastrService,
-    private router: Router,
   ) {}
-
-  ngOnInit(): void {
-    this.dangerousType$.subscribe(types => {
-      for (const type of types) {
-        // @ts-ignore
-        for (const typeDetail of type) {
-          this.type.push(typeDetail);
-        }
-      }
-    });
-    this.onValueChanged();
-  }
 
   preview(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -54,22 +37,17 @@ export class DangerousComponent implements OnInit {
     }
   }
 
-  onValueChanged() {
-    this.postDangerous.valueChanges.subscribe(val => {
-      this.typeSelected = val.dangerousType;
-      this.comment = val.comment;
-      this.photo = val.photo;
-    });
+  createDangerous() {
+    const time = formatDate(this.date, 'dd-MM-yyyy hh:mm:ss a', 'fr-FR');
+    const dangerousPayload: DangerousSituation = {
+      dangerousSituationTypeId: this.postDangerous.value.dangerousType,
+      comment: this.postDangerous.value.comment,
+      photo: this.postDangerous.value.photo,
+      date: time,
+    };
+
+    this.dangerousService.createDangerousSituation(dangerousPayload);
   }
 
-  createDangerous() {
-    const dangerousPayload: DangerousSituation = {
-      typeSituationDangerousID: this.typeSelected,
-      dangerousSituationComment: this.comment,
-      dangerousSituationPhoto: this.photo,
-    };
-    this.dangerousService.createDangerousSituation(dangerousPayload);
-    this.toastrService.success('Succès');
-    this.router.navigate(['/home']);
-  }
+
 }

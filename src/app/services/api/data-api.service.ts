@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DataApi } from '../../interfaces/api/data-api.interface';
 import { Header } from '../../interfaces/header.interface';
 
@@ -11,8 +11,31 @@ export class DataApiService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<DataApi> {
-    return this.http.get<DataApi>('/api/direction-zone-entity-type-dangerous-situation');
+  static getData(): Observable<DataApi> {
+    // @todo: call API
+    return of({
+      directions: [
+        {id: 1, name: 'Direction 1'},
+        {id: 2, name: 'Direction 2'},
+      ],
+      areas: [
+        {id: 1, name: 'Area 1', directionId: 1},
+        {id: 2, name: 'Area 2', directionId: 1},
+        {id: 3, name: 'Area 3', directionId: 2},
+        {id: 4, name: 'Area 4', directionId: 2},
+      ],
+      entities: [
+        {id: 1, name: 'Entity 1', areaId: 1},
+        {id: 2, name: 'Entity 2', areaId: 1},
+        {id: 3, name: 'Entity 3', areaId: 2},
+        {id: 4, name: 'Entity 4', areaId: 3},
+        {id: 5, name: 'Entity 5', areaId: 4},
+      ],
+      dangerousTypes: [
+        {id: 1, label: 'Type 1'},
+        {id: 2, label: 'Type 2'},
+      ],
+    });
   }
 
   getHeader(): Observable<Header> {

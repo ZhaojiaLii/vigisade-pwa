@@ -15,7 +15,7 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MemberComponent } from '../visit/containers/member.component';
+import { SurveyTeamMemberComponent } from '../visit/components/survey-team-member/survey-team-member.component';
 import { SecurityTemplateComponent } from '../securite/containers/security-template.component';
 import { CommonModule } from '@angular/common';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
@@ -25,7 +25,7 @@ import { CollapseModule } from 'ngx-bootstrap';
 
 const sharedComponents = [
   MenuComponent,
-  MemberComponent,
+  SurveyTeamMemberComponent,
   ATraiterElementComponent,
 ];
 const sharedDirectives = [
@@ -64,7 +64,7 @@ const materialModules = [
     CollapseModule.forRoot(),
   ],
   entryComponents: [
-    MemberComponent,
+    SurveyTeamMemberComponent,
     SecurityTemplateComponent,
     ATraiterElementComponent,
   ],

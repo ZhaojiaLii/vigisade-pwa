@@ -1,5 +1,6 @@
 export interface DangerousSituation {
-  typeSituationDangerousID: number;
-  dangerousSituationComment: string;
-  dangerousSituationPhoto: string;
+  dangerousSituationTypeId: number;
+  date: string;
+  comment: string;
+  photo: string;
 }

@@ -1,107 +1,130 @@
 <div class="container mb-90">
-  <div class="container-content">
-    <div class="font-bold font-25">
-      DR NORMANDIE
+    <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null}">
+        <div class="font-bold font-25">
+            DR NORMANDIE
+        </div>
+        <form [formGroup]="mainForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select class="form-control" appHighlight id="agenceSelect" formControlName="entity">
+                        <option value=""></option>
+                        <option value="Agence lorem ipsum">Agence lorem ipsum</option>
+                    </select>
+                    <label for="agenceSelect">Agence</label>
+                    <div class="line"></div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" appHighlight id="chantierSelect" formControlName="place">
+                    <label for="chantierSelect">Lieu du chantier</label>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" appHighlight id="clientSelect" formControlName="client">
+                    <label for="clientSelect">Client</label>
+                    <div class="line"></div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect"
+                           formControlName="date">
+                    <label for="dateSelect">Date de la visite <span
+                            class="light-grey">(jour, mois, année)</span></label>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </form>
+        <p class="font-medium font-22">Équipe contrôlée</p>
+        <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
+        <app-survey-team-member
+            *ngFor="let i of getMemberIndexes()"
+            [member]="teamMembers[i]"
+            (updateMember)="updateTeamMember($event, i)"
+            (removeMember)="removeTeamMember(i)"
+        ></app-survey-team-member>
+        <div (click)="addTeamMember()" class="card-full-width d-flex justify-content-end mr-2 mt-2">
+            <div class="circle-white-icon shadow-01 bg-info suppr">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z"
+                          fill="#FFF"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="mx-30">
+            <button class="btn btn-info d-block w-100 mt-5">Valider</button>
+        </div>
     </div>
-    <form [formGroup]="mainForm">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <select class="form-control" appHighlight id="agenceSelect" formControlName="entity">
-            <option value=""></option>
-            <option value="Agence lorem ipsum">Agence lorem ipsum</option>
-          </select>
-          <label for="agenceSelect">Agence</label>
-          <div class="line"></div>
+    <div
+        *ngFor="let category of (survey$|async)?.categories"
+        class="container-content"
+        [ngClass]="{'hide': (selectedCategory$|async)?.id !== category.id}"
+    >
+        <div class="row">
+            <div class="card card-full-width mb-10 shadow-none">
+                <div
+                    *ngFor="let question of category.questions;"
+                    class="row"
+                >
+                    QUESTION
+            </div>
         </div>
-        <div class="form-group col-md-6">
-          <input type="text" class="form-control" appHighlight id="chantierSelect" formControlName="place">
-          <label for="chantierSelect">Lieu du chantier</label>
-          <div class="line"></div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <input type="text" class="form-control" appHighlight id="clientSelect" formControlName="client">
-          <label for="clientSelect">Client</label>
-          <div class="line"></div>
-        </div>
-        <div class="form-group col-md-6">
-          <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect" formControlName="date">
-          <label for="dateSelect">Date de la visite <span class="light-grey">(jour, mois, année)</span></label>
-          <div class="line"></div>
-        </div>
-      </div>
-    </form>
-    <p class="font-medium font-22">Équipe contrôlée</p>
-    <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
-    <app-member
-        *ngFor="let index of teamGroupIndex"
-        [memberID]="index"
-        (FirstName)="updateFirstName($event)"
-        (LastName)="updateLastName($event)"
-        (Quality)="updateQuality($event)"
-        (DELETE)="deleteTeamMember($event)"
-    ></app-member>
-    <div (click)="addTeamMember()" class="card-full-width d-flex justify-content-end mr-2 mt-2">
-      <div class="circle-white-icon shadow-01 bg-info suppr">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" fill="#FFF"></path>
-        </svg>
-      </div>
     </div>
-    <div class="mx-30">
-      <button class="btn btn-info d-block w-100 mt-5" (click)="validForm()">Valider</button>
-    </div>
-  </div>
 </div>
 <div class="fixed-footer">
-  <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-    <div class=""><span class="font-bold">50</span>/57</div>
-    <div class="d-flex align-items-center">
-      <div class="mr-2"><span class="font-bold">Visite 0</span>/9</div>
-      <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
-        <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
-      </svg>
+    <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+         aria-controls="collapseBasic">
+        <div class=""><span class="font-bold">50</span>/57</div>
+        <div class="d-flex align-items-center">
+            <div class="mr-2"><span class="font-bold">Visite 0</span>/9</div>
+            <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
+                <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
+            </svg>
+        </div>
     </div>
-  </div>
-  <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
-    <div class="d-flex align-items-center justify-content-between" routerLink="/visit">
-      <span class="note-label">Visite</span>
-      <span class="note text-success"><strong>9</strong>/9</span>
-    </div>
-    <div class="d-flex align-items-center justify-content-between" routerLink="/security">
-      <span class="note-label">Sécurité</span>
-      <span class="note text-danger"><strong>9</strong>/9</span>
-    </div>
-    <div class="d-flex align-items-center justify-content-between">
-      <span class="note-label">Qualité</span>
-      <span class="note text-success"><strong>9</strong>/9</span>
-    </div>
-    <div class="d-flex align-items-center justify-content-between">
-      <span class="note-label">Environnement</span>
-      <span class="note text-success"><strong>9</strong>/9</span>
-    </div>
-    <div class="d-flex align-items-center justify-content-between" routerLink="/bestPractice">
+    <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
+        <div
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectSurveyCategory(null)"
+        >
+            <span class="note-label">Visite</span>
+            <span class="note text-success"><strong>9</strong>/9</span>
+        </div>
+        <div
+            *ngFor="let category of (survey$|async)?.categories"
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectSurveyCategory(category.id)"
+        >
+            <span class="note-label">{{category.title}}</span>
+            <span class="note text-success"><strong>9</strong>/9</span>
+        </div>
+        <div
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectSurveyCategory(bestPracticeId)"
+        >
     <span class="d-flex align-items-center">
       <svg class="flex-shrink-0 mr-2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
         <defs>
             <filter id="a" width="110.7%" height="106%" x="-5.3%" y="-3%" filterUnits="objectBoundingBox">
                 <feOffset in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
                 <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"></feGaussianBlur>
-                <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+                <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1"
+                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
                 <feMerge>
                     <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
                     <feMergeNode in="SourceGraphic"></feMergeNode>
                 </feMerge>
             </filter>
         </defs>
-        <path fill="#E3A300" fill-rule="evenodd" d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z" filter="url(#a)" transform=""></path>
+        <path fill="#E3A300" fill-rule="evenodd"
+              d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z"
+              filter="url(#a)" transform=""></path>
       </svg>
       <span class="note-label">Bonne pratique</span>
     </span>
-      <span class="note text-danger"><strong>9</strong>/9</span>
+            <span class="note text-danger"><strong>9</strong>/9</span>
+        </div>
     </div>
-  </div>
-  <div class="overlay-collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"></div>
+    <div class="overlay-collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+         aria-controls="collapseBasic"></div>
 </div>
 

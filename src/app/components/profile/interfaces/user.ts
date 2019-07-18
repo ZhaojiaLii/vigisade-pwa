@@ -1,5 +1,4 @@
 export interface User {
-  id: number;
   mail: string;
   directionId: number;
   areaId: number;
