@@ -16,8 +16,8 @@
         <div class="form-row">
           <div class="form-group col-12">
             <select class="form-control" appHighlight id="typeSelect" formControlName="dangerousType">
-              <option value="{{type.id}}" *ngFor="let type of (dangerousType$|async)">
-                {{type.label}}
+              <option value="{{type.typeDangerousSituationsId}}" *ngFor="let type of type">
+                {{type.typeDangerousSituationTranslation[0].typeDangerousSituationTranslationType}}
               </option>
             </select>
             <label for="typeSelect">Type</label>
@@ -52,6 +52,5 @@
   <div class="mx-30 my-45">
     <button class="btn btn-info d-block w-100" (click)="createDangerous()">Valider</button>
   </div>
-
 </div>
 
