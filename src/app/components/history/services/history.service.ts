@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { HistoryState } from '../store/history.state';
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { loadHistory, loadResult, selectCategory, selectResult } from '../store/history.actions';
 import { getHistory, getResult, getSelectedResultCategory, getSelectedResult, getSelectedResultEntity, getSelectedResultSurvey, getSelectedResultQuestions } from '../store/history.selectors';
-import { Survey } from '../../visit/interfaces/survey.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Category } from '../../visit/interfaces/category.interface';
+import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { ResultQuestion } from '../interfaces/result-question.interface';
 
 @Injectable({

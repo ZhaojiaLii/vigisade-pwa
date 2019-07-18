@@ -1,14 +1,14 @@
 <div class="container mb-90">
   <div class="row" [formGroup]="visitForm">
     <div class="card card-full-width mb-10 shadow-none">
-      <app-security-template
-          *ngFor="let question of (survey$|async)?.categories[0].questions"
-          [questionLabel]="question.label"
-          [questionHelp]="question.help"
-          (Selection)="getSelection($event)"
-          (Photo)="getPhoto($event)"
-          (Comment)="getComment($event)"
-      ></app-security-template>
+<!--      <app-security-template-->
+<!--          *ngFor="let question of (survey$|async)?.categories[0].questions"-->
+<!--          [questionLabel]="question.label"-->
+<!--          [questionHelp]="question.help"-->
+<!--          (Selection)="getSelection($event)"-->
+<!--          (Photo)="getPhoto($event)"-->
+<!--          (Comment)="getComment($event)"-->
+<!--      ></app-security-template>-->
     </div>
   </div>
   <div class="mx-30 my-45">

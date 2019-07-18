@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 

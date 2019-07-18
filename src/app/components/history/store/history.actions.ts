@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 
 export const loadHistory = createAction('[Survey] Load History');

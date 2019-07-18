@@ -15,7 +15,7 @@ import { UpdateUser } from '../interfaces/updateUser.interface';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  userDirectionId: number; userAreaId: number; userEntityId: number; userId: number;
+  userDirectionId: number; userAreaId: number; userEntityId: number;
   userDirection: string; userArea: string; userEntity: string;
   Directions = []; Areas = []; Entities = [];
   currentLanguage = 'Français';
@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
     });
     this.user$.subscribe(user => {
       console.log(user);
-      this.userId = user.id;
       this.userDirectionId = user.directionId;
       this.userAreaId = user.areaId;
       this.userEntityId = user.entityId;
@@ -117,12 +116,13 @@ export class ProfileComponent implements OnInit {
           firstname: this.userFirstName,
           lastname: this.userLastName,
           direction_id: this.changedDirectionId as number,
-          area_id: this.changedAreaId,
-          entity_id: this.changedEntityId,
+          area_id: this.changedAreaId as number,
+          entity_id: this.changedEntityId as number,
           image: this.userPhoto,
         };
         console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
+        console.log(POST);
         this.toastrService.success('Màj votre Profile', 'Succès');
       }
     );

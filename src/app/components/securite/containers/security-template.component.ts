@@ -39,6 +39,7 @@ export class SecurityTemplateComponent implements OnInit {
     if (this.questionHelp === '') {
       this.questionHelp = 'Pas d\'aide ici';
     }
+    console.log(this.questionLabel);
   }
 
   preview(event: any) {
@@ -97,7 +98,7 @@ export class SecurityTemplateComponent implements OnInit {
       }
     }
     this.showErrorMessage();
-    console.log(this.showError);
+    // console.log(this.showError);
   }
 
   showErrorMessage() {

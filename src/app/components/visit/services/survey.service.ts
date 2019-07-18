@@ -5,9 +5,9 @@ import { CreateResult } from '../interfaces/createResultInterface/createResult.i
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Observable } from 'rxjs';
 import { SurveyState } from '../store/survey.state';
-import { Survey } from '../interfaces/survey.interface';
+import { Survey } from '../interfaces/getSurveys/survey.interface';
 import { getSurveyOfUser, getSurveySelectedCategory } from '../store/survey.selectors';
-import { Category } from '../interfaces/category.interface';
+import { Category } from '../interfaces/getSurveys/category.interface';
 
 @Injectable({
   providedIn: 'root',

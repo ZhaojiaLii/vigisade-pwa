@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TeamMember } from '../../interfaces/team-member.interface';
+import { TeamMember } from '../../interfaces/getSurveys/team-member.interface';
 
 @Component({
   selector: 'app-survey-team-member',

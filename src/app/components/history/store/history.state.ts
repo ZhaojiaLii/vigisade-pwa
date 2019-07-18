@@ -1,4 +1,4 @@
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 export interface HistoryState {
   history: Result[] | null;

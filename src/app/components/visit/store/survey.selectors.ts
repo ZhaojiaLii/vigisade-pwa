@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SurveyState } from './survey.state';
 import { getUser } from '../../profile/store/profile.selector';
 import { User } from '../../profile/interfaces/user';
-import { Survey } from '../interfaces/survey.interface';
+import { Survey } from '../interfaces/getSurveys/survey.interface';
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
 
@@ -25,10 +25,9 @@ export const getSurveyOfUser = createSelector(
     if (!user || !user.directionId) {
       return null;
     }
-
-    const surveyOfUser = state.surveys
-      .find(survey => survey.directionId === user.directionId);
-
+    const surveys = [];
+    surveys.push(state.surveys);
+    const surveyOfUser = surveys.find(survey => survey.surveyDirectionId === user.directionId);
     return surveyOfUser || null;
   },
 );
@@ -37,12 +36,12 @@ export const getSurveySelectedCategory = createSelector(
   getSurveyOfUser,
   getSelectedCategoryId,
   (survey: Survey, selectedId: number) => {
-    if (!selectedId || !survey || !survey.categories) {
+    if (!selectedId || !survey || !survey.surveyCategories) {
       return null;
     }
 
-    const surveyCategory = survey.categories
-      .find(category => category.id === selectedId);
+    const surveyCategory = survey.surveyCategories
+      .find(category => category.surveyCategoryId === selectedId);
 
     return surveyCategory || null;
   }

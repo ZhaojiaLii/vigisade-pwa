@@ -1,5 +1,5 @@
 import { ResultQuestion } from '../../../history/interfaces/result-question.interface';
-import { TeamMember } from '../team-member.interface';
+import { TeamMember } from '../getSurveys/team-member.interface';
 
 export interface GetResult {
   id: number;

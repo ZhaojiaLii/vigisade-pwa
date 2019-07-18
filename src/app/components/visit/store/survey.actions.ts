@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Survey } from '../interfaces/survey.interface';
+import { Survey } from '../interfaces/getSurveys/survey.interface';
 import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 

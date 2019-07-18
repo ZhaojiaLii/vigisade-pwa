@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs-compat/add/operator/skip';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Survey } from '../../visit/interfaces/survey.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { SurveyApiService } from '../../visit/services/survey-api.service';
 import { SurveyService } from '../../visit/services/survey.service';
 
@@ -25,7 +25,6 @@ export class SecuriteComponent implements OnInit {
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   constructor(
       private surveyService: SurveyService,
-      private surveyApiService: SurveyApiService,
       ) {
   }
   ngOnInit() {

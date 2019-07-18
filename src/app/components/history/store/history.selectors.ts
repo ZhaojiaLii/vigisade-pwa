@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HistoryState } from './history.state';
-import { Result } from '../../visit/interfaces/result.interface';
-import { Survey } from '../../visit/interfaces/survey.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Category } from '../../visit/interfaces/category.interface';
-import { Question } from '../../visit/interfaces/question.interface';
+import { Category } from '../../visit/interfaces/getSurveys/category.interface';
+import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 import { ResultQuestion } from '../interfaces/result-question.interface';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
@@ -43,7 +43,7 @@ export const getSelectedResultSurvey = createSelector(
       return null;
     }
 
-    const resultSurvey = surveys.find(survey => survey.id === result.surveyId);
+    const resultSurvey = surveys.find(survey => survey.surveyId === result.surveyId);
 
     return resultSurvey || null;
   }
@@ -67,12 +67,12 @@ export const getSelectedResultCategory = createSelector(
   getSelectedResultSurvey,
   getHistoryState,
   (survey: Survey, state: HistoryState) => {
-    if (!state.layout.selectedCategory || !survey || !survey.categories) {
+    if (!state.layout.selectedCategory || !survey || !survey.surveyCategories) {
       return null;
     }
 
-    const surveyCategory = survey.categories
-      .find(category => category.id === state.layout.selectedCategory);
+    const surveyCategory = survey.surveyCategories
+      .find(category => category.surveyCategoryId === state.layout.selectedCategory);
 
     return surveyCategory || null;
   }
@@ -82,9 +82,9 @@ export const getSelectedResultQuestions = createSelector(
   getSelectedResultCategory,
   getSelectedResult,
   (category: Category, result: Result) => {
-    return category.questions.map((categoryQuestion: Question) => {
+    return category.surveyQuestion.map((categoryQuestion: Question) => {
       const question = result.questions
-        .find((q: ResultQuestion) => q.questionId === categoryQuestion.id);
+        .find((q: ResultQuestion) => q.questionId === categoryQuestion.surveyQuestionId);
 
       return {
         ...question,
