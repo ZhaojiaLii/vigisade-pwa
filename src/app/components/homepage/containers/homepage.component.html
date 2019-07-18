@@ -17,9 +17,8 @@
       <span class="font-25">
         <span [ngPlural]="(user$|async)?.countRemainingActions">
           <ng-template ngPluralCase="=1">action</ng-template>
-          <ng-template ngPluralCase="other">actions</ng-template>
+          <ng-template ngPluralCase="other">actions à traiter</ng-template>
         </span>
-        à traiter
       </span>
     </div>
   </div>
