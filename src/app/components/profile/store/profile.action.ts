@@ -1,5 +1,6 @@
 import { User } from '../interfaces/user';
 import { createAction, props } from '@ngrx/store';
+import { UpdateUser } from '../interfaces/updateUser.interface';
 
 export const loadUser = createAction(
   '[GetUser] Gets User data',
@@ -17,7 +18,7 @@ export const loadUserFail = createAction(
 
 export const updateUser = createAction(
   '[UpdateUser] Update user data',
-  props<{updateUserPayload: User}>(),
+  props<{updateUserPayload: UpdateUser}>(),
 );
 
 export const updateUserSuccess = createAction(

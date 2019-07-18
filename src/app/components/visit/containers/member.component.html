@@ -11,19 +11,19 @@
         <form [formGroup]="teamMember">
             <div class="form-row">
                 <div class="form-group col-md-6 mx-2">
-                    <input type="text" class="form-control" appHighlight id="prenomSelect" formControlName="firstName">
+                    <input type="text" class="form-control" appHighlight id="prenomSelect" formControlName="firstName" (keyup)="firstNameChanged()">
                     <label for="prenomSelect">Prénom</label>
                     <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6 mx-2">
-                    <input type="text" class="form-control" appHighlight id="nomSelect" formControlName="lastName">
+                    <input type="text" class="form-control" appHighlight id="nomSelect" formControlName="lastName" (keyup)="lastNameChanged()">
                     <label for="nomSelect">Nom</label>
                     <div class="line"></div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 mx-2">
-                    <select class="form-control" appHighlight id="qualiteSelect" formControlName="role">
+                    <select class="form-control" appHighlight id="qualiteSelect" formControlName="quality" (keyup)="qualityChanged()">
                         <option value=""></option>
                         <option value="interimaire">Intérimaire</option>
                     </select>

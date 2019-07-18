@@ -12,12 +12,6 @@ export const loadSurveysFail = createAction(
   '[Survey] Gets surveys Fail',
   props<{error: any}>(),
 );
-
-export const selectSurveyCategory = createAction(
-  '[Survey] Select Survey Category',
-  props<{id: number}>(),
-);
-
 /***
  * create a result data (POST: api/survey/create)
  */
