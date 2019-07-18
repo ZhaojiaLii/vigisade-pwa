@@ -5,3 +5,5 @@ export interface BestPractice {
   bestPracticeComment: string;
   bestPracticePhoto: string;
 }
+
+export const BEST_PRACTICE_CATEGORY_ID = -1;

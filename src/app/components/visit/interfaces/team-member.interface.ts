@@ -1,7 +1,7 @@
 export interface TeamMember {
-  id: number;
-  resultId: number;
-  firstName: string;
-  lastName: string;
-  role: string;
+  id?: number;
+  resultId?: number;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
 }
