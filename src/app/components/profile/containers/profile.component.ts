@@ -2,6 +2,7 @@ import { ProfileService } from '../services/profile.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { Direction } from '../../shared/interfaces/direction.interface';
 import { DataService } from '../../../services/data.service';
@@ -50,7 +51,9 @@ export class ProfileComponent implements OnInit {
         this.Languages.splice(this.Languages.indexOf(language), 1);
       }
     });
-    this.user$.subscribe(user => {
+    this.user$.pipe(
+      filter(u => !!u),
+    ).subscribe(user => {
         this.userDirectionId = user.directionId;
         this.userAreaId = user.areaId;
         this.userEntityId = user.entityId;
@@ -113,6 +116,7 @@ export class ProfileComponent implements OnInit {
           this.changedEntityId = this.userEntityId;
         }
         const POST: User = {
+          language: '',
           mail: this.userMail,
           directionId: this.changedDirectionId as number,
           areaId: this.changedAreaId,

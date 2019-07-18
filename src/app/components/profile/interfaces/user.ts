@@ -5,6 +5,7 @@ export interface User {
   entityId: number;
   firstName: string;
   lastName: string;
+  language?: string;
   photo: string;
   countRemainingActions: number;
   countCurrentMonthVisits: number;
