@@ -1,5 +1,5 @@
 import { ProfileService } from '../services/profile.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
@@ -38,9 +38,13 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private dataService: DataService,
     private toastrService: ToastrService,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+    this.language = this.fb.group({
+      language: this.currentLanguage
+    });
     this.Languages.forEach(language => {
       if (language === this.currentLanguage) {
         this.Languages.splice(this.Languages.indexOf(language), 1);

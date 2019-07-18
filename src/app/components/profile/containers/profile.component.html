@@ -7,9 +7,9 @@
   <form [formGroup]="postForm">
     <div class="form-row">
       <div class="form-group col-md-6" [formGroup]="language">
-        <select class="form-control has-value" appHighlight id="langueSelect" formControlName="language">
-          <option value="">{{currentLanguage}}</option>
-          <option *ngFor="let language of Languages">{{language}}</option>
+        <select class="form-control {{ currentLanguage ? 'has-value' : ''}}"  appHighlight id="langueSelect" formControlName="language">
+          <option [value]="currentLanguage">{{currentLanguage}}</option>
+          <option *ngFor="let language of Languages" [value]="language">{{language}}</option>
         </select>
         <label for="langueSelect">Langue</label>
         <div class="line"></div>
@@ -18,7 +18,7 @@
 
       </div>
       <div class="form-group col-md-6">
-        <select class="form-control has-value" appHighlight id="paysSelect" formControlName="direction">
+        <select class="form-control" appHighlight id="paysSelect" formControlName="direction">
           <option value="">{{userDirection}}</option>
           <option *ngFor="let direction of Directions" value="{{direction.id}}">{{direction.name}}</option>
         </select>
@@ -28,7 +28,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select class="form-control has-value" appHighlight id="regionSelect" formControlName="area">
+        <select class="form-control" appHighlight id="regionSelect" formControlName="area">
           <option value="">{{userArea}}</option>
           <option *ngFor="let area of Areas" value="{{area.id}}">{{area.name}}</option>
         </select>
@@ -36,7 +36,7 @@
         <div class="line"></div>
       </div>
       <div class="form-group col-md-6">
-        <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
+        <select class="form-control" appHighlight id="entiteSelect" formControlName="entity">
           <option value="">{{userEntity}}</option>
           <option *ngFor="let entity of Entities" value="{{entity.id}}">{{entity.name}}</option>
         </select>
