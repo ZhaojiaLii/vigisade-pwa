@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SurveyService } from '../../visit/services/survey.service';
 import { Observable } from 'rxjs';
-import { Survey } from '../../visit/interfaces/survey.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 @Component({
   selector: 'app-a-traiter-element',

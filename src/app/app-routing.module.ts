@@ -52,6 +52,11 @@ const routes: Routes = [
     canActivate: [TokenGuard],
   },
   {
+    path: 'security/:id',
+    component: SecuriteComponent,
+    canActivate: [TokenGuard],
+  },
+  {
     path: 'bestPractice',
     component: BonnePratiqueComponent,
     canActivate: [TokenGuard],

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Result } from '../../visit/interfaces/result.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 
 @Component({
@@ -53,9 +53,9 @@ export class ActionCorrectiveComponent implements OnInit {
     );
   }
 
-  clickBack() {
-    history.go(-1);
-  }
+  // clickBack() {
+  //   history.go(-1);
+  // }
 
   preview(event: any) {
     if (event.target.files && event.target.files[0]) {

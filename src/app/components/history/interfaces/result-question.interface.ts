@@ -1,4 +1,4 @@
-import { Question } from '../../visit/interfaces/question.interface';
+import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 
 export interface ResultQuestion {
   id: number;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TeamMember } from '../../../visit/interfaces/team-member.interface';
+import { TeamMember } from '../../../visit/interfaces/getSurveys/team-member.interface';
 
 @Component({
   selector: 'app-detail-member',

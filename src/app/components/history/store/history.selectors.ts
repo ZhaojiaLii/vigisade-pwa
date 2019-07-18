@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HistoryState } from './history.state';
-import { Result } from '../../visit/interfaces/result.interface';
-import { Survey } from '../../visit/interfaces/survey.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Category } from '../../visit/interfaces/category.interface';
-import { Question } from '../../visit/interfaces/question.interface';
+import { Category } from '../../visit/interfaces/getSurveys/category.interface';
+import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 import { ResultQuestion } from '../interfaces/result-question.interface';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
