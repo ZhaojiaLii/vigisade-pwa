@@ -1,5 +1,5 @@
-<div *ngIf="(result$|async) === null || (resultSurvey$|async) === null">
-    SPINNER
+<div *ngIf="(result$|async) === null || (resultSurvey$|async) === null"  class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) === null" class="container mb-90">
     <div class="container-content">
@@ -41,12 +41,10 @@
     *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async)"
     class="container mb-90">
     <div class="row">
-        <div class="card card-full-width mb-10 shadow-none">
-            <app-details-question
-                *ngFor="let question of (selectedQuestions$|async)"
-                [question]="question"
-            ></app-details-question>
-        </div>
+        <app-details-question
+            *ngFor="let question of (selectedQuestions$|async)"
+            [question]="question"
+        ></app-details-question>
     </div>
 </div>
 <div class="fixed-footer">

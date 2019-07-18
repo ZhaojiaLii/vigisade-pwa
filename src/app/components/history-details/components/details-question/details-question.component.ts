@@ -4,6 +4,8 @@ import { ResultQuestion } from '../../../history/interfaces/result-question.inte
 @Component({
   selector: 'app-details-question',
   templateUrl: './details-question.component.html',
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {class : 'card card-full-width mb-10 shadow-none'}
 })
 export class DetailsQuestionComponent {
 
