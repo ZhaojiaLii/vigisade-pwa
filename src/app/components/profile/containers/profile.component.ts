@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
   currentLanguage = 'Français';
   Languages = ['Français', 'Anglais', 'Espagnol'];
   userMail: string; userFirstName: string; userLastName: string; userPhoto: string;
-  userCountRemainingActions: number; userCountCurrentMonthVisits: number; usercountLastMonthVisits: number;
   language = new FormGroup({
     language: new FormControl(''),
   });
@@ -57,9 +56,6 @@ export class ProfileComponent implements OnInit {
       this.userLastName = user.lastName;
       this.userFirstName = user.firstName;
       this.userPhoto = user.photo;
-      this.userCountCurrentMonthVisits = user.countCurrentMonthVisits;
-      this.userCountRemainingActions = user.countRemainingActions;
-      this.usercountLastMonthVisits = user.countLastMonthVisits;
     });
     this.direction$.subscribe(directions => {
       console.log(directions);
