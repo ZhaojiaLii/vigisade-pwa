@@ -30,7 +30,7 @@
           <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
         </span>
       </div>
-      <span class="font-18 font-ultaLight">Visite<ng-container *ngIf="((user$|async)?.countCurrentMonthVisits > 1)">s</ng-container> ce mois-ci</span>
+      <span class="font-18 font-ultaLight">visite<ng-container *ngIf="((user$|async)?.countCurrentMonthVisits > 1)">s</ng-container> ce mois-ci</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
