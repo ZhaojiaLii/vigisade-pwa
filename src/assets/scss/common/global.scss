@@ -72,6 +72,13 @@ app-root, app-login {
   height: 100%;
   display: block;
 }
+app-login {
+  background: #f5f5f5;
+  background: -moz-linear-gradient(top, #f5f5f5 50%, #0093d0 100%);
+  background: -webkit-linear-gradient(top, #f5f5f5 50%,#0093d0 100%);
+  background: linear-gradient(to bottom, #f5f5f5 50%,#0093d0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#0093d0',GradientType=0 );
+}
 .light-grey {
   color: #8a8a8a;
 }
@@ -211,6 +218,7 @@ app-root, app-login {
   padding-bottom: 15px;
   background-color: #fff;
   border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(56, 132, 165, 0.5);
 }
 
 .spinner-container {
