@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateDangerousSituation } from '../interfaces/create-dangerous-situation.interface';
+import { DangerousSituation } from '../interfaces/dangerous-situation.interface';
 
 export const createDangerousSituation = createAction(
   '[dangerous] Create Dangerous Situation',
-  props<{ dangerousSituation: CreateDangerousSituation }>(),
+  props<{ dangerousSituation: DangerousSituation }>(),
 );
 
 export const createDangerousSituationSuccess = createAction(

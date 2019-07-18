@@ -1,7 +1,6 @@
 import { SurveyService } from '../services/survey.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey } from '../interfaces/survey.interface';
 import { Observable } from 'rxjs';
@@ -50,6 +49,8 @@ export class VisitComponent {
   areas$: Observable<Area[]> = this.dataService.getAreas();
   entities$: Observable<Entity[]> = this.dataService.getEntities();
 
+  data = [];
+
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
 
   bestPracticeId = BEST_PRACTICE_CATEGORY_ID;
@@ -84,6 +85,31 @@ export class VisitComponent {
   selectSurveyCategory(id: number): void {
     this.isCollapsed = false;
     this.surveyService.selectSurveyCategory(id);
+  }
+
+  getSelection(selection) {
+    this.data.forEach((data) => {
+      if (selection.label === data.label) {
+        data.selection = selection.selection;
+        // console.log(data);
+      }
+    });
+  }
+  getComment(comment) {
+    this.data.forEach((data) => {
+      if (comment.label === data.label) {
+        data.comment = comment.comment;
+        // console.log(data);
+      }
+    });
+  }
+  getPhoto(photo) {
+    this.data.forEach((data) => {
+      if (photo.label === data.label) {
+        data.photo = photo.photo;
+        // console.log(data);
+      }
+    });
   }
 }
 

@@ -61,11 +61,14 @@
     >
         <div class="row">
             <div class="card card-full-width mb-10 shadow-none">
-                <div
+                <app-security-template
                     *ngFor="let question of category.questions;"
-                    class="row"
-                >
-                    QUESTION
+                    [questionLabel]="question.label"
+                    [questionHelp]="question.help"
+                    (Selection)="getSelection($event)"
+                    (Photo)="getPhoto($event)"
+                    (Comment)="getComment($event)"
+                ></app-security-template>
             </div>
         </div>
     </div>
