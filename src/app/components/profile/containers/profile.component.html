@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="profile-header mb-50">
+  <div class="profile-header mb-30">
     <img src="../../../../assets/images/profile/brocelia.jpeg" alt="" class="img-fluid mx-auto d-block rounded-circle w-118px mb-4">
     <p class="text-center font-24 font-weight-600 mb-0">Name: {{(user$ | async)?.firstName + (user$ | async)?.lastName}}</p>
     <p class="text-center light-grey mb-0">E-mail: {{(user$ | async)?.mail}}</p>
@@ -7,40 +7,40 @@
   <form [formGroup]="postForm">
     <div class="form-row">
       <div class="form-group col-md-6" [formGroup]="language">
-        <select class="form-control has-value" appHighlight id="langueSelect" formControlName="language">
-          <option value="{{currentLanguage}}">{{currentLanguage}}</option>
-          <option *ngFor="let language of Languages" value="{{language}}">{{language}}</option>
-        </select>
         <label for="langueSelect">Langue</label>
+        <select class="form-control has-value"  appHighlight id="langueSelect" formControlName="language">
+          <option value="{{currentLanguage}}" [selected]="currentLanguage">{{currentLanguage}}</option>
+          <option *ngFor="let language of Languages" [value]="language">{{language}}</option>
+        </select>
         <div class="line"></div>
       </div>
       <div>
 
       </div>
       <div class="form-group col-md-6">
+        <label for="paysSelect">Direction</label>
         <select class="form-control has-value" appHighlight id="paysSelect" formControlName="direction">
-          <option value="{{userDirectionId}}">{{userDirection}}</option>
+          <option value="{{userDirectionId}}" [selected]="userDirection">{{userDirection}}</option>
           <option *ngFor="let direction of Directions" value="{{direction.id}}">{{direction.name}}</option>
         </select>
-        <label for="paysSelect">Direction</label>
         <div class="line"></div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select class="form-control has-value" appHighlight id="regionSelect" formControlName="area">
-          <option value="{{userAreaId}}">{{userArea}}</option>
-          <option *ngFor="let area of Areas" value="{{area.id}}">{{area.name}}</option>
-        </select>
         <label for="regionSelect">Zone</label>
+        <select class="form-control has-value" appHighlight id="regionSelect" formControlName="area">
+          <option value="{{userAreaId}}" [selected]="userArea">{{userArea}}</option>
+          <option *ngFor="let area of getTargetChildArea" value="{{area.id}}">{{area.name}}</option>
+        </select>
         <div class="line"></div>
       </div>
       <div class="form-group col-md-6">
-        <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
-          <option value="{{userEntityId}}">{{userEntity}}</option>
-          <option *ngFor="let entity of Entities" value="{{entity.id}}">{{entity.name}}</option>
-        </select>
         <label for="entiteSelect">Entité</label>
+        <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
+          <option value="{{userEntityId}}" [selected]="userEntity">{{userEntity}}</option>
+          <option *ngFor="let entity of getTargetChildEntity" value="{{entity.id}}">{{entity.name}}</option>
+        </select>
         <div class="line"></div>
       </div>
     </div>
