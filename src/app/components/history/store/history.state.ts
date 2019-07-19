@@ -1,7 +1,8 @@
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 
 export interface HistoryState {
-  history: Result[] | null;
+  history: GetResult | null;
   results: Result[];
   layout: {
     selectedResult: number | null;

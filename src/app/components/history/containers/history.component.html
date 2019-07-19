@@ -2,7 +2,7 @@
     <div *ngIf="(history$|async) === null" class="row">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    <div *ngIf="(history$|async)?.length >= 0" class="row">
+    <div *ngIf="(history$|async)?.result.length >= 0" class="row">
         <div *ngIf="countHistory$|async" [ngPlural]="countHistory$|async" class="total">
             <ng-template ngPluralCase="=0">Aucun contrôle trouvé</ng-template>
             <ng-template ngPluralCase="=1">1 contrôle trouvé</ng-template>
@@ -11,9 +11,9 @@
             </ng-template>
         </div>
         <app-history-item
-            *ngFor="let result of history$ | async"
+            *ngFor="let result of (history$ | async).result"
             [result]="result"
-            [routerLink]="['/history',result.id]"
+            [routerLink]="['/history',result.resultId]"
             style="display: block; width: 100%;"
         ></app-history-item>
     </div>

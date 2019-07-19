@@ -4,7 +4,7 @@
 <div *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) === null" class="container mb-90">
     <div class="container-content">
         <div class="font-bold font-25">
-            {{(resultSurvey$|async).title|uppercase}}
+            DR {{(resultEntity$|async).name|uppercase}}
         </div>
         <div class="form-row">
             <div class="ml-3 mt-3 col-md-6">
@@ -13,23 +13,23 @@
             </div>
             <div class="ml-3 my-2 col-md-6">
                 <span class="font-12">Lieu du chantier</span>
-                <div><span>{{(result$|async).place}}</span></div>
+                <div><span>{{(result$|async).resultPlace}}</span></div>
             </div>
         </div>
         <div class="form-row">
             <div class="ml-3 my-2 col-md-6">
                 <span class="font-12">Client</span>
-                <div><span>{{(result$|async).client}}</span></div>
+                <div><span>{{(result$|async).resultClient}}</span></div>
             </div>
             <div class="ml-3 mt-2 mb-3 col-md-6">
                 <span class="font-12">Date de la visite<span class="light-grey">(jour, mois, année)</span></span>
-                <div><span>{{(result$|async).date}}</span></div>
+                <div><span>{{(result$|async).resultDate}}</span></div>
             </div>
         </div>
         <p class="font-medium font-22">Équipe contrôlée</p>
         <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
         <app-detail-member
-                *ngFor="let member of (result$|async).teamMembers"
+                *ngFor="let member of (result$|async).resultTeamMember"
                 [teamMember]="member"
         ></app-detail-member>
         <div class="mx-30">
@@ -64,11 +64,11 @@
             <span class="note text-success"><strong>9</strong>/9</span>
         </div>
         <div
-            *ngFor="let category of (resultSurvey$|async).categories"
+            *ngFor="let category of (resultSurvey$|async).surveyCategories"
             class="d-flex align-items-center justify-content-between"
-            (click)="selectCategory(category.id)"
+            (click)="selectCategory(category.surveyCategoryId)"
         >
-            <span class="note-label">{{category.title}}</span>
+            <span class="note-label">{{category.surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle}}</span>
             <span class="note success"><strong>X</strong>/X</span>
 <!--            <span class="note text-danger"><strong>9</strong>/9</span>-->
         </div>

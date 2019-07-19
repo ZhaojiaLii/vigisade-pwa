@@ -1,11 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 
 
 export const loadHistory = createAction('[Survey] Load History');
 export const loadHistorySuccess = createAction(
   '[Survey] Load History Success',
-  props<{history: Result[]}>(),
+  props<{history: GetResult}>(),
 );
 export const loadHistoryFail = createAction(
   '[Survey] Load History Fail',

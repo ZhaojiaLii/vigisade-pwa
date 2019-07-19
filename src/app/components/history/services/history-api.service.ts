@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Observable, of } from 'rxjs';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,153 +12,37 @@ export class HistoryApiService {
 
   constructor(private http: HttpClient) {}
 
-  getHistory(): Observable<Result[]> {
-    // return this.http.get<Result[]>('/api/survey/history/').pipe(
+  getHistory(): Observable<GetResult> {
+    // const  params = new  HttpParams().set('user_id', '25').set('user_roles', 'ROLE_ADMIN');
+    // return this.http.get<GetResult>('/api/survey/history', {responseType: 'json', params});
     return of({}).pipe(
-      map(() => [
-        {
-          id: 1,
-          surveyId: 1,
-          userId: 2,
-          directionId: 1,
-          areaId: 11,
-          entityId: 1,
-          date: '2019-07-02',
-          place: '23 Boulevard Charner 22000 Saint-Brieuc',
-          client: 'Nom du client',
-          status: true,
-          teamMembers: [
-            {
-              id: 1,
-              resultId: 1,
-              firstName: 'Jean-Pierre',
-              lastName: 'Nomdefamille',
-              role: 'admin',
-            },
-            {
-              id: 2,
-              resultId: 2,
-              firstName: 'Jean-Pierre',
-              lastName: 'Nomdefamille',
-              role: 'admin',
-            },
-          ],
-          bestPracticeDone: true,
-          bestPracticeComment: '111',
-          bestPracticePhoto: 'bestPracticePhoto',
-        },
-        {
-          id: 2,
-          surveyId: 1,
-          userId: 2,
-          directionId: 1,
-          areaId: 11,
-          entityId: 1,
-          date: '2019-07-03',
-          place: '32 Rue Ponthieu 75008 Paris',
-          client: 'Nom du client',
-          status: false,
-          teamMembers: [
-            {
-              id: 1,
-              resultId: 1,
-              firstName: 'Jean-Pierre',
-              lastName: 'Nomdefamille',
-              role: 'admin',
-            },
-          ],
-          bestPracticeDone: true,
-          bestPracticeComment: '111',
-          bestPracticePhoto: 'bestPracticePhoto',
-        },
-        {
-          id: 3,
-          surveyId: 1,
-          userId: 2,
-          directionId: 1,
-          areaId: 11,
-          entityId: 1,
-          date: '2019-07-03',
-          place: '33 Rue des 3 Bornes 75011 Paris',
-          client: 'Nom du client',
-          status: false,
-          teamMembers: [
-            {
-              id: 1,
-              resultId: 1,
-              firstName: 'Jean-Pierre',
-              lastName: 'Nomdefamille',
-              role: 'admin',
-            },
-          ],
-          bestPracticeDone: true,
-          bestPracticeComment: '111',
-          bestPracticePhoto: 'bestPracticePhoto',
-        },
-      ]),
+      map(() => ({
+        userId: 25,
+        result: [
+          {
+            resultId: 4,
+            resultDirection: 34,
+            resultDate: '2019-07-03',
+            resultPlace: '32 Rue Ponthieu, 75008 Paris',
+            resultClient: 'Zhli',
+            resultUserId: 25,
+            resultValidated: true,
+          },
+          {
+            resultId: 5,
+            resultDirection: 34,
+            resultDate: '2019-07-03',
+            resultPlace: '33 rue des 3 bornes, 75011 paris',
+            resultClient: 'xu',
+            resultUserId: 25,
+            resultValidated: true,
+          },
+      ]
+      }))
     );
   }
 
   getResult(id: number): Observable<Result> {
-    // return this.http.get<Result>('/api/survey/history/' + id + '/').pipe(
-    return of({}).pipe(
-      map(() => ({
-        id: 1,
-        surveyId: 1,
-        userId: 2,
-        directionId: 1,
-        areaId: 11,
-        entityId: 1,
-        date: '2019-07-02',
-        place: '23 Boulevard Charner 22000 Saint-Brieuc',
-        client: 'Nom du client',
-        status: true,
-        questions: [
-          {
-            id: 1,
-            resultId: 1,
-            questionId: 1,
-            notation: 'notation',
-            comment: 'comment',
-            photo: 'photo',
-          },
-          {
-            id: 2,
-            resultId: 1,
-            questionId: 1,
-            notation: 'notation',
-            comment: 'comment',
-            photo: 'photo',
-          },
-          {
-            id: 3,
-            resultId: 1,
-            questionId: 1,
-            notation: 'notation',
-            comment: 'comment',
-            photo: 'photo',
-          },
-        ],
-        teamMembers: [
-          {
-            id: 1,
-            resultId: 1,
-            firstName: 'Jean',
-            lastName: 'Pierre',
-            role: 'admin',
-          },
-          {
-            id: 2,
-            resultId: 2,
-            firstName: 'Clement',
-            lastName: 'Han',
-            role: 'admin',
-          },
-        ],
-        bestPracticeDone: true,
-        bestPracticeComment: '111',
-        bestPracticePhoto: 'bestPracticePhoto',
-      }))
-    );
+   return this.http.get<Result>('/api/survey/history/' + id + '/');
   }
 }
