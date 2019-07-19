@@ -28,8 +28,11 @@ export const getEntities = createSelector(
   (areas: Area[]) => {
     const entities = [];
     areas.map(area => {
-      if (area[0]) {
-        entities.push(area.entity);
+      // @ts-ignore
+      for (const childArea of area) {
+        if (childArea.entity) {
+          entities.push(childArea.entity);
+        }
       }
     });
     return entities;

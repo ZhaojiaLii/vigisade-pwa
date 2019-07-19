@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   userDirectionId: number; userAreaId: number; userEntityId: number;
   userDirection: string; userArea: string; userEntity: string;
   Directions = []; Areas = []; Entities = [];
+  allArea = []; allEntity = [];
   currentLanguage = 'Français';
   Languages = ['Français', 'Anglais', 'Espagnol'];
   userMail: string; userFirstName: string; userLastName: string; userPhoto: string;
@@ -40,6 +41,8 @@ export class ProfileComponent implements OnInit {
     private toastrService: ToastrService,
   ) {}
 
+  getTargetChildArea = [];
+  getTargetChildEntity = [];
   ngOnInit(): void {
     this.Languages.forEach(language => {
       if (language === this.currentLanguage) {
@@ -57,7 +60,7 @@ export class ProfileComponent implements OnInit {
       this.userPhoto = user.photo;
     });
     this.direction$.subscribe(directions => {
-      console.log(directions);
+      // console.log(directions);
       this.Directions = [];
       for (const direction of directions) {
         if (direction.id === this.userDirectionId) {
@@ -69,49 +72,52 @@ export class ProfileComponent implements OnInit {
     });
     this.area$.subscribe(areas => {
       this.Areas = [];
-      for (const area of areas) {
-        // console.log(area);
+      this.getTargetChildArea = [];
+      for (const areaParent of areas) {
         // @ts-ignore
-        for (const singleArea of area) {
-          if (singleArea.id === this.userAreaId) {
-            this.userArea = singleArea.name;
+        for (const childArea of areaParent) {
+          this.allArea.push(childArea);
+          if (childArea.id === this.userAreaId) {
+            this.userArea = childArea.name;
           } else {
-            this.Areas.push(singleArea);
+            this.Areas.push(childArea); // all the areas except user current area
+            if (childArea.direction === this.userDirectionId) {
+              this.getTargetChildArea.push(childArea);
+            }
           }
         }
       }
+      console.log(this.getTargetChildArea);
     });
     this.entity$.subscribe(entities => {
-      // console.log(entities);
       this.Entities = [];
-      // for (const entity of entities) {
-      //   if (entity.id === this.userEntityId) {
-      //     this.userEntity = entity.name;
-      //   } else {
-      //     this.Entities.push(entity);
-      //   }
-      // }
+      this.getTargetChildEntity = [];
+      for (const entityParent of entities) {
+        // @ts-ignore
+        for (const childEntity of entityParent) {
+          this.allEntity.push(childEntity);
+          if (childEntity.id === this.userEntityId) {
+            this.userEntity = childEntity.name;
+          } else {
+            this.Entities.push(childEntity); // all the entities except user current entity
+            if (childEntity.area_id === this.userAreaId) {
+              this.getTargetChildEntity.push(childEntity);
+            }
+          }
+        }
+      }
+      console.log(this.getTargetChildEntity);
     });
     this.onUserDataChanged();
   }
   onUserDataChanged() {
     this.postForm.valueChanges.subscribe(
       val => {
-        if (val.direction !== '') {
-          this.changedDirectionId = Number(val.direction);
-        } else {
-          this.changedDirectionId = this.userDirectionId;
-        }
-        if (val.area !== '') {
-          this.changedAreaId = Number(val.area);
-        } else {
-          this.changedAreaId = this.userAreaId;
-        }
-        if (val.entity !== '') {
-          this.changedEntityId = Number(val.entity);
-        } else {
-          this.changedEntityId = this.userEntityId;
-        }
+        console.log('form control output ', val);
+        this.userArea = '';
+        this.userAreaId = 0;
+        this.userEntityId = 0;
+        this.userEntity = '';
         const POST: UpdateUser = {
           firstname: this.userFirstName,
           lastname: this.userLastName,
@@ -120,16 +126,15 @@ export class ProfileComponent implements OnInit {
           entity_id: this.changedEntityId as number,
           image: this.userPhoto,
         };
-        console.log('POST data is: ', POST);
+        // console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
-        console.log(POST);
         this.toastrService.success('Màj votre Profile', 'Succès');
       }
     );
 
     this.language.valueChanges.subscribe(
       val => {
-        console.log(val.language);
+        // console.log(val.language);
         this.Languages = ['Français', 'Anglais', 'Espagnol'];
         if (val.language !== this.currentLanguage) {
           this.toastrService.success('Votre langue a changé à ' + val.language , 'Succès');
@@ -140,6 +145,39 @@ export class ProfileComponent implements OnInit {
             this.Languages.splice(this.Languages.indexOf(language), 1);
           }
         });
+      }
+    );
+    this.postForm.get('direction').valueChanges.subscribe(val => {
+        this.getTargetChildArea = [];
+        this.getTargetChildEntity = [];
+        this.changedDirectionId = Number(val);
+        for (const area of this.allArea) {
+          if (area.direction === this.changedDirectionId) {
+            this.getTargetChildArea.push(area);
+          }
+        }
+        for (const entity of this.allEntity) {
+          for (const targetArea of this.getTargetChildArea) {
+            if (entity.area_id === targetArea.id) {
+              this.getTargetChildEntity.push(entity);
+            }
+          }
+        }
+        console.log(this.allArea);
+      }
+    );
+    this.postForm.get('area').valueChanges.subscribe(val => {
+        this.getTargetChildEntity = [];
+        this.changedAreaId = Number(val);
+        for (const entity of this.allEntity) {
+          if (entity.area_id === this.changedAreaId) {
+            this.getTargetChildEntity.push(entity);
+          }
+        }
+      }
+    );
+    this.postForm.get('entity').valueChanges.subscribe(val => {
+        this.changedEntityId = val;
       }
     );
   }
