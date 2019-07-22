@@ -9,6 +9,7 @@ import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { ResultQuestion } from '../../history/interfaces/result-question.interface';
+import { Area } from '../../shared/interfaces/area.interface';
 
 @Component({
   selector: 'app-detail-visit',
@@ -23,6 +24,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   result$: Observable<Result> = this.historyService.getSelectedResult();
   resultSurvey$: Observable<Survey> = this.historyService.getSelectedResultSurvey();
   resultEntity$: Observable<Entity> = this.historyService.getSelectedResultEntity();
+  resultArea$: Observable<Area> = this.historyService.getSelectedResultArea();
   selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
   selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
 
@@ -40,6 +42,9 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.historyService.selectResult(resultId);
       this.historyService.loadResult(resultId);
     });
+    this.selectedQuestions$.subscribe(val => {
+      console.log(val);
+    });
   }
 
   ngOnDestroy(): void {
@@ -47,18 +52,20 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   }
 
   nextResult() {
-    this.nextResultId = this.selectedId + 1;
-    if (this.nextResultId > this.resultsNum) {
-      // if the result is the last one, navigate to the first result
-      this.nextResultId = 1;
-      this.router.navigate(['/history', this.nextResultId]);
-      window.scroll(0, 0);
-      this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
-    } else {
-      this.router.navigate(['/history', this.nextResultId]);
-      window.scroll(0, 0);
-      this.toastrService.success('La visite prochaine', 'Visite: ' + this.nextResultId);
-    }
+    // not finished yet !!
+
+    // this.nextResultId = this.selectedId + 1;
+    // if (this.nextResultId > this.resultsNum) {
+    //   // if the result is the last one, navigate to the first result
+    //   this.nextResultId = 1;
+    //   this.router.navigate(['/history', this.nextResultId]);
+    //   window.scroll(0, 0);
+    //   this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
+    // } else {
+    //   this.router.navigate(['/history', this.nextResultId]);
+    //   window.scroll(0, 0);
+    //   this.toastrService.success('La visite prochaine', 'Visite: ' + this.nextResultId);
+    // }
   }
 
   selectCategory(id: number): void {

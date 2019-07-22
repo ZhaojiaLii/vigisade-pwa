@@ -16,7 +16,9 @@ export const getAreas = createSelector(
     const areas = [];
     directions.map(direction => {
       if (direction.area[0]) {
-        areas.push(direction.area);
+        for (const areaChild of direction.area) {
+          areas.push(areaChild);
+        }
       }
     });
     return areas;
@@ -28,10 +30,9 @@ export const getEntities = createSelector(
   (areas: Area[]) => {
     const entities = [];
     areas.map(area => {
-      // @ts-ignore
-      for (const childArea of area) {
-        if (childArea.entity) {
-          entities.push(childArea.entity);
+      if (area.entity) {
+        for (const entityChild of area.entity) {
+          entities.push(entityChild);
         }
       }
     });

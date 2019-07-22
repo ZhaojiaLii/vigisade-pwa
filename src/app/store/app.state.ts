@@ -10,7 +10,7 @@ import { HistoryState } from '../components/history/store/history.state';
 export interface State {
     dangerous: DangerousState;
     data: DataState;
-    history: HistoryState,
+    history: HistoryState;
     layout: LayoutState;
     login: LoginState;
     profile: ProfileState;

@@ -60,7 +60,6 @@ export class ProfileComponent implements OnInit {
       this.userPhoto = user.photo;
     });
     this.direction$.subscribe(directions => {
-      // console.log(directions);
       this.Directions = [];
       for (const direction of directions) {
         if (direction.id === this.userDirectionId) {
@@ -73,40 +72,32 @@ export class ProfileComponent implements OnInit {
     this.area$.subscribe(areas => {
       this.Areas = [];
       this.getTargetChildArea = [];
-      for (const areaParent of areas) {
-        // @ts-ignore
-        for (const childArea of areaParent) {
-          this.allArea.push(childArea);
-          if (childArea.id === this.userAreaId) {
-            this.userArea = childArea.name;
-          } else {
-            this.Areas.push(childArea); // all the areas except user current area
-            if (childArea.direction === this.userDirectionId) {
-              this.getTargetChildArea.push(childArea);
-            }
+      for (const area of areas) {
+        this.allArea.push(area);
+        if (area.id === this.userAreaId) {
+          this.userArea = area.name;
+        } else {
+          this.Areas.push(area); // all the areas except user current area
+          if (area.direction === this.userDirectionId) {
+            this.getTargetChildArea.push(area);
           }
         }
       }
-      console.log(this.getTargetChildArea);
     });
     this.entity$.subscribe(entities => {
       this.Entities = [];
       this.getTargetChildEntity = [];
-      for (const entityParent of entities) {
-        // @ts-ignore
-        for (const childEntity of entityParent) {
-          this.allEntity.push(childEntity);
-          if (childEntity.id === this.userEntityId) {
-            this.userEntity = childEntity.name;
-          } else {
-            this.Entities.push(childEntity); // all the entities except user current entity
-            if (childEntity.area_id === this.userAreaId) {
-              this.getTargetChildEntity.push(childEntity);
-            }
+      for (const entity of entities) {
+        this.allEntity.push(entity);
+        if (entity.id === this.userEntityId) {
+          this.userEntity = entity.name;
+        } else {
+          this.Entities.push(entity); // all the entities except user current entity
+          if (entity.area_id === this.userAreaId) {
+            this.getTargetChildEntity.push(entity);
           }
         }
       }
-      console.log(this.getTargetChildEntity);
     });
     this.onUserDataChanged();
   }
@@ -163,7 +154,6 @@ export class ProfileComponent implements OnInit {
             }
           }
         }
-        console.log(this.allArea);
       }
     );
     this.postForm.get('area').valueChanges.subscribe(val => {

@@ -1,11 +1,12 @@
 import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 
 export interface ResultQuestion {
-  id: number;
-  questionId: number;
-  notation: string;
-  comment: string;
-  photo: string;
+  resultQuestionId: number;
+  resultQuestionResultId: number;
+  resultQuestionTeamMemberId: number;
+  resultQuestionResultNotation: string;
+  resultQuestionResultComment: string;
+  resultQuestionResultPhoto: string;
   // For display.
-  question?: Question;
+  resultQuestionResultQuestionId?: Question;
 }
