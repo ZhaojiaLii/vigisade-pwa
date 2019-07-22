@@ -51,7 +51,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   nextResult() {
     // not finished yet !!
 
-    // this.nextResultId = this.selectedId + 1;
+    // this.nextResultId = this.correctionId + 1;
     // if (this.nextResultId > this.resultsNum) {
     //   // if the result is the last one, navigate to the first result
     //   this.nextResultId = 1;
