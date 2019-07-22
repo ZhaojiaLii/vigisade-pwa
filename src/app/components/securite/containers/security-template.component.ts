@@ -39,7 +39,7 @@ export class SecurityTemplateComponent implements OnInit {
     if (this.questionHelp === '') {
       this.questionHelp = 'Pas d\'aide ici';
     }
-    console.log(this.questionLabel);
+    // console.log(this.questionLabel);
   }
 
   preview(event: any) {

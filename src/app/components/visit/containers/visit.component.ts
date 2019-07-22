@@ -15,6 +15,7 @@ import { TeamMember } from '../interfaces/getSurveys/team-member.interface';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { Direction } from '../../shared/interfaces/direction.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-visit',
@@ -49,9 +50,15 @@ export class VisitComponent implements OnInit {
   areas$: Observable<Area[]> = this.dataService.getAreas();
   entities$: Observable<Entity[]> = this.dataService.getEntities();
   directions$: Observable<Direction[]> = this.dataService.getDirections();
+  resultSurveyId: number;
+  resultUserId: number;
+  resultAreaId: number;
+  resultEntityId: number;
   userDirectionId: number;
   userDirection: string;
-
+  entities = [];
+  areas = [];
+  questionNum = 0;
   data = [];
 
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
@@ -63,11 +70,14 @@ export class VisitComponent implements OnInit {
     private historyService: HistoryService,
     private profileService: ProfileService,
     private dataService: DataService,
+    private toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
     this.user$.subscribe(user => {
       this.userDirectionId = user.directionId;
+      this.resultUserId = user.id;
+      this.resultAreaId = user.areaId;
     });
     this.directions$.subscribe(directions => {
       for (const direction of directions) {
@@ -76,10 +86,36 @@ export class VisitComponent implements OnInit {
         }
       }
     });
+    this.areas$.subscribe(areas => {
+      for (const area of areas) {
+        if (area.direction === this.userDirectionId) {
+          this.areas.push(area);
+        }
+      }
+    });
     this.entities$.subscribe(entities => {
-      console.log(entities);
+      for (const entity of entities) {
+        for (const area of this.areas) {
+          if (area.id === entity.area_id) {
+            this.entities.push(entity);
+          }
+        }
+      }
+    });
+    this.survey$.subscribe(survey => {
+      this.resultSurveyId = survey.surveyId;
+      const categories = survey.surveyCategories;
+      let questionNum;
+      for (const category of categories) {
+        questionNum = category.surveyQuestion.length;
+        this.calculateTotalQuestionNum(questionNum);
+      }
     });
     this.onChanged();
+  }
+
+  calculateTotalQuestionNum(question: number) {
+    this.questionNum = this.questionNum + question;
   }
 
   getMemberIndexes(): number[] {
@@ -143,6 +179,22 @@ export class VisitComponent implements OnInit {
         // console.log(data);
       }
     });
+  }
+
+  postForm() {
+    const POST: CreateResult = {
+      resultId: null,
+      resultSurveyId: this.resultSurveyId,
+      resultUserId: this.resultUserId,
+      resultDirectionId: this.userDirectionId,
+      resultAreaId: this.resultAreaId,
+      resultEntityId: this.mainForm.value.entity,
+    };
+    this.toastrService.success('success');
+  }
+
+  postAlert() {
+    this.toastrService.error('champs vide');
   }
 }
 
