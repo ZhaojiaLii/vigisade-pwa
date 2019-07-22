@@ -5,6 +5,6 @@ export interface Result {
   resultDate: string;
   resultPlace: string;
   resultClient: string;
-    resultUserId: number;
+  resultUserId: number;
   resultValidated: boolean;
 }

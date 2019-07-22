@@ -19,7 +19,10 @@ export class ATraiterElementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.historyService.loadResult(this.resultId) ;
+    this.historyService.loadResult(this.resultId);
+    this.result$.subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

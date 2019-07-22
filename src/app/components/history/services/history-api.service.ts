@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Observable, of } from 'rxjs';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
@@ -13,8 +13,8 @@ export class HistoryApiService {
   constructor(private http: HttpClient) {}
 
   getHistory(): Observable<GetResult> {
-    // const  params = new  HttpParams().set('user_id', '25').set('user_roles', 'ROLE_ADMIN');
-    // return this.http.get<GetResult>('/api/survey/history', {responseType: 'json', params});
+    // const  headers = new  HttpHeaders().set('user_id', '25').set('user_roles', 'ROLE_ADMIN');
+    // return this.http.get<GetResult>('/api/survey/history', {headers});
     return of({}).pipe(
       map(() => ({
         userId: 25,
