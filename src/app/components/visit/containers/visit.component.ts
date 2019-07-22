@@ -14,6 +14,7 @@ import { HistoryService } from '../../history/services/history.service';
 import { TeamMember } from '../interfaces/getSurveys/team-member.interface';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
+import { Direction } from '../../shared/interfaces/direction.interface';
 
 @Component({
   selector: 'app-visit',
@@ -47,6 +48,9 @@ export class VisitComponent implements OnInit {
   user$: Observable<User> = this.profileService.getUser();
   areas$: Observable<Area[]> = this.dataService.getAreas();
   entities$: Observable<Entity[]> = this.dataService.getEntities();
+  directions$: Observable<Direction[]> = this.dataService.getDirections();
+  userDirectionId: number;
+  userDirection: string;
 
   data = [];
 
@@ -62,6 +66,19 @@ export class VisitComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user$.subscribe(user => {
+      this.userDirectionId = user.directionId;
+    });
+    this.directions$.subscribe(directions => {
+      for (const direction of directions) {
+        if (direction.id === this.userDirectionId) {
+          this.userDirection = direction.name;
+        }
+      }
+    });
+    this.entities$.subscribe(entities => {
+      console.log(entities);
+    });
     this.onChanged();
   }
 

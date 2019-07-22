@@ -3,7 +3,7 @@ import { ActionCorrectiveService } from '../../action-corrective/services/action
 import { Observable } from 'rxjs';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Correction } from '../../action-corrective/interfaces/getCorrection/correction.interface';
+import { GetCorrection } from '../../action-corrective/interfaces/getCorrection/getCorrection.interface';
 
 @Component({
   selector: 'app-a-traiter',
@@ -13,7 +13,7 @@ export class ATraiterComponent implements OnInit {
   data = [];
   resultId = [];
   aTraiterNum = 0;
-  correction$: Observable<Correction[]> = this.correctionService.getCorrection();
+  correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
   history$: Observable<GetResult> = this.historyService.getHistory();
   constructor(
     private correctionService: ActionCorrectiveService,

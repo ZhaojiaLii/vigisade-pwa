@@ -1,7 +1,7 @@
 <div class="container mb-90">
     <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null}">
         <div class="font-bold font-25">
-            DR NORMANDIE
+            DR {{userDirection | uppercase}}
         </div>
         <form [formGroup]="mainForm">
             <div class="form-row">
