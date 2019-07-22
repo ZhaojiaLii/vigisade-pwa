@@ -36,7 +36,6 @@ export const getSelectedResult = createSelector(
     if (!state.layout.selectedResult) {
       return null;
     }
-    console.log(state);
     const result = state.results
       .find(r => r.resultId === state.layout.selectedResult);
 
