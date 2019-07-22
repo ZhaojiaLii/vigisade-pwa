@@ -22,26 +22,10 @@ export class ATraiterComponent implements OnInit {
 
   ngOnInit() {
     this.correctionService.loadCorrection();
-    this.correction$.subscribe(
-      corrections => {
-        console.log(corrections);
-        // this.resultId = [];
-        // this.data.push(corrections);
-        // this.aTraiterNum = this.data[0].length;
-        // for (const correction of this.data[0]) {
-        //   this.resultId.push(correction.result_id);
-        // }
-      }
-    );
-    this.history$.subscribe(
-      val => {
-        console.log(val);
-      }
-    );
   }
 
-  ScrollTop() {
-    window.scroll(0, 0);
-  }
+  // ScrollTop() {
+  //   window.scroll(0, 0);
+  // }
 
 }
