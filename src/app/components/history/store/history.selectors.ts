@@ -77,8 +77,7 @@ export const getSelectedResultArea = createSelector(
     if (!result) {
       return null;
     }
-    console.log(areas);
-    const resultArea = areas.find(area => area.id === result.resultEntityId);
+    const resultArea = areas.find(area => area.id === result.resultAreaId);
     return resultArea || null;
   }
 );

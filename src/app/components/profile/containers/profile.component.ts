@@ -60,7 +60,6 @@ export class ProfileComponent implements OnInit {
       this.userPhoto = user.photo;
     });
     this.direction$.subscribe(directions => {
-      // console.log(directions);
       this.Directions = [];
       for (const direction of directions) {
         if (direction.id === this.userDirectionId) {
@@ -84,10 +83,8 @@ export class ProfileComponent implements OnInit {
           }
         }
       }
-      console.log(this.getTargetChildArea);
     });
     this.entity$.subscribe(entities => {
-      // bugs need handle
       this.Entities = [];
       this.getTargetChildEntity = [];
       for (const entity of entities) {
@@ -101,7 +98,6 @@ export class ProfileComponent implements OnInit {
           }
         }
       }
-      console.log(this.getTargetChildEntity);
     });
     this.onUserDataChanged();
   }
@@ -158,7 +154,6 @@ export class ProfileComponent implements OnInit {
             }
           }
         }
-        console.log(this.allArea);
       }
     );
     this.postForm.get('area').valueChanges.subscribe(val => {

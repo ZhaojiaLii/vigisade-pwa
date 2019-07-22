@@ -42,10 +42,6 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.historyService.selectResult(resultId);
       this.historyService.loadResult(resultId);
     });
-
-    this.resultArea$.subscribe(val => {
-      console.log(val);
-    });
   }
 
   ngOnDestroy(): void {
@@ -53,18 +49,20 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   }
 
   nextResult() {
-    this.nextResultId = this.selectedId + 1;
-    if (this.nextResultId > this.resultsNum) {
-      // if the result is the last one, navigate to the first result
-      this.nextResultId = 1;
-      this.router.navigate(['/history', this.nextResultId]);
-      window.scroll(0, 0);
-      this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
-    } else {
-      this.router.navigate(['/history', this.nextResultId]);
-      window.scroll(0, 0);
-      this.toastrService.success('La visite prochaine', 'Visite: ' + this.nextResultId);
-    }
+    // not finished yet !!
+
+    // this.nextResultId = this.selectedId + 1;
+    // if (this.nextResultId > this.resultsNum) {
+    //   // if the result is the last one, navigate to the first result
+    //   this.nextResultId = 1;
+    //   this.router.navigate(['/history', this.nextResultId]);
+    //   window.scroll(0, 0);
+    //   this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
+    // } else {
+    //   this.router.navigate(['/history', this.nextResultId]);
+    //   window.scroll(0, 0);
+    //   this.toastrService.success('La visite prochaine', 'Visite: ' + this.nextResultId);
+    // }
   }
 
   selectCategory(id: number): void {

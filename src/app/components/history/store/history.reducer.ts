@@ -16,7 +16,7 @@ export const createHistoryReducer = createReducer(
   on(loadResultSuccess, (state, {result}) => ({
     ...state,
     results: state.results
-      .filter(currentResult => currentResult.id !== result.id)
+      .filter(currentResult => currentResult.resultId !== result.resultId)
       .concat(result),
   })),
 );

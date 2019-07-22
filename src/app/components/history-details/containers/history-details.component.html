@@ -4,7 +4,7 @@
 <div *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) === null" class="container mb-90">
     <div class="container-content">
         <div class="font-bold font-25">
-            DR {{(resultEntity$|async).name|uppercase}}
+            DR {{(resultArea$|async).name|uppercase}}
         </div>
         <div class="form-row">
             <div class="ml-3 mt-3 col-md-6">
@@ -50,9 +50,9 @@
 <div class="fixed-footer">
     <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
          aria-controls="collapseBasic">
-        <div class=""><span class="font-bold">50</span>/57</div>
+        <div class=""><span class="font-bold">0</span>/4</div>
         <div class="d-flex align-items-center">
-            <div class="mr-2"><span class="font-bold">Visite 0</span>/9</div>
+            <div class="mr-2"><span class="font-bold">Visite 0</span>/4</div>
             <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
                 <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
             </svg>
@@ -61,15 +61,15 @@
     <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
         <div class="d-flex align-items-center justify-content-between" routerLink="/visit">
             <span class="note-label">Visite</span>
-            <span class="note text-success"><strong>9</strong>/9</span>
+            <span class="note text-success"><strong>0</strong>/4</span>
         </div>
         <div
-            *ngFor="let category of (resultSurvey$|async).surveyCategories"
+            *ngFor="let category of (resultSurvey$|async)?.surveyCategories"
             class="d-flex align-items-center justify-content-between"
             (click)="selectCategory(category.surveyCategoryId)"
         >
             <span class="note-label">{{category.surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle}}</span>
-            <span class="note success"><strong>X</strong>/X</span>
+            <span class="note success"><strong>0</strong>/{{category.surveyQuestion.length}}</span>
 <!--            <span class="note text-danger"><strong>9</strong>/9</span>-->
         </div>
         <div class="d-flex align-items-center justify-content-between" routerLink="/bestPractice">
@@ -93,7 +93,7 @@
         </svg>
         <span class="note-label">Bonne pratique</span>
       </span>
-            <span class="note text-danger"><strong>9</strong>/9</span>
+            <span class="note text-danger"><strong>0</strong>/1</span>
         </div>
     </div>
     <div class="overlay-collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
