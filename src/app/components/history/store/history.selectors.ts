@@ -89,7 +89,6 @@ export const getSelectedResultCategory = createSelector(
     if (!state.layout.selectedCategory || !survey || !survey.surveyCategories) {
       return null;
     }
-
     const surveyCategory = survey.surveyCategories
       .find(category => category.surveyCategoryId === state.layout.selectedCategory);
 
@@ -104,7 +103,6 @@ export const getSelectedResultQuestions = createSelector(
     return category.surveyQuestion.map((categoryQuestion: Question) => {
       const question = result.resultQuestion
         .find((q: ResultQuestion) => q.resultQuestionId === categoryQuestion.surveyQuestionId);
-
       return {
         ...question,
         question: categoryQuestion,

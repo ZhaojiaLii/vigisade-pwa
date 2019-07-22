@@ -42,6 +42,9 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.historyService.selectResult(resultId);
       this.historyService.loadResult(resultId);
     });
+    this.selectedQuestions$.subscribe(val => {
+      console.log(val);
+    });
   }
 
   ngOnDestroy(): void {
