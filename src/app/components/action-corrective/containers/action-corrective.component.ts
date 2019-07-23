@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 
 
 @Component({
@@ -27,11 +27,15 @@ export class ActionCorrectiveComponent implements OnInit {
   thisCorrection: any;
   resultId: number;
   questionId: number;
+  categoryId: number;
+  categoryTitle: string;
   question: any;
   userId: number;
+  result: any;
+  history$: Observable<GetResult> = this.historyService.getHistory();
   correction$: Observable<Correction[]> = this.correctionService.getCorrection();
-  result$: Observable<Result> = this.historyService.getResult();
   user$: Observable<User> = this.profileService.getUser();
+  getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   correctionQuestions$: Observable<any> = this.correctionService.getCorrectionQuestion();
   constructor(
     private correctionService: ActionCorrectiveService,
@@ -56,13 +60,19 @@ export class ActionCorrectiveComponent implements OnInit {
             this.thisCorrection = correction;
             this.resultId = correction.result_id;
             this.questionId = correction.question_id;
+            this.categoryId = correction.category_id;
           }
         }
-        console.log(this.questionId);
       }
     );
-    this.historyService.selectResult(this.resultId);
-    this.historyService.loadResult(this.resultId);
+    this.getCorrectionCategory$.subscribe(categories => {
+      console.log(categories);
+      this.categoryTitle = categories.find(category =>
+        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle;
+    });
+    this.history$.subscribe(histories => {
+      this.result = histories.result.find(result => result.resultId === this.resultId);
+    });
     this.correctionQuestions$.subscribe(questions => {
       for (const question of questions) {
         if (question.surveyQuestionId === Number(this.questionId)) {
@@ -74,10 +84,6 @@ export class ActionCorrectiveComponent implements OnInit {
       this.userId = user.id;
     });
   }
-
-  // clickBack() {
-  //   history.go(-1);
-  // }
 
   preview(event: any) {
     if (event.target.files && event.target.files[0]) {

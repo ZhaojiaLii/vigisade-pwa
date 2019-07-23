@@ -1,12 +1,12 @@
 <div class="card card-full-width mb-10 shadow-none">
   <div class="card-body px-30">
     <div class="row align-items-center light-grey mb-20">
-      <div class="col-6 font-demiBold">{{(result$ | async)?.resultClient}}</div>
-      <div class="col-6 text-right font-12">{{(result$ | async)?.resultDate}}</div>
+      <div class="col-6 font-demiBold">{{categoryTitle}}</div>
+      <div class="col-6 text-right font-12">{{result?.resultDate}}</div>
     </div>
     <div class="row align-items-end mb-2">
       <div class="col-6 font-demiBold font-14">
-         {{(result$ | async)?.resultPlace}}
+         {{result?.resultPlace}}
       </div>
     </div>
   </div>

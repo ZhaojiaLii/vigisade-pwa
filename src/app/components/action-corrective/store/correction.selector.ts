@@ -42,7 +42,6 @@ export const getCorrectionCategory = createSelector(
         }
       }
     }
-    console.log(categories);
     return categories || null;
   }
 );

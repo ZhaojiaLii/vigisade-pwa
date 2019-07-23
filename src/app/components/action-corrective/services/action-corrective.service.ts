@@ -5,7 +5,12 @@ import { createCorrection, loadCorrection, updateCorrection } from '../store/cor
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Observable } from 'rxjs';
-import { getCorrection, getCorrectionQuestion, getCorrectionSurvey } from '../store/correction.selector';
+import {
+  getCorrection,
+  getCorrectionCategory,
+  getCorrectionQuestion,
+  getCorrectionSurvey
+} from '../store/correction.selector';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
@@ -33,6 +38,10 @@ export class ActionCorrectiveService {
 
   getCorrectionSurvey(): Observable<Survey> {
     return this.store.pipe(select(getCorrectionSurvey));
+  }
+
+  getCorrectionCategory(): Observable<any> {
+    return this.store.pipe(select(getCorrectionCategory));
   }
 
   getCorrectionQuestion(): Observable<any> {

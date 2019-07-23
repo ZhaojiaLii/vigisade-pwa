@@ -17,10 +17,8 @@ import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.i
   templateUrl: './history-details.component.html',
 })
 export class HistoryDetailsComponent implements OnInit, OnDestroy {
-  selectedId: number;
   nextResultIdIndex: number;
   isCollapsed = false;
-  resultsNum: any;
   resultIds = [];
   questionNum = 0;
   thisResultId: number;
@@ -50,19 +48,16 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.historyService.loadResult(this.thisResultId);
     });
     this.history$.subscribe(results => {
-      console.log(results);
       for (const result of results.result) {
         this.resultIds.push(result.resultId);
       }
     });
     this.survey$.subscribe(survey => {
-      console.log(survey);
       const categories = survey.surveyCategories;
       let questionNum;
       for (const category of categories) {
         questionNum = category.surveyQuestion.length;
         this.calculateTotalQuestionNum(questionNum);
-        console.log(questionNum);
       }
     });
   }
@@ -76,7 +71,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   }
   nextResult() {
     this.thisResultIdIndex = this.resultIds.findIndex(id => id === this.thisResultId);
-    console.log(this.thisResultIdIndex);
+    // console.log(this.thisResultIdIndex);
     this.nextResultIdIndex = this.thisResultIdIndex + 1;
     if (this.nextResultIdIndex >= this.resultIds.length) {
       // if the result is the last one, navigate to the first result
