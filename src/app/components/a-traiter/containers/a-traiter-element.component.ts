@@ -21,12 +21,6 @@ export class ATraiterElementComponent implements OnInit {
   ngOnInit() {
     this.historyService.selectResult(this.resultId);
     this.historyService.loadResult(this.resultId);
-    this.survey$.subscribe(result => {
-      console.log(result);
-    });
-    this.result$.subscribe(result => {
-      console.log(result);
-    });
   }
 
 }

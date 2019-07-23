@@ -1,6 +1,6 @@
-import {GetCorrection} from '../interfaces/getCorrection/getCorrection.interface';
-import {UpdateCorrection} from '../interfaces/updateCorrection/updateCorrection.interface';
-import {CreateCorrection} from '../interfaces/createCorrection/createCorrection.interface';
+import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
+import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
+import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 
 /**
  * get correction state

@@ -6,6 +6,7 @@
     <app-a-traiter-element
         *ngFor="let correction of (correction$|async)"
         [resultId]="correction.result_id"
+        [routerLink]="['/atraiter',correction.id]"
         style="display: block; width: 100%;"
     ></app-a-traiter-element>
   </div>

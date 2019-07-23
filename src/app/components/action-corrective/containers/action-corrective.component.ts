@@ -9,6 +9,9 @@ import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { ResultQuestion } from '../../history/interfaces/result-question.interface';
+import { Category } from '../../visit/interfaces/getSurveys/category.interface';
+import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 
 
 @Component({
@@ -17,15 +20,22 @@ import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 })
 export class ActionCorrectiveComponent implements OnInit {
   imgURL: any;
-  selectedId: number;
+  correctionId: number;
   correction = new FormGroup({
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
   corrections = [];
   thisCorrection: any;
+  resultId: number;
+  questionId: number;
   correction$: Observable<GetCorrection> = this.correctionService.getCorrection();
   result$: Observable<Result> = this.historyService.getResult();
+  getCorrectionSurvey$: Observable<Survey> = this.correctionService.getCorrectionSurvey();
+  getCorrectionCategory: Observable<Category> = this.correctionService.getCorrectionCategory();
+  getCorrectionQuestion$: Observable<any> = this.correctionService.getCorrectionQuestion();
+  selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
+  selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -37,20 +47,27 @@ export class ActionCorrectiveComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.correctionService.loadCorrection();
     this.route.paramMap.subscribe(params => {
-      this.selectedId = +params.get('id');
-      this.historyService.loadResult(this.selectedId);
+      this.correctionId = +params.get('id');
     });
     this.correction$.subscribe(
       corrections => {
-        this.corrections.push(corrections);
-        for (const correction of this.corrections[0]) {
-          if (correction.id === this.selectedId) {
+        // @ts-ignore
+        for (const correction of corrections) {
+          if (correction.id === this.correctionId) {
             this.thisCorrection = correction;
+            this.resultId = correction.result_id;
+            this.questionId = correction.question_id;
           }
         }
       }
     );
+    this.historyService.selectResult(this.resultId);
+    this.historyService.loadResult(this.resultId);
+    this.getCorrectionQuestion$.subscribe(question => {
+      console.log(question);
+    });
   }
 
   // clickBack() {

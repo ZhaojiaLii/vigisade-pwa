@@ -1,8 +1,9 @@
 
 export interface Question {
-  label: string;
-  id: number;
-  notation: string;
-  comment: string;
-  photo: string;
+  resultQuestionId: number;
+  resultQuestionResultId: number;
+  resultQuestionResultQuestionId: number;
+  resultQuestionResultNotation: string;
+  resultQuestionResultComment: string;
+  resultQuestionResultPhoto: string;
 }

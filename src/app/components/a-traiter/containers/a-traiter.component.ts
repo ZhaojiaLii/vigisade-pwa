@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
 import { Observable } from 'rxjs';
-import { GetCorrection } from '../../action-corrective/interfaces/getCorrection/getCorrection.interface';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { HistoryService } from '../../history/services/history.service';
+import { GetCorrection } from '../../action-corrective/interfaces/getCorrection/getCorrection.interface';
 
 @Component({
   selector: 'app-a-traiter',
@@ -22,6 +22,9 @@ export class ATraiterComponent implements OnInit {
 
   ngOnInit() {
     this.correctionService.loadCorrection();
+    this.correction$.subscribe(correction => {
+      console.log(correction);
+    });
   }
 
   // ScrollTop() {
