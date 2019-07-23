@@ -182,14 +182,15 @@ export class VisitComponent implements OnInit {
   }
 
   postForm() {
-    const POST: CreateResult = {
-      resultId: null,
-      resultSurveyId: this.resultSurveyId,
-      resultUserId: this.resultUserId,
-      resultDirectionId: this.userDirectionId,
-      resultAreaId: this.resultAreaId,
-      resultEntityId: this.mainForm.value.entity,
-    };
+    // not completed
+    // const POST: CreateResult = {
+    //   resultId: null,
+    //   resultSurveyId: this.resultSurveyId,
+    //   resultUserId: this.resultUserId,
+    //   resultDirectionId: this.userDirectionId,
+    //   resultAreaId: this.resultAreaId,
+    //   resultEntityId: this.mainForm.value.entity,
+    // };
     this.toastrService.success('success');
   }
 
