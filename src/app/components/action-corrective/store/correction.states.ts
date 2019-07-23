@@ -1,18 +1,18 @@
-import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+import { Correction } from '../interfaces/getCorrection/correction.interface';
 
 /**
  * get correction state
  */
 export interface CorrectionState {
-  correction: GetCorrection | null;
+  correctiveAction: Correction[] | null;
   createCorrection: CreateCorrection | null;
   updateCorrection: UpdateCorrection | null;
 }
 
 export const correctionInitialState = {
-  correction: null,
+  correctiveAction: null,
   createCorrection: null,
   updateCorrection: null,
 };

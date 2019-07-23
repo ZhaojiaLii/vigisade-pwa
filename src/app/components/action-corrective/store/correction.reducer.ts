@@ -15,7 +15,7 @@ import {
 export const createCorrectionReducer = createReducer(
   correctionInitialState,
   on(loadCorrection, state => state),
-  on(loadCorrectionSuccess, (state, {correction}) => ({...state, correction})),
+  on(loadCorrectionSuccess, (state, {correctiveAction}) => ({...state, correctiveAction})),
   on(loadCorrectionFail, state => state),
   on(createCorrection, state => state),
   on(createCorrectionSuccess, (state, {status}) => ({...state, status})),

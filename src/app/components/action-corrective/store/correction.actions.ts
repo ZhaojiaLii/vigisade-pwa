@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+import { Correction } from '../interfaces/getCorrection/correction.interface';
 
 export const loadCorrection = createAction(
     '[correction] Load Correction',
@@ -9,7 +9,7 @@ export const loadCorrection = createAction(
 
 export const loadCorrectionSuccess = createAction(
     '[correction] Load Correction Success',
-    props<{ correction: GetCorrection }>(),
+    props<{ correctiveAction: Correction[] }>(),
 );
 
 export const loadCorrectionFail = createAction(

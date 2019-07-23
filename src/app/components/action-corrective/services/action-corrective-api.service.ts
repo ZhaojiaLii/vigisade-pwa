@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetCorrection } from '../interfaces/getCorrection/getCorrection.interface';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
+import { Correction } from '../interfaces/getCorrection/correction.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,8 +33,8 @@ export class ActionCorrectiveApiService {
     ).pipe();
   }
 
-  loadCorrection(): Observable<GetCorrection> {
-    return this.http.get<GetCorrection>(
+  loadCorrection(): Observable<Correction[]> {
+    return this.http.get<Correction[]>(
       '/api/corrective-action/'
     ).pipe();
   }

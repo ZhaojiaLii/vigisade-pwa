@@ -13,33 +13,32 @@ export class HistoryApiService {
   constructor(private http: HttpClient) {}
 
   getHistory(): Observable<GetResult> {
-    // const  headers = new  HttpHeaders().set('user_id', '25').set('user_roles', 'ROLE_ADMIN');
-    // return this.http.get<GetResult>('/api/survey/history', {headers});
-    return of({}).pipe(
-      map(() => ({
-        userId: 25,
-        result: [
-          {
-            resultId: 6,
-            resultDirection: 91,
-            resultDate: '2019-07-03',
-            resultPlace: '32 Rue Ponthieu, 75008 Paris',
-            resultClient: 'Zhli',
-            resultUserId: 48,
-            resultValidated: true,
-          },
-          {
-            resultId: 7,
-            resultDirection: 91,
-            resultDate: '2019-07-03',
-            resultPlace: '33 rue des 3 bornes, 75011 paris',
-            resultClient: 'xu',
-            resultUserId: 48,
-            resultValidated: true,
-          },
-      ]
-      }))
-    );
+    return this.http.get<GetResult>('/api/survey/history');
+    // return of({}).pipe(
+    //   map(() => ({
+    //     userId: 25,
+    //     result: [
+    //       {
+    //         resultId: 6,
+    //         resultDirection: 91,
+    //         resultDate: '2019-07-03',
+    //         resultPlace: '32 Rue Ponthieu, 75008 Paris',
+    //         resultClient: 'Zhli',
+    //         resultUserId: 48,
+    //         resultValidated: true,
+    //       },
+    //       {
+    //         resultId: 7,
+    //         resultDirection: 91,
+    //         resultDate: '2019-07-03',
+    //         resultPlace: '33 rue des 3 bornes, 75011 paris',
+    //         resultClient: 'xu',
+    //         resultUserId: 48,
+    //         resultValidated: true,
+    //       },
+    //   ]
+    //   }))
+    // );
   }
 
   getResult(id: number): Observable<Result> {

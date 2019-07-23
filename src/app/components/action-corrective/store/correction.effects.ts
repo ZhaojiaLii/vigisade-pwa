@@ -28,7 +28,7 @@ export class CorrectionEffects {
     ofType(loadCorrection),
     switchMap(() => {
       return this.correctionApi.loadCorrection().pipe(
-        map(correction => loadCorrectionSuccess({correction})),
+        map(correctiveAction => loadCorrectionSuccess({correctiveAction})),
         catchError(error => of(loadCorrectionFail({error: error.message}))),
       );
     })
