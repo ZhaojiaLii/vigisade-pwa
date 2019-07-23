@@ -26,7 +26,7 @@ import { loginFeature } from './components/login/store/login.feature';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
-import { SecurityTemplateComponent } from './components/securite/containers/security-template.component';
+import { SurveyQuestionComponent } from './components/visit/components/survey-question/survey-question.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
 import { ToastrModule } from 'ngx-toastr';
@@ -80,7 +80,7 @@ const ngrxFeatures = [
     VisitComponent,
     ActionCorrectiveComponent,
     SecuriteComponent,
-    SecurityTemplateComponent,
+    SurveyQuestionComponent,
     BonnePratiqueComponent,
     BonnePratiqueComponent,
     ATraiterComponent,

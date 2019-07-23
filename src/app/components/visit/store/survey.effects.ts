@@ -22,10 +22,11 @@ export class SurveyEffects {
       );
     })
   ));
+
   createResult$ = createEffect(() => this.actions$.pipe(
       ofType(createResult),
       switchMap(action => {
-          return this.surveyApi.createResult(action.createResultPayload).pipe(
+          return this.surveyApi.createResult(action.payload).pipe(
               map(status => createResultSuccess({status})),
               catchError(error => of(createResultFail({error: error.message}))),
           );

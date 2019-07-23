@@ -4,6 +4,6 @@ import { SurveyCategoryTitleTranslation } from './surveyCategoryTitleTranslation
 export interface Category {
   surveyCategoryId: number;
   surveyCategoryOrdonnancement: number;
-  surveyCategoryTitleTranslation: SurveyCategoryTitleTranslation[];
+  surveyCategoryTitleTranslation: SurveyCategoryTitleTranslation;
   surveyQuestion: Question[];
 }

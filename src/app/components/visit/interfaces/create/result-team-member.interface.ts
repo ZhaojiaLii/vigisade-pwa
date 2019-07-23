@@ -1,6 +1,4 @@
-
-
-export interface TeamMembers {
+export interface ResultTeamMember {
   resultTeamMemberId: number;
   resultTeamMemberFirstName: string;
   resultTeamMemberLastName: string;

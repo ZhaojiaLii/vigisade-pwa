@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { Result } from '../interfaces/create/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
 @Injectable({
@@ -14,13 +14,17 @@ export class SurveyApiService {
   constructor(private http: HttpClient) {}
 
   getSurveys(): Observable<Survey[]> {
-    return this.http.get<Survey[]>('/api/survey/');
+    return this.http.get<Survey>('/api/survey/').pipe(
+      // Waiting API fix.
+      map(survey => ([survey])),
+    );
   }
 
-  createResult(createResult: CreateResult): Observable<number> {
+  createResult(createResult: Result): Observable<number> {
+    console.log('API', createResult);
     return this.http.post(
       '/api/survey/create/',
-      {},
+      createResult,
       {observe: 'response'},
       ).pipe(
         tap((response: HttpResponse<{status: number}>) => {

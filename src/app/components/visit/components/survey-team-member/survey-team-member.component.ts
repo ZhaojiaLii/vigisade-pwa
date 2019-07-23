@@ -11,9 +11,13 @@ export class SurveyTeamMemberComponent implements OnInit {
 
   @Input() member: TeamMember;
 
+  @Input() index: number;
+
+  @Input() canRemove = false;
+
   @Output() updateMember = new EventEmitter<TeamMember>();
 
-  @Output() removeMember = new EventEmitter<boolean>();
+  @Output() removeMember = new EventEmitter<number>();
 
   teamMember = new FormGroup({
     firstName: new FormControl(''),
@@ -22,7 +26,7 @@ export class SurveyTeamMemberComponent implements OnInit {
   });
 
   deleteMember() {
-    this.removeMember.emit(true);
+    this.removeMember.emit(this.index);
   }
 
   ngOnInit(): void {
