@@ -1,14 +1,22 @@
-<div class="container mb-90">
+<div *ngIf="(survey$|async) === null" class="container mb-90">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="survey$|async" class="container mb-90">
     <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null}">
         <div class="font-bold font-25">
-            DR {{userDirection | uppercase}}
+            DR {{(userDirection$|async)?.name|uppercase}}
         </div>
         <form [formGroup]="mainForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <select class="form-control" appHighlight id="agenceSelect" formControlName="entity">
                         <option value=""></option>
-                        <option value="{{entity.id}}" *ngFor="let entity of entities">{{entity.name}}</option>
+                        <option
+                            *ngFor="let entity of (userEntities$|async)"
+                            value="{{entity.id}}"
+                        >
+                            {{entity.name}}
+                        </option>
                     </select>
                     <label for="agenceSelect">Agence</label>
                     <div class="line"></div>
@@ -34,24 +42,38 @@
                 </div>
             </div>
         </form>
-        <p class="font-medium font-22">Équipe contrôlée</p>
-        <p class="group-control-subtitle-text">Personnel présent sur le chantier</p>
-        <app-survey-team-member
-            *ngFor="let i of getMemberIndexes()"
-            [member]="teamMembers[i]"
-            (updateMember)="updateTeamMember($event, i)"
-            (removeMember)="removeTeamMember(i)"
-        ></app-survey-team-member>
-        <div (click)="addTeamMember()" class="card-full-width d-flex justify-content-end mr-2 mt-2">
-            <div class="circle-white-icon shadow-01 bg-info suppr">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                    <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z"
-                          fill="#FFF"></path>
-                </svg>
+        <div *ngIf="(survey$|async)?.surveyTeam !== teamMode.no">
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.manager" class="font-medium font-22">Responsable contrôlé</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">Équipe contrôlée</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="group-control-subtitle-text">Personnel présent sur le chantier</p>
+            <app-survey-team-member
+                *ngFor="let i of getMemberIndexes()"
+                [member]="teamMembers[i]"
+                [index]="i"
+                [canRemove]="teamMembers?.length > 1"
+                (updateMember)="updateTeamMember($event, i)"
+                (removeMember)="removeTeamMember($event)"
+            ></app-survey-team-member>
+            <div
+                *ngIf="(survey$|async)?.surveyTeam === teamMode.team"
+                (click)="addTeamMember()"
+                class="card-full-width d-flex justify-content-end mr-2 mt-2"
+            >
+                <div class="circle-white-icon shadow-01 bg-info suppr">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z"
+                              fill="#FFF"></path>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class="mx-30">
-            <button class="btn btn-info d-block w-100 mt-5"  (click)="questionDone === 4 ? postForm() : postAlert()">Valider</button>
+            <button
+                (click)="post()"
+                class="btn btn-info d-block w-100 mt-5"
+            >
+                Valider
+            </button>
         </div>
     </div>
     <div
@@ -61,19 +83,16 @@
     >
         <div class="row">
             <div class="card card-full-width mb-10 shadow-none">
-                <app-security-template
+                <app-survey-question
                     *ngFor="let question of category.surveyQuestion;"
-                    [questionLabel]="question.surveyQuestionTranslation[0].surveyQuestionTranslationLabel"
-                    [questionHelp]="question.surveyQuestionTranslation[0].surveyQuestionTranslationHelp"
-                    (Selection)="getSelection($event)"
-                    (Photo)="getPhoto($event)"
-                    (Comment)="getComment($event)"
-                ></app-security-template>
+                    [question]="question"
+                    [group]="getQuestionForm(question.surveyQuestionId)"
+                ></app-survey-question>
             </div>
         </div>
     </div>
 </div>
-<div class="fixed-footer">
+<div *ngIf="survey$|async" class="fixed-footer">
     <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
          aria-controls="collapseBasic">
         <div class=""><span class="font-bold">0</span>/{{questionNum}}</div>
@@ -97,7 +116,7 @@
             class="d-flex align-items-center justify-content-between"
             (click)="selectSurveyCategory(category.surveyCategoryId)"
         >
-            <span class="note-label">{{category.surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle}}</span>
+            <span class="note-label">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}}</span>
             <span class="note text-success"><strong>0</strong>/{{category.surveyQuestion.length}}</span>
         </div>
         <div

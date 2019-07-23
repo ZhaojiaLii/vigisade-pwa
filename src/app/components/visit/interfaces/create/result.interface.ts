@@ -1,8 +1,8 @@
-import { TeamMembers } from './teamMembers.interface';
-import { Question } from './question.interface';
+import { ResultTeamMember } from './result-team-member.interface';
+import { ResultQuestion } from './result-question.interface';
 
 
-export interface CreateResult {
+export interface Result {
   resultId: number;
   resultSurveyId: number;
   resultUserId: number;
@@ -13,8 +13,8 @@ export interface CreateResult {
   resultPlace: string;
   resultClient: string;
   resultValidated: boolean;
-  resultTeamMember?: TeamMembers[];
-  question: Question[];
+  resultTeamMember?: ResultTeamMember[];
+  resultQuestion: ResultQuestion[];
   resultBestPracticeDone: string;
   resultBestPracticeComment: string;
   resultBestPracticePhoto: string;

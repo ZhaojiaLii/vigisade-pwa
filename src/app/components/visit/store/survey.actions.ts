@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { Result } from '../interfaces/create/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
 export const loadSurveys = createAction('[Survey] Load Surveys');
@@ -18,12 +18,9 @@ export const selectSurveyCategory = createAction(
   props<{id: number}>(),
 );
 
-/***
- * create a result data (POST: api/survey/create)
- */
 export const createResult = createAction(
     '[Survey] Create a Result',
-    props<{createResultPayload: CreateResult}>()
+    props<{payload: Result}>()
 );
 
 export const createResultSuccess = createAction(

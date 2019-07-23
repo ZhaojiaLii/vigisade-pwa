@@ -19,15 +19,15 @@ export const getSelectedCategoryId = createSelector(
 );
 
 export const getSurveyOfUser = createSelector(
-  getSurveyState,
+  getSurveys,
   getUser,
-  (state: SurveyState, user: User) => {
-    if (!user || !user.directionId) {
+  (surveys: Survey[], user: User) => {
+    if (!user || !user.directionId || !surveys) {
       return null;
     }
-    const surveys = [];
-    surveys.push(state.surveys);
-    const surveyOfUser = surveys.find(survey => survey.surveyDirectionId === user.directionId);
+
+    const surveyOfUser = surveys
+      .find(survey => survey.surveyDirectionId === user.directionId);
     return surveyOfUser || null;
   },
 );

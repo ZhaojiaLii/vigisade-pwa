@@ -16,7 +16,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SurveyTeamMemberComponent } from '../visit/components/survey-team-member/survey-team-member.component';
-import { SecurityTemplateComponent } from '../securite/containers/security-template.component';
+import { SurveyQuestionComponent } from '../visit/components/survey-question/survey-question.component';
 import { CommonModule } from '@angular/common';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
@@ -65,7 +65,7 @@ const materialModules = [
   ],
   entryComponents: [
     SurveyTeamMemberComponent,
-    SecurityTemplateComponent,
+    SurveyQuestionComponent,
     ATraiterElementComponent,
   ],
   exports: [

@@ -4,9 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { ProfileState } from '../store/profile.state';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
-import { getUser, getUserArea, getUserDirection, getUserEntity } from '../store/profile.selector';
+import { getUser, getUserDirection, getUserEntities } from '../store/profile.selector';
 import { Direction } from '../../shared/interfaces/direction.interface';
-import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { UpdateUser } from '../interfaces/updateUser.interface';
 
@@ -35,11 +34,7 @@ export class ProfileService {
     return this.store.pipe(select(getUserDirection));
   }
 
-  getUserArea(): Observable<Area> {
-    return this.store.pipe(select(getUserArea));
-  }
-
-  getUserEntity(): Observable<Entity> {
-    return this.store.pipe(select(getUserEntity));
+  getUserEntities(): Observable<Entity[]> {
+    return this.store.pipe(select(getUserEntities));
   }
 }

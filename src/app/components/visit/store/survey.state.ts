@@ -1,4 +1,4 @@
-import { CreateResult } from '../interfaces/createResultInterface/createResult.interface';
+import { Result } from '../interfaces/create/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
 
@@ -7,7 +7,7 @@ import { Survey } from '../interfaces/getSurveys/survey.interface';
  */
 export interface SurveyState {
   surveys: Survey[];
-  createResult: CreateResult | null;
+  createResult: Result | null;
   updateResult: UpdateResult | null;
   layout: {
     selectedCategory: number | null;
@@ -15,7 +15,7 @@ export interface SurveyState {
 }
 
 export const surveyInitialState: SurveyState = {
-  surveys: [],
+  surveys: null,
   createResult: null,
   updateResult: null,
   layout: {

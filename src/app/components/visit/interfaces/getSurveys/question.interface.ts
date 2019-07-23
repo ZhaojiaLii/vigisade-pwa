@@ -5,5 +5,5 @@ export interface Question {
   surveyQuestionOrdonnancement: number;
   surveyQuestionType: string;
   surveyQuestionCategoryId: number;
-  surveyQuestionTranslation: SurveyQuestionTranslation[];
+  surveyQuestionTranslation: SurveyQuestionTranslation;
 }

@@ -1,5 +1,5 @@
 
-export interface Question {
+export interface ResultQuestion {
   resultQuestionId: number;
   resultQuestionResultId: number;
   resultQuestionResultQuestionId: number;
