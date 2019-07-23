@@ -5,4 +5,5 @@ export interface UpdateUser {
   area_id: number;
   entity_id: number;
   image: string;
+  language: string;
 }
