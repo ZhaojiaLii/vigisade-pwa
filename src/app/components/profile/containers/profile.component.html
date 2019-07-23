@@ -10,7 +10,7 @@
         <label for="langueSelect">Langue</label>
         <select class="form-control has-value"  appHighlight id="langueSelect" formControlName="language">
           <option value="{{currentLanguageId}}" [selected]="currentLanguage">{{currentLanguage}}</option>
-          <option *ngFor="let language of Languages" [value]="language.id">{{language.name}}</option>
+          <option *ngFor="let language of Languages" value="{{language.id}}">{{language.name}}</option>
         </select>
         <div class="line"></div>
       </div>
