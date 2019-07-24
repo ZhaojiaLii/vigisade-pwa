@@ -68,7 +68,7 @@ export class ActionCorrectiveComponent implements OnInit {
     this.getCorrectionCategory$.subscribe(categories => {
       console.log(categories);
       this.categoryTitle = categories.find(category =>
-        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle;
+        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
     });
     this.history$.subscribe(histories => {
       this.result = histories.result.find(result => result.resultId === this.resultId);

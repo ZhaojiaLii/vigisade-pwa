@@ -30,15 +30,16 @@ export const getCorrectionCategory = createSelector(
   getCorrection,
   getSurveys,
   (corrections: Correction[], surveys: Survey[]) => {
-    // @ts-ignore
-    const allCategories = surveys.surveyCategories;
-    const categories = [];
     let correctionCategory;
-    if (corrections !== null) {
-      for (const correction of corrections) {
-        correctionCategory = allCategories.find(category => category.surveyCategoryId === correction.category_id);
-        if (!categories.includes(correctionCategory)) {
-          categories.push(correctionCategory);
+    const categories = [];
+    for (const survey of surveys) {
+      const allCategories = survey.surveyCategories;
+      if (corrections !== null) {
+        for (const correction of corrections) {
+          correctionCategory = allCategories.find(category => category.surveyCategoryId === correction.category_id);
+          if (!categories.includes(correctionCategory)) {
+            categories.push(correctionCategory);
+          }
         }
       }
     }

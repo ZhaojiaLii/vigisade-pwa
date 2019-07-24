@@ -40,8 +40,9 @@ export class ATraiterElementComponent implements OnInit {
       }
     );
     this.getCorrectionCategory$.subscribe(categories => {
+      console.log(categories);
       this.categoryTitle = categories.find(category =>
-        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation[0].surveyCategoryTranslatableTitle;
+        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
     });
   }
 

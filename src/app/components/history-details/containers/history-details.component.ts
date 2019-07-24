@@ -48,11 +48,13 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.historyService.loadResult(this.thisResultId);
     });
     this.history$.subscribe(results => {
+      console.log(results);
       for (const result of results.result) {
         this.resultIds.push(result.resultId);
       }
     });
     this.survey$.subscribe(survey => {
+      console.log(survey);
       const categories = survey.surveyCategories;
       let questionNum;
       for (const category of categories) {
