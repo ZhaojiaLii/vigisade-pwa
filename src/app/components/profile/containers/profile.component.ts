@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   getTargetChildEntity = [];
   ngOnInit(): void {
     this.user$.subscribe(user => {
-      console.log(user);
+      // console.log(user);
       this.userDirectionId = user.directionId;
       this.userAreaId = user.areaId;
       this.userEntityId = user.entityId;
@@ -119,8 +119,7 @@ export class ProfileComponent implements OnInit {
   }
   onUserDataChanged() {
     this.postForm.valueChanges.subscribe(
-      val => {
-        console.log('form control output ', val);
+      () => {
         this.userArea = '';
         this.userAreaId = 0;
         this.userEntityId = 0;
@@ -134,7 +133,7 @@ export class ProfileComponent implements OnInit {
           image: this.userPhoto,
           language: this.changedLanguage,
         };
-        console.log('POST data is: ', POST);
+        // console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
         this.toastrService.success('Votre profil a été mis à jour', 'Succès');
       }
@@ -169,7 +168,7 @@ export class ProfileComponent implements OnInit {
         image: this.userPhoto,
         language: this.changedLanguage,
       };
-      console.log('POST data is: ', POST);
+      // console.log('POST data is: ', POST);
       this.profileService.updateUser(POST);
       this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + val.language , 'Succès');
       this.Languages.forEach(language => {
