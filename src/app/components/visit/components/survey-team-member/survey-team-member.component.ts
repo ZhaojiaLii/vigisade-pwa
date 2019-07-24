@@ -1,37 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { TeamMember } from '../../interfaces/getSurveys/team-member.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-survey-team-member',
   templateUrl: './survey-team-member.component.html',
 })
 
-export class SurveyTeamMemberComponent implements OnInit {
+export class SurveyTeamMemberComponent {
 
-  @Input() member: TeamMember;
-
-  @Input() index: number;
+  @Input() form: FormGroup;
 
   @Input() canRemove = false;
 
-  @Output() updateMember = new EventEmitter<TeamMember>();
-
-  @Output() removeMember = new EventEmitter<number>();
-
-  teamMember = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    role: new FormControl(''),
-  });
+  @Output() removeMember = new EventEmitter<string>();
 
   deleteMember() {
-    this.removeMember.emit(this.index);
-  }
-
-  ngOnInit(): void {
-    this.teamMember.valueChanges.subscribe((member) => {
-      this.updateMember.emit({...member});
-    });
+    this.removeMember.emit(this.form.value.id);
   }
 }

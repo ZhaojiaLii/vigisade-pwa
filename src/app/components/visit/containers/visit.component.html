@@ -34,8 +34,7 @@
                     <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect"
-                           formControlName="date">
+                    <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect" formControlName="date">
                     <label for="dateSelect">Date de la visite <span
                             class="light-grey">(jour, mois, année)</span></label>
                     <div class="line"></div>
@@ -47,11 +46,9 @@
             <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">Équipe contrôlée</p>
             <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="group-control-subtitle-text">Personnel présent sur le chantier</p>
             <app-survey-team-member
-                *ngFor="let i of getMemberIndexes()"
-                [member]="teamMembers[i]"
-                [index]="i"
-                [canRemove]="teamMembers?.length > 1"
-                (updateMember)="updateTeamMember($event, i)"
+                *ngFor="let group of teamMembersForms"
+                [form]="group"
+                [canRemove]="teamMembersForms?.length > 1"
                 (removeMember)="removeTeamMember($event)"
             ></app-survey-team-member>
             <div
@@ -69,6 +66,7 @@
         </div>
         <div class="mx-30">
             <button
+                [attr.disabled]="canPost() ? null : 1"
                 (click)="post()"
                 class="btn btn-info d-block w-100 mt-5"
             >
@@ -84,9 +82,9 @@
         <div class="row">
             <div class="card card-full-width mb-10 shadow-none">
                 <app-survey-question
-                    *ngFor="let question of category.surveyQuestion;"
-                    [question]="question"
-                    [group]="getQuestionForm(question.surveyQuestionId)"
+                    *ngFor="let questionForm of getQuestionForms(category.surveyCategoryId);"
+                    [question]="questionForm.question"
+                    [group]="questionForm.group"
                 ></app-survey-question>
             </div>
         </div>
@@ -97,7 +95,12 @@
          aria-controls="collapseBasic">
         <div class=""><span class="font-bold">0</span>/{{questionNum}}</div>
         <div class="d-flex align-items-center">
-            <div class="mr-2"><span class="font-bold">Visite {{questionDone}}</span>/4</div>
+            <div *ngIf="(selectedCategory$|async) === null" class="mr-2">
+                <span class="font-bold">Visite {{countValidSurveyFields()}}</span>/{{countSurveyFields()}}
+            </div>
+            <div *ngIf="(selectedCategory$|async) as category" class="mr-2">
+                <span class="font-bold">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}} {{countValidQuestions(category.surveyCategoryId)}}</span>/{{countQuestions(category.surveyCategoryId)}}
+            </div>
             <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
                 <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
             </svg>
@@ -109,7 +112,9 @@
             (click)="selectSurveyCategory(null)"
         >
             <span class="note-label">Visite</span>
-            <span class="note text-success"><strong>{{questionDone}}</strong>/4</span>
+            <span [ngClass]="{'text-success': countValidSurveyFields() === countSurveyFields()}" class="note">
+                <strong>{{countValidSurveyFields()}}</strong>/{{countSurveyFields()}}
+            </span>
         </div>
         <div
             *ngFor="let category of (survey$|async)?.surveyCategories"
@@ -117,7 +122,12 @@
             (click)="selectSurveyCategory(category.surveyCategoryId)"
         >
             <span class="note-label">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}}</span>
-            <span class="note text-success"><strong>0</strong>/{{category.surveyQuestion.length}}</span>
+            <span
+                [ngClass]="{'text-success': countValidQuestions(category.surveyCategoryId) === countQuestions(category.surveyCategoryId)}"
+                class="note"
+            >
+                <strong>{{countValidQuestions(category.surveyCategoryId) || 0}}</strong>/{{countQuestions(category.surveyCategoryId)}}
+            </span>
         </div>
         <div
             class="d-flex align-items-center justify-content-between"

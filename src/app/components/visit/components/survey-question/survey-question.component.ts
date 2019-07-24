@@ -17,10 +17,8 @@ export class SurveyQuestionComponent implements OnChanges {
   showError = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-
     this.group.valueChanges.subscribe((values) => {
 
-      console.log('changes', values);
       this.showError = false;
 
       Object.keys(values).forEach((key: string) => {
