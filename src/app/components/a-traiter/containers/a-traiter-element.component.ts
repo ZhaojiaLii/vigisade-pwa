@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SurveyService } from '../../visit/services/survey.service';
 import { Observable } from 'rxjs';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { Correction } from '../../action-corrective/interfaces/getCorrection/correction.interface';
+import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
 
 @Component({
   selector: 'app-a-traiter-element',
@@ -11,16 +12,38 @@ import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 })
 export class ATraiterElementComponent implements OnInit {
   @Input() resultId;
-  result$: Observable<Result> = this.historyService.getSelectedResult();
-  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
+  @Input() correctionId;
+  result: any;
+  categoryId: number;
+  categoryTitle: string;
+  history$: Observable<GetResult> = this.historyService.getHistory();
+  correction$: Observable<Correction[]> = this.correctionService.getCorrection();
+  getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   constructor(
     private surveyService: SurveyService,
     private historyService: HistoryService,
+    private correctionService: ActionCorrectiveService,
   ) { }
 
   ngOnInit() {
-    this.historyService.selectResult(this.resultId);
-    this.historyService.loadResult(this.resultId);
+    this.historyService.loadHistory();
+    this.history$.subscribe(histories => {
+      this.result = histories.result.find(result => result.resultId === this.resultId);
+    });
+    this.correction$.subscribe(
+      corrections => {
+        for (const correction of corrections) {
+          if (correction.id === this.correctionId) {
+            this.categoryId = correction.category_id;
+          }
+        }
+      }
+    );
+    this.getCorrectionCategory$.subscribe(categories => {
+      console.log(categories);
+      this.categoryTitle = categories.find(category =>
+        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
+    });
   }
 
 }

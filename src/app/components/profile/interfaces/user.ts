@@ -7,6 +7,7 @@ export interface User {
   firstName: string;
   lastName: string;
   photo: string;
+  language: string;
   countRemainingActions: number;
   countCurrentMonthVisits: number;
   countLastMonthVisits: number;

@@ -10,17 +10,22 @@ import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { ResultQuestion } from '../../history/interfaces/result-question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 
 @Component({
   selector: 'app-detail-visit',
   templateUrl: './history-details.component.html',
 })
 export class HistoryDetailsComponent implements OnInit, OnDestroy {
-  selectedId: number;
-  nextResultId: number;
+  nextResultIdIndex: number;
   isCollapsed = false;
-  resultsNum: any;
+  resultIds = [];
+  questionNum = 0;
+  thisResultId: number;
+  thisResultIdIndex: number;
 
+  history$: Observable<GetResult> = this.historyService.getHistory();
+  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   result$: Observable<Result> = this.historyService.getSelectedResult();
   resultSurvey$: Observable<Survey> = this.historyService.getSelectedResultSurvey();
   resultEntity$: Observable<Entity> = this.historyService.getSelectedResultEntity();
@@ -38,9 +43,24 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const resultId = parseInt(params.get('id'), 10);
-      this.historyService.selectResult(resultId);
-      this.historyService.loadResult(resultId);
+      this.thisResultId = parseInt(params.get('id'), 10);
+      this.historyService.selectResult(this.thisResultId);
+      this.historyService.loadResult(this.thisResultId);
+    });
+    this.history$.subscribe(results => {
+      console.log(results);
+      for (const result of results.result) {
+        this.resultIds.push(result.resultId);
+      }
+    });
+    this.survey$.subscribe(survey => {
+      console.log(survey);
+      const categories = survey.surveyCategories;
+      let questionNum;
+      for (const category of categories) {
+        questionNum = category.surveyQuestion.length;
+        this.calculateTotalQuestionNum(questionNum);
+      }
     });
   }
 
@@ -48,21 +68,24 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
     this.historyService.selectResult(null);
   }
 
+  calculateTotalQuestionNum(question: number) {
+    this.questionNum = this.questionNum + question;
+  }
   nextResult() {
-    // not finished yet !!
-
-    // this.nextResultId = this.correctionId + 1;
-    // if (this.nextResultId > this.resultsNum) {
-    //   // if the result is the last one, navigate to the first result
-    //   this.nextResultId = 1;
-    //   this.router.navigate(['/history', this.nextResultId]);
-    //   window.scroll(0, 0);
-    //   this.toastrService.success('Retourner à la première', 'Visite: ' + this.nextResultId);
-    // } else {
-    //   this.router.navigate(['/history', this.nextResultId]);
-    //   window.scroll(0, 0);
-    //   this.toastrService.success('La visite prochaine', 'Visite: ' + this.nextResultId);
-    // }
+    this.thisResultIdIndex = this.resultIds.findIndex(id => id === this.thisResultId);
+    // console.log(this.thisResultIdIndex);
+    this.nextResultIdIndex = this.thisResultIdIndex + 1;
+    if (this.nextResultIdIndex >= this.resultIds.length) {
+      // if the result is the last one, navigate to the first result
+      this.nextResultIdIndex = 0;
+      this.router.navigate(['/history', this.resultIds[this.nextResultIdIndex]]);
+      window.scroll(0, 0);
+      this.toastrService.success('Retourner à la première', 'Visite: ' + (this.nextResultIdIndex + 1));
+    } else {
+      this.router.navigate(['/history', this.resultIds[this.nextResultIdIndex]]);
+      window.scroll(0, 0);
+      this.toastrService.success('La visite prochaine', 'Visite: ' + (this.nextResultIdIndex + 1));
+    }
   }
 
   selectCategory(id: number): void {

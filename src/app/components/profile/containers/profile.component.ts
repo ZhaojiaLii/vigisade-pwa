@@ -19,8 +19,22 @@ export class ProfileComponent implements OnInit {
   userDirection: string; userArea: string; userEntity: string;
   Directions = []; Areas = []; Entities = [];
   allArea = []; allEntity = [];
-  currentLanguage = 'Français';
-  Languages = ['Français', 'Anglais', 'Espagnol'];
+  currentLanguage: string;
+  currentLanguageId: string;
+  Languages = [
+    {
+      name: 'Français',
+      id: 'fr',
+    },
+    {
+      name: 'Anglais',
+      id: 'en',
+    },
+    {
+      name: 'Espagnol',
+      id: 'es',
+    },
+  ];
   userMail: string; userFirstName: string; userLastName: string; userPhoto: string;
   language = new FormGroup({
     language: new FormControl(''),
@@ -44,11 +58,6 @@ export class ProfileComponent implements OnInit {
   getTargetChildArea = [];
   getTargetChildEntity = [];
   ngOnInit(): void {
-    this.Languages.forEach(language => {
-      if (language === this.currentLanguage) {
-        this.Languages.splice(this.Languages.indexOf(language), 1);
-      }
-    });
     this.user$.subscribe(user => {
       console.log(user);
       this.userDirectionId = user.directionId;
@@ -58,6 +67,13 @@ export class ProfileComponent implements OnInit {
       this.userLastName = user.lastName;
       this.userFirstName = user.firstName;
       this.userPhoto = user.photo;
+      this.currentLanguageId = user.language;
+      this.currentLanguage = this.Languages.find(language => language.id === this.currentLanguageId).name;
+    });
+    this.Languages.forEach(language => {
+      if (language.name === this.currentLanguage) {
+        this.Languages.splice(this.Languages.indexOf(language), 1);
+      }
     });
     this.direction$.subscribe(directions => {
       this.Directions = [];
@@ -116,28 +132,52 @@ export class ProfileComponent implements OnInit {
           area_id: this.changedAreaId as number,
           entity_id: this.changedEntityId as number,
           image: this.userPhoto,
+          language: this.changedLanguage,
         };
-        // console.log('POST data is: ', POST);
+        console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
         this.toastrService.success('Votre profil a été mis à jour', 'Succès');
       }
     );
-
-    this.language.valueChanges.subscribe(
-      val => {
-        // console.log(val.language);
-        this.Languages = ['Français', 'Anglais', 'Espagnol'];
-        if (val.language !== this.currentLanguage) {
-          this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + val.language , 'Succès');
-          this.currentLanguage = val.language;
+    this.language.get('language').valueChanges.subscribe(val => {
+      this.Languages = [
+        {
+          name: 'Français',
+          id: 'fr',
+        },
+        {
+          name: 'Anglais',
+          id: 'en',
+        },
+        {
+          name: 'Espagnol',
+          id: 'es',
+        },
+      ];
+      this.currentLanguageId = val;
+      this.currentLanguage = this.Languages.find(language => language.id === this.currentLanguageId).name;
+      this.changedLanguage = val;
+      this.changedDirectionId = this.userDirectionId;
+      this.changedAreaId = this.userAreaId;
+      this.changedEntityId = this.userEntityId;
+      const POST: UpdateUser = {
+        firstname: this.userFirstName,
+        lastname: this.userLastName,
+        direction_id: this.changedDirectionId as number,
+        area_id: this.changedAreaId as number,
+        entity_id: this.changedEntityId as number,
+        image: this.userPhoto,
+        language: this.changedLanguage,
+      };
+      console.log('POST data is: ', POST);
+      this.profileService.updateUser(POST);
+      this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + val.language , 'Succès');
+      this.Languages.forEach(language => {
+        if (language.name === this.currentLanguage) {
+          this.Languages.splice(this.Languages.indexOf(language), 1);
         }
-        this.Languages.forEach(language => {
-          if (language === this.currentLanguage) {
-            this.Languages.splice(this.Languages.indexOf(language), 1);
-          }
-        });
-      }
-    );
+      });
+    });
     this.postForm.get('direction').valueChanges.subscribe(val => {
         this.getTargetChildArea = [];
         this.getTargetChildEntity = [];

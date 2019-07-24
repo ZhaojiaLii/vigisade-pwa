@@ -3,18 +3,19 @@
     <div class="card card-full-width mb-10 shadow-none">
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
-            <div class="col-6 font-demiBold">{{(result$ | async)?.resultClient}}</div>
-            <div class="col-6 text-right font-12">{{(result$ | async)?.resultDate}}</div>
+            <div class="col-6 font-demiBold">{{categoryTitle}}</div>
+            <div class="col-6 text-right font-12">{{result?.resultDate}}</div>
         </div>
         <p class="font-demiBold mb-2">
-          {{(result$ | async)?.resultPlace}}
+          {{result?.resultPlace}}
         </p>
       </div>
     </div>
     <div class="card card-full-width mb-10 shadow-none lineH-24px">
       <div class="card-body">
         <p class="mb-30">
-            Equipements de Protection Collective <span class="light-grey font-14">(signalisation, blindage, échaffaudage, dérivation, pompage,…)</span>
+            {{question.surveyQuestionTranslation.surveyQuestionTranslationLabel}} &nbsp; &nbsp;
+          <span class="light-grey font-14">{{question.surveyQuestionTranslation.surveyQuestionTranslationHelp}}</span>
         </p>
         <p class="px-10 font-14 mb-30">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat metus id urna maximus porttitor. Suspendisse fermentum faucibus mi quis malesuada. Nam sit amet vulputate ipsum.

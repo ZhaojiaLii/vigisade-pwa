@@ -50,9 +50,7 @@ export const getSelectedResultSurvey = createSelector(
     if (!result) {
       return null;
     }
-    const surveysArray = [];
-    surveysArray.push(surveys);
-    const resultSurvey = surveysArray.find(survey => survey.surveyId === result.resultSurveyId);
+    const resultSurvey = surveys.find(survey => survey.surveyId === result.resultSurveyId);
     return resultSurvey || null;
   }
 );

@@ -1,11 +1,19 @@
 <div class="container mb-90">
-  <div class="row">
-    <div class="total">
-      <strong>{{(correction$|async)?.length}}</strong> contrôle(s) trouvé(s)
+  <div *ngIf="(correction$|async) === null" class="row">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div *ngIf="(correction$|async)?.length >= 0" class="row">
+    <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
+      <ng-template ngPluralCase="=0">Aucun contrôle trouvé</ng-template>
+      <ng-template ngPluralCase="=1">1 contrôle trouvé</ng-template>
+      <ng-template ngPluralCase="other">
+        <strong>{{ countCorrection$|async }}</strong> contrôles trouvés
+      </ng-template>
     </div>
     <app-a-traiter-element
         *ngFor="let correction of (correction$|async)"
         [resultId]="correction.result_id"
+        [correctionId]="correction.id"
         [routerLink]="['/atraiter',correction.id]"
         style="display: block; width: 100%;"
     ></app-a-traiter-element>

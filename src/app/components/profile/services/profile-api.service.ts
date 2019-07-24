@@ -28,7 +28,7 @@ export class ProfileApiService {
       {observe: 'response'},
     ).pipe(
       tap((response: HttpResponse<{status: number}>) => {
-        if (response && response.status) {
+        if (response && response.status === 200) {
           console.log('update profile succeed');
         } else {
           console.log('update profile failed');
