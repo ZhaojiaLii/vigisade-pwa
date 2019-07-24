@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 import {
   getCorrection,
   getCorrectionCategory,
-  getCorrectionQuestion,
+  getCorrectionQuestion, getCorrectionResult,
   getCorrectionSurvey
 } from '../store/correction.selector';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class ActionCorrectiveService {
 
   getCorrectionSurvey(): Observable<Survey> {
     return this.store.pipe(select(getCorrectionSurvey));
+  }
+
+  getCorrectionResult(): Observable<Result> {
+    return this.store.pipe(select(getCorrectionResult));
   }
 
   getCorrectionCategory(): Observable<any> {

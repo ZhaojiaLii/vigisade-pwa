@@ -11,6 +11,7 @@ import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class ActionCorrectiveComponent implements OnInit {
   user$: Observable<User> = this.profileService.getUser();
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   correctionQuestions$: Observable<any> = this.correctionService.getCorrectionQuestion();
+  getCorrectionResult$: Observable<Result> = this.correctionService.getCorrectionResult();
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -61,12 +63,23 @@ export class ActionCorrectiveComponent implements OnInit {
             this.resultId = correction.result_id;
             this.questionId = correction.question_id;
             this.categoryId = correction.category_id;
+            this.historyService.selectResult(this.resultId);
+            this.historyService.loadResult(this.resultId);
           }
         }
       }
     );
+    this.getCorrectionResult$.subscribe(result => {
+      if (result === null) {
+        return;
+      } else {
+        const resultQuestions = result.resultQuestion;
+        for (const question of resultQuestions) {
+          // @todo: all the questions in the selected result is here
+        }
+      }
+    });
     this.getCorrectionCategory$.subscribe(categories => {
-      console.log(categories);
       this.categoryTitle = categories.find(category =>
         category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
     });

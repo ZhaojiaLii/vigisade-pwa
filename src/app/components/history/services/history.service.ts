@@ -55,7 +55,7 @@ export class HistoryService {
     );
   }
 
-  getResult(): Observable<Result> {
+  getResult(): Observable<Result[]> {
     return this.store.pipe(select(getResult));
   }
 
