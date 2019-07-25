@@ -16,11 +16,11 @@ export const getCorrection = createSelector(
 // export const getCorrectionResults = createSelector(
 //   getCorrection,
 //   getResults,
-//   (corrections: Correction[], userResults: Result[]) => {
+//   (corrections: Correction[], userResult: Result[]) => {
 //     const resultsArray = [];
-//     if (corrections !== null && userResults !== null) {
+//     if (corrections !== null && userResult !== null) {
 //       for (const correction of corrections) {
-//         const correctionResult = userResults.find(result => result.resultId === correction.result_id);
+//         const correctionResult = userResult.find(result => result.resultId === correction.result_id);
 //         if (!resultsArray.includes(correctionResult)) {
 //           resultsArray.push(correctionResult);
 //         }

@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
   userId: number;
   userDirectionId: number;
   userEntityId: number;
-  userResults = [];
+  userResult = [];
   history$: Observable<GetResult> = this.historyService.getHistory();
   countHistory$: Observable<number> = this.historyService.countHistory();
   user$: Observable<User> = this.profileService.getUser();
@@ -46,32 +46,32 @@ export class HistoryComponent implements OnInit {
     });
     if (isMobile) {
       this.history$.subscribe(results => {
-        this.userResults = [];
+        this.userResult = [];
         for (const result of results.result) {
           if (result.resultUserId === this.userId) {
-            this.userResults.push(result);
+            this.userResult.push(result);
           }
         }
       });
     }
     if (isDesktopDevice) {
       this.history$.subscribe(results => {
-        this.userResults = [];
+        this.userResult = [];
         for (const result of results.result) {
           if (result.resultUserId === this.userId) {
-            this.userResults.push(result);
+            this.userResult.push(result);
           } else {
             if (this.priority.includes('ROLE_MANAGER') && !this.priority.includes('ROLE_ADMIN')) {
               // user is manager but not admin
               if (result.resultEntity === this.userEntityId) {
-                this.userResults.push(result);
+                this.userResult.push(result);
               }
-              this.userResults.push();
+              this.userResult.push();
             }
             if (!this.priority.includes('ROLE_CONDUCTEUR') && !this.priority.includes('ROLE_MANAGER')) {
               // user is admin
               if (result.resultDirection === this.userDirectionId) {
-                this.userResults.push(result);
+                this.userResult.push(result);
               }
             }
           }
