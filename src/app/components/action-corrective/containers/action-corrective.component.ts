@@ -66,7 +66,6 @@ export class ActionCorrectiveComponent implements OnInit {
       }
     );
     this.getCorrectionCategory$.subscribe(categories => {
-      console.log(categories);
       this.categoryTitle = categories.find(category =>
         category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
     });
@@ -111,13 +110,12 @@ export class ActionCorrectiveComponent implements OnInit {
         comment_question: this.correction.value.comment,
         image: 'photo path',
       };
-      console.log(correctionPayload);
+      // console.log(correctionPayload);
       this.correctionService.updateCorrection(correctionPayload);
       this.toastrService.success('maj succèss');
       this.router.navigate(['/atraiter']);
       window.scroll(0, 0);
     }
-    console.log(this.correction.value);
   }
 
 }

@@ -18,8 +18,5 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     this.historyService.loadHistory();
-    this.countHistory$.subscribe(history => {
-      console.log('history number', history);
-    });
   }
 }
