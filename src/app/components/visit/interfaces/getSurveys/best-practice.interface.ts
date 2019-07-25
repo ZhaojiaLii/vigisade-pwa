@@ -1,4 +1,4 @@
-export interface BestPracticeTranslation {
+export interface BestPractice {
   surveyTranslationId: number;
   surveyTranslationBestPracticeLabel: string;
   surveyTranslationBestPracticeHelp: string;

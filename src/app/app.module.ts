@@ -5,7 +5,6 @@ import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -19,14 +18,12 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/containers/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { surveyFeature } from './components/visit/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
-import { SurveyQuestionComponent } from './components/visit/components/survey-question/survey-question.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
 import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +39,7 @@ import { DangerousSituationModule } from './components/dangerous/dangerous-situa
 import { HistoryDetailsModule } from './components/history-details/history-details.module';
 import { historyFeature } from './components/history/store/history.feature';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { SurveyModule } from './components/visit/survey.module';
 
 registerLocaleData(localeFr);
 
@@ -50,13 +48,13 @@ const pageComponents = [
   TutorialComponent,
   HomepageComponent,
   ProfileComponent,
-  VisitComponent,
 ];
 
 const pageModules = [
   DangerousSituationModule,
   HistoryModule,
   HistoryDetailsModule,
+  SurveyModule,
 ];
 
 const ngrxFeatures = [
@@ -78,10 +76,8 @@ const ngrxFeatures = [
     TutorialComponent,
     HomepageComponent,
     ProfileComponent,
-    VisitComponent,
     ActionCorrectiveComponent,
     SecuriteComponent,
-    SurveyQuestionComponent,
     BonnePratiqueComponent,
     BonnePratiqueComponent,
     ATraiterComponent,
@@ -105,7 +101,6 @@ const ngrxFeatures = [
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 1000,
       positionClass: 'toast-center-center',

@@ -4,21 +4,15 @@ import { Component, OnInit } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
 import { Observable } from 'rxjs';
-import { Result } from '../interfaces/create/result.interface';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
-import { DataService } from '../../../services/data.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { Direction } from '../../shared/interfaces/direction.interface';
-import { ToastrService } from 'ngx-toastr';
-import { combineLatest } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Question } from '../interfaces/getSurveys/question.interface';
-import { ResultQuestion } from '../interfaces/create/result-question.interface';
-import { ResultTeamMember } from '../interfaces/create/result-team-member.interface';
 
 @Component({
   selector: 'app-visit',
@@ -29,7 +23,6 @@ export class VisitComponent implements OnInit {
 
   isCollapsed = false;
   updateResultPayload: UpdateResult;
-  questionDone = 0;
 
   /** Forms */
   mainForm = new FormGroup({
@@ -47,6 +40,12 @@ export class VisitComponent implements OnInit {
   questionsForms: {group: FormGroup, question: Question}[] = [];
   // Keep questions to ease form updates.
   questions: Question[] = [];
+  bestPracticeForm = new FormGroup({
+    selection: new FormControl('', [Validators.required]),
+    type: new FormControl(''),
+    comment: new FormControl(''),
+    photo: new FormControl(''),
+  });
 
   /** Data */
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
@@ -55,11 +54,13 @@ export class VisitComponent implements OnInit {
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
 
   teamMode = TEAM_MODE;
+  surveyTeamMode = this.teamMode.no;
 
   questionNum = 0;
   data = [];
 
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
+  isBestPracticeSelected$: Observable<boolean> = this.surveyService.isBestPracticedSelected();
 
   bestPracticeId = BEST_PRACTICE_CATEGORY_ID;
 
@@ -67,8 +68,6 @@ export class VisitComponent implements OnInit {
     private surveyService: SurveyService,
     private historyService: HistoryService,
     private profileService: ProfileService,
-    private dataService: DataService,
-    private toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +86,8 @@ export class VisitComponent implements OnInit {
           this.questions.push(question);
         });
       });
+
+      this.surveyTeamMode = survey.surveyTeam;
     });
   }
 
@@ -131,17 +132,21 @@ export class VisitComponent implements OnInit {
   }
 
   countSurveyFields(): number {
-    return 4 + this.teamMembersForms.length;
+    return 4 + (this.surveyTeamMode === this.teamMode.no ? 0 : this.teamMembersForms.length);
   }
 
   countValidSurveyFields(): number {
+    const countTeamMembersForm = this.surveyTeamMode === this.teamMode.no
+      ? 0
+      : this.teamMembersForms.reduce((sum, form) => {
+          return sum + (form.status === 'VALID' ? 1 : 0);
+        }, 0);
+
     return (+this.mainForm.get('entity').valid)
       + (+this.mainForm.get('place').valid)
       + (+this.mainForm.get('client').valid)
       + (+this.mainForm.get('date').valid)
-      + this.teamMembersForms.reduce((sum, form) => {
-        return sum + (form.status === 'VALID' ? 1 : 0);
-      }, 0);
+      + countTeamMembersForm;
   }
 
   countValidQuestions(categoryId: number): number {
@@ -156,80 +161,6 @@ export class VisitComponent implements OnInit {
     return this.questionsForms
       .filter(form => form.question.surveyQuestionCategoryId === categoryId)
       .length;
-  }
-
-  canPost(): boolean {
-    if (this.countSurveyFields() !== this.countValidSurveyFields()) {
-      return false;
-    }
-
-    let allQuestionsValid = true;
-
-    this.questionsForms.forEach(questionForm => {
-      console.log(questionForm.group.status);
-      if (questionForm.group.status !== 'VALID') {
-        allQuestionsValid = false;
-        return;
-      }
-    });
-
-    return allQuestionsValid;
-  }
-
-  post() {
-    if (this.mainForm.status !== 'VALID') {
-      this.toastrService.error('Les informations de visite sont obligatoires.');
-      return;
-    }
-
-    // @todo: check members + questions
-
-    combineLatest(
-      this.survey$,
-      this.user$,
-    ).pipe(take(1)).subscribe(([survey, user]) => {
-      const questions: ResultQuestion[] = this.questionsForms.map(form => {
-        return {
-          resultQuestionId: null,
-          resultQuestionResultId: null,
-          resultQuestionResultQuestionId: form.group.value.id,
-          resultQuestionResultNotation: form.group.value.selection,
-          resultQuestionResultComment: form.group.value.comment,
-          resultQuestionResultPhoto: null, // @todo
-          teamMemberId: survey.surveyTeam === TEAM_MODE.no
-            ? null
-            : form.group.value.teamMemberId,
-        };
-      });
-      const teamMembers: ResultTeamMember[] = survey.surveyTeam === TEAM_MODE.no
-        ? []
-        : this.teamMembersForms.map(form => ({
-          resultTeamMemberId: form.value.id,
-          resultTeamMemberFirstName: form.value.firstName,
-          resultTeamMemberLastName: form.value.lastName,
-          resultTeamMemberRole: form.value.role,
-        }));
-      const result: Result = {
-        resultId: null,
-        resultSurveyId: survey.surveyId,
-        resultUserId: user.id,
-        resultDirectionId: user.directionId,
-        resultAreaId: user.areaId,
-        resultEntityId: user.entityId,
-        resultDate: this.mainForm.get('date').value,
-        resultPlace: this.mainForm.get('place').value,
-        resultClient: this.mainForm.get('client').value,
-        resultValidated: true,
-        resultTeamMember: teamMembers,
-        resultQuestion: questions,
-        resultBestPracticeDone: 'todo',
-        resultBestPracticeComment: 'todo',
-        resultBestPracticePhoto: 'todo',
-      };
-
-      this.surveyService.createResult(result);
-      this.toastrService.success('success');
-    });
   }
 
   private getRandomId(): string {
