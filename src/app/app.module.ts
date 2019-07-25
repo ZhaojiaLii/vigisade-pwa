@@ -41,6 +41,7 @@ import localeFr from '@angular/common/locales/fr';
 import { DangerousSituationModule } from './components/dangerous/dangerous-situation.module';
 import { HistoryDetailsModule } from './components/history-details/history-details.module';
 import { historyFeature } from './components/history/store/history.feature';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 registerLocaleData(localeFr);
 
@@ -89,6 +90,7 @@ const ngrxFeatures = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DeviceDetectorModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
