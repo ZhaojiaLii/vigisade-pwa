@@ -1,14 +1,14 @@
 import { Category } from './category.interface';
-import { TypeBestPractice } from './typeBestPractice.interface';
-import { BestPracticeTranslation } from './bestPracticeTranslation.interface';
+import { BestPracticeType } from './best-practice-type.interface';
+import { BestPractice } from './best-practice.interface';
 
 export interface Survey {
   surveyId: number;
   surveyDirectionId: number;
   surveyTeam: string;
   surveyCategories: Category[];
-  typeBestPractice: TypeBestPractice[];
-  bestPracticeTranslation: BestPracticeTranslation;
+  typeBestPractice: BestPracticeType[];
+  bestPracticeTranslation: BestPractice;
 }
 
 export const TEAM_MODE_TEAM = 'Equipe';

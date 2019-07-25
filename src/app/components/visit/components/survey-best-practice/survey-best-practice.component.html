@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="card card-full-width shadow-none" [style.border]="showError ? 'solid red 1px' : ''">
+        <div class="card-body ml-3 mr-3">
+            <p style="color: red" *ngIf="showError">
+                Tous les champs sont obligatoires.
+            </p>
+
+            <div class="d-flex justify-content-between">
+                <div class=" mb-15 lineH-24px">
+                    <p class="m-0">
+                        {{survey.bestPracticeTranslation.surveyTranslationBestPracticeLabel}}
+                    </p>
+                    <div id="collapseBasic"[collapse]="!isCollapsed" [isAnimated]="true">
+                        <div class="light-grey font-14">
+                            {{survey.bestPracticeTranslation.surveyTranslationBestPracticeHelp}}
+                        </div>
+                    </div>
+                </div>
+                <div
+                    *ngIf="survey.bestPracticeTranslation.surveyTranslationBestPracticeHelp?.length > 0"
+                    class="flex-shrink-0 mt-1 ml-2"
+                    (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="isCollapsed"
+                    aria-controls="collapseBasic"
+                >
+                    <svg class="cursor" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+                        <g fill="#3884A5" fill-rule="evenodd">
+                            <path d="M10.5 1.4c-5.019 0-9.1 4.082-9.1 9.1s4.081 9.1 9.1 9.1c5.018 0 9.1-4.082 9.1-9.1s-4.082-9.1-9.1-9.1m0 19.6C4.71 21 0 16.29 0 10.5S4.71 0 10.5 0 21 4.71 21 10.5 16.29 21 10.5 21"></path>
+                            <path d="M9.529 13.98c0-.255.094-.476.28-.66a.934.934 0 0 1 .68-.276c.256 0 .479.088.672.264a.852.852 0 0 1 .288.649.897.897 0 0 1-.282.66.94.94 0 0 1-.678.275.947.947 0 0 1-.366-.071 1.026 1.026 0 0 1-.306-.193.867.867 0 0 1-.288-.647zm.239-1.667v-.456c0-.192.015-.364.042-.516a1.907 1.907 0 0 1 .372-.828c.1-.128.227-.264.378-.408l.54-.516c.153-.136.283-.288.39-.456.108-.168.163-.372.163-.612 0-.312-.1-.574-.294-.786-.196-.212-.475-.318-.834-.318a1.18 1.18 0 0 0-1.128.78 1.575 1.575 0 0 0-.097.468l-1.475-.132c.048-.384.149-.726.306-1.026.156-.3.358-.554.606-.762.248-.208.53-.366.852-.474.32-.108.664-.162 1.032-.162.344 0 .67.05.977.15.309.1.58.248.817.444.236.196.422.438.557.726.137.288.204.62.204.996 0 .256-.028.48-.084.672a1.919 1.919 0 0 1-.24.528c-.103.16-.23.314-.378.462a9.012 9.012 0 0 1-.498.462 5.38 5.38 0 0 0-.39.36c-.1.104-.18.208-.24.312a1.153 1.153 0 0 0-.126.336c-.023.12-.036.268-.036.444v.312H9.768z"></path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <form [formGroup]="group">
+                <div class="d-flex align-items-center justify-content-between">
+                    <label class="check-container">
+                        <input type="radio" name="selection" value="conforme" formControlName="selection">
+                        <div class="radiobtn svg-green circle-white-icon shadow-01">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="11 9 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 36.462h3.333c.801 0 1.908.383 3.08.789 1.065.368 2.166.749 2.846.749h7.408c.612 0 1.11-.518 1.11-1.154 0-.636-.498-1.154-1.11-1.154a.377.377 0 0 1-.37-.384c0-.213.165-.385.37-.385h.74c.613 0 1.112-.518 1.112-1.154 0-.636-.499-1.154-1.112-1.154a.377.377 0 0 1-.37-.384c0-.213.166-.385.37-.385h.741c.613 0 1.111-.518 1.111-1.154 0-.636-.498-1.154-1.11-1.154a.377.377 0 0 1-.371-.384c0-.213.165-.385.37-.385h.74c.613 0 1.112-.517 1.112-1.154 0-.636-.499-1.153-1.111-1.153H31.74a.364.364 0 0 1-.29-.145.397.397 0 0 1-.072-.325c.49-2.24.735-4.54.732-6.838 0-.636-.498-1.154-1.111-1.154s-1.111.518-1.111 1.154a.39.39 0 0 1-.006.069 18.493 18.493 0 0 1-1.422 4.334c-1.4 2.906-3.34 4.443-5.61 4.443H21v8.462zM37.828 39H30.24c-.82 0-1.953-.391-3.154-.806-1.09-.377-2.217-.765-2.915-.765H20.38a.386.386 0 0 1-.379-.393v-9.429c0-.217.17-.393.38-.393h2.275c4.778 0 6.343-7.732 6.449-8.29C29.124 17.86 29.967 17 31 17c1.046 0 1.897.881 1.897 1.964a33.366 33.366 0 0 1-.667 6.679h7.873c1.046 0 1.897.881 1.897 1.964 0 .843-.515 1.563-1.236 1.842.297.346.477.802.477 1.301 0 .843-.514 1.563-1.235 1.841.296.347.477.803.477 1.302 0 .843-.515 1.563-1.236 1.841.297.347.477.803.477 1.302 0 1.083-.85 1.964-1.896 1.964z" fill="#20A15F" stroke="#20A15F"></path>
+                            </svg>
+                        </div>
+                    </label>
+                    <label class="check-container">
+                        <input type="radio" name="selection" value="non-conforme" formControlName="selection">
+                        <div class="radiobtn svg-danger circle-white-icon shadow-01">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="11 9 40 40">
+                                <path fill="#D94545" stroke="#D94545" d="M21 21.538h3.333c.801 0 1.908-.383 3.08-.789C28.478 20.381 29.58 20 30.26 20h7.408c.612 0 1.11.518 1.11 1.154 0 .636-.498 1.154-1.11 1.154a.377.377 0 0 0-.37.384c0 .213.165.385.37.385h.74c.613 0 1.112.518 1.112 1.154 0 .636-.499 1.154-1.112 1.154a.377.377 0 0 0-.37.384c0 .213.166.385.37.385h.741c.613 0 1.111.518 1.111 1.154 0 .636-.498 1.154-1.11 1.154a.377.377 0 0 0-.371.384c0 .213.165.385.37.385h.74c.613 0 1.112.517 1.112 1.154 0 .636-.499 1.153-1.111 1.153H31.74a.364.364 0 0 0-.29.145.397.397 0 0 0-.072.325c.49 2.24.735 4.54.732 6.838 0 .636-.498 1.154-1.111 1.154s-1.111-.518-1.111-1.154a.39.39 0 0 0-.006-.069 18.493 18.493 0 0 0-1.422-4.334c-1.4-2.906-3.34-4.443-5.61-4.443H21v-8.462zM37.828 19H30.24c-.82 0-1.953.391-3.154.806-1.09.377-2.217.765-2.915.765H20.38c-.21 0-.379.176-.379.393v9.429c0 .217.17.393.38.393h2.275c4.778 0 6.343 7.732 6.449 8.29C29.124 40.14 29.967 41 31 41c1.046 0 1.897-.881 1.897-1.964a33.366 33.366 0 0 0-.667-6.679h7.873c1.046 0 1.897-.881 1.897-1.964 0-.843-.515-1.563-1.236-1.842.297-.346.477-.802.477-1.301 0-.843-.514-1.563-1.235-1.841.296-.347.477-.803.477-1.302 0-.843-.515-1.563-1.236-1.841.297-.347.477-.803.477-1.302 0-1.083-.85-1.964-1.896-1.964z"></path>
+                            </svg>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="bp-type">Type</label>
+                        <select
+                            appHighlight
+                            id="bp-type"
+                            class="form-control has-value"
+                            formControlName="type"
+                        >
+                            <option
+                                *ngFor="let type of survey.typeBestPractice"
+                                value="{{type.typeBestPracticeId}}"
+                            >
+                                {{type.typeBestPracticeTranslation.typeBestPracticeTranslationType}}
+                            </option>
+                        </select>
+                        <div class="line"></div>
+                    </div>
+                    <div class="form-group col-12">
+                        <textarea
+                            appHighlight
+                            id="bp-comment"
+                            class="form-control"
+                            rows="3"
+                            formControlName="comment"
+                            required
+                        ></textarea>
+                        <label for="bp-comment" class="light-grey font-14">
+                            Commentaire court
+                        </label>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="mx-30 mb-25">
+                    <input style="display: none" type="file" (change)="preview($event)" #uploadImage formControlName="photo">
+                    <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center" (click)="uploadImage.click()" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
+                            <g fill="#363636" fill-rule="evenodd" stroke="#363636">
+                                <path d="M2.42 4.549a.71.71 0 0 0-.71.708v10.647a.71.71 0 0 0 .71.709H21.58a.71.71 0 0 0 .71-.71V5.258a.71.71 0 0 0-.71-.708h-4.4a.352.352 0 0 1-.274-.13L14.67 1.71H9.328L7.093 4.42a.355.355 0 0 1-.274.13h-4.4zM21.58 17.322H2.42A1.42 1.42 0 0 1 1 15.904V5.256a1.42 1.42 0 0 1 1.42-1.419h4.232L8.887 1.13a.355.355 0 0 1 .274-.128h5.677c.106 0 .206.046.274.128l2.235 2.71h4.234c.782 0 1.42.636 1.42 1.418v10.646c0 .782-.638 1.42-1.42 1.42z"></path>
+                                <path d="M12 5.258a4.618 4.618 0 0 0-4.613 4.613A4.619 4.619 0 0 0 12 14.484a4.618 4.618 0 0 0 4.613-4.613A4.618 4.618 0 0 0 12 5.258m0 9.936a5.33 5.33 0 0 1-5.323-5.323A5.328 5.328 0 0 1 12 4.549a5.327 5.327 0 0 1 5.322 5.322A5.328 5.328 0 0 1 12 15.194M19.807 7.742a.71.71 0 1 1 0-1.42.71.71 0 0 1 0 1.42"></path>
+                                <path d="M12 8.097c-.978 0-1.774.796-1.774 1.774s.796 1.774 1.774 1.774 1.774-.796 1.774-1.774S12.978 8.097 12 8.097m0 4.258A2.486 2.486 0 0 1 9.516 9.87 2.486 2.486 0 0 1 12 7.387a2.486 2.486 0 0 1 2.483 2.484A2.486 2.486 0 0 1 12 12.355"></path>
+                            </g>
+                        </svg>
+                        <span class="ml-3">Ajouter une photo</span>
+                    </button>
+                </div>
+                <div class="image-preview">
+                    <img src="{{imgUrl}}" alt="Preview failed" *ngIf="imgUrl" style="width: 100%; height: 10%;">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

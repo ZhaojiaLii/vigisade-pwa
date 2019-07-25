@@ -15,19 +15,16 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SurveyTeamMemberComponent } from '../visit/components/survey-team-member/survey-team-member.component';
-import { SurveyQuestionComponent } from '../visit/components/survey-question/survey-question.component';
 import { CommonModule } from '@angular/common';
 import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-element.component';
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
-import { CollapseModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, CollapseModule } from 'ngx-bootstrap';
 import { MenuButtonsComponent } from './components/menu-buttons/menu-buttons.component';
 
 const sharedComponents = [
   MenuComponent,
   MenuButtonsComponent,
-  SurveyTeamMemberComponent,
   ATraiterElementComponent,
 ];
 const sharedDirectives = [
@@ -64,10 +61,9 @@ const materialModules = [
     CommonModule,
     RouterModule,
     CollapseModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   entryComponents: [
-    SurveyTeamMemberComponent,
-    SurveyQuestionComponent,
     ATraiterElementComponent,
   ],
   exports: [
@@ -76,6 +72,7 @@ const materialModules = [
     CommonModule,
     RouterModule,
     CollapseModule,
+    BsDatepickerModule,
     ...materialModules,
     ...sharedComponents,
     ...sharedDirectives,

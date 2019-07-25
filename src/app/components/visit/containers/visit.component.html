@@ -2,7 +2,7 @@
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div *ngIf="survey$|async" class="container mb-90">
-    <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null}">
+    <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null || (isBestPracticeSelected$|async)}">
         <div class="font-bold font-25">
             DR {{(userDirection$|async)?.name|uppercase}}
         </div>
@@ -64,20 +64,18 @@
                 </div>
             </div>
         </div>
-        <div class="mx-30">
-            <button
-                [attr.disabled]="canPost() ? null : 1"
-                (click)="post()"
-                class="btn btn-info d-block w-100 mt-5"
-            >
-                Valider
-            </button>
-        </div>
+        <app-survey-submit
+            [currentStepFinished]="countValidSurveyFields() === countSurveyFields()"
+            [mainForm]="mainForm"
+            [teamMembersForms]="teamMembersForms"
+            [questionsForms]="questionsForms"
+            [bestPracticeForm]="bestPracticeForm"
+        ></app-survey-submit>
     </div>
     <div
         *ngFor="let category of (survey$|async)?.surveyCategories"
         class="container-content"
-        [ngClass]="{'hide': (selectedCategory$|async)?.surveyCategoryId!== category.surveyCategoryId}"
+        [ngClass]="{'hide': (selectedCategory$|async)?.surveyCategoryId !== category.surveyCategoryId || (isBestPracticeSelected$|async)}"
     >
         <div class="row">
             <div class="card card-full-width mb-10 shadow-none">
@@ -88,6 +86,33 @@
                 ></app-survey-question>
             </div>
         </div>
+        <app-survey-submit
+            [currentStepFinished]="countValidQuestions(category.surveyCategoryId) === countQuestions(category.surveyCategoryId)"
+            [mainForm]="mainForm"
+            [teamMembersForms]="teamMembersForms"
+            [questionsForms]="questionsForms"
+            [bestPracticeForm]="bestPracticeForm"
+        ></app-survey-submit>
+    </div>
+    <div
+        class="container-content"
+        [ngClass]="{'hide': !(isBestPracticeSelected$|async)}"
+    >
+        <div class="row">
+            <div class="card card-full-width mb-10 shadow-none">
+                <app-survey-best-practice
+                    [group]="bestPracticeForm"
+                    [survey]="survey$|async"
+                ></app-survey-best-practice>
+            </div>
+        </div>
+        <app-survey-submit
+                [currentStepFinished]="bestPracticeForm.status === 'VALID'"
+                [mainForm]="mainForm"
+                [teamMembersForms]="teamMembersForms"
+                [questionsForms]="questionsForms"
+                [bestPracticeForm]="bestPracticeForm"
+        ></app-survey-submit>
     </div>
 </div>
 <div *ngIf="survey$|async" class="fixed-footer">
@@ -95,12 +120,17 @@
          aria-controls="collapseBasic">
         <div class=""><span class="font-bold">0</span>/{{questionNum}}</div>
         <div class="d-flex align-items-center">
-            <div *ngIf="(selectedCategory$|async) === null" class="mr-2">
+            <div *ngIf="(selectedCategory$|async) === null && !(isBestPracticeSelected$|async)" class="mr-2">
                 <span class="font-bold">Visite {{countValidSurveyFields()}}</span>/{{countSurveyFields()}}
             </div>
-            <div *ngIf="(selectedCategory$|async) as category" class="mr-2">
+            <div *ngIf="!(isBestPracticeSelected$|async) && (selectedCategory$|async) as category" class="mr-2">
                 <span class="font-bold">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}} {{countValidQuestions(category.surveyCategoryId)}}</span>/{{countQuestions(category.surveyCategoryId)}}
             </div>
+            <div *ngIf="(isBestPracticeSelected$|async)" class="mr-2">
+                <span class="font-bold">Bonne pratique {{bestPracticeForm.status === 'VALID' ? 1 : 0}}</span>/1
+            </div>
+
+
             <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
                 <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
             </svg>
@@ -153,7 +183,12 @@
               </svg>
               <span class="note-label">Bonne pratique</span>
             </span>
-            <span class="note text-danger"><strong>0</strong>/1</span>
+            <span
+                class="note"
+                [ngClass]="bestPracticeForm.status === 'VALID' ? 'text-success' : 'text-danger'"
+            >
+                <strong>{{bestPracticeForm.status === 'VALID' ? 1 : 0}}</strong>/1
+            </span>
         </div>
     </div>
     <div class="overlay-collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
