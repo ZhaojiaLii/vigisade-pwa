@@ -27,7 +27,7 @@ export const getResults = createSelector(
 
 export const getResult = createSelector(
   getHistoryState,
-  (state: HistoryState) => state.results[0],
+  (state: HistoryState) => state.results,
 );
 
 export const getSelectedResult = createSelector(
