@@ -22,9 +22,11 @@ import { ATraiterElementComponent } from '../a-traiter/containers/a-traiter-elem
 import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
 import { CollapseModule } from 'ngx-bootstrap';
+import { MenuButtonsComponent } from './components/menu-buttons/menu-buttons.component';
 
 const sharedComponents = [
   MenuComponent,
+  MenuButtonsComponent,
   SurveyTeamMemberComponent,
   ATraiterElementComponent,
 ];
