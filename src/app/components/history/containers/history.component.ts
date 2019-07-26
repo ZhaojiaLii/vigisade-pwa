@@ -18,8 +18,7 @@ export class HistoryComponent implements OnInit {
   userEntityId: number;
   results = [];
   userHistoryDesktop$: Observable<any> = combineLatest(
-    this.historyService.getHistory(),
-    this.profileService.getUser(),
+    [this.historyService.getHistory(), this.profileService.getUser()]
   ).pipe(
     filter(([result, user]) => {
         // console.log(result);
@@ -54,8 +53,7 @@ export class HistoryComponent implements OnInit {
   );
 
   userHistoryMobile$: Observable<any> = combineLatest(
-    this.historyService.getHistory(),
-    this.profileService.getUser(),
+    [this.historyService.getHistory(), this.profileService.getUser()]
   ).pipe(
     filter(([result, user]) => {
       this.results = [];
