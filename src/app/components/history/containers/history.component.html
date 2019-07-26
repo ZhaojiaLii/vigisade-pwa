@@ -2,19 +2,61 @@
     <div *ngIf="(user$|async) === null" class="row">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
+    <form [formGroup]="filterForm">
+        <div class="card card-full-width mb-10 shadow-none">
+            <div class="card-body px-30">
+                <div class="row align-items-center light-grey mb-20">
+                    <div class="col-6 font-demiBold">Filtre de recherche</div>
+                </div>
+                <hr/>
+                <div class="row align-items-center light-grey mb-20">
+                    <div class="col-6 font-demiBold">Date début:
+                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate">
+                    </div>
+                    <div class="col-6 font-demiBold">Date fin:
+                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate">
+                    </div>
+                </div>
+                <div class="row align-items-center light-grey mb-20">
+                    <div class="col-6 font-demiBold">Zone:
+                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="area">
+                            <option value="{{area.id}}" *ngFor="let area of areas">{{area.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 font-demiBold">Entity:
+                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="entity">
+                            <option value="{{entity.id}}" *ngFor="let entity of entities">{{entity.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-center light-grey mb-20">
+                    <div class="col-6 font-demiBold">Créateur:
+                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="creator">
+                            <option value="">1</option>
+                        </select>
+                    </div>
+                    <div class="col-6 text-right font-weight-bold font-14">
+                        <button style="background: #008ac9; color: #ffffff" class="col-6" (click)="filter()">Rechercher</button>
+                        <div><button style="background: #008ac9; color: #ffffff" class="col-6" (click)="filter()">Reinit</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <div *ngIf="results.length >= 0" class="row">
         <div *ngIf="results.length" [ngPlural]="results.length" class="total">
             <ng-template ngPluralCase="=0">Aucun contrôle trouvé</ng-template>
             <ng-template ngPluralCase="=1">1 contrôle trouvé</ng-template>
             <ng-template ngPluralCase="other">
-                <strong>{{ results.length }}</strong> contrôles trouvés
+                <strong>{{ countResult }}</strong> contrôles trouvés
             </ng-template>
         </div>
         <app-history-item
             *ngFor="let result of results"
-            [result]="result"
-            [routerLink]="['/history',result.resultId]"
+            [result]="result.result"
+            [routerLink]="['/history',result.result.resultId]"
             style="display: block; width: 100%;"
+            [style.display]="result.status ? 'block' : 'none'"
         ></app-history-item>
     </div>
 </div>
