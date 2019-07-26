@@ -34,8 +34,9 @@ export const getCorrectionResult = createSelector(
   getCorrection,
   getResult,
   (corrections: Correction[], results: Result[]) => {
-    console.log(results);
-    return results[0] || null;
+    for (const result of results) {
+      return result;
+    }
   }
 );
 

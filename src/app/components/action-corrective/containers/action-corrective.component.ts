@@ -31,6 +31,7 @@ export class ActionCorrectiveComponent implements OnInit {
   categoryId: number;
   categoryTitle: string;
   question: any;
+  resultQuestion: any;
   userId: number;
   result: any;
   history$: Observable<GetResult> = this.historyService.getHistory();
@@ -69,13 +70,19 @@ export class ActionCorrectiveComponent implements OnInit {
         }
       }
     );
+    this.historyService.loadResult(this.resultId);
+    this.historyService.getResult();
     this.getCorrectionResult$.subscribe(result => {
-      if (result === null) {
+      if (result === null || result === undefined) {
         return;
       } else {
+        // console.log('get result', 'resultid= ', this.resultId, 'questionId= ', this.questionId);
         const resultQuestions = result.resultQuestion;
         for (const question of resultQuestions) {
-          // @todo: all the questions in the selected result is here
+          if (question.resultQuestionResultId === this.resultId && question.resultQuestionResultQuestionId === this.questionId) {
+            this.resultQuestion = question;
+            // console.log(question);
+          }
         }
       }
     });

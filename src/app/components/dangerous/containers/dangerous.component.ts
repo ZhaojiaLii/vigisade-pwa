@@ -32,14 +32,6 @@ export class DangerousComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dangerousType$.subscribe(types => {
-      for (const type of types) {
-        // @ts-ignore
-        for (const typeDetail of type) {
-          this.type.push(typeDetail);
-        }
-      }
-    });
     this.onValueChanged();
   }
 

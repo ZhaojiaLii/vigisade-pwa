@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit {
       this.userFirstName = user.firstName;
       this.userPhoto = user.photo;
       this.currentLanguageId = user.language;
+      console.log(this.currentLanguageId);
       this.currentLanguage = this.Languages.find(language => language.id === this.currentLanguageId).name;
     });
     this.Languages.forEach(language => {

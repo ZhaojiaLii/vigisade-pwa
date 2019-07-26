@@ -37,6 +37,7 @@ export class DangerousService {
   }
 
   getDangerousTypes(): Observable<DangerousType[]> {
+    // @ts-ignore
     return this.store.pipe(select(getTypeDangerousSituations));
   }
 }
