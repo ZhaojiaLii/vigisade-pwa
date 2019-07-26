@@ -36,7 +36,7 @@ export class DataService {
     return this.store.pipe(select(getDirections));
   }
 
-  getTypeDangerousSituations(): Observable<DangerousType[]> {
+  getTypeDangerousSituations(): Observable<DangerousType> {
     return this.store.pipe(select(getTypeDangerousSituations));
   }
 

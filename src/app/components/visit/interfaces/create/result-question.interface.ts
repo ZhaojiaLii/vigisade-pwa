@@ -3,7 +3,7 @@ export interface ResultQuestion {
   resultQuestionId: number;
   resultQuestionResultId: number;
   resultQuestionResultQuestionId: number;
-  resultQuestionResultNotation: string;
+  resultQuestionResultNotation: number;
   resultQuestionResultComment: string;
   resultQuestionResultPhoto: string;
 }

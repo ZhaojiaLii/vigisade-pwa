@@ -1,6 +1,7 @@
 export interface User {
   id: number;
   mail: string;
+  roles: Array<string>;
   directionId: number;
   areaId: number;
   entityId: number;

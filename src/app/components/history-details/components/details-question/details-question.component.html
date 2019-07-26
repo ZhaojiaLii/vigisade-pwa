@@ -2,10 +2,10 @@
     <div class="d-flex justify-content-between">
         <div class=" mb-15 lineH-24px">
             <p class="m-0">
-                {{question.resultQuestionResultQuestionId.surveyQuestionTranslation[0].surveyQuestionTranslationLabel}}
+                {{question.resultQuestionResultQuestionId.surveyQuestionTranslation.surveyQuestionTranslationLabel}}
             </p>
-            <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true" *ngIf='question.resultQuestionResultQuestionId.surveyQuestionTranslation[0].surveyQuestionTranslationHelp'>
-                <div class="light-grey font-14">{{question.resultQuestionResultQuestionId.surveyQuestionTranslation[0].surveyQuestionTranslationHelp}}</div>
+            <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true" *ngIf='question.resultQuestionResultQuestionId.surveyQuestionTranslation.surveyQuestionTranslationHelp'>
+                <div class="light-grey font-14">{{question.resultQuestionResultQuestionId.surveyQuestionTranslation.surveyQuestionTranslationHelp}}</div>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
     </div>
     <div class="row" *ngIf='question.resultQuestionResultPhoto'>
         <div class="col">
-            <img class="img-fluide" src="{{question.resultQuestionResultPhoto}}"/>
+            <img class="img-fluide" src="{{question.resultQuestionResultPhoto}}" alt=""/>
         </div>
     </div>
 </div>

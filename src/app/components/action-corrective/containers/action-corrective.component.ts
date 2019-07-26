@@ -11,6 +11,7 @@ import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class ActionCorrectiveComponent implements OnInit {
   categoryId: number;
   categoryTitle: string;
   question: any;
+  resultQuestion: any;
   userId: number;
   result: any;
   history$: Observable<GetResult> = this.historyService.getHistory();
@@ -37,6 +39,7 @@ export class ActionCorrectiveComponent implements OnInit {
   user$: Observable<User> = this.profileService.getUser();
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   correctionQuestions$: Observable<any> = this.correctionService.getCorrectionQuestion();
+  getCorrectionResult$: Observable<Result> = this.correctionService.getCorrectionResult();
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -61,10 +64,28 @@ export class ActionCorrectiveComponent implements OnInit {
             this.resultId = correction.result_id;
             this.questionId = correction.question_id;
             this.categoryId = correction.category_id;
+            this.historyService.selectResult(this.resultId);
+            this.historyService.loadResult(this.resultId);
           }
         }
       }
     );
+    this.historyService.loadResult(this.resultId);
+    this.historyService.getResult();
+    this.getCorrectionResult$.subscribe(result => {
+      if (result === null || result === undefined) {
+        return;
+      } else {
+        // console.log('get result', 'resultid= ', this.resultId, 'questionId= ', this.questionId);
+        const resultQuestions = result.resultQuestion;
+        for (const question of resultQuestions) {
+          if (question.resultQuestionResultId === this.resultId && question.resultQuestionResultQuestionId === this.questionId) {
+            this.resultQuestion = question;
+            // console.log(question);
+          }
+        }
+      }
+    });
     this.getCorrectionCategory$.subscribe(categories => {
       this.categoryTitle = categories.find(category =>
         category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;

@@ -16,8 +16,8 @@
         <div class="form-row">
           <div class="form-group col-12">
             <select class="form-control" appHighlight id="typeSelect" formControlName="dangerousType">
-              <option value="{{type.typeDangerousSituationsId}}" *ngFor="let type of type">
-                {{type.typeDangerousSituationTranslation[0].typeDangerousSituationTranslationType}}
+              <option value="{{type.typeDangerousSituationsId}}" *ngFor="let type of (dangerousType$|async)">
+                {{type.typeDangerousSituationTranslation.typeDangerousSituationTranslationType}}
               </option>
             </select>
             <label for="typeSelect">Type</label>

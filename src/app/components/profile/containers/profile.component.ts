@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit {
       this.userFirstName = user.firstName;
       this.userPhoto = user.photo;
       this.currentLanguageId = user.language;
+      console.log(this.currentLanguageId);
       this.currentLanguage = this.Languages.find(language => language.id === this.currentLanguageId).name;
     });
     this.Languages.forEach(language => {
@@ -170,7 +171,7 @@ export class ProfileComponent implements OnInit {
       };
       // console.log('POST data is: ', POST);
       this.profileService.updateUser(POST);
-      this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + val.language , 'Succès');
+      this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + this.currentLanguage , 'Succès');
       this.Languages.forEach(language => {
         if (language.name === this.currentLanguage) {
           this.Languages.splice(this.Languages.indexOf(language), 1);

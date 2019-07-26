@@ -3,12 +3,41 @@ import { CorrectionState } from './correction.states';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
+import { getResult } from '../../history/store/history.selectors';
+import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
 
 export const getCorrection = createSelector(
   getCorrectionState,
   (state: CorrectionState) => state.correctiveAction,
+);
+
+// export const getCorrectionResults = createSelector(
+//   getCorrection,
+//   getResults,
+//   (corrections: Correction[], userResult: Result[]) => {
+//     const resultsArray = [];
+//     if (corrections !== null && userResult !== null) {
+//       for (const correction of corrections) {
+//         const correctionResult = userResult.find(result => result.resultId === correction.result_id);
+//         if (!resultsArray.includes(correctionResult)) {
+//           resultsArray.push(correctionResult);
+//         }
+//       }
+//     }
+//     return resultsArray || null;
+//   }
+// );
+
+export const getCorrectionResult = createSelector(
+  getCorrection,
+  getResult,
+  (corrections: Correction[], results: Result[]) => {
+    for (const result of results) {
+      return result;
+    }
+  }
 );
 
 export const getCorrectionSurvey = createSelector(

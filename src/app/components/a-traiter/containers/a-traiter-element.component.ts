@@ -28,6 +28,10 @@ export class ATraiterElementComponent implements OnInit {
   ngOnInit() {
     this.historyService.loadHistory();
     this.history$.subscribe(histories => {
+      if (histories.result == null) {
+        this.result = [];
+        return;
+      }
       this.result = histories.result.find(result => result.resultId === this.resultId);
     });
     this.correction$.subscribe(
