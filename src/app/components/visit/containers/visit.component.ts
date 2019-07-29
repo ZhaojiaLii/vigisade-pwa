@@ -6,13 +6,11 @@ import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
 import { Observable } from 'rxjs';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
-import { DataService } from '../../../services/data.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { Direction } from '../../shared/interfaces/direction.interface';
-import { ToastrService } from 'ngx-toastr';
 import { filter, take } from 'rxjs/operators';
 import { Question } from '../interfaces/getSurveys/question.interface';
 

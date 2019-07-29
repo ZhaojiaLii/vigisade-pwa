@@ -1,5 +1,3 @@
-import { Question } from '../../visit/interfaces/getSurveys/question.interface';
-
 export interface ResultQuestion {
   resultQuestionId: number;
   resultQuestionResultId: number;
@@ -8,5 +6,5 @@ export interface ResultQuestion {
   resultQuestionResultComment: string;
   resultQuestionResultPhoto: string;
   // For display.
-  resultQuestionResultQuestionId?: Question;
+  resultQuestionResultQuestionId?: number;
 }

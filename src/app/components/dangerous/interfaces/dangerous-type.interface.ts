@@ -3,5 +3,5 @@ import { TypeDangerousSituationTranslation } from '../../shared/interfaces/typeD
 
 export interface DangerousType {
   typeDangerousSituationsId: number;
-  typeDangerousSituationTranslation: TypeDangerousSituationTranslation[];
+  typeDangerousSituationTranslation: TypeDangerousSituationTranslation;
 }

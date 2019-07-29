@@ -5,7 +5,6 @@ import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -39,6 +38,7 @@ import localeFr from '@angular/common/locales/fr';
 import { DangerousSituationModule } from './components/dangerous/dangerous-situation.module';
 import { HistoryDetailsModule } from './components/history-details/history-details.module';
 import { historyFeature } from './components/history/store/history.feature';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 import { SurveyModule } from './components/visit/survey.module';
 
 registerLocaleData(localeFr);
@@ -86,6 +86,7 @@ const ngrxFeatures = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DeviceDetectorModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
