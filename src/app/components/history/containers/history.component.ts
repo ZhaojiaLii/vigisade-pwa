@@ -18,10 +18,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HistoryComponent implements OnInit {
   deviceInfo = null;
-  priority = [];
-  userId: number;
-  userDirectionId: number;
-  userEntityId: number;
   countResult: number;
   results = [];
   areas = [];
@@ -151,12 +147,6 @@ export class HistoryComponent implements OnInit {
     const isMobile = this.deviceService.isMobile();
     // const isTablet = this.deviceService.isTablet();
     const isDesktopDevice = this.deviceService.isDesktop();
-    this.user$.subscribe(user => {
-      this.userId = user.id;
-      this.userDirectionId = user.directionId;
-      this.userEntityId = user.entityId;
-      this.priority = user.roles;
-    });
     if (isMobile) {
       console.log('MOBILE MODE');
       this.userHistoryMobile$.subscribe();
@@ -168,29 +158,8 @@ export class HistoryComponent implements OnInit {
   }
 
   filter() {
-    // const filterData = {
-    //   startDate: formatDate(this.filterForm.value.startDate, 'dd/MM/yyyy', 'fr'),
-    //   // startDate: this.filterForm.value.startDate,
-    //   endDate: formatDate(this.filterForm.value.endDate, 'dd/MM/yyyy', 'fr'),
-    //   area: this.filterForm.value.area,
-    //   entity: this.filterForm.value.entity,
-    //   creator: this.filterForm.value.creator,
-    // };
-    if (this.filterForm.value.area !== null) {
-      for (const result of this.results) {
-        if (result.result.resultArea !== this.filterForm.value.area) {
-          result.status = false;
-        }
-      }
-    }
-    if (this.filterForm.value.entity !== null) {
-      for (const result of this.results) {
-        if (result.result.resultEntity !== this.filterForm.value.entity) {
-          result.status = false;
-        }
-      }
-    }
     if (this.filterForm.value.startDate && this.filterForm.value.endDate) {
+      // filtering by date
       const start = formatDate(this.filterForm.value.startDate, 'dd/MM/yyyy', 'fr');
       const startYear = start.slice(start.length - 4, start.length);
       const startMonth = start.slice(3, 5);
@@ -219,12 +188,37 @@ export class HistoryComponent implements OnInit {
         result.status = true;
       }
     }
+    if (this.filterForm.value.area !== '' && this.filterForm.value.area !== null) {
+      // filtering by area
+      for (const result of this.results) {
+        if (result.status === true) {
+          result.status = Number(result.result.resultArea) === Number(this.filterForm.value.area);
+        }
+      }
+    }
+    if (this.filterForm.value.entity !== '' && this.filterForm.value.entity !== null) {
+      // filtering by entity
+      for (const result of this.results) {
+        if (result.status === true) {
+          result.status = Number(result.result.resultEntity) === Number(this.filterForm.value.entity);
+        }
+      }
+    }
+    // console.log(this.results);
     this.countResultNum(this.results);
     if (this.countResult === 0) {
       this.toastrService.error('Aucun Résultat');
     } else {
       this.toastrService.success(this.countResult + ' résultat trouvé');
     }
+  }
+
+  reInitFilter() {
+    this.filterForm.reset();
+    for (const result of this.results) {
+      result.status = true;
+    }
+    this.countResultNum(this.results);
   }
 
   countResultNum(results: any) {
