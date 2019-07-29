@@ -37,12 +37,6 @@ export class SurveySubmitComponent {
       return;
     }
 
-    // @todo
-    // si étape actuel = visite, go première catégorie
-    // si étape actuel = catégorie, go categorie suivante
-    // si étape actuel = dernière cat, go bonne pratique
-    // sinon post
-
     combineLatest(
       this.surveyService.isBestPracticedSelected(),
       this.surveyService.getSurveySelectedCategory(),
@@ -93,7 +87,7 @@ export class SurveySubmitComponent {
           resultQuestionResultQuestionId: form.group.value.id,
           resultQuestionResultNotation: form.group.value.selection,
           resultQuestionResultComment: form.group.value.comment,
-          resultQuestionResultPhoto: null, // @todo
+          resultQuestionResultPhoto: form.group.value.photo,
           teamMemberId: survey.surveyTeam === TEAM_MODE.no
             ? null
             : form.group.value.teamMemberId,
