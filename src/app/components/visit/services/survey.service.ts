@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { createResult, loadSurveys, selectSurveyCategory, updateResult } from '../store/survey.actions';
+import { createResult, loadSurveys, selectSurveyCategory, setLoadingState, updateResult } from '../store/survey.actions';
 import { Result } from '../interfaces/create/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SurveyState } from '../store/survey.state';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { getSelectedCategoryId, getSurveyOfUser, getSurveySelectedCategory } from '../store/survey.selectors';
+import { getSelectedCategoryId, getSurveyOfUser, getSurveySelectedCategory, isLoading } from '../store/survey.selectors';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 
@@ -32,6 +32,14 @@ export class SurveyService {
 
   updateResult(updateResultPayload: UpdateResult): void {
     this.store.dispatch(updateResult({updateResultPayload}));
+  }
+
+  setLoadingState(loading: boolean): void {
+    this.store.dispatch(setLoadingState({loading}));
+  }
+
+  isLoading(): Observable<boolean> {
+    return this.store.pipe(select(isLoading));
   }
 
   getSurveyOfUser(): Observable<Survey> {

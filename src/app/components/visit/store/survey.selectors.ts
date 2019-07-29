@@ -46,3 +46,8 @@ export const getSurveySelectedCategory = createSelector(
     return surveyCategory || null;
   }
 );
+
+export const isLoading = createSelector(
+  getSurveyState,
+  (state: SurveyState) => state.layout.loading,
+);

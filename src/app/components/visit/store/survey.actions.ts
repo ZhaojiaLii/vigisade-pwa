@@ -51,3 +51,7 @@ export const updateResultFail = createAction(
   props<{error: any}>(),
 );
 
+export const setLoadingState = createAction(
+  '[Survey] Set Loading State',
+  props<{loading: boolean}>(),
+);

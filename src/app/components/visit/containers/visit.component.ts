@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
 import { Observable } from 'rxjs';
-import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
@@ -49,20 +48,18 @@ export class VisitComponent implements OnInit {
 
   /** Data */
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
-  user$: Observable<User> = this.profileService.getUser();
   userDirection$: Observable<Direction> = this.profileService.getUserDirection();
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
 
   teamMode = TEAM_MODE;
   surveyTeamMode = this.teamMode.no;
 
-  questionNum = 0;
-  data = [];
-
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
   isBestPracticeSelected$: Observable<boolean> = this.surveyService.isBestPracticedSelected();
 
   bestPracticeId = BEST_PRACTICE_CATEGORY_ID;
+
+  loading$: Observable<boolean> = this.surveyService.isLoading();
 
   constructor(
     private surveyService: SurveyService,
@@ -161,6 +158,19 @@ export class VisitComponent implements OnInit {
     return this.questionsForms
       .filter(form => form.question.surveyQuestionCategoryId === categoryId)
       .length;
+  }
+
+  countTotal(): number {
+    // +1 for best practice.
+    return this.countSurveyFields() + this.questionsForms.length + 1;
+  }
+
+  countValidTotal(): number {
+    return this.countValidSurveyFields()
+      + this.questionsForms
+        .filter(form => form.group.status === 'VALID')
+        .length
+      + (+(this.bestPracticeForm.status === 'VALID'));
   }
 
   private getRandomId(): string {

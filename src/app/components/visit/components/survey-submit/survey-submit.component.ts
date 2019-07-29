@@ -119,8 +119,8 @@ export class SurveySubmitComponent {
         resultBestPracticePhoto: this.bestPracticeForm.value.photo,
       };
 
+      this.surveyService.setLoadingState(true);
       this.surveyService.createResult(result);
-      this.toastrService.success('success');
     });
   }
 }

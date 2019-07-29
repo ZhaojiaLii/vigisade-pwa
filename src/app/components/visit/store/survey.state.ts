@@ -11,6 +11,7 @@ export interface SurveyState {
   updateResult: UpdateResult | null;
   layout: {
     selectedCategory: number | null;
+    loading: boolean;
   };
 }
 
@@ -20,5 +21,6 @@ export const surveyInitialState: SurveyState = {
   updateResult: null,
   layout: {
     selectedCategory: null,
+    loading: false,
   },
 };
