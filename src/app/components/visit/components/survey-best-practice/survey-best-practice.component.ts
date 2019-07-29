@@ -23,6 +23,7 @@ export class SurveyBestPracticeComponent {
       const reader = new FileReader();
       reader.onload = (Event: any) => {
         this.imgUrl = Event.target.result;
+        this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
     }

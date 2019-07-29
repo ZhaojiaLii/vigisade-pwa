@@ -67,9 +67,10 @@ export class HistoryComponent implements OnInit {
     map(() => this.results),
   );
 
-  userHistoryMobile$: Observable<any> = combineLatest(
-    [this.historyService.getHistory(), this.profileService.getUser()]
-  ).pipe(
+  userHistoryMobile$: Observable<any> = combineLatest([
+    this.historyService.getHistory(),
+    this.profileService.getUser(),
+  ]).pipe(
     filter(([result, user]) => {
       this.results = [];
       for (const element of result.result) {

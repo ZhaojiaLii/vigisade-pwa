@@ -36,6 +36,7 @@ export class SurveyQuestionComponent implements OnChanges {
       const reader = new FileReader();
       reader.onload = (Event: any) => {
         this.imgURL = Event.target.result;
+        this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
     }

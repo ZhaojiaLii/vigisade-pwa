@@ -37,15 +37,10 @@ export class SurveySubmitComponent {
       return;
     }
 
-    // @todo
-    // si étape actuel = visite, go première catégorie
-    // si étape actuel = catégorie, go categorie suivante
-    // si étape actuel = dernière cat, go bonne pratique
-    // sinon post
-
-    combineLatest(
-      [this.surveyService.isBestPracticedSelected(), this.surveyService.getSurveySelectedCategory()]
-    ).pipe(
+    combineLatest([
+      this.surveyService.isBestPracticedSelected(),
+      this.surveyService.getSurveySelectedCategory(),
+    ]).pipe(
       take(1),
     ).subscribe(([isBestPracticeSelected, selectedCategory]) => {
       if (isBestPracticeSelected) {
@@ -81,9 +76,10 @@ export class SurveySubmitComponent {
   }
 
   private sendForm() {
-    combineLatest(
-      [this.surveyService.getSurveyOfUser(), this.profileService.getUser()]
-    ).pipe(take(1)).subscribe(([survey, user]) => {
+    combineLatest([
+      this.surveyService.getSurveyOfUser(),
+      this.profileService.getUser(),
+    ]).pipe(take(1)).subscribe(([survey, user]) => {
       const questions: ResultQuestion[] = this.questionsForms.map(form => {
         return {
           resultQuestionId: null,
@@ -91,7 +87,7 @@ export class SurveySubmitComponent {
           resultQuestionResultQuestionId: Number(form.group.value.id),
           resultQuestionResultNotation: Number(form.group.value.selection),
           resultQuestionResultComment: form.group.value.comment,
-          resultQuestionResultPhoto: null, // @todo
+          resultQuestionResultPhoto: form.group.value.photo,
           teamMemberId: survey.surveyTeam === TEAM_MODE.no
             ? null
             : form.group.value.teamMemberId,
