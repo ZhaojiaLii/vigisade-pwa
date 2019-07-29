@@ -84,7 +84,7 @@ export class SurveySubmitComponent {
         return {
           resultQuestionId: null,
           resultQuestionResultId: null,
-          resultQuestionResultQuestionId: form.group.value.id,
+          resultQuestionResultQuestionId: Number(form.group.value.id),
           resultQuestionResultNotation: Number(form.group.value.selection),
           resultQuestionResultComment: form.group.value.comment,
           resultQuestionResultPhoto: form.group.value.photo,
