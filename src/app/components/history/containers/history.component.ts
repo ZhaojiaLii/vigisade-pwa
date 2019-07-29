@@ -17,9 +17,10 @@ export class HistoryComponent implements OnInit {
   userDirectionId: number;
   userEntityId: number;
   results = [];
-  userHistoryDesktop$: Observable<any> = combineLatest(
-    [this.historyService.getHistory(), this.profileService.getUser()]
-  ).pipe(
+  userHistoryDesktop$: Observable<any> = combineLatest([
+    this.historyService.getHistory(),
+    this.profileService.getUser(),
+  ]).pipe(
     filter(([result, user]) => {
         // console.log(result);
         if (user.roles.includes('ROLE_ADMIN')) {
@@ -52,9 +53,10 @@ export class HistoryComponent implements OnInit {
     map(() => this.results),
   );
 
-  userHistoryMobile$: Observable<any> = combineLatest(
-    [this.historyService.getHistory(), this.profileService.getUser()]
-  ).pipe(
+  userHistoryMobile$: Observable<any> = combineLatest([
+    this.historyService.getHistory(),
+    this.profileService.getUser(),
+  ]).pipe(
     filter(([result, user]) => {
       this.results = [];
       for (const element of result.result) {

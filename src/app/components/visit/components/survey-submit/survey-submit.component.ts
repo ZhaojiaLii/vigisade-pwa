@@ -37,9 +37,10 @@ export class SurveySubmitComponent {
       return;
     }
 
-    combineLatest(
-      [this.surveyService.isBestPracticedSelected(), this.surveyService.getSurveySelectedCategory()]
-    ).pipe(
+    combineLatest([
+      this.surveyService.isBestPracticedSelected(),
+      this.surveyService.getSurveySelectedCategory(),
+    ]).pipe(
       take(1),
     ).subscribe(([isBestPracticeSelected, selectedCategory]) => {
       if (isBestPracticeSelected) {
@@ -75,9 +76,10 @@ export class SurveySubmitComponent {
   }
 
   private sendForm() {
-    combineLatest(
-      [this.surveyService.getSurveyOfUser(), this.profileService.getUser()]
-    ).pipe(take(1)).subscribe(([survey, user]) => {
+    combineLatest([
+      this.surveyService.getSurveyOfUser(),
+      this.profileService.getUser(),
+    ]).pipe(take(1)).subscribe(([survey, user]) => {
       const questions: ResultQuestion[] = this.questionsForms.map(form => {
         return {
           resultQuestionId: null,
