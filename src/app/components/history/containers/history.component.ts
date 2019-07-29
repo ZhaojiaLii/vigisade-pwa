@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HistoryComponent implements OnInit {
   deviceInfo = null;
+  isDesktop = false;
   countResult: number;
   results = [];
   areas = [];
@@ -150,10 +151,12 @@ export class HistoryComponent implements OnInit {
     if (isMobile) {
       console.log('MOBILE MODE');
       this.userHistoryMobile$.subscribe();
+      this.isDesktop = false;
     }
     if (isDesktopDevice) {
       console.log('PC MODE');
       this.userHistoryDesktop$.subscribe();
+      this.isDesktop = true;
     }
   }
 

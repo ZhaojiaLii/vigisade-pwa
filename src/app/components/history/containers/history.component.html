@@ -2,7 +2,7 @@
     <div *ngIf="(user$|async) === null" class="row">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    <form [formGroup]="filterForm">
+    <form [formGroup]="filterForm" *ngIf="isDesktop">
         <div class="card card-full-width mb-10 shadow-none">
             <div class="card-body px-30">
                 <div class="row align-items-center light-grey mb-20">
