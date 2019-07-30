@@ -3,7 +3,7 @@ import { CorrectionState } from './correction.states';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
-import { getResult } from '../../history/store/history.selectors';
+import { getResult, getSelectedResult } from '../../history/store/history.selectors';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
@@ -32,10 +32,10 @@ export const getCorrection = createSelector(
 
 export const getCorrectionResult = createSelector(
   getCorrection,
-  getResult,
-  (corrections: Correction[], results: Result[]) => {
-    for (const result of results) {
-      return result;
+  getSelectedResult,
+  (corrections: Correction[], results: Result) => {
+    if (corrections && results) {
+      return results;
     }
   }
 );
