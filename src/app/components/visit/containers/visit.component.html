@@ -4,7 +4,7 @@
 <div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
     <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null || (isBestPracticeSelected$|async)}">
         <div class="font-bold font-25">
-            DR {{(userDirection$|async)?.name|uppercase}}
+            {{(surveyArea$|async)?.name|uppercase}}
         </div>
         <form [formGroup]="mainForm">
             <div class="form-row">

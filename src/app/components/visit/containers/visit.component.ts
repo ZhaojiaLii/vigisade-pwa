@@ -9,13 +9,13 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
-import { Direction } from '../../shared/interfaces/direction.interface';
 import { filter, take } from 'rxjs/operators';
 import { Question } from '../interfaces/getSurveys/question.interface';
 import { getRandomId } from '../../../data/random.helpers';
 import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
 import { ResultDraft } from '../interfaces/result-draft.interface';
 import { DraftService } from '../../../services/draft.service';
+import { Area } from '../../shared/interfaces/area.interface';
 
 @Component({
   selector: 'app-visit',
@@ -47,7 +47,7 @@ export class VisitComponent implements OnInit {
 
   /** Data */
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
-  userDirection$: Observable<Direction> = this.profileService.getUserDirection();
+  surveyArea$: Observable<Area> = this.surveyService.getSurveyArea();
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
 
   teamMode = TEAM_MODE;

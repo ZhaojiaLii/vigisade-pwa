@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ProfileState } from '../store/profile.state';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { User } from '../interfaces/user';
-import { getUser, getUserDirection, getUserEntities } from '../store/profile.selector';
-import { Direction } from '../../shared/interfaces/direction.interface';
+import { getUser, getUserArea } from '../store/profile.selector';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { UpdateUser } from '../interfaces/updateUser.interface';
 
@@ -30,11 +30,11 @@ export class ProfileService {
     this.store.dispatch(updateUser({updateUserPayload}));
   }
 
-  getUserDirection(): Observable<Direction> {
-    return this.store.pipe(select(getUserDirection));
-  }
-
   getUserEntities(): Observable<Entity[]> {
-    return this.store.pipe(select(getUserEntities));
+    return this.store.pipe(
+      select(getUserArea),
+      filter(area => !!area),
+      map(area => area.entity),
+    );
   }
 }
