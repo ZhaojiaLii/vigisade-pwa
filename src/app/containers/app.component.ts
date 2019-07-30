@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
     ).subscribe(() => {
       this.surveyService.loadSurveys();
       this.dataService.loadData();
+      this.dataService.loadHeader();
       this.profileService.loadUser();
       this.historyService.loadHistory();
     });

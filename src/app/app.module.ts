@@ -40,6 +40,7 @@ import { HistoryDetailsModule } from './components/history-details/history-detai
 import { historyFeature } from './components/history/store/history.feature';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { SurveyModule } from './components/visit/survey.module';
+import { draftFeature } from './store/draft/draft.feature';
 
 registerLocaleData(localeFr);
 
@@ -59,6 +60,7 @@ const pageModules = [
 
 const ngrxFeatures = [
   dataFeature,
+  draftFeature,
   correctionFeature,
   dangerousFeature,
   historyFeature,

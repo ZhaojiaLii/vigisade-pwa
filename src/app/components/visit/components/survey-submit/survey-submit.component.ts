@@ -11,6 +11,8 @@ import { take, switchMap } from 'rxjs/operators';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../../interfaces/getResultInterface/bestPractice.interface';
+import { ToastrService } from 'ngx-toastr';
+import { DraftService } from '../../../../services/draft.service';
 
 @Component({
   selector: 'app-survey-submit',
@@ -26,9 +28,21 @@ export class SurveySubmitComponent {
   @Input() bestPracticeForm: FormGroup;
 
   constructor(
+    private draftService: DraftService,
     private surveyService: SurveyService,
     private profileService: ProfileService,
+    private toastr: ToastrService,
   ) {}
+
+  save() {
+    this.draftService.saveSurveyDraft({
+      main: this.mainForm.value,
+      teamMembers: this.teamMembersForms.map(group => group.value),
+      questions: this.questionsForms.map(form => form.group.value),
+      bestPractice: this.bestPracticeForm.value,
+    });
+    this.toastr.success('Brouillon enregistré.');
+  }
 
   post() {
     if (!this.isFormValid) {

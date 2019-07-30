@@ -1,5 +1,10 @@
 <div class="mx-30">
-    <button class="btn btn-info d-block w-100 mt-5">Enregistrer</button>
+    <button
+        class="btn btn-info d-block w-100 mt-5"
+        (click)="save()"
+    >
+        Enregistrer
+    </button>
     <button
         [attr.disabled]="isFormValid ? null : 1"
         (click)="post()"

@@ -6,10 +6,12 @@ import { LayoutState } from './layout/layout.state';
 import { DataState } from './data/data.state';
 import { DangerousState } from '../components/dangerous/store/dangerous.states';
 import { HistoryState } from '../components/history/store/history.state';
+import { DraftState } from './draft/draft.state';
 
 export interface State {
     dangerous: DangerousState;
     data: DataState;
+    draft: DraftState;
     history: HistoryState;
     layout: LayoutState;
     login: LoginState;

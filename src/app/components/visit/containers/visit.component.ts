@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { ProfileService } from '../../profile/services/profile.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
@@ -12,6 +12,10 @@ import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/best
 import { Direction } from '../../shared/interfaces/direction.interface';
 import { filter, take } from 'rxjs/operators';
 import { Question } from '../interfaces/getSurveys/question.interface';
+import { getRandomId } from '../../../data/random.helpers';
+import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
+import { ResultDraft } from '../interfaces/result-draft.interface';
+import { DraftService } from '../../../services/draft.service';
 
 @Component({
   selector: 'app-visit',
@@ -30,12 +34,7 @@ export class VisitComponent implements OnInit {
     client: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
   });
-  teamMembersForms: FormGroup[] = [new FormGroup({
-    id: new FormControl(this.getRandomId(), [Validators.required]),
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    role: new FormControl('', [Validators.required]),
-  })];
+  teamMembersForms: FormGroup[] = [buildTeamMemberForm()];
   questionsForms: {group: FormGroup, question: Question}[] = [];
   // Keep questions to ease form updates.
   questions: Question[] = [];
@@ -62,6 +61,7 @@ export class VisitComponent implements OnInit {
   loading$: Observable<boolean> = this.surveyService.isLoading();
 
   constructor(
+    private draftService: DraftService,
     private surveyService: SurveyService,
     private historyService: HistoryService,
     private profileService: ProfileService,
@@ -69,37 +69,38 @@ export class VisitComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize questions forms.
-    this.surveyService.getSurveyOfUser().pipe(
-      filter((survey: Survey) => !!survey),
+    combineLatest([
+      this.surveyService.getSurveyOfUser(),
+      this.draftService.getSurveyDraft(),
+    ]).pipe(
+      filter(([survey, draft]) => !!survey),
       take(1),
-    ).subscribe((survey: Survey) => {
+    ).subscribe(([survey, draft]) => {
+
+      // Merge questions in a single array to make initialization easier.
       survey.surveyCategories.forEach((category: Category) => {
         category.surveyQuestion.forEach((question: Question) => {
-          this.questionsForms.push({
-            group: this.buildQuestionForm(question, this.teamMembersForms[0].get('id').value),
-            question,
-          });
-
           this.questions.push(question);
         });
       });
+
+      if (draft) {
+        this.initFormFromDraft(draft);
+      } else {
+        this.initFormFromScratch();
+      }
 
       this.surveyTeamMode = survey.surveyTeam;
     });
   }
 
   addTeamMember(): void {
-    const memberId = this.getRandomId();
-    this.teamMembersForms = this.teamMembersForms.concat(new FormGroup({
-      id: new FormControl(memberId, [Validators.required]),
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      role: new FormControl('', [Validators.required]),
-    }));
+    const memberId = getRandomId();
+    this.teamMembersForms = this.teamMembersForms.concat(buildTeamMemberForm());
 
     this.questions.forEach(question => {
       this.questionsForms.push({
-        group: this.buildQuestionForm(question, memberId),
+        group: buildQuestionForm(question, memberId),
         question,
       });
     });
@@ -173,19 +174,32 @@ export class VisitComponent implements OnInit {
       + (+(this.bestPracticeForm.status === 'VALID'));
   }
 
-  private getRandomId(): string {
-    return Math.random().toString(36).substring(2, 15)
-      + Math.random().toString(36).substring(2, 15);
+  initFormFromScratch(): void {
+    this.questions.forEach((question: Question) => {
+      this.questionsForms.push({
+        group: buildQuestionForm(question, this.teamMembersForms[0].get('id').value),
+        question,
+      });
+    });
   }
 
-  private buildQuestionForm(question: Question, teamMemberId: string) {
-    return new FormGroup({
-      id: new FormControl(question.surveyQuestionId.toString()),
-      teamMemberId: new FormControl(teamMemberId),
-      selection: new FormControl('', [Validators.required]),
-      comment: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      photo: new FormControl(''),
+  initFormFromDraft(draft: ResultDraft): void {
+    this.mainForm.patchValue(draft.main);
+    this.teamMembersForms = [];
+    draft.teamMembers.forEach(teamMember => {
+      const teamMemberGroup = buildTeamMemberForm();
+      teamMemberGroup.patchValue(teamMember);
+      this.teamMembersForms.push(teamMemberGroup);
     });
+    this.questionsForms = [];
+    draft.questions.forEach(questionDraft => {
+      const question = this.questions
+        .find(q => q.surveyQuestionId.toString() === questionDraft.id);
+      const questionGroup = buildQuestionForm(question, questionDraft.teamMemberId);
+      questionGroup.patchValue(questionDraft);
+      this.questionsForms.push({question, group: questionGroup});
+    });
+    this.bestPracticeForm.patchValue(draft.bestPractice);
   }
 }
 

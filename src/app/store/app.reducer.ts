@@ -10,10 +10,13 @@ import { layoutReducer } from './layout/layout.reducer';
 import { dataReducer } from './data/data.reducer';
 import { dangerousReducer } from '../components/dangerous/store/dangerous.reducer';
 import { historyReducer } from '../components/history/store/history.reducer';
+import { localStorageSyncReducer } from '../data/local-storage.helpers';
+import { draftReducer } from './draft/draft.reducer';
 
 export const reducers: ActionReducerMap<State> = {
     dangerous: dangerousReducer,
     data: dataReducer,
+    draft: draftReducer,
     history: historyReducer,
     layout: layoutReducer,
     login: loginReducer,
@@ -23,5 +26,5 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? [storeFreeze]
-  : [];
+  ? [storeFreeze, localStorageSyncReducer]
+  : [localStorageSyncReducer];

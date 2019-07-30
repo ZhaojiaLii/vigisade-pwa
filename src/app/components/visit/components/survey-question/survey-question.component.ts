@@ -12,8 +12,6 @@ export class SurveyQuestionComponent implements OnChanges {
   @Input() group: FormGroup;
 
   isCollapsed = false;
-  imgURL: any;
-
   showError = false;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,11 +29,10 @@ export class SurveyQuestionComponent implements OnChanges {
     });
   }
 
-  preview(event: any) {
+  encode(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (Event: any) => {
-        this.imgURL = Event.target.result;
         this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
