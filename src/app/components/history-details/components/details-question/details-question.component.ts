@@ -5,6 +5,7 @@ import { Result } from '../../../visit/interfaces/getSurveys/result.interface';
 import { HistoryService } from '../../../history/services/history.service';
 import { filter, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SurveyQuestion } from '../../../history/interfaces/surveyQuestion.interface';
 
 @Component({
   selector: 'app-details-question',
@@ -14,7 +15,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DetailsQuestionComponent implements OnInit, OnDestroy {
 
-  @Input() question: ResultQuestion;
+  @Input() question: SurveyQuestion;
   @Input() resultId: number;
 
   isCollapsed = true;
@@ -47,7 +48,7 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.question);
+    console.log(this.question);
     // console.log(this.resultId); // 31
     this.getResultQuestion$.subscribe(question => {
       this.questionNotation = question.resultQuestionResultNotation;
