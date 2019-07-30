@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 
 @Component({
@@ -39,6 +39,16 @@ export class SurveyQuestionComponent implements OnChanges {
         this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  updateValidators(required: boolean): void {
+    if (required) {
+      this.group.get('comment').setValidators([Validators.required, Validators.minLength(1)]);
+      this.group.get('comment').updateValueAndValidity();
+    } else {
+      this.group.get('comment').clearValidators();
+      this.group.get('comment').updateValueAndValidity();
     }
   }
 }

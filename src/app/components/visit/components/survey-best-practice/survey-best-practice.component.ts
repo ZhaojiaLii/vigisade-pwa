@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../../interfaces/getSurveys/survey.interface';
 
 @Component({
@@ -26,6 +26,20 @@ export class SurveyBestPracticeComponent {
         this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  updateValidators(required: boolean): void {
+    if (required) {
+      this.group.get('type').setValidators([Validators.required]);
+      this.group.get('comment').setValidators([Validators.required, Validators.minLength(1)]);
+      this.group.get('type').updateValueAndValidity();
+      this.group.get('comment').updateValueAndValidity();
+    } else {
+      this.group.get('type').clearValidators();
+      this.group.get('comment').clearValidators();
+      this.group.get('type').updateValueAndValidity();
+      this.group.get('comment').updateValueAndValidity();
     }
   }
 }
