@@ -10,7 +10,6 @@ import { Observable, combineLatest, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { Question } from '../../interfaces/getSurveys/question.interface';
-import { BEST_PRACTICE_CATEGORY_ID } from '../../interfaces/getResultInterface/bestPractice.interface';
 import { ToastrService } from 'ngx-toastr';
 import { DraftService } from '../../../../services/draft.service';
 
@@ -42,31 +41,6 @@ export class SurveySubmitComponent {
       bestPractice: this.bestPracticeForm.value,
     });
     this.toastr.success('Brouillon enregistré.');
-  }
-
-  post() {
-    if (!this.isFormValid) {
-      return;
-    }
-
-    combineLatest([
-      this.surveyService.isBestPracticedSelected(),
-      this.surveyService.getSurveySelectedCategory(),
-    ]).pipe(
-      take(1),
-    ).subscribe(([isBestPracticeSelected, selectedCategory]) => {
-      if (isBestPracticeSelected) {
-        this.sendForm();
-      } else {
-        this.getNextCategory(selectedCategory).pipe(take(1)).subscribe(nextCategory => {
-          this.surveyService.selectSurveyCategory(
-            nextCategory
-              ? nextCategory.surveyCategoryId
-              : BEST_PRACTICE_CATEGORY_ID
-          );
-        });
-      }
-    });
   }
 
   private getNextCategory(currentCategory: Category): Observable<Category> {
