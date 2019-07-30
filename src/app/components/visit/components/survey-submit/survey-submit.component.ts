@@ -61,7 +61,7 @@ export class SurveySubmitComponent {
     );
   }
 
-  private sendForm() {
+  sendForm() {
     combineLatest([
       this.surveyService.getSurveyOfUser(),
       this.profileService.getUser(),
