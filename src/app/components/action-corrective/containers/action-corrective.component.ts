@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
@@ -12,6 +12,7 @@ import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { filter, map } from 'rxjs/operators';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ActionCorrectiveComponent implements OnInit {
     photo: new FormControl(''),
   });
   thisCorrection: any;
+  correctionResult: any;
   resultId: number;
   questionId: number;
   categoryId: number;
@@ -35,6 +37,26 @@ export class ActionCorrectiveComponent implements OnInit {
   userId: number;
   result: any;
   history$: Observable<GetResult> = this.historyService.getHistory();
+  // getCorrectionSingleResult$: Observable<any> = combineLatest(
+  //   [this.historyService.getHistory(), this.correctionService.getCorrection()]
+  // ).pipe(
+  //   filter(([history, corrections]) => {
+  //     const thisCorrection = corrections.find(correction => correction.id === this.correctionId);
+  //     const correctionHistory = history.result.find(re => re.resultId === thisCorrection.result_id);
+  //     this.historyService.selectResult(correctionHistory.resultId);
+  //     this.historyService.loadResult(correctionHistory.resultId);
+  //     this.correctionResult = this.historyService.getResult().pipe(
+  //       filter(result => {
+  //         result.find(singleResult => singleResult.resultQuestionResultQuestionId === thisCorrection.question_id);
+  //         console.log(this.correctionResult);
+  //         return true;
+  //       }),
+  //       map(() => this.correctionResult),
+  //     );
+  //     return true;
+  //   }),
+  //   map(() => this.correctionResult),
+  // );
   correction$: Observable<Correction[]> = this.correctionService.getCorrection();
   user$: Observable<User> = this.profileService.getUser();
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
@@ -81,6 +103,7 @@ export class ActionCorrectiveComponent implements OnInit {
         for (const question of resultQuestions) {
           if (question.resultQuestionResultId === this.resultId && question.resultQuestionResultQuestionId === this.questionId) {
             this.resultQuestion = question;
+            return;
             // console.log(question);
           }
         }

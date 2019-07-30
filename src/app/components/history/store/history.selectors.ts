@@ -8,7 +8,6 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 import { ResultQuestion } from '../interfaces/result-question.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
@@ -18,12 +17,12 @@ export const getHistory = createSelector(
   (state: HistoryState) => state.history,
 );
 
-export const getResults = createSelector(
-  getHistory,
-  (history: GetResult) => {
-    return history.result;
-  }
-);
+// export const getResults = createSelector(
+//   getHistory,
+//   (history: GetResult) => {
+//     return history.result;
+//   }
+// );
 
 export const getResult = createSelector(
   getHistoryState,
