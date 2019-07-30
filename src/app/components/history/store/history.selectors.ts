@@ -8,7 +8,6 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { Question } from '../../visit/interfaces/getSurveys/question.interface';
 import { ResultQuestion } from '../interfaces/result-question.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
@@ -18,12 +17,12 @@ export const getHistory = createSelector(
   (state: HistoryState) => state.history,
 );
 
-export const getResults = createSelector(
-  getHistory,
-  (history: GetResult) => {
-    return history.result;
-  }
-);
+// export const getResults = createSelector(
+//   getHistory,
+//   (history: GetResult) => {
+//     return history.result;
+//   }
+// );
 
 export const getResult = createSelector(
   getHistoryState,
@@ -76,6 +75,26 @@ export const getSelectedResultArea = createSelector(
     }
     const resultArea = areas.find(area => area.id === result.resultAreaId);
     return resultArea || null;
+  }
+);
+
+export const getSelectedResultBestPractice = createSelector(
+  getSelectedResult,
+  getSurveys,
+  (result: Result, survey: Survey[]) => {
+    if (result !== null && survey !== null) {
+      const resultSurvey = survey.find(sur => sur.surveyId === result.resultSurveyId);
+      const resultBestPractice = {
+        resultBestPracticeDone: result.resultBestPracticeDone,
+        resultBestPracticeComment: result.resultBestPracticeComment,
+        resultBestPracticePhoto: result.resultBestPracticePhoto,
+        surveyTranslationBestPracticeHelp: resultSurvey.bestPracticeTranslation.surveyTranslationBestPracticeHelp,
+        surveyTranslationBestPracticeLabel: resultSurvey.bestPracticeTranslation.surveyTranslationBestPracticeLabel,
+      };
+      return resultBestPractice || null;
+    } else {
+      return ;
+    }
   }
 );
 

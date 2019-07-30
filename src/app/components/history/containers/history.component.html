@@ -35,9 +35,13 @@
                             <option value=""></option>
                         </select>
                     </div>
-                    <div class="col-6 text-right font-weight-bold font-14">
-                        <button style="background: #008ac9; color: #ffffff" class="col-6" (click)="filter()">Rechercher</button>
-                        <div><button style="background: #008ac9; color: #ffffff" class="col-6" (click)="reInitFilter()">Réinitialiser</button></div>
+                    <div class="col-6 font-weight-bold font-14 d-flex">
+                      <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="filter()">
+                        <span class="ml-2">Rechercher</span>
+                      </button>
+                      <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="reInitFilter()">
+                        <span class="ml-2">Réinitialiser</span>
+                      </button>
                     </div>
                 </div>
             </div>

@@ -26,6 +26,7 @@ export class ActionCorrectiveComponent implements OnInit {
     photo: new FormControl(''),
   });
   thisCorrection: any;
+  correctionResult: any;
   resultId: number;
   questionId: number;
   categoryId: number;
@@ -35,6 +36,26 @@ export class ActionCorrectiveComponent implements OnInit {
   userId: number;
   result: any;
   history$: Observable<GetResult> = this.historyService.getHistory();
+  // getCorrectionSingleResult$: Observable<any> = combineLatest(
+  //   [this.historyService.getHistory(), this.correctionService.getCorrection()]
+  // ).pipe(
+  //   filter(([history, corrections]) => {
+  //     const thisCorrection = corrections.find(correction => correction.id === this.correctionId);
+  //     const correctionHistory = history.result.find(re => re.resultId === thisCorrection.result_id);
+  //     this.historyService.selectResult(correctionHistory.resultId);
+  //     this.historyService.loadResult(correctionHistory.resultId);
+  //     this.correctionResult = this.historyService.getResult().pipe(
+  //       filter(result => {
+  //         result.find(singleResult => singleResult.resultQuestionResultQuestionId === thisCorrection.question_id);
+  //         console.log(this.correctionResult);
+  //         return true;
+  //       }),
+  //       map(() => this.correctionResult),
+  //     );
+  //     return true;
+  //   }),
+  //   map(() => this.correctionResult),
+  // );
   correction$: Observable<Correction[]> = this.correctionService.getCorrection();
   user$: Observable<User> = this.profileService.getUser();
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
@@ -81,7 +102,7 @@ export class ActionCorrectiveComponent implements OnInit {
         for (const question of resultQuestions) {
           if (question.resultQuestionResultId === this.resultId && question.resultQuestionResultQuestionId === this.questionId) {
             this.resultQuestion = question;
-            // console.log(question);
+            return;
           }
         }
       }

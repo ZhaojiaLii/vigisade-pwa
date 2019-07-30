@@ -15,6 +15,17 @@
   &.justify-content-center > span {
     margin: 0;
   }
+  .menu-text {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    bottom: 1rem;
+    width: 1.125rem;
+    cursor: pointer;
+    @extend .d-flex;
+    @extend .align-items-center;
+    @extend .justify-content-center;
+  }
   .menu-icon {
     position: absolute;
     top: 1rem;

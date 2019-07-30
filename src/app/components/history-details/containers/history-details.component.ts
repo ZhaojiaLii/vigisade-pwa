@@ -23,6 +23,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   questionNum = 0;
   thisResultId: number;
   thisResultIdIndex: number;
+  showCategories = false;
 
   history$: Observable<GetResult> = this.historyService.getHistory();
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
@@ -32,6 +33,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   resultArea$: Observable<Area> = this.historyService.getSelectedResultArea();
   selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
   selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
+  getSelectedResultBestPractice$: Observable<any> = this.historyService.getSelectedResultBestPractice();
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +44,8 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.historyService.selectResultCategory(null);
+    this.showCategories = false;
     this.route.paramMap.subscribe(params => {
       this.thisResultId = parseInt(params.get('id'), 10);
       this.historyService.selectResult(this.thisResultId);
@@ -64,6 +68,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.historyService.selectResult(null);
+    this.historyService.selectResultCategory(null);
   }
 
   calculateTotalQuestionNum(question: number) {
@@ -86,8 +91,14 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectCategory(id: number): void {
+  selectResult(id: number) {
     this.historyService.selectResultCategory(id);
+    this.showCategories = true;
+    this.isCollapsed = false;
+  }
+
+  selectBestPractice() {
+    this.showCategories = false;
     this.isCollapsed = false;
   }
 }
