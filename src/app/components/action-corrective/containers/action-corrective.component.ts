@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
@@ -12,7 +12,6 @@ import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
-import { filter, map } from 'rxjs/operators';
 
 
 @Component({
@@ -104,7 +103,6 @@ export class ActionCorrectiveComponent implements OnInit {
           if (question.resultQuestionResultId === this.resultId && question.resultQuestionResultQuestionId === this.questionId) {
             this.resultQuestion = question;
             return;
-            // console.log(question);
           }
         }
       }
