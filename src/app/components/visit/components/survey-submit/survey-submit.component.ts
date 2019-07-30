@@ -8,7 +8,6 @@ import { Category } from '../../interfaces/getSurveys/category.interface';
 import { SurveyService } from '../../services/survey.service';
 import { Observable, combineLatest, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../../interfaces/getResultInterface/bestPractice.interface';
@@ -19,7 +18,7 @@ import { BEST_PRACTICE_CATEGORY_ID } from '../../interfaces/getResultInterface/b
 })
 export class SurveySubmitComponent {
 
-  @Input() currentStepFinished = false;
+  @Input() isFormValid = false;
 
   @Input() mainForm: FormGroup;
   @Input() teamMembersForms: FormGroup[];
@@ -29,11 +28,10 @@ export class SurveySubmitComponent {
   constructor(
     private surveyService: SurveyService,
     private profileService: ProfileService,
-    private toastrService: ToastrService,
   ) {}
 
   post() {
-    if (!this.currentStepFinished) {
+    if (!this.isFormValid) {
       return;
     }
 
