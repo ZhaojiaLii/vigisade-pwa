@@ -1,23 +1,12 @@
 <div class="container mb-90">
   <div class="row" [formGroup]="visitForm">
     <div class="card card-full-width mb-10 shadow-none">
-<!--      <app-security-template-->
-<!--          *ngFor="let question of (survey$|async)?.categories[0].questions"-->
-<!--          [questionLabel]="question.label"-->
-<!--          [questionHelp]="question.help"-->
-<!--          (Selection)="getSelection($event)"-->
-<!--          (Photo)="getPhoto($event)"-->
-<!--          (Comment)="getComment($event)"-->
-<!--      ></app-security-template>-->
     </div>
   </div>
   <div class="mx-30 my-45">
     <button class="btn btn-info d-block w-100" (click)="validVisit()">Valider</button>
   </div>
 </div>
-<!--<div class="spinner" *ngIf="loadingPage">-->
-<!--  <mat-spinner style="z-index: 10; position: absolute; left: 40%; top: 50%; stroke: #3884a5;"></mat-spinner>-->
-<!--</div>-->
 <div class="fixed-footer">
   <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
     <div class=""><span class="font-bold">50</span>/57</div>

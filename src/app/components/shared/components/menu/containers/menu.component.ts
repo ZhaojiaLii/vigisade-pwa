@@ -12,9 +12,8 @@ import { filter, map } from 'rxjs/operators';
 export class MenuComponent {
 
   isMenuOpen$: Observable<boolean> = this.layoutService.isMenuOpen();
-
+  isTutorialOpen$: Observable<boolean> = this.layoutService.isTutorialOpen();
   isLogged$: Observable<boolean> = this.loginService.isLogged();
-
   route$: Observable<string> = this.router.events.pipe(
     filter((event: RouterEvent) => event instanceof NavigationEnd),
     map((event: NavigationEnd) => event.url),
@@ -28,5 +27,10 @@ export class MenuComponent {
 
   toggleMenu(): void {
     this.layoutService.toggleMenu();
+  }
+
+  toggleTutorial(): void {
+    this.layoutService.toggleTutorial();
+    // this.layoutService.toggleMenu();
   }
 }
