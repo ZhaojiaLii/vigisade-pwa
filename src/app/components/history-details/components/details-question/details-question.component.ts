@@ -51,18 +51,10 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
     this.getResultQuestion$.subscribe(question => {
       this.questionNotation = question.resultQuestionResultNotation;
       switch (this.questionNotation) {
-        case 1:
-          this.radioGroup.get('radio1').setValue('1');
-          break;
-        case 2:
-          this.radioGroup.get('radio2').setValue('2');
-          break;
-        case 3:
-          this.radioGroup.get('radio3').setValue('3');
-          break;
-        case 4:
-          this.radioGroup.get('radio4').setValue('4');
-          break;
+        case 1: this.radioGroup.get('radio1').setValue('1'); break;
+        case 2: this.radioGroup.get('radio2').setValue('2'); break;
+        case 3: this.radioGroup.get('radio3').setValue('3'); break;
+        case 4: this.radioGroup.get('radio4').setValue('4'); break;
       }
     });
   }

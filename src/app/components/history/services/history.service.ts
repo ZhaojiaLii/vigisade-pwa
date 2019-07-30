@@ -13,7 +13,8 @@ import {
   getSelectedResultEntity,
   getSelectedResultSurvey,
   getSelectedResultQuestions,
-  getSelectedResultArea
+  getSelectedResultArea,
+  getSelectedResultBestPractice,
 } from '../store/history.selectors';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
@@ -74,6 +75,11 @@ export class HistoryService {
   getSelectedResultArea(): Observable<Area> {
     return this.store.pipe(select(getSelectedResultArea));
   }
+
+  getSelectedResultBestPractice(): Observable<any> {
+    return this.store.pipe(select(getSelectedResultBestPractice));
+  }
+
   getSelectedCategory(): Observable<Category> {
     return this.store.pipe(select(getSelectedResultCategory));
   }

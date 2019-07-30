@@ -78,6 +78,26 @@ export const getSelectedResultArea = createSelector(
   }
 );
 
+export const getSelectedResultBestPractice = createSelector(
+  getSelectedResult,
+  getSurveys,
+  (result: Result, survey: Survey[]) => {
+    if (result !== null && survey !== null) {
+      const resultSurvey = survey.find(sur => sur.surveyId === result.resultSurveyId);
+      const resultBestPractice = {
+        resultBestPracticeDone: result.resultBestPracticeDone,
+        resultBestPracticeComment: result.resultBestPracticeComment,
+        resultBestPracticePhoto: result.resultBestPracticePhoto,
+        surveyTranslationBestPracticeHelp: resultSurvey.bestPracticeTranslation.surveyTranslationBestPracticeHelp,
+        surveyTranslationBestPracticeLabel: resultSurvey.bestPracticeTranslation.surveyTranslationBestPracticeLabel,
+      };
+      return resultBestPractice || null;
+    } else {
+      return ;
+    }
+  }
+);
+
 export const getSelectedResultCategory = createSelector(
   getSelectedResultSurvey,
   getHistoryState,

@@ -33,6 +33,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   resultArea$: Observable<Area> = this.historyService.getSelectedResultArea();
   selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
   selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
+  getSelectedResultBestPractice$: Observable<any> = this.historyService.getSelectedResultBestPractice();
 
   constructor(
     private route: ActivatedRoute,
@@ -93,6 +94,11 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   selectResult(id: number) {
     this.historyService.selectResultCategory(id);
     this.showCategories = true;
+    this.isCollapsed = false;
+  }
+
+  selectBestPractice() {
+    this.showCategories = false;
     this.isCollapsed = false;
   }
 }
