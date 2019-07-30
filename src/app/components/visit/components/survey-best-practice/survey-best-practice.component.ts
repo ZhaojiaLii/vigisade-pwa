@@ -32,11 +32,13 @@ export class SurveyBestPracticeComponent {
       this.group.get('comment').setValidators([Validators.required, Validators.minLength(1)]);
       this.group.get('type').updateValueAndValidity();
       this.group.get('comment').updateValueAndValidity();
+      this.group.get('photo').updateValueAndValidity();
     } else {
       this.group.get('type').clearValidators();
       this.group.get('comment').clearValidators();
       this.group.get('type').updateValueAndValidity();
       this.group.get('comment').updateValueAndValidity();
+      this.group.get('photo').updateValueAndValidity();
     }
   }
 }

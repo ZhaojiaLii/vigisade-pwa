@@ -3,16 +3,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
-import { filter } from 'rxjs/operators';
 import 'rxjs-compat/add/operator/filter';
 
 
@@ -21,7 +19,6 @@ import 'rxjs-compat/add/operator/filter';
   templateUrl: './action-corrective.component.html',
 })
 export class ActionCorrectiveComponent implements OnInit {
-  imgURL: any;
   correction = new FormGroup({
     comment: new FormControl(''),
     photo: new FormControl(''),
@@ -104,15 +101,13 @@ export class ActionCorrectiveComponent implements OnInit {
       this.userId = user.id;
     });
   }
-
-  preview(event: any) {
+  encode(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (Event: any) => {
-        this.imgURL = Event.target.result;
+        this.correction.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);
-      // this.photoChanged();
     }
   }
 
@@ -129,7 +124,7 @@ export class ActionCorrectiveComponent implements OnInit {
         result_id: this.thisCorrection.result_id,
         status: 'Validé',
         comment_question: this.correction.value.comment,
-        image: 'photo path',
+        image: this.correction.value.photo,
       };
       // console.log(correctionPayload);
       this.correctionService.updateCorrection(correctionPayload);
