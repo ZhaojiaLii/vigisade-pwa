@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SurveyState } from '../store/survey.state';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { getSelectedCategoryId, getSurveyOfUser, getSurveySelectedCategory, isLoading } from '../store/survey.selectors';
+import { getSelectedCategoryId, getSurveyArea, getSurveyOfUser, getSurveySelectedCategory, isLoading } from '../store/survey.selectors';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
+import { Area } from '../../shared/interfaces/area.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,10 @@ export class SurveyService {
 
   getSurveyOfUser(): Observable<Survey> {
     return this.store.pipe(select(getSurveyOfUser));
+  }
+
+  getSurveyArea(): Observable<Area> {
+    return this.store.pipe(select(getSurveyArea));
   }
 
   isBestPracticedSelected(): Observable<boolean> {

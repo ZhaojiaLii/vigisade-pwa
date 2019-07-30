@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProfileState } from './profile.state';
-import { getDirections } from '../../../store/data/data.selectors';
+import { getAreas } from '../../../store/data/data.selectors';
 import { User } from '../interfaces/user';
-import { Direction } from '../../shared/interfaces/direction.interface';
+import { Area } from '../../shared/interfaces/area.interface';
 
 export const getProfileState = createFeatureSelector<ProfileState>('profile');
 
@@ -11,27 +11,14 @@ export const getUser = createSelector(
   (state: ProfileState) => state.user,
 );
 
-export const getUserDirection = createSelector(
+export const getUserArea = createSelector(
   getUser,
-  getDirections,
-  (user: User, directions: Direction[]) => {
-    if (!user) {
+  getAreas,
+  (user: User, areas: Area[]) => {
+    if (!user || !user.areaId || !areas || !areas.length) {
       return null;
     }
 
-    return directions.find(direction => direction.id === user.directionId);
-  },
-);
-
-export const getUserEntities = createSelector(
-  getUserDirection,
-  (direction: Direction) => {
-    if (!direction) {
-      return null;
-    }
-
-    return direction.area.reduce((entities, area) => {
-      return [...entities, ...area.entity];
-    }, []);
+    return areas.find(area => area.id === user.areaId);
   },
 );

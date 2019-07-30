@@ -3,6 +3,8 @@ import { SurveyState } from './survey.state';
 import { getUser } from '../../profile/store/profile.selector';
 import { User } from '../../profile/interfaces/user';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
+import { getAreas } from '../../../store/data/data.selectors';
+import { Area } from '../../shared/interfaces/area.interface';
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
 
@@ -30,6 +32,18 @@ export const getSurveyOfUser = createSelector(
       .find(survey => survey.surveyDirectionId === user.directionId);
     return surveyOfUser || null;
   },
+);
+
+export const getSurveyArea = createSelector(
+  getSurveyOfUser,
+  getAreas,
+  (survey: Survey, areas: Area[]) => {
+    if (!survey || !areas || areas.length === 0) {
+      return null;
+    }
+
+    return areas.find(area => survey.surveyAreaId === area.id);
+  }
 );
 
 export const getSurveySelectedCategory = createSelector(

@@ -4,6 +4,7 @@ import { BestPractice } from './best-practice.interface';
 
 export interface Survey {
   surveyId: number;
+  surveyAreaId: number;
   surveyDirectionId: number;
   surveyTeam: string;
   surveyCategories: Category[];

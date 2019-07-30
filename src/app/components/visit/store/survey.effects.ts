@@ -7,6 +7,7 @@ import { from, of } from 'rxjs';
 import { SurveyService } from '../services/survey.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { setResultDraft } from '../../../store/draft/draft.actions';
 
 @Injectable()
 export class SurveyEffects {
@@ -45,6 +46,11 @@ export class SurveyEffects {
       tap(() => this.toast.success('Visite validée.')),
     )),
     map(() => setLoadingState({loading: false}))
+  ));
+
+  cleanDraftWhenCreatingResult$ = createEffect(() => this.actions$.pipe(
+    ofType(createResultSuccess),
+    map(() => setResultDraft({draft: null})),
   ));
 
   createResultFail$ = createEffect(() => this.actions$.pipe(

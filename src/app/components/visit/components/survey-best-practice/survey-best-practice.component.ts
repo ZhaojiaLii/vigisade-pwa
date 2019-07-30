@@ -16,13 +16,10 @@ export class SurveyBestPracticeComponent {
 
   isCollapsed = true;
 
-  imgUrl: string;
-
-  preview(event: any) {
+  encode(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (Event: any) => {
-        this.imgUrl = Event.target.result;
         this.group.patchValue({photo: Event.target.result});
       };
       reader.readAsDataURL(event.target.files[0]);

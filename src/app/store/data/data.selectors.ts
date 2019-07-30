@@ -13,15 +13,7 @@ export const getDirections = createSelector(
 export const getAreas = createSelector(
   getDirections,
   (directions: Direction[]) => {
-    const areas = [];
-    directions.map(direction => {
-      if (direction.area[0]) {
-        for (const areaChild of direction.area) {
-          areas.push(areaChild);
-        }
-      }
-    });
-    return areas;
+    return directions.reduce((areas, direction) => [...areas, ...direction.area], []);
   }
 );
 

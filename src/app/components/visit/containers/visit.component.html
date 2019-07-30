@@ -4,7 +4,7 @@
 <div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
     <div class="container-content" [ngClass]="{'hide': (selectedCategory$|async) !== null || (isBestPracticeSelected$|async)}">
         <div class="font-bold font-25">
-            DR {{(userDirection$|async)?.name|uppercase}}
+            {{(surveyArea$|async)?.name|uppercase}}
         </div>
         <form [formGroup]="mainForm">
             <div class="form-row">
@@ -64,13 +64,6 @@
                 </div>
             </div>
         </div>
-        <app-survey-submit
-            [currentStepFinished]="countValidSurveyFields() === countSurveyFields()"
-            [mainForm]="mainForm"
-            [teamMembersForms]="teamMembersForms"
-            [questionsForms]="questionsForms"
-            [bestPracticeForm]="bestPracticeForm"
-        ></app-survey-submit>
     </div>
     <div
         *ngFor="let category of (survey$|async)?.surveyCategories"
@@ -86,13 +79,6 @@
                 ></app-survey-question>
             </div>
         </div>
-        <app-survey-submit
-            [currentStepFinished]="countValidQuestions(category.surveyCategoryId) === countQuestions(category.surveyCategoryId)"
-            [mainForm]="mainForm"
-            [teamMembersForms]="teamMembersForms"
-            [questionsForms]="questionsForms"
-            [bestPracticeForm]="bestPracticeForm"
-        ></app-survey-submit>
     </div>
     <div
         class="container-content"
@@ -106,14 +92,16 @@
                 ></app-survey-best-practice>
             </div>
         </div>
-        <app-survey-submit
-                [currentStepFinished]="bestPracticeForm.status === 'VALID'"
-                [mainForm]="mainForm"
-                [teamMembersForms]="teamMembersForms"
-                [questionsForms]="questionsForms"
-                [bestPracticeForm]="bestPracticeForm"
-        ></app-survey-submit>
     </div>
+</div>
+<div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
+    <app-survey-submit
+        [isFormValid]="countTotal() === countValidTotal()"
+        [mainForm]="mainForm"
+        [teamMembersForms]="teamMembersForms"
+        [questionsForms]="questionsForms"
+        [bestPracticeForm]="bestPracticeForm"
+    ></app-survey-submit>
 </div>
 <div *ngIf="survey$|async" class="fixed-footer">
     <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"

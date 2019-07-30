@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HomepageService } from '../services/homepage.service';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
 import { Observable } from 'rxjs';
@@ -17,9 +16,7 @@ export class HomepageComponent {
 
   constructor(
     private dataService: DataService,
-    private homepageService: HomepageService,
     private profileService: ProfileService,
   ) {
-    this.homepageService.loadRequiredData();
   }
 }
