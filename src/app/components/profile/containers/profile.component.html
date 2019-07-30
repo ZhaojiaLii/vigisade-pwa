@@ -1,7 +1,7 @@
 <div class="container">
   <div class="profile-header mb-30">
     <img src="../../../../assets/images/profile/brocelia.jpeg" alt="" class="img-fluid mx-auto d-block rounded-circle w-118px mb-4">
-    <p class="text-center font-24 font-weight-600 mb-0">{{(user$ | async)?.firstName + (user$ | async)?.lastName}}</p>
+    <p class="text-center font-24 font-weight-600 mb-0">{{(user$ | async)?.firstName + ' ' + (user$ | async)?.lastName}}</p>
     <p class="text-center light-grey mb-0">{{(user$ | async)?.mail}}</p>
   </div>
   <form [formGroup]="postForm">
