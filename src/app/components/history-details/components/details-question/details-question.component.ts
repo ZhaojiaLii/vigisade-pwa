@@ -38,7 +38,6 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
       const questions = result.resultQuestion;
       // @ts-ignore
       this.thisQuestion = questions.find(question => question.resultQuestionResultQuestionId === this.question.surveyQuestionId);
-      console.log(this.thisQuestion);
       return true;
     }),
     map(() => this.thisQuestion),
@@ -48,7 +47,6 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.question);
     // console.log(this.resultId); // 31
     this.getResultQuestion$.subscribe(question => {
       this.questionNotation = question.resultQuestionResultNotation;

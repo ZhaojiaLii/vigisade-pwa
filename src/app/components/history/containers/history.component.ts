@@ -150,12 +150,12 @@ export class HistoryComponent implements OnInit {
     // const isTablet = this.deviceService.isTablet();
     const isDesktopDevice = this.deviceService.isDesktop();
     if (isMobile) {
-      console.log('MOBILE MODE');
+      // console.log('MOBILE MODE');
       this.userHistoryMobile$.subscribe();
       this.isDesktop = false;
     }
     if (isDesktopDevice) {
-      console.log('PC MODE');
+      // console.log('PC MODE');
       this.userHistoryDesktop$.subscribe();
       this.isDesktop = true;
     }

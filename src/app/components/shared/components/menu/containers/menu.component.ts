@@ -31,6 +31,6 @@ export class MenuComponent {
 
   toggleTutorial(): void {
     this.layoutService.toggleTutorial();
-    // this.layoutService.toggleMenu();
+    this.layoutService.toggleMenu();
   }
 }

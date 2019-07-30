@@ -44,9 +44,6 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.historyService.selectResultCategory(null);
-    this.selectedCategory$.subscribe(val => {
-      console.log(val);
-    });
     this.showCategories = false;
     this.route.paramMap.subscribe(params => {
       this.thisResultId = parseInt(params.get('id'), 10);
