@@ -35,10 +35,11 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
     [this.historyService.getSelectedResult()]
   ).pipe(
     filter(([result]) => {
-      const questions = result.resultQuestion;
-      // @ts-ignore
-      this.thisQuestion = questions.find(question => question.resultQuestionResultQuestionId === this.question.surveyQuestionId);
-      return true;
+      if (result) {
+        const questions = result.resultQuestion;
+        this.thisQuestion = questions.find(question => question.resultQuestionResultQuestionId === this.question.surveyQuestionId);
+        return true;
+      }
     }),
     map(() => this.thisQuestion),
   );

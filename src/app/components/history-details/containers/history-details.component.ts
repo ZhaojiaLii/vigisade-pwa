@@ -24,6 +24,11 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   thisResultId: number;
   thisResultIdIndex: number;
   showCategories = false;
+  nextCategoryClicked = false;
+  thisCategoryIndex = 0;
+  nextCategoryIndex = 0;
+  arriveLastCategory = false;
+  surveyCategoryIds = [];
 
   history$: Observable<GetResult> = this.historyService.getHistory();
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
@@ -50,6 +55,13 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.thisResultId = parseInt(params.get('id'), 10);
       this.historyService.selectResult(this.thisResultId);
       this.historyService.loadResult(this.thisResultId);
+    });
+    this.resultSurvey$.subscribe(survey => {
+      if (survey) {
+        for (const category of survey.surveyCategories) {
+          this.surveyCategoryIds.push(category.surveyCategoryId);
+        }
+      }
     });
     this.history$.subscribe(results => {
       for (const result of results.result) {
@@ -91,14 +103,35 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  nextCategory() {
+    const categoryNum = this.surveyCategoryIds.length;
+    if (this.thisCategoryIndex < categoryNum) {
+      // console.log(this.thisCategoryIndex);
+      this.selectResult(this.surveyCategoryIds[this.thisCategoryIndex]);
+      this.thisCategoryIndex++;  // 3
+      this.arriveLastCategory = false;
+      this.toastrService.success('prochaine category');
+    } else {
+      this.selectBestPractice();
+      this.thisCategoryIndex = 0;
+      this.arriveLastCategory = true;
+      this.toastrService.success('bonne pratique');
+    }
+    window.scroll(0, 0);
+  }
+
   selectResult(id: number) {
+    this.thisCategoryIndex = this.surveyCategoryIds.findIndex(categoryId => categoryId === id);
     this.historyService.selectResultCategory(id);
     this.showCategories = true;
+    this.arriveLastCategory = false;
+    // this.nextCategoryClicked = true;
     this.isCollapsed = false;
   }
 
   selectBestPractice() {
     this.showCategories = false;
     this.isCollapsed = false;
+    this.arriveLastCategory = true;
   }
 }
