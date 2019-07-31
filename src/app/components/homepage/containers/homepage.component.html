@@ -1,4 +1,4 @@
-ll<div class="container">
+<div class="container">
   <div class="row mb-50">
     <div class="card card-full-width">
       <div class="card-body">
@@ -11,7 +11,7 @@ ll<div class="container">
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
     <div class="card-body text-center text-info"> 
-      <a class="nav-link d-flex align-items-center" routerLink="/atraiter">
+      <a class="nav-link d-flex align-items-center" routerLink="/atraiter" style="justify-content: center !important;">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
@@ -28,17 +28,21 @@ ll<div class="container">
   <div class="row text-center mb-30">
     <div class="col-6 ">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white">
-          <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
-        </span>
+        <a class="nav-link d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+          <span class="circle-white">
+            <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
+          </span>
+        </a>
       </div>
       <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countCurrentMonthVisits > 1)">s</ng-container> ce mois-ci</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white">
-          <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
-        </span>
+        <a class="nav-link d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+          <span class="circle-white">
+            <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
+          </span>
+        </a>
       </div>
       <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countLastMonthVisits > 1)">s</ng-container> le mois dernier</span>
     </div>
