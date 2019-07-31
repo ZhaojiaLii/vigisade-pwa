@@ -11,7 +11,7 @@
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
     <div class="card-body text-center text-info"> 
-      <a class="nav-link d-flex align-items-center" routerLink="/atraiter" style="justify-content: center !important;">
+      <a class="nav-link-homepage d-flex align-items-center" routerLink="/atraiter">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
@@ -28,7 +28,7 @@
   <div class="row text-center mb-30">
     <div class="col-6 ">
       <div class="welcome-visit-card mb-2">
-        <a class="nav-link d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history">
           <span class="circle-white">
             <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
           </span>
@@ -38,7 +38,7 @@
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
-        <a class="nav-link d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history">
           <span class="circle-white">
             <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
           </span>
