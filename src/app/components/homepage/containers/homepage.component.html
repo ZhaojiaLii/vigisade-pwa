@@ -1,4 +1,4 @@
-<div class="container">
+ll<div class="container">
   <div class="row mb-50">
     <div class="card card-full-width">
       <div class="card-body">
@@ -10,16 +10,18 @@
   </div>
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
-    <div class="card-body text-center text-info">
-      <span class="font-30 font-weight-bold mr-2">
-        <strong>{{(user$|async)?.countRemainingActions}}</strong>
-      </span>
-      <span class="font-25">
-        <span [ngPlural]="(user$|async)?.countRemainingActions">
-          <ng-template ngPluralCase="=1">action</ng-template>
-          <ng-template ngPluralCase="other">actions à traiter</ng-template>
+    <div class="card-body text-center text-info"> 
+      <a class="nav-link d-flex align-items-center" routerLink="/atraiter">
+        <span class="font-30 font-weight-bold mr-2">
+          <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
-      </span>
+        <span class="font-25">
+          <span [ngPlural]="(user$|async)?.countRemainingActions">
+            <ng-template ngPluralCase="=1">action à traiter</ng-template>
+            <ng-template ngPluralCase="other">actions à traiter</ng-template>
+          </span>
+        </span>
+      </a>
     </div>
   </div>
 
@@ -44,7 +46,3 @@
 
   <app-menu-buttons></app-menu-buttons>
 </div>
-
-
-
-
