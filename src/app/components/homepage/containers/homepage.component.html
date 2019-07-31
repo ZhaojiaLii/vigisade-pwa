@@ -10,33 +10,39 @@
   </div>
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
-    <div class="card-body text-center text-info">
-      <span class="font-30 font-weight-bold mr-2">
-        <strong>{{(user$|async)?.countRemainingActions}}</strong>
-      </span>
-      <span class="font-25">
-        <span [ngPlural]="(user$|async)?.countRemainingActions">
-          <ng-template ngPluralCase="=1">action</ng-template>
-          <ng-template ngPluralCase="other">actions à traiter</ng-template>
+    <div class="card-body text-center text-info"> 
+      <a class="nav-link-homepage d-flex align-items-center" routerLink="/atraiter" style="justify-content: center !important;">
+        <span class="font-30 font-weight-bold mr-2">
+          <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
-      </span>
+        <span class="font-25">
+          <span [ngPlural]="(user$|async)?.countRemainingActions">
+            <ng-template ngPluralCase="=1">action à traiter</ng-template>
+            <ng-template ngPluralCase="other">actions à traiter</ng-template>
+          </span>
+        </span>
+      </a>
     </div>
   </div>
 
   <div class="row text-center mb-30">
     <div class="col-6 ">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white">
-          <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
-        </span>
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+          <span class="circle-white">
+            <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
+          </span>
+        </a>
       </div>
       <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countCurrentMonthVisits > 1)">s</ng-container> ce mois-ci</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
-        <span class="circle-white">
-          <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
-        </span>
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+          <span class="circle-white">
+            <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
+          </span>
+        </a>
       </div>
       <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countLastMonthVisits > 1)">s</ng-container> le mois dernier</span>
     </div>
@@ -44,7 +50,3 @@
 
   <app-menu-buttons></app-menu-buttons>
 </div>
-
-
-
-
