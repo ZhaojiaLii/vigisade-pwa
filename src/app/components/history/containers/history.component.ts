@@ -23,6 +23,7 @@ export class HistoryComponent implements OnInit {
   results = [];
   areas = [];
   entities = [];
+  creators = [];
   userHistoryDesktop$: Observable<any> = combineLatest(
     [this.historyService.getHistory(), this.profileService.getUser()]
   ).pipe(
@@ -119,6 +120,26 @@ export class HistoryComponent implements OnInit {
     }),
     map(() => this.entities),
   );
+  creators$: Observable<any> = combineLatest(
+    [this.userHistoryDesktop$]
+  ).pipe(
+    filter(([results]) => {
+      for (const result of results) {
+        const creatorName = result.result.resultUserfirstName + ' ' + result.result.resultUserlastName;
+        const creatorId = result.result.resultUserId;
+        const creator = {
+          name: creatorName,
+          id: creatorId,
+        };
+        const data = this.creators.find(cre => cre.name === creator.name);
+        if (!data) {
+          this.creators.push(creator);
+        }
+      }
+      return true;
+    }),
+    map(() => this.creators),
+  );
 
   filterForm = new FormGroup({
     startDate: new FormControl(''),
@@ -142,6 +163,7 @@ export class HistoryComponent implements OnInit {
     this.userAreas$.subscribe();
     this.userEntities$.subscribe();
     this.countResultNum(this.results);
+    this.creators$.subscribe();
   }
 
   deviceDetection() {
@@ -205,6 +227,14 @@ export class HistoryComponent implements OnInit {
       for (const result of this.results) {
         if (result.status === true) {
           result.status = Number(result.result.resultEntity) === Number(this.filterForm.value.entity);
+        }
+      }
+    }
+    if (this.filterForm.value.creator !== '' && this.filterForm.value.creator !== null) {
+      // filtering by creator
+      for (const result of this.results) {
+        if (result.status === true) {
+          result.status = Number(result.result.resultUserId) === Number(this.filterForm.value.creator);
         }
       }
     }

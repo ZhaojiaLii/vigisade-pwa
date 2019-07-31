@@ -17,16 +17,12 @@ import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.i
   templateUrl: './history-details.component.html',
 })
 export class HistoryDetailsComponent implements OnInit, OnDestroy {
-  nextResultIdIndex: number;
   isCollapsed = false;
   resultIds = [];
   questionNum = 0;
   thisResultId: number;
-  thisResultIdIndex: number;
   showCategories = false;
-  nextCategoryClicked = false;
   thisCategoryIndex = 0;
-  nextCategoryIndex = 0;
   arriveLastCategory = false;
   surveyCategoryIds = [];
 
@@ -86,29 +82,12 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   calculateTotalQuestionNum(question: number) {
     this.questionNum = this.questionNum + question;
   }
-  nextResult() {
-    this.thisResultIdIndex = this.resultIds.findIndex(id => id === this.thisResultId);
-    // console.log(this.thisResultIdIndex);
-    this.nextResultIdIndex = this.thisResultIdIndex + 1;
-    if (this.nextResultIdIndex >= this.resultIds.length) {
-      // if the result is the last one, navigate to the first result
-      this.nextResultIdIndex = 0;
-      this.router.navigate(['/history', this.resultIds[this.nextResultIdIndex]]);
-      window.scroll(0, 0);
-      this.toastrService.success('Retourner à la première', 'Visite: ' + (this.nextResultIdIndex + 1));
-    } else {
-      this.router.navigate(['/history', this.resultIds[this.nextResultIdIndex]]);
-      window.scroll(0, 0);
-      this.toastrService.success('La visite prochaine', 'Visite: ' + (this.nextResultIdIndex + 1));
-    }
-  }
 
   nextCategory() {
     const categoryNum = this.surveyCategoryIds.length;
     if (this.thisCategoryIndex < categoryNum) {
-      // console.log(this.thisCategoryIndex);
       this.selectResult(this.surveyCategoryIds[this.thisCategoryIndex]);
-      this.thisCategoryIndex++;  // 3
+      this.thisCategoryIndex++;
       this.arriveLastCategory = false;
       this.toastrService.success('prochaine category');
     } else {
@@ -125,7 +104,6 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
     this.historyService.selectResultCategory(id);
     this.showCategories = true;
     this.arriveLastCategory = false;
-    // this.nextCategoryClicked = true;
     this.isCollapsed = false;
   }
 
