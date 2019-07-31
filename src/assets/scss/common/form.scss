@@ -10,6 +10,7 @@ select {
   background-size: 11px 6px;
   background-position: right center;
   background-repeat: no-repeat;
+  padding-right: 5px;
 }
 [bsDatepicker] {
   -webkit-appearance: none;
@@ -19,6 +20,7 @@ select {
   background-size: 20px 22px;
   background-position: right center;
   background-repeat: no-repeat;
+  padding-right: 5px;
 }
 .form-row {
   margin-left: -$grid-gutter-width / 2;
