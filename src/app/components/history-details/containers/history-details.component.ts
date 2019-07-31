@@ -89,7 +89,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
       this.selectResult(this.surveyCategoryIds[this.thisCategoryIndex]);
       this.thisCategoryIndex++;
       this.arriveLastCategory = false;
-      this.toastrService.success('prochaine category');
+      this.toastrService.success('Catégorie suivante');
     } else {
       this.selectBestPractice();
       this.thisCategoryIndex = 0;
