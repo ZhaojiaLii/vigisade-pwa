@@ -7,8 +7,3 @@ export const isMenuOpen = createSelector(
   getLayoutState,
   (state: LayoutState) => state.menuOpen,
 );
-
-export const isTutorialOpen = createSelector(
-  getLayoutState,
-  (state: LayoutState) => state.openTutorial,
-);

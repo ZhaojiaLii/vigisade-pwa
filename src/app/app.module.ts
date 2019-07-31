@@ -41,6 +41,7 @@ import { historyFeature } from './components/history/store/history.feature';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { SurveyModule } from './components/visit/survey.module';
 import { draftFeature } from './store/draft/draft.feature';
+import { menuFeature } from './components/shared/components/menu/store/menu.feature';
 
 registerLocaleData(localeFr);
 
@@ -66,6 +67,7 @@ const ngrxFeatures = [
   historyFeature,
   layoutFeature,
   loginFeature,
+  menuFeature,
   profileFeature,
   surveyFeature,
 ];

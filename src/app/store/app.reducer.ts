@@ -12,6 +12,7 @@ import { dangerousReducer } from '../components/dangerous/store/dangerous.reduce
 import { historyReducer } from '../components/history/store/history.reducer';
 import { localStorageSyncReducer } from '../data/local-storage.helpers';
 import { draftReducer } from './draft/draft.reducer';
+import { menuReducer } from '../components/shared/components/menu/store/menu.reducer';
 
 export const reducers: ActionReducerMap<State> = {
     dangerous: dangerousReducer,
@@ -20,6 +21,7 @@ export const reducers: ActionReducerMap<State> = {
     history: historyReducer,
     layout: layoutReducer,
     login: loginReducer,
+    menu: menuReducer,
     profile: profileReducer,
     correction: correctionReducer,
     survey: surveyReducer,

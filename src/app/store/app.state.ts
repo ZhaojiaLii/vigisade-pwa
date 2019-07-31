@@ -7,6 +7,7 @@ import { DataState } from './data/data.state';
 import { DangerousState } from '../components/dangerous/store/dangerous.states';
 import { HistoryState } from '../components/history/store/history.state';
 import { DraftState } from './draft/draft.state';
+import { MenuState } from '../components/shared/components/menu/store/menu.state';
 
 export interface State {
     dangerous: DangerousState;
@@ -15,6 +16,7 @@ export interface State {
     history: HistoryState;
     layout: LayoutState;
     login: LoginState;
+    menu: MenuState;
     profile: ProfileState;
     correction: CorrectionState;
     survey: SurveyState;
