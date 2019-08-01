@@ -72,12 +72,13 @@ export class VisitComponent implements OnInit {
   ngOnInit(): void {
     // Initialize questions forms.
     combineLatest([
+      this.profileService.getUser(),
       this.surveyService.getSurveyOfUser(),
       this.draftService.getSurveyDraft(),
     ]).pipe(
-      filter(([survey, draft]) => !!survey && draft !== undefined),
+      filter(([user, survey, draft]) => !!user && !!survey && draft !== undefined),
       take(1),
-    ).subscribe(([survey, draft]) => {
+    ).subscribe(([user, survey, draft]) => {
 
       // Merge questions in a single array to make initialization easier.
       survey.surveyCategories.forEach((category: Category) => {
@@ -89,7 +90,7 @@ export class VisitComponent implements OnInit {
       if (draft) {
         this.initFormFromDraft(draft);
       } else {
-        this.initFormFromScratch();
+        this.initFormFromScratch(user.entityId);
       }
 
       this.surveyTeamMode = survey.surveyTeam;
@@ -189,7 +190,11 @@ export class VisitComponent implements OnInit {
       + (+(this.bestPracticeForm.status === 'VALID'));
   }
 
-  initFormFromScratch(): void {
+  initFormFromScratch(userEntityId: number): void {
+    if (userEntityId) {
+      this.mainForm.patchValue({entity: userEntityId.toString()});
+    }
+
     this.questions.forEach((question: Question) => {
       const teamMemberId = question.surveyQuestionType === TYPE_GENERAL
         ? ''
