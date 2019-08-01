@@ -109,8 +109,6 @@ export class VisitComponent implements OnInit {
           question,
         });
       });
-
-    console.log(this.questionsForms, this.teamMembersForms);
   }
 
   removeTeamMember(id: string): void {
