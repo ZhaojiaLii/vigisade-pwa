@@ -76,6 +76,7 @@
                     *ngFor="let questionForm of getQuestionForms(category.surveyCategoryId);"
                     [question]="questionForm.question"
                     [group]="questionForm.group"
+                    [teamMember]="getQuestionMember(questionForm.group.value.teamMemberId)"
                 ></app-survey-question>
             </div>
         </div>

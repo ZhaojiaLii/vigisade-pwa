@@ -8,6 +8,10 @@
                 <div class=" mb-15 lineH-24px">
                     <p class="m-0">
                         {{question.surveyQuestionTranslation.surveyQuestionTranslationLabel}}
+                        <span *ngIf="teamMember">
+                            (pour {{teamMember.firstName}}
+                            {{teamMember.lastName}})
+                        </span>
                     </p>
                     <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
                         <div class="light-grey font-14">

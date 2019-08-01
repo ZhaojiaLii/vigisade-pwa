@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Question } from '../../interfaces/getSurveys/question.interface';
+import { TeamMemberType } from '../../interfaces/form/team-member-type.interface';
 
 @Component({
   selector: 'app-survey-question',
@@ -10,6 +11,7 @@ export class SurveyQuestionComponent implements OnChanges {
 
   @Input() question: Question;
   @Input() group: FormGroup;
+  @Input() teamMember: TeamMemberType;
 
   isCollapsed = false;
   showError = false;
