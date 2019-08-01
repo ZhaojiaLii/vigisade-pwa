@@ -243,7 +243,7 @@ export class HistoryComponent implements OnInit {
     if (this.countResult === 0) {
       this.toastrService.error('Aucun Résultat');
     } else {
-      this.toastrService.success(this.countResult + ' résultat trouvé');
+      this.toastrService.success(this.countResult + ' résultat(s) trouvé(s)');
     }
   }
 

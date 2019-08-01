@@ -4,7 +4,7 @@
 <div *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) === null" class="container mb-90">
     <div class="container-content">
         <div class="font-bold font-25">
-            DR {{(resultArea$|async).name|uppercase}}
+            {{(resultArea$|async).name|uppercase}}
         </div>
         <div class="form-row">
             <div class="ml-3 mt-3 col-md-6">
