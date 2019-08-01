@@ -136,7 +136,7 @@ export class ProfileComponent implements OnInit {
         };
         // console.log('POST data is: ', POST);
         this.profileService.updateUser(POST);
-        this.toastrService.success('Votre profil a été mis à jour', 'Succès');
+        this.toastrService.success('Votre profil a été mis à jour');
       }
     );
     this.language.get('language').valueChanges.subscribe(val => {
@@ -171,7 +171,7 @@ export class ProfileComponent implements OnInit {
       };
       // console.log('POST data is: ', POST);
       this.profileService.updateUser(POST);
-      this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + this.currentLanguage , 'Succès');
+      this.toastrService.success('Votre profil a été mis à jour avec une nouvelle langue : ' + this.currentLanguage);
       this.Languages.forEach(language => {
         if (language.name === this.currentLanguage) {
           this.Languages.splice(this.Languages.indexOf(language), 1);
