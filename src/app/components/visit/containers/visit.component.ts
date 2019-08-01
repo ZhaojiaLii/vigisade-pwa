@@ -10,12 +10,13 @@ import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { filter, take } from 'rxjs/operators';
-import { Question } from '../interfaces/getSurveys/question.interface';
-import { getRandomId } from '../../../data/random.helpers';
+import { Question, TYPE_GENERAL, TYPE_TEAM } from '../interfaces/getSurveys/question.interface';
 import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
 import { ResultDraft } from '../interfaces/result-draft.interface';
 import { DraftService } from '../../../services/draft.service';
 import { Area } from '../../shared/interfaces/area.interface';
+import { TeamMemberType } from '../interfaces/form/team-member-type.interface';
+import { User } from '../../profile/interfaces/user';
 
 @Component({
   selector: 'app-visit',
@@ -46,6 +47,7 @@ export class VisitComponent implements OnInit {
   });
 
   /** Data */
+  user$: Observable<User> = this.profileService.getUser();
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   surveyArea$: Observable<Area> = this.surveyService.getSurveyArea();
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
@@ -73,7 +75,7 @@ export class VisitComponent implements OnInit {
       this.surveyService.getSurveyOfUser(),
       this.draftService.getSurveyDraft(),
     ]).pipe(
-      filter(([survey, draft]) => !!survey),
+      filter(([survey, draft]) => !!survey && draft !== undefined),
       take(1),
     ).subscribe(([survey, draft]) => {
 
@@ -95,15 +97,19 @@ export class VisitComponent implements OnInit {
   }
 
   addTeamMember(): void {
-    const memberId = getRandomId();
-    this.teamMembersForms = this.teamMembersForms.concat(buildTeamMemberForm());
+    const teamMember = buildTeamMemberForm();
+    this.teamMembersForms = this.teamMembersForms.concat(teamMember);
 
-    this.questions.forEach(question => {
-      this.questionsForms.push({
-        group: buildQuestionForm(question, memberId),
-        question,
+    this.questions
+      .filter(question => question.surveyQuestionType === TYPE_TEAM)
+      .forEach(question => {
+        this.questionsForms.push({
+          group: buildQuestionForm(question, teamMember.value.id),
+          question,
+        });
       });
-    });
+
+    console.log(this.questionsForms, this.teamMembersForms);
   }
 
   removeTeamMember(id: string): void {
@@ -122,6 +128,15 @@ export class VisitComponent implements OnInit {
     });
 
     // @todo: sort
+  }
+
+  getQuestionMember(teamMemberId: string): TeamMemberType {
+    const teamMemberForm = this.teamMembersForms
+      .find(group => group.value.id === teamMemberId);
+
+    return teamMemberForm
+      ? teamMemberForm.value
+      : null;
   }
 
   selectSurveyCategory(id: number): void {
@@ -176,8 +191,12 @@ export class VisitComponent implements OnInit {
 
   initFormFromScratch(): void {
     this.questions.forEach((question: Question) => {
+      const teamMemberId = question.surveyQuestionType === TYPE_GENERAL
+        ? ''
+        : this.teamMembersForms[0].get('id').value;
+
       this.questionsForms.push({
-        group: buildQuestionForm(question, this.teamMembersForms[0].get('id').value),
+        group: buildQuestionForm(question, teamMemberId),
         question,
       });
     });

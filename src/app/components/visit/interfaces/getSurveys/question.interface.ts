@@ -7,3 +7,6 @@ export interface Question {
   surveyQuestionCategoryId: number;
   surveyQuestionTranslation: SurveyQuestionTranslation;
 }
+
+export const TYPE_TEAM = 'Equipe';
+export const TYPE_GENERAL = 'General';

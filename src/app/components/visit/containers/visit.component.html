@@ -76,6 +76,7 @@
                     *ngFor="let questionForm of getQuestionForms(category.surveyCategoryId);"
                     [question]="questionForm.question"
                     [group]="questionForm.group"
+                    [teamMember]="getQuestionMember(questionForm.group.value.teamMemberId)"
                 ></app-survey-question>
             </div>
         </div>
@@ -97,6 +98,8 @@
 <div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
     <app-survey-submit
         [isFormValid]="countTotal() === countValidTotal()"
+        [user]="(user$|async)"
+        [surveyId]="(survey$|async)?.surveyId"
         [mainForm]="mainForm"
         [teamMembersForms]="teamMembersForms"
         [questionsForms]="questionsForms"
