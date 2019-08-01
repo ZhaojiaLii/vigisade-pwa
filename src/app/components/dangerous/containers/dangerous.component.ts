@@ -61,7 +61,7 @@ export class DangerousComponent implements OnInit {
       dangerousSituationPhoto: this.photo,
     };
     this.dangerousService.createDangerousSituation(dangerousPayload);
-    this.toastrService.success('Succès');
+    this.toastrService.success('Situation dangereuse crée');
     this.router.navigate(['/home']);
   }
 }
