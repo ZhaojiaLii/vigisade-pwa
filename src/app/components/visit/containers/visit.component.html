@@ -98,6 +98,8 @@
 <div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
     <app-survey-submit
         [isFormValid]="countTotal() === countValidTotal()"
+        [user]="(user$|async)"
+        [surveyId]="(survey$|async)?.surveyId"
         [mainForm]="mainForm"
         [teamMembersForms]="teamMembersForms"
         [questionsForms]="questionsForms"

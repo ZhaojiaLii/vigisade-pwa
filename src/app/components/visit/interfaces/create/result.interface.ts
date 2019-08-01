@@ -15,6 +15,7 @@ export interface Result {
   resultValidated: boolean;
   resultTeamMember?: ResultTeamMember[];
   resultQuestion: ResultQuestion[];
+  resultBestPracticeTypeId: string;
   resultBestPracticeDone: string;
   resultBestPracticeComment: string;
   resultBestPracticePhoto: string;

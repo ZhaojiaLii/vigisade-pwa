@@ -16,6 +16,7 @@ import { ResultDraft } from '../interfaces/result-draft.interface';
 import { DraftService } from '../../../services/draft.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { TeamMemberType } from '../interfaces/form/team-member-type.interface';
+import { User } from '../../profile/interfaces/user';
 
 @Component({
   selector: 'app-visit',
@@ -46,6 +47,7 @@ export class VisitComponent implements OnInit {
   });
 
   /** Data */
+  user$: Observable<User> = this.profileService.getUser();
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   surveyArea$: Observable<Area> = this.surveyService.getSurveyArea();
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
@@ -73,7 +75,7 @@ export class VisitComponent implements OnInit {
       this.surveyService.getSurveyOfUser(),
       this.draftService.getSurveyDraft(),
     ]).pipe(
-      filter(([survey, draft]) => !!survey),
+      filter(([survey, draft]) => !!survey && draft !== undefined),
       take(1),
     ).subscribe(([survey, draft]) => {
 

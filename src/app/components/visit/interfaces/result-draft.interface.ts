@@ -1,4 +1,9 @@
 export interface ResultDraft {
+  ids: {
+    survey: number;
+    user: number;
+    direction: number;
+  };
   main: {
     entity: string;
     place: string;

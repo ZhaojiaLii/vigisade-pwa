@@ -12,6 +12,7 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { ToastrService } from 'ngx-toastr';
 import { DraftService } from '../../../../services/draft.service';
+import { User } from '../../../profile/interfaces/user';
 
 @Component({
   selector: 'app-survey-submit',
@@ -20,6 +21,9 @@ import { DraftService } from '../../../../services/draft.service';
 export class SurveySubmitComponent {
 
   @Input() isFormValid = false;
+
+  @Input() user: User;
+  @Input() surveyId: number;
 
   @Input() mainForm: FormGroup;
   @Input() teamMembersForms: FormGroup[];
@@ -35,6 +39,11 @@ export class SurveySubmitComponent {
 
   save() {
     this.draftService.saveSurveyDraft({
+      ids: {
+        survey: this.surveyId,
+        user: this.user.id,
+        direction: this.user.directionId,
+      },
       main: this.mainForm.value,
       teamMembers: this.teamMembersForms.map(group => group.value),
       questions: this.questionsForms.map(form => form.group.value),
@@ -100,6 +109,7 @@ export class SurveySubmitComponent {
         resultValidated: true,
         resultTeamMember: teamMembers,
         resultQuestion: questions,
+        resultBestPracticeTypeId: this.bestPracticeForm.value.type,
         resultBestPracticeDone: this.bestPracticeForm.value.selection,
         resultBestPracticeComment: this.bestPracticeForm.value.comment,
         resultBestPracticePhoto: this.bestPracticeForm.value.photo,
