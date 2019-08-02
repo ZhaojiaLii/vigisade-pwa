@@ -8,3 +8,7 @@ export const compress = (event, options) => from(
   take(1),
   switchMap(file => imageCompression.getDataUrlFromFile(file)),
 );
+
+export const IMAGE_PATH = {
+  result: '/pwa/uploads/images/result/',
+};

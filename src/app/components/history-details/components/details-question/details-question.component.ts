@@ -6,6 +6,7 @@ import { HistoryService } from '../../../history/services/history.service';
 import { filter, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SurveyQuestion } from '../../../history/interfaces/surveyQuestion.interface';
+import { IMAGE_PATH } from '../../../../data/image.helpers';
 
 @Component({
   selector: 'app-details-question',
@@ -28,6 +29,8 @@ export class DetailsQuestionComponent implements OnInit, OnDestroy {
     radio3: new FormControl(''),
     radio4: new FormControl(''),
   });
+
+  imagePath = IMAGE_PATH.result;
 
   getResult$: Observable<Result> = this.historyService.getSelectedResult();
   selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();

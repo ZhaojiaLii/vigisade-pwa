@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { TeamMemberType } from '../../interfaces/form/team-member-type.interface';
-import { compress } from '../../data/image.helpers';
+import { compress } from '../../../../data/image.helpers';
 
 @Component({
   selector: 'app-survey-question',

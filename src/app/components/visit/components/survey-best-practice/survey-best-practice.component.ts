@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../../interfaces/getSurveys/survey.interface';
-import { compress } from '../../data/image.helpers';
+import { compress } from '../../../../data/image.helpers';
 
 @Component({
   selector: 'app-survey-best-practice',

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { DangerousService } from '../services/dangerous.service';
 import { DangerousSituationType } from '../interfaces/dangerous-situation-type.interface';
 import { DataService } from '../../../services/data.service';
-import { compress } from '../../visit/data/image.helpers';
+import { compress } from '../../../data/image.helpers';
 
 @Component({
   selector: 'app-dangerous',
