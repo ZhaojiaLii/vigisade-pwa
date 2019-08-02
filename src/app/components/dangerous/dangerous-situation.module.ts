@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { DangerousComponent } from './containers/dangerous.component';
+import { DangerousSituationComponent } from './containers/dangerous-situation.component';
 
 @NgModule({
   imports: [
     SharedModule,
   ],
   declarations: [
-    DangerousComponent,
+    DangerousSituationComponent,
   ],
 })
 export class DangerousSituationModule {}

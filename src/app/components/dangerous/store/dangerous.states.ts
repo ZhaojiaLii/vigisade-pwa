@@ -1,9 +1,14 @@
-import { CreateDangerousSituation } from '../interfaces/create-dangerous-situation.interface';
+import { DangerousSituationPayload } from '../interfaces/create/dangerous-situation.interface';
 
 export interface DangerousState {
-  unsavedDangerousSituations: CreateDangerousSituation[];
+  loading: boolean;
+  unsavedDangerousSituations: {
+    id: string;
+    dangerousSituation: DangerousSituationPayload
+  }[];
 }
 
 export const dangerousInitialState = {
+  loading: false,
   unsavedDangerousSituations: [],
 };

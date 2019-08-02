@@ -1,11 +1,11 @@
 import { Direction } from '../../components/shared/interfaces/direction.interface';
 import { Header } from '../../interfaces/header.interface';
-import { DangerousType } from '../../components/dangerous/interfaces/dangerous-type.interface';
+import { DangerousSituationType } from '../../components/dangerous/interfaces/dangerous-situation-type.interface';
 
 export interface DataState {
   direction: Direction[];
   header: Header;
-  typeDangerousSituations: DangerousType[];
+  typeDangerousSituations: DangerousSituationType[];
 }
 
 export const initialDataState = {

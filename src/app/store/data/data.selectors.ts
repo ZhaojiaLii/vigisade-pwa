@@ -32,9 +32,9 @@ export const getEntities = createSelector(
   },
 );
 
-export const getTypeDangerousSituations = createSelector(
+export const getDangerousSituationTypes = createSelector(
   getDataState,
-  (state: DataState) => state.typeDangerousSituations[0],
+  (state: DataState) => state.typeDangerousSituations,
 );
 
 export const getHeader = createSelector(

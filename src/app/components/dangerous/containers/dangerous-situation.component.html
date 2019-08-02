@@ -12,12 +12,15 @@
         </span>
         <span class="font-24 ml-2 font-medium">Signaler</span>
       </div>
-      <form [formGroup]="postDangerous">
+      <form [formGroup]="dangerousSituationGroup">
         <div class="form-row">
           <div class="form-group col-12">
-            <select class="form-control" appHighlight id="typeSelect" formControlName="dangerousType">
-              <option value="{{type.typeDangerousSituationsId}}" *ngFor="let type of (dangerousType$|async)">
-                {{type.typeDangerousSituationTranslation.typeDangerousSituationTranslationType}}
+            <select class="form-control" appHighlight id="typeSelect" formControlName="type">
+              <option
+                  *ngFor="let type of (types$|async)"
+                  value="{{type.typeDangerousSituationsId}}"
+              >
+                {{type.typeDangerousSituationTranslation?.typeDangerousSituationTranslationType}}
               </option>
             </select>
             <label for="typeSelect">Type</label>
@@ -30,7 +33,8 @@
           </div>
         </div>
         <div class="mx-30 mb-25">
-          <input style="display: none" type="file" (change)="preview($event)" #uploadImage formControlName="photo">
+          <input type="hidden" value="" formControlName="photo">
+          <input style="display: none" type="file" accept="image/*" (change)="updateImage($event)" #uploadImage>
           <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center" (click)="uploadImage.click()">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
                 <g fill="#363636" fill-rule="evenodd" stroke="#363636">
@@ -42,15 +46,21 @@
               <span class="ml-3">Ajouter une photo</span>
           </button>
         </div>
-        <div class="image-preview">
-          <img src="{{imgURL}}" alt="Preview failed" *ngIf="imgURL" style="width: 100%; height: 10%;">
+        <div *ngIf="dangerousSituationGroup.value.photo?.length > 0" class="image-preview">
+          <img src="{{dangerousSituationGroup.value.photo}}" alt="Preview failed" style="width: 100%; height: 10%;">
         </div>
       </form>
     </div>
   </div>
 
   <div class="mx-30 my-45">
-    <button class="btn btn-info d-block w-100" (click)="createDangerous()">Valider</button>
+    <button
+        [attr.disabled]="dangerousSituationGroup.status !== 'VALID' ? true : null"
+        class="btn btn-info d-block w-100"
+        (click)="createDangerous()"
+    >
+      Valider
+    </button>
   </div>
 </div>
 

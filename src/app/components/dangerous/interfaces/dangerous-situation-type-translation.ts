@@ -1,4 +1,4 @@
-export interface TypeDangerousSituationTranslation {
+export interface DangerousSituationTypeTranslation {
   typeDangerousSituationTranslationId: number;
   typeDangerousSituationTranslationTranslatableId: number;
   typeDangerousSituationTranslationType: string;

@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
-import { DangerousComponent } from './components/dangerous/containers/dangerous.component';
+import { DangerousSituationComponent } from './components/dangerous/containers/dangerous-situation.component';
 import { VisitComponent } from './components/visit/containers/visit.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/containers/securite.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'dangerous',
-    component: DangerousComponent,
+    component: DangerousSituationComponent,
     canActivate: [TokenGuard],
   },
   {

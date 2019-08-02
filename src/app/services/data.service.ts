@@ -8,13 +8,13 @@ import {
   getDirections,
   getEntities,
   getHeader,
-  getTypeDangerousSituations
+  getDangerousSituationTypes
 } from '../store/data/data.selectors';
 import { Area } from '../components/shared/interfaces/area.interface';
 import { Entity } from '../components/shared/interfaces/entity.interface';
 import { loadData, loadHeader } from '../store/data/data.actions';
 import { Header } from '../interfaces/header.interface';
-import { DangerousType } from '../components/dangerous/interfaces/dangerous-type.interface';
+import { DangerousSituationType } from '../components/dangerous/interfaces/dangerous-situation-type.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -36,8 +36,8 @@ export class DataService {
     return this.store.pipe(select(getDirections));
   }
 
-  getTypeDangerousSituations(): Observable<DangerousType> {
-    return this.store.pipe(select(getTypeDangerousSituations));
+  getDangerousSituationTypes(): Observable<DangerousSituationType[]> {
+    return this.store.pipe(select(getDangerousSituationTypes));
   }
 
   getAreas(): Observable<Area[]> {

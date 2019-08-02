@@ -32,7 +32,7 @@ export class SurveyQuestionComponent implements OnChanges {
     });
   }
 
-  compress(event: any) {
+  updateImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
         this.group.patchValue({photo: dataUrl});
