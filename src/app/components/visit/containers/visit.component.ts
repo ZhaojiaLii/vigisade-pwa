@@ -122,11 +122,17 @@ export class VisitComponent implements OnInit {
   }
 
   getQuestionForms(categoryId: number): {group: FormGroup, question: Question}[] {
-    return this.questionsForms.filter(questionForm => {
-      return questionForm.question.surveyQuestionCategoryId === categoryId;
-    });
+    return this.questionsForms
+      .filter(questionForm => {
+        return questionForm.question.surveyQuestionCategoryId === categoryId;
+      })
+      .sort((a, b) => {
+        if (a.question.surveyQuestionOrdonnancement !== b.question.surveyQuestionOrdonnancement) {
+          return a.question.surveyQuestionOrdonnancement - b.question.surveyQuestionOrdonnancement;
+        }
 
-    // @todo: sort
+        return Number(a.group.value.teamMemberId) - Number(b.group.value.teamMemberId);
+      });
   }
 
   getQuestionMember(teamMemberId: string): TeamMemberType {
