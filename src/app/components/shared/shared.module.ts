@@ -21,6 +21,14 @@ import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule, CollapseModule } from 'ngx-bootstrap';
 import { MenuButtonsComponent } from './components/menu-buttons/menu-buttons.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const sharedComponents = [
   MenuComponent,
@@ -62,6 +70,14 @@ const materialModules = [
     RouterModule,
     CollapseModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   entryComponents: [
     ATraiterElementComponent,
@@ -77,6 +93,7 @@ const materialModules = [
     ...sharedComponents,
     ...sharedDirectives,
     ...sharedPipes,
+    TranslateModule,
   ],
 })
 export class SharedModule {

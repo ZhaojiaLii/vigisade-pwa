@@ -4,10 +4,10 @@
   </div>
   <div *ngIf="(correction$|async)?.length >= 0" class="row">
     <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
-      <ng-template ngPluralCase="=0">Aucun contrôle trouvé</ng-template>
-      <ng-template ngPluralCase="=1">1 contrôle trouvé</ng-template>
+      <ng-template ngPluralCase="=0">{{'HistoriqueVisites.Aucun contrôle trouvé'|translate}}</ng-template>
+      <ng-template ngPluralCase="=1">1 {{'HistoriqueVisites.contrôle trouvé'|translate:{value:''} }}</ng-template>
       <ng-template ngPluralCase="other">
-        <strong>{{ countCorrection$|async }}</strong> contrôles trouvés
+        <strong>{{ countCorrection$|async }}</strong> {{'HistoriqueVisites.contrôle trouvé'|translate:{value:'s'} }}
       </ng-template>
     </div>
     <app-a-traiter-element

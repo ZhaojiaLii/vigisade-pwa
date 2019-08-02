@@ -6,53 +6,53 @@
         <div class="card card-full-width mb-10 shadow-none mp-15">
             <div class="card-body px-30">
                 <div class="row align-items-center light-grey mb-20">
-                    <div class="col-6 font-demiBold">Filtres de recherche</div>
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Filtres de recherche'|translate}}</div>
                 </div>
                 <hr/>
                 <div class="row align-items-center light-grey mb-20">
-                    <div class="col-6 font-demiBold">Date début :
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date début'|translate}} :
                       <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate">
                     </div>
-                    <div class="col-6 font-demiBold">Date fin :
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date fin'|translate}} :
                       <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate">
                     </div>
                 </div>
                 <div class="row align-items-center light-grey mb-20">
-                    <div class="col-6 font-demiBold">Zone :
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
                         <select class="form-control" style="border: solid 1px lightgrey" formControlName="area">
                             <option value="{{area.id}}" *ngFor="let area of areas">{{area.name}}</option>
                         </select>
                     </div>
-                    <div class="col-6 font-demiBold">Entité :
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Entité'|translate}} :
                         <select class="form-control" style="border: solid 1px lightgrey" formControlName="entity">
                             <option value="{{entity.id}}" *ngFor="let entity of entities">{{entity.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="row align-items-center light-grey mb-20">
-                    <div class="col-6 font-demiBold">Créateur :
+                    <div class="col-6 font-demiBold">{{'HistoriqueVisites.Créateur'|translate}} :
                         <select class="form-control" style="border: solid 1px lightgrey" formControlName="creator">
                             <option value="{{creator.id}}" *ngFor="let creator of creators">{{creator.name}}</option>
                         </select>
                     </div>
                     <div class="col-6 font-weight-bold font-14 d-flex">
                       <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="filter()">
-                        <span>Rechercher</span>
+                        <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
                       </button>
                       <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="reInitFilter()">
-                        <span>Réinitialiser</span>
+                        <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
                       </button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    <div *ngIf="results.length >= 0" class="row">
-        <div *ngIf="results.length" [ngPlural]="results.length" class="total">
-            <ng-template ngPluralCase="=0">Aucun contrôle trouvé</ng-template>
-            <ng-template ngPluralCase="=1">1 contrôle trouvé</ng-template>
+    <div *ngIf="results?.length >= 0" class="row">
+        <div *ngIf="results?.length" [ngPlural]="results?.length" class="total">
+            <ng-template ngPluralCase="=0">Aucun {{'HistoriqueVisites.contrôle trouvé'|translate:{value:''} }}</ng-template>
+            <ng-template ngPluralCase="=1">1 {{'HistoriqueVisites.contrôle trouvé'|translate:{value:''} }}</ng-template>
             <ng-template ngPluralCase="other">
-                <strong>{{ countResult }}</strong> contrôles trouvés
+                <strong>{{ countResult }}</strong> {{'HistoriqueVisites.contrôle trouvé'|translate:{value:'s'} }}
             </ng-template>
         </div>
         <app-history-item

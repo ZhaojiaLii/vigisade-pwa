@@ -83,7 +83,6 @@ const ngrxFeatures = [
     ActionCorrectiveComponent,
     SecuriteComponent,
     BonnePratiqueComponent,
-    BonnePratiqueComponent,
     ATraiterComponent,
   ],
   imports: [
@@ -113,7 +112,7 @@ const ngrxFeatures = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ...pageModules,
+    ...pageModules
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

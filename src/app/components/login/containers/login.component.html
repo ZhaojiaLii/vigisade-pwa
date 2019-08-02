@@ -9,18 +9,18 @@
       <div class="form-row">
         <div class="form-group col-12 mb-2">
             <input appHighlight type="text" class="username form-control" #username>
-            <label>Login</label>
+            <label>{{'Login.Login'|translate}}</label>
             <div class="line"></div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-12">
             <input appHighlight type="password" class="password form-control" #password>
-            <label>Mot de passe</label>
+            <label>{{'Login.Mot de passe'|translate}}</label>
             <div class="line"></div>
         </div>
       </div> 
-      <button class="btn btn-info" (click)="login(username.value, password.value)">Connexion</button>
+      <button class="btn btn-info" (click)="login(username.value, password.value)">{{'Login.Connexion'|translate}}</button>
     </div>
   </div>
   <div *ngIf="spinnerEnable" class="spinner-container">

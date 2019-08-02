@@ -17,8 +17,8 @@
         </span>
         <span class="font-25">
           <span [ngPlural]="(user$|async)?.countRemainingActions">
-            <ng-template ngPluralCase="=1">action à traiter</ng-template>
-            <ng-template ngPluralCase="other">actions à traiter</ng-template>
+            <ng-template ngPluralCase="=1">{{'Homepage.ActionsTraiter'|translate:{value:''} }}</ng-template>
+            <ng-template ngPluralCase="other">{{'Homepage.ActionsTraiter'|translate:{value:'s'} }}</ng-template>
           </span>
         </span>
       </a>
@@ -34,7 +34,7 @@
           </span>
         </a>
       </div>
-      <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countCurrentMonthVisits > 1)">s</ng-container> ce mois-ci</span>
+      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites ce mois-ci'|translate:{value:((user$|async)?.countCurrentMonthVisits > 1) ? 's' : ''} }}</span>
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
@@ -44,7 +44,7 @@
           </span>
         </a>
       </div>
-      <span class="font-ultaLight" style="font-size: 20px">visite<ng-container *ngIf="((user$|async)?.countLastMonthVisits > 1)">s</ng-container> le mois dernier</span>
+      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites le mois dernier'|translate:{value:((user$|async)?.countLastMonthVisits > 1) ? 's' : '' } }}</span>
     </div>
   </div>
 

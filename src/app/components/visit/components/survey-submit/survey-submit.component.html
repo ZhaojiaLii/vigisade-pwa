@@ -3,13 +3,13 @@
         class="btn btn-info d-block w-100 mt-5"
         (click)="save()"
     >
-        Enregistrer
+      {{'Visite.Enregistrer'|translate}}
     </button>
     <button
         [attr.disabled]="isFormValid ? null : 1"
         (click)="sendForm()"
         class="btn btn-info d-block w-100 mt-5"
     >
-        Valider
+      {{'Visite.Valider'|translate}}
     </button>
 </div>

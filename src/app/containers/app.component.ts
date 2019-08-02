@@ -7,6 +7,7 @@ import { DataService } from '../services/data.service';
 import { ProfileService } from '../components/profile/services/profile.service';
 import { HistoryService } from '../components/history/services/history.service';
 import { SurveyService } from '../components/visit/services/survey.service';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -22,9 +23,14 @@ export class AppComponent implements OnInit {
     private profileService: ProfileService,
     private historyService: HistoryService,
     private surveyService: SurveyService,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
+
+    this.translateService.addLangs(['fr', 'en', 'es']);
+    this.translateService.setDefaultLang('fr');
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => this.layoutService.closeMenu());

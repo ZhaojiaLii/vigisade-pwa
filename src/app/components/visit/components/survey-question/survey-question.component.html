@@ -2,7 +2,7 @@
     <div class="card card-full-width shadow-none" [style.border]="showError ? 'solid red 1px' : ''">
         <div class="card-body ml-3 mr-3">
             <p style="color: red" *ngIf="showError">
-                Tous les champs sont obligatoires.
+              {{'Tous les champs sont obligatoires.'|translate}}
             </p>
             <div class="d-flex justify-content-between">
                 <div class=" mb-15 lineH-24px">
@@ -92,7 +92,7 @@
                             appHighlight
                             formControlName="comment"
                         ></textarea>
-                        <label for="commentaire" class="light-grey font-14">Commentaire</label>
+                        <label for="commentaire" class="light-grey font-14">{{'Visite.Commentaire'|translate}}</label>
                         <div class="line"></div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                                         d="M12 8.097c-.978 0-1.774.796-1.774 1.774s.796 1.774 1.774 1.774 1.774-.796 1.774-1.774S12.978 8.097 12 8.097m0 4.258A2.486 2.486 0 0 1 9.516 9.87 2.486 2.486 0 0 1 12 7.387a2.486 2.486 0 0 1 2.483 2.484A2.486 2.486 0 0 1 12 12.355"></path>
                             </g>
                         </svg>
-                        <span class="ml-3">Ajouter une photo</span>
+                        <span class="ml-3">{{'Visite.Ajouter une photo'|translate}}</span>
                     </button>
                 </div>
                 <div *ngIf="group.value.photo?.length > 0" class="image-preview">

@@ -18,33 +18,33 @@
                             {{entity.name}}
                         </option>
                     </select>
-                    <label for="agenceSelect">Agence</label>
+                    <label for="agenceSelect">{{'Visite.Agence'|translate}}</label>
                     <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" appHighlight id="chantierSelect" formControlName="place">
-                    <label for="chantierSelect">Lieu du chantier</label>
+                    <label for="chantierSelect">{{'Visite.Lieu du chantier'|translate}}</label>
                     <div class="line"></div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" appHighlight id="clientSelect" formControlName="client">
-                    <label for="clientSelect">Client</label>
+                    <label for="clientSelect">{{'Visite.Client'|translate}}</label>
                     <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" bsDatepicker class="form-control" appHighlight id="dateSelect" formControlName="date">
-                    <label for="dateSelect">Date de la visite <span
-                            class="light-grey">(jour, mois, année)</span></label>
+                    <label for="dateSelect">{{'Visite.Date de la visite'|translate}}<span
+                            class="light-grey">{{'Visite.(jour, mois, année)'|translate}}</span></label>
                     <div class="line"></div>
                 </div>
             </div>
         </form>
         <div *ngIf="(survey$|async)?.surveyTeam !== teamMode.no">
-            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.manager" class="font-medium font-22">Responsable contrôlé</p>
-            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">Équipe contrôlée</p>
-            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="group-control-subtitle-text">Personnel présent sur le chantier</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.manager" class="font-medium font-22">{{'Visite.Responsable contrôlé'|translate}}</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">{{'Visite.Équipe contrôlée'|translate}}</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="group-control-subtitle-text">{{'Visite.Personnel présent sur le chantier'|translate}}</p>
             <app-survey-team-member
                 *ngFor="let group of teamMembersForms"
                 [form]="group"
@@ -112,13 +112,13 @@
         <div class=""><span class="font-bold">{{countValidTotal()}}</span>/{{countTotal()}}</div>
         <div class="d-flex align-items-center">
             <div *ngIf="(selectedCategory$|async) === null && !(isBestPracticeSelected$|async)" class="mr-2">
-                <span class="font-bold">Visite {{countValidSurveyFields()}}</span>/{{countSurveyFields()}}
+                <span class="font-bold">{{'Visite.Visite'|translate}} {{countValidSurveyFields()}}</span>/{{countSurveyFields()}}
             </div>
             <div *ngIf="!(isBestPracticeSelected$|async) && (selectedCategory$|async) as category" class="mr-2">
                 <span class="font-bold">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}} {{countValidQuestions(category.surveyCategoryId)}}</span>/{{countQuestions(category.surveyCategoryId)}}
             </div>
             <div *ngIf="(isBestPracticeSelected$|async)" class="mr-2">
-                <span class="font-bold">Bonne pratique {{bestPracticeForm.status === 'VALID' ? 1 : 0}}</span>/1
+                <span class="font-bold">{{'Visite.Bonne pratique'|translate}} {{bestPracticeForm.status === 'VALID' ? 1 : 0}}</span>/1
             </div>
 
 
@@ -132,7 +132,7 @@
             class="d-flex align-items-center justify-content-between"
             (click)="selectSurveyCategory(null)"
         >
-            <span class="note-label">Visite</span>
+            <span class="note-label">{{'Visite.Visite'|translate}}</span>
             <span [ngClass]="{'text-success': countValidSurveyFields() === countSurveyFields()}" class="note">
                 <strong>{{countValidSurveyFields()}}</strong>/{{countSurveyFields()}}
             </span>
@@ -172,7 +172,7 @@
                       d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z"
                       filter="url(#a)" transform=""></path>
               </svg>
-              <span class="note-label">Bonne pratique</span>
+              <span class="note-label">{{'Visite.Bonne pratique'|translate}}</span>
             </span>
             <span
                 class="note"

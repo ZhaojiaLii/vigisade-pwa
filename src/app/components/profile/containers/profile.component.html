@@ -7,10 +7,10 @@
   <form [formGroup]="postForm">
     <div class="form-row">
       <div class="form-group col-md-6" [formGroup]="language">
-        <label for="langueSelect">Langue</label>
+        <label for="langueSelect">{{'Profil.Langue'|translate}}</label>
         <select class="form-control has-value"  appHighlight id="langueSelect" formControlName="language">
           <option value="{{currentLanguageId}}" [selected]="currentLanguage">{{currentLanguage}}</option>
-          <option *ngFor="let language of Languages" value="{{language.id}}">{{language.name}}</option>
+          <option *ngFor="let language of Languages" value="{{language.id}}">{{language.name|translate}}</option>
         </select>
         <div class="line"></div>
       </div>
@@ -18,28 +18,28 @@
 
       </div>
       <div class="form-group col-md-6">
-        <label for="paysSelect">Direction</label>
+        <label for="paysSelect">{{'Profil.Direction'|translate}}</label>
         <select class="form-control has-value" appHighlight id="paysSelect" formControlName="direction">
           <option value="{{userDirectionId}}" [selected]="userDirection">{{userDirection}}</option>
-          <option *ngFor="let direction of Directions" value="{{direction.id}}">{{direction.name}}</option>
+          <option *ngFor="let direction of Directions" value="{{direction.id}}">{{direction.name|translate}}</option>
         </select>
         <div class="line"></div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="regionSelect">Zone</label>
+        <label for="regionSelect">{{'Profil.Zone'|translate}}</label>
         <select class="form-control has-value" appHighlight id="regionSelect" formControlName="area">
           <option value="{{userAreaId}}" [selected]="userArea">{{userArea}}</option>
-          <option *ngFor="let area of getTargetChildArea" value="{{area.id}}">{{area.name}}</option>
+          <option *ngFor="let area of getTargetChildArea" value="{{area.id}}">{{area.name|translate}}</option>
         </select>
         <div class="line"></div>
       </div>
       <div class="form-group col-md-6">
-        <label for="entiteSelect">Entité</label>
+        <label for="entiteSelect">{{'Profil.Entité'|translate}}</label>
         <select class="form-control has-value" appHighlight id="entiteSelect" formControlName="entity">
           <option value="{{userEntityId}}" [selected]="userEntity">{{userEntity}}</option>
-          <option *ngFor="let entity of getTargetChildEntity" value="{{entity.id}}">{{entity.name}}</option>
+          <option *ngFor="let entity of getTargetChildEntity" value="{{entity.id}}">{{entity.name|translate}}</option>
         </select>
         <div class="line"></div>
       </div>

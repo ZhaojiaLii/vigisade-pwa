@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <p class=" mb-30 lineH-24px">
-            Avez-vous identifié une pratique remarquable au cours de cette visite ?
+            {{"Avez-vous identifié une pratique remarquable au cours de cette visite ?"|translate}}
           </p>
           <span routerLink="/tutorial">
             <svg class="flex-shrink-0 mt-2 ml-2" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
@@ -47,7 +47,7 @@
           <div class="form-row">
             <div class="form-group col-12">
               <textarea appHighlight class="form-control" id="commentaire" rows="3"></textarea>
-              <label for="commentaire" class="light-grey font-14">Commentaire</label>
+              <label for="commentaire" class="light-grey font-14">{{'Visite.Commentaire'|translate}}</label>
               <div class="line"></div>
             </div>
           </div>
@@ -60,7 +60,7 @@
                       <path d="M12 8.097c-.978 0-1.774.796-1.774 1.774s.796 1.774 1.774 1.774 1.774-.796 1.774-1.774S12.978 8.097 12 8.097m0 4.258A2.486 2.486 0 0 1 9.516 9.87 2.486 2.486 0 0 1 12 7.387a2.486 2.486 0 0 1 2.483 2.484A2.486 2.486 0 0 1 12 12.355"></path>
                   </g>
                 </svg>
-                <span class="ml-3">Ajouter une photo</span>
+                <span class="ml-3">{{'Visite.Ajouter une photo'|translate}}</span>
               </button>
           </div>
         </form>
@@ -68,7 +68,7 @@
     </div>
   </div>
   <div class="mx-30 my-45">
-    <button class="btn btn-info d-block w-100">Valider</button>
+    <button class="btn btn-info d-block w-100">{{'Visite.Valider'|translate}}</button>
   </div>
 </div>
 <div class="fixed-footer">
@@ -91,7 +91,7 @@
           </defs>
           <path fill="#E3A300" fill-rule="evenodd" d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z" filter="url(#a)" transform=""></path>
         </svg>
-        <span class="font-bold">Bonne pratique 0</span>
+        <span class="font-bold">{{'Visite.Bonne pratique'|translate}} 0</span>
         /1
       </div>
       <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
@@ -101,19 +101,19 @@
   </div>
   <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
     <div class="d-flex align-items-center justify-content-between" routerLink="/visit">
-      <span class="note-label">Visite</span>
+      <span class="note-label">{{'Visite.Visite'|translate}}</span>
       <span class="note text-success"><strong>9</strong>/9</span>
     </div>
     <div class="d-flex align-items-center justify-content-between" routerLink="/security">
-      <span class="note-label">Sécurité</span>
+      <span class="note-label">{{'Visite.Sécurité'|translate}}</span>
       <span class="note text-danger"><strong>9</strong>/9</span>
     </div>
     <div class="d-flex align-items-center justify-content-between">
-      <span class="note-label">Qualité</span>
+      <span class="note-label">{{'Visite.Qualité'|translate}}</span>
       <span class="note text-success"><strong>9</strong>/9</span>
     </div>
     <div class="d-flex align-items-center justify-content-between">
-      <span class="note-label">Environnement</span>
+      <span class="note-label">{{'Visite.Environnement'|translate}}</span>
       <span class="note text-success"><strong>9</strong>/9</span>
     </div>
     <div class="d-flex align-items-center justify-content-between" routerLink="/bonne-pratique">
@@ -132,7 +132,7 @@
           </defs>
           <path fill="#E3A300" fill-rule="evenodd" d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z" filter="url(#a)" transform=""></path>
         </svg>
-        <span class="note-label">Bonne pratique</span>
+        <span class="note-label">{{'Visite.Bonne pratique'|translate}}</span>
       </span>
       <span class="note text-danger"><strong>9</strong>/9</span>
     </div>

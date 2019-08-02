@@ -31,12 +31,12 @@
     </div>
     <div class="card card-full-width shadow-none">
       <div class="card-body">
-        <div class="font-22 font-demiBold">Correctif</div>
+        <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
           <div class="form-row">
             <div class="form-group col-12">
               <textarea appHighlight class="form-control" id="commentaire" rows="3" formControlName="comment"></textarea>
-              <label for="commentaire" class="light-grey font-14">Commentaire</label>
+              <label for="commentaire" class="light-grey font-14">{{ 'SituationDangereuse.Commentaire'|translate }}</label>
               <div class="line"></div>
             </div>
           </div>
@@ -52,7 +52,7 @@
                       <path d="M12 8.097c-.978 0-1.774.796-1.774 1.774s.796 1.774 1.774 1.774 1.774-.796 1.774-1.774S12.978 8.097 12 8.097m0 4.258A2.486 2.486 0 0 1 9.516 9.87 2.486 2.486 0 0 1 12 7.387a2.486 2.486 0 0 1 2.483 2.484A2.486 2.486 0 0 1 12 12.355"></path>
                   </g>
                 </svg>
-                <span class="ml-3">Ajouter une photo</span>
+                <span class="ml-3">{{'SituationDangereuse.Ajouter une photo'|translate}}</span>
               </button>
           </div>
           <div  *ngIf="correction.value.photo?.length > 0" class="image-preview">
@@ -63,6 +63,6 @@
     </div>
   </div>
   <div class="mx-30 my-45">
-    <button class="btn btn-info d-block w-100" (click)="validForm()">Valider</button>
+    <button class="btn btn-info d-block w-100" (click)="validForm()">{{'SituationDangereuse.Valider'|translate}}</button>
   </div>
 </div>
