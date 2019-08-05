@@ -14,9 +14,15 @@ export class SurveyApiService {
   constructor(private http: HttpClient) {}
 
   getSurveys(): Observable<Survey[]> {
-    return this.http.get<Survey>('/api/survey/').pipe(
+    return this.http.get<Survey>('/api/survey/', {observe: 'response'}).pipe(
       // Waiting API fix.
-      map(survey => ([survey])),
+      map(response => {
+        if (response.status === 204) {
+          return null;
+        }
+
+        return [response.body];
+      }),
     );
   }
 

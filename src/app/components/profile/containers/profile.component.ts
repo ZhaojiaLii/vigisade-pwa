@@ -11,6 +11,7 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { languages } from '../../../data/language.helpers';
+import { SurveyService } from '../../visit/services/survey.service';
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
     private dataService: DataService,
     private toastrService: ToastrService,
     private translateService: TranslateService,
+    private surveyService: SurveyService,
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,7 @@ export class ProfileComponent implements OnInit {
     this.userForm.valueChanges.subscribe((changes: Partial<User>) => {
       this.translateService.setDefaultLang(changes.language);
       this.profileService.updateUser(changes);
+      this.surveyService.loadSurveys();
     });
   }
 }
