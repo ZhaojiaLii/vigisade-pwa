@@ -143,7 +143,7 @@ export class ProfileComponent implements OnInit {
         this.profileService.updateUser(POST);
 
         this.translateService.get(['Profil']['Succès Votre profil a été mis à jour'], (res) => {
-          this.toastrService.success(res +' : ' + this.currentLanguage);
+          this.toastrService.success(res + ' : ' + this.currentLanguage );
         });
 
       }
@@ -182,7 +182,7 @@ export class ProfileComponent implements OnInit {
       this.profileService.updateUser(POST);
 
       this.translateService.get(['Profil']['Succès Votre profil a été mis à jour avec une nouvelle langue'], (res) => {
-        this.toastrService.success(res +' : ' + this.currentLanguage);
+        this.toastrService.success(res + ' : ' + this.currentLanguage );
       });
 
       this.Languages.forEach(language => {

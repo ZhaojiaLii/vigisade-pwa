@@ -21,9 +21,9 @@ import { MenuComponent } from './components/menu/containers/menu.component';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule, CollapseModule } from 'ngx-bootstrap';
 import { MenuButtonsComponent } from './components/menu-buttons/menu-buttons.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
