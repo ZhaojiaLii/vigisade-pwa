@@ -30,7 +30,7 @@ export class VisitComponent implements OnInit {
 
   /** Forms */
   mainForm = new FormGroup({
-    entity: new FormControl('', [Validators.required]),
+    entityId: new FormControl('', [Validators.required]),
     place: new FormControl('', [Validators.required]),
     client: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
@@ -196,7 +196,7 @@ export class VisitComponent implements OnInit {
 
   initFormFromScratch(userEntityId: number): void {
     if (userEntityId) {
-      this.mainForm.patchValue({entity: userEntityId.toString()});
+      this.mainForm.patchValue({entityId: userEntityId.toString()});
     }
 
     this.questions.forEach((question: Question) => {

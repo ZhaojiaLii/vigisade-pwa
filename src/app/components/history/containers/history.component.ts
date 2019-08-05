@@ -144,8 +144,8 @@ export class HistoryComponent implements OnInit {
   filterForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
-    area: new FormControl(''),
-    entity: new FormControl(''),
+    areaId: new FormControl(''),
+    entityId: new FormControl(''),
     creator: new FormControl(''),
 });
 

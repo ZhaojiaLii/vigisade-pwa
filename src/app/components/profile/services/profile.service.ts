@@ -5,9 +5,9 @@ import { ProfileState } from '../store/profile.state';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { User } from '../interfaces/user';
-import { getUser, getUserArea } from '../store/profile.selector';
+import { getUser, getUserArea, getUserDirection } from '../store/profile.selector';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { UpdateUser } from '../interfaces/updateUser.interface';
+import { Area } from '../../shared/interfaces/area.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,14 +22,28 @@ export class ProfileService {
     this.store.dispatch(loadUser());
   }
 
+  updateUser(updatedFields: Partial<User>): void {
+    this.store.dispatch(updateUser({updatedFields}));
+  }
+
   getUser(): Observable<User> {
     return this.store.pipe(select(getUser));
   }
 
-  updateUser(updateUserPayload: UpdateUser): void {
-    this.store.dispatch(updateUser({updateUserPayload}));
+  /**
+   * Gets areas from the user's current direction.
+   */
+  getUserAreas(): Observable<Area[]> {
+    return this.store.pipe(
+      select(getUserDirection),
+      filter(direction => !!direction),
+      map(direction => direction.area),
+    );
   }
 
+  /**
+   * Gets entities from the user's current area.
+   */
   getUserEntities(): Observable<Entity[]> {
     return this.store.pipe(
       select(getUserArea),

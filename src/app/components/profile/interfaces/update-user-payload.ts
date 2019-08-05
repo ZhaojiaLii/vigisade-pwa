@@ -1,4 +1,4 @@
-export interface UpdateUser {
+export interface UpdateUserPayload {
   lastname: string;
   firstname: string;
   direction_id: number;

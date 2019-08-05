@@ -3,13 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { UpdateUser } from '../interfaces/updateUser.interface';
-
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type':  'application/json',
-//   })
-// };
+import { UpdateUserPayload } from '../interfaces/update-user-payload';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +15,7 @@ export class ProfileApiService {
     return this.http.get<User>('/api/user/');
   }
 
-  updateUser(updateUserPayload: UpdateUser): Observable<any> {
+  updateUser(updateUserPayload: UpdateUserPayload): Observable<any> {
     return this.http.post(
       '/api/user/update/',
       updateUserPayload,
