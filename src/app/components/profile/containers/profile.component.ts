@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
       // Values are sent to API on change.
       switchMap(([prev, changes]: [Partial<User>, Partial<User>]) => {
         if (prev.directionId.toString() !== changes.directionId.toString()) {
-          this.surveyService.loadSurveys();
           return this.dataService.getDirections().pipe(
             map((directions: Direction[]) => ({
               ...changes,
