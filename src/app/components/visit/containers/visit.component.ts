@@ -30,7 +30,7 @@ export class VisitComponent implements OnInit {
 
   /** Forms */
   mainForm = new FormGroup({
-    entityId: new FormControl('', [Validators.required]),
+    entity: new FormControl('', [Validators.required]),
     place: new FormControl('', [Validators.required]),
     client: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
