@@ -13,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { languages } from '../../../data/language.helpers';
 import { SurveyService } from '../../visit/services/survey.service';
 import { getDefaultFromAreaId, getDefaultFromDirectionId } from '../../../data/directions.helpers';
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 @Component({
   selector: 'app-profile',
@@ -47,6 +49,9 @@ export class ProfileComponent implements OnInit {
       filter(user => !!user),
       take(1),
     ).subscribe(user => {
+      // Define moment locale.
+      moment.locale(user.language + '-' + user.language);
+
       const defaultValue: Partial<User> = {
         language: user.language,
         directionId: user.directionId,

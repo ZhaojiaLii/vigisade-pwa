@@ -14,7 +14,7 @@
         </svg>
     </a>
     <span *ngIf="(menuOptions$|async)?.routeLabel" class="menuText">
-      {{(menuOptions$|async).routeLabel}}
+      {{(menuOptions$|async).routeLabel|translate}}
     </span>
   <span *ngIf="(menuOptions$|async)?.routeLabel === null">
     <svg xmlns="http://www.w3.org/2000/svg" width="113" height="32" viewBox="0 0 113 32">

@@ -9,10 +9,11 @@ import { setOptions } from './menu.actions';
 export class MenuEffects {
   setMenuOptions$ = createEffect(() => this.actions$.pipe(
     ofType(ROUTER_NAVIGATION),
-    map((action: RouterNavigationAction) => action.payload.event.url),
+    map((action: RouterNavigationAction) => action.payload.routerState),
     map(url => {
-        return MENU_SETUP.hasOwnProperty(url)
-          ? MENU_SETUP[url]
+        const path = url.root.firstChild.routeConfig.path;
+        return MENU_SETUP.hasOwnProperty(path)
+          ? MENU_SETUP[path]
           : DEFAULT_MENU_OPTIONS;
     }),
     map(options => setOptions({options})),

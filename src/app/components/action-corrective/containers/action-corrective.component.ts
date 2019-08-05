@@ -12,6 +12,7 @@ import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import 'rxjs-compat/add/operator/filter';
+import {IMAGE_PATH} from '../../../data/image.helpers';
 
 
 @Component({
@@ -39,6 +40,9 @@ export class ActionCorrectiveComponent implements OnInit {
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   correctionQuestions$: Observable<any> = this.correctionService.getCorrectionQuestion();
   getCorrectionResult$: Observable<Result> = this.correctionService.getCorrectionResult();
+
+  imagePath = IMAGE_PATH.result;
+
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,

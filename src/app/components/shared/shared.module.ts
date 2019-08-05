@@ -24,6 +24,8 @@ import { MenuButtonsComponent } from './components/menu-buttons/menu-buttons.com
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { MomentModule } from 'ngx-moment';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,7 +79,8 @@ const materialModules = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MomentModule
   ],
   entryComponents: [
     ATraiterElementComponent,
@@ -94,6 +97,7 @@ const materialModules = [
     ...sharedDirectives,
     ...sharedPipes,
     TranslateModule,
+    MomentModule
   ],
 })
 export class SharedModule {

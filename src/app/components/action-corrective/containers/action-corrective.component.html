@@ -24,7 +24,7 @@
         <p class="px-10 font-14 mb-30">{{resultQuestion? resultQuestion.resultQuestionResultComment : 'Question commentaire'}}</p>
         <div *ngIf="resultQuestion">
           <div *ngIf="resultQuestion.resultQuestionResultPhoto">
-            <img src="{{resultQuestion? resultQuestion.resultQuestionResultPhoto : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
+            <img src="{{resultQuestion? (imagePath + resultQuestion.resultQuestionResultPhoto) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
           </div>
         </div>
       </div>

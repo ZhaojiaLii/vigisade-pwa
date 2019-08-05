@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LayoutService } from '../../../../../services/layout.service';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../../../login/services/login.service';
-import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterEvent} from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { MenuOptions } from '../interfaces/menu-options.interface';
 import { MenuService } from '../services/menu.service';
