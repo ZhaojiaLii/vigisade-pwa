@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { DataService } from '../../../services/data.service';
 import { Header } from '../../../interfaces/header.interface';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 @Component({
   selector: 'app-homepage',
@@ -26,6 +28,8 @@ export class HomepageComponent implements OnInit {
     this.user$.pipe(
       filter(user => !!user)
     ).subscribe(user => {
+        /* Define moment locale */
+        moment.locale(user.language + '-' + user.language);
         this.translateService.setDefaultLang(user.language);
     });
   }

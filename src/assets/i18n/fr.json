@@ -14,6 +14,7 @@
   "SituationDangereuse.Situation dangereuse crée": "Situation dangereuse crée",
 
   "Homepage.ActionsTraiter": "Action{{value}} à traiter",
+  "Homepage.AucuneactionTraiter": "Aucune action à traiter",
   "Homepage.Visites ce mois-ci": "Visite{{value}} ce mois-ci",
   "Homepage.Visites le mois dernier": "Visite{{value}} le mois dernier",
   "Homepage.Nouvelle visite": "Nouvelle visite",

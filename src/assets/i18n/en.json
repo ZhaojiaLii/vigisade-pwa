@@ -14,6 +14,7 @@
   "SituationDangereuse.Situation dangereuse crée": "Dangerous situation created",
 
   "Homepage.ActionsTraiter": "Non-compliance{{value}} to treat",
+  "Homepage.AucuneactionTraiter": "No Non-compliance to treat",
   "Homepage.Visites ce mois-ci": "Inspection{{value}} of this month",
   "Homepage.Visites le mois dernier": "Inspection{{value}} of the last month",
   "Homepage.Nouvelle visite": "New inspection",

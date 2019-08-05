@@ -9,8 +9,10 @@ import { DataService } from '../../../services/data.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import { languages } from '../../../data/language.helpers';
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 @Component({
   selector: 'app-profile',
@@ -44,6 +46,10 @@ export class ProfileComponent implements OnInit {
       filter(user => !!user),
       take(1),
     ).subscribe(user => {
+
+      /* Define moment locale */
+      moment.locale(user.language + '-' + user.language);
+
       this.setDefaultValues(user);
       this.listenChanges();
     });
