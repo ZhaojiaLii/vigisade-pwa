@@ -34,6 +34,13 @@ export const getSurveyOfUser = createSelector(
   },
 );
 
+export const getSurveyQuestions = createSelector(
+  getSurveyOfUser,
+  (survey: Survey) => survey.surveyCategories.reduce((questions, category) => {
+    return [...questions, ...category.surveyQuestion];
+  }, []),
+);
+
 export const getSurveyArea = createSelector(
   getSurveyOfUser,
   getAreas,

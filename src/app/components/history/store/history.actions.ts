@@ -43,3 +43,7 @@ export const selectCategory = createAction(
   '[Survey] Select a category for result',
   props<{id: number}>(),
 );
+
+export const goToNextCategory = createAction(
+  '[History] Go to next category',
+);

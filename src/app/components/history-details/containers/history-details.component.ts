@@ -1,76 +1,49 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SurveyService } from '../../visit/services/survey.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
-import { ResultQuestion } from '../../visit/interfaces/results/result-question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { Result } from '../../visit/interfaces/results/result.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../../visit/interfaces/getResultInterface/bestPractice.interface';
+import { QuestionResult } from '../../history/interfaces/question-result.interface';
 
 @Component({
   selector: 'app-detail-visit',
   templateUrl: './history-details.component.html',
 })
 export class HistoryDetailsComponent implements OnInit, OnDestroy {
-  isCollapsed = false;
-  resultIds = [];
-  questionNum = 0;
-  thisResultId: number;
-  showCategories = false;
-  thisCategoryIndex = 0;
-  arriveLastCategory = false;
-  surveyCategoryIds = [];
 
-  history$: Observable<GetResult> = this.historyService.getHistory();
-  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
+  isCollapsed = false;
+
   result$: Observable<Result> = this.historyService.getSelectedResult();
-  resultSurvey$: Observable<Survey> = this.historyService.getSelectedResultSurvey();
-  resultEntity$: Observable<Entity> = this.historyService.getSelectedResultEntity();
   resultArea$: Observable<Area> = this.historyService.getSelectedResultArea();
+  resultEntity$: Observable<Entity> = this.historyService.getSelectedResultEntity();
+
+  survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
+
   selectedCategory$: Observable<Category> = this.historyService.getSelectedCategory();
-  selectedQuestions$: Observable<ResultQuestion[]> = this.historyService.getSelectedQuestions();
-  getSelectedResultBestPractice$: Observable<any> = this.historyService.getSelectedResultBestPractice();
+  selectedQuestions$: Observable<QuestionResult[]> = this.historyService.getSelectedQuestions();
+  isGoodPracticeSelected$: Observable<boolean> = this.historyService.isGoodPracticeSelected();
+
+  goodPracticeId = GOOD_PRACTICE_CATEGORY_ID;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private toastrService: ToastrService,
     private surveyService: SurveyService,
     private historyService: HistoryService,
   ) { }
 
   ngOnInit() {
     this.historyService.selectResultCategory(null);
-    this.showCategories = false;
+
     this.route.paramMap.subscribe(params => {
-      this.thisResultId = parseInt(params.get('id'), 10);
-      this.historyService.selectResult(this.thisResultId);
-      this.historyService.loadResult(this.thisResultId);
-    });
-    this.resultSurvey$.subscribe(survey => {
-      if (survey) {
-        for (const category of survey.surveyCategories) {
-          this.surveyCategoryIds.push(category.surveyCategoryId);
-        }
-      }
-    });
-    this.history$.subscribe(results => {
-      for (const result of results.result) {
-        this.resultIds.push(result.resultId);
-      }
-    });
-    this.survey$.subscribe(survey => {
-      const categories = survey.surveyCategories;
-      let questionNum;
-      for (const category of categories) {
-        questionNum = category.surveyQuestion.length;
-        this.calculateTotalQuestionNum(questionNum);
-      }
+      const id = parseInt(params.get('id'), 10);
+      this.historyService.selectResult(id);
+      this.historyService.loadResult(id);
     });
   }
 
@@ -79,37 +52,13 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
     this.historyService.selectResultCategory(null);
   }
 
-  calculateTotalQuestionNum(question: number) {
-    this.questionNum = this.questionNum + question;
-  }
-
-  nextCategory() {
-    const categoryNum = this.surveyCategoryIds.length;
-    if (this.thisCategoryIndex < categoryNum) {
-      this.selectResult(this.surveyCategoryIds[this.thisCategoryIndex]);
-      this.thisCategoryIndex++;
-      this.arriveLastCategory = false;
-      this.toastrService.success('Catégorie suivante');
-    } else {
-      this.selectBestPractice();
-      this.thisCategoryIndex = 0;
-      this.arriveLastCategory = true;
-      this.toastrService.success('bonne pratique');
-    }
-    window.scroll(0, 0);
-  }
-
-  selectResult(id: number) {
-    this.thisCategoryIndex = this.surveyCategoryIds.findIndex(categoryId => categoryId === id);
+  selectCategory(id: number): void {
     this.historyService.selectResultCategory(id);
-    this.showCategories = true;
-    this.arriveLastCategory = false;
-    this.isCollapsed = false;
+    this.isCollapsed = !this.isCollapsed;
   }
 
-  selectBestPractice() {
-    this.showCategories = false;
-    this.isCollapsed = false;
-    this.arriveLastCategory = true;
+  goToNextCategory() {
+    this.historyService.goToNextResultCategory();
+    window.scroll(0, 0);
   }
 }

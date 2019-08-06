@@ -1,5 +1,4 @@
 import { Category } from './category.interface';
-import { TeamMembers } from './teamMembers.interface';
 import { BestPractice } from './bestPractice.interface';
 
 
@@ -12,7 +11,7 @@ export interface UpdateResult {
   place: string;
   client: string;
   validated: boolean;
-  teamMembers?: TeamMembers[];
+  teamMembers?: {member: string}[];
   categories: Category[];
   bestPractice: BestPractice[];
 }

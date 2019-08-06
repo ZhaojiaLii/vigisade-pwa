@@ -9,7 +9,7 @@ import { SurveyState } from '../store/survey.state';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
 import { getSelectedCategoryId, getSurveyArea, getSurveyOfUser, getSurveySelectedCategory, isLoading } from '../store/survey.selectors';
 import { Category } from '../interfaces/getSurveys/category.interface';
-import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 
 @Injectable({
@@ -54,7 +54,7 @@ export class SurveyService {
   isBestPracticedSelected(): Observable<boolean> {
     return this.store.pipe(
       select(getSelectedCategoryId),
-      map(selectedId => selectedId === BEST_PRACTICE_CATEGORY_ID),
+      map(selectedId => selectedId === GOOD_PRACTICE_CATEGORY_ID),
     );
   }
 

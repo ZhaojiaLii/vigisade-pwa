@@ -1,12 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HistoryState } from './history.state';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
-import { getSurveys } from '../../visit/store/survey.selectors';
+import { getSurveyQuestions, getSurveys } from '../../visit/store/survey.selectors';
 import { getAreas, getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { Question } from '../../visit/interfaces/getSurveys/question.interface';
-import { ResultQuestion } from '../../visit/interfaces/results/result-question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
 import { getUser } from '../../profile/store/profile.selector';
@@ -173,31 +171,46 @@ export const getSelectedResultBestPractice = createSelector(
   }
 );
 
+export const getSelectedResultCategoryId = createSelector(
+  getHistoryState,
+  state => state.layout.selectedCategory,
+);
+
 export const getSelectedResultCategory = createSelector(
   getSelectedResultSurvey,
-  getHistoryState,
-  (survey: Survey, state: HistoryState) => {
-    if (!state.layout.selectedCategory || !survey || !survey.surveyCategories) {
+  getSelectedResultCategoryId,
+  (survey: Survey, selectedCategoryId: number) => {
+    if (!selectedCategoryId || !survey || !survey.surveyCategories) {
       return null;
     }
     const surveyCategory = survey.surveyCategories
-      .find(category => category.surveyCategoryId === state.layout.selectedCategory);
+      .find(category => category.surveyCategoryId === selectedCategoryId);
 
     return surveyCategory || null;
   }
 );
 
 export const getSelectedResultQuestions = createSelector(
-  getSelectedResultCategory,
   getSelectedResult,
-  (category: Category, result: Result) => {
-    return category.surveyQuestion.map((categoryQuestion: Question) => {
-      const question = result.resultQuestion
-        .find((q: ResultQuestion) => q.resultQuestionId === categoryQuestion.surveyQuestionId);
-      return {
-        ...question,
-        question: categoryQuestion,
-      };
-    });
+  getSelectedResultCategoryId,
+  getSurveyQuestions,
+  (result: Result, selectedCategoryId: number, questions: Question[]) => {
+    if (!result) {
+      return [];
+    }
+
+    return result.resultQuestion
+      .map(questionResult => {
+        return {
+          question: questions
+            .find(question => questionResult.resultQuestionResultQuestionId === question.surveyQuestionId),
+          result: questionResult,
+          teamMember: result.resultTeamMember
+            .find(teamMember => teamMember.resultTeamMemberId === questionResult.resultQuestionTeamMemberId),
+        };
+      })
+      .filter(questionResult => {
+        return questionResult.question.surveyQuestionCategoryId === selectedCategoryId;
+      });
   }
 );

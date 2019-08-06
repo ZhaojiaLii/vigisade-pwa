@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { Survey } from '../../../visit/interfaces/getSurveys/survey.interface';
+import { Result } from '../../../visit/interfaces/results/result.interface';
 
 @Component({
   selector: 'app-details-best-practice',
@@ -7,24 +8,10 @@ import { FormControl, FormGroup } from '@angular/forms';
   // tslint:disable-next-line:use-host-property-decorator
   host: {class : 'card card-full-width mb-10 shadow-none'},
 })
-export class DetailsBestPracticeComponent implements OnInit, OnDestroy {
+export class DetailsBestPracticeComponent {
+
+  @Input() survey: Survey;
+  @Input() result: Result;
 
   isCollapsed = true;
-  @Input() bestPractice;
-  radioGroup = new FormGroup({
-    radioGood: new FormControl(''),
-    radioBad: new FormControl(''),
-  });
-  constructor(
-  ) {}
-
-  ngOnInit(): void {
-    switch (this.bestPractice.resultBestPracticeDone) {
-      case true: this.radioGroup.get('radioGood').setValue('good'); break;
-      case false: this.radioGroup.get('radioBad').setValue('bad'); break;
-    }
-  }
-
-  ngOnDestroy(): void {
-  }
 }

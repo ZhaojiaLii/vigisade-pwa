@@ -6,4 +6,4 @@ export interface BestPractice {
   bestPracticePhoto: string;
 }
 
-export const BEST_PRACTICE_CATEGORY_ID = -1;
+export const GOOD_PRACTICE_CATEGORY_ID = -1;

@@ -1,7 +1,11 @@
-<div *ngIf="(result$|async) === null || (resultSurvey$|async) === null"  class="spinner-container">
+<div *ngIf="(result$|async) === null || (survey$|async) === null"  class="spinner-container">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
-<div *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) === null" class="container mb-90">
+<!-- ACCUEIL VISITE -->
+<div
+    *ngIf="(result$|async) && (survey$|async) && (selectedCategory$|async) === null && (isGoodPracticeSelected$|async) === false"
+    class="container mb-90"
+>
     <div class="container-content">
         <div class="font-bold font-25">
             {{(resultArea$|async).name|uppercase}}
@@ -23,49 +27,67 @@
             </div>
             <div class="ml-3 mt-2 mb-3 col-md-6">
                 <span class="font-12">{{'ConsultationVisite.Date de la visite'|translate}} <span class="light-grey">{{'ConsultationVisite.(jour, mois, année)'|translate}}</span></span>
-                <div><span>{{(result$|async).resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD, MM, YYYY'}} </span></div>
+                <div>
+                    <span>{{(result$|async).resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD, MM, YYYY'}} </span>
+                </div>
             </div>
         </div>
         <p class="font-medium font-22">{{'ConsultationVisite.Equipe contrôlée'|translate}}</p>
         <p class="group-control-subtitle-text">{{'ConsultationVisite.Personnel présent sur le chantier'|translate}}</p>
         <app-detail-member
-                *ngFor="let member of (result$|async).resultTeamMember"
-                [teamMember]="member"
+            *ngFor="let member of (result$|async).resultTeamMember"
+            [teamMember]="member"
         ></app-detail-member>
-        <div class="mx-30">
-            <button class="btn btn-info d-block w-100 mt-5" (click)="nextCategory()">{{'ConsultationVisite.Suivant'|translate}}</button>
-        </div>
     </div>
 </div>
+<!-- CATEGORIES VISITE -->
 <div
-    *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) && showCategories"
+    *ngIf="(result$|async) && (survey$|async) && (selectedCategory$|async)"
     class="container mb-90">
-    <div class="row" *ngIf="showCategories">
+    <div class="row">
         <app-details-question
-            *ngFor="let question of (selectedQuestions$|async)"
-            [question]="question?.question"
-            [resultId]="thisResultId"
+            *ngFor="let questionResult of (selectedQuestions$|async)"
+            [questionResult]="questionResult"
         ></app-details-question>
     </div>
-    <div class="mx-30" *ngIf="!arriveLastCategory">
-      <button class="btn btn-info d-block w-100 mt-5" (click)="nextCategory()">{{'ConsultationVisite.Suivant'|translate}}</button>
-    </div>
 </div>
+<!-- BONNE PRATIQUE -->
 <div
-  *ngIf="(result$|async) && (resultSurvey$|async) && (selectedCategory$|async) && (getSelectedResultBestPractice$|async)"
-  class="container mb-90">
-  <div class="row" *ngIf="!showCategories">
+  *ngIf="(result$|async) && (survey$|async) && (isGoodPracticeSelected$|async)"
+  class="container mb-90"
+>
+  <div class="row">
     <app-details-best-practice
-      [bestPractice]="getSelectedResultBestPractice$|async"
+       [survey]="survey$|async"
+       [result]="result$|async"
     ></app-details-best-practice>
   </div>
 </div>
+<!-- NAVIGATION -->
+<div *ngIf="(isGoodPracticeSelected$|async) === false" class="container mb-90">
+    <div class="mx-30">
+        <button
+            class="btn btn-info d-block w-100 mt-5"
+            (click)="goToNextCategory()">{{'ConsultationVisite.Suivant'|translate}}
+        </button>
+    </div>
+</div>
+<!-- FOOTER -->
 <div class="fixed-footer">
     <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
          aria-controls="collapseBasic">
-        <div class=""><span class="font-bold"></span></div>
         <div class="d-flex align-items-center">
-            <div class="mr-2"><span class="font-bold">{{'ConsultationVisite.Visite'|translate}}</span></div>
+            <div class="mr-2">
+                <span *ngIf="(selectedCategory$|async) === null && !(isGoodPracticeSelected$|async)" class="font-bold">
+                    {{'ConsultationVisite.Visite'|translate}}
+                </span>
+                <span *ngIf="(selectedCategory$|async)" class="font-bold">
+                    {{(selectedCategory$|async).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}}
+                </span>
+                <span *ngIf="isGoodPracticeSelected$|async" class="font-bold">
+                    {{'ConsultationVisite.Bonne pratique'|translate}}
+                </span>
+            </div>
             <svg class="scroll-top" xmlns="http://www.w3.org/2000/svg" width="11" height="6" viewBox="0 0 11 6">
                 <path fill="#3884A5" fill-rule="evenodd" d="M11 1.238L5.5 6 0 1.134 1.377 0 5.5 4.075 9.467 0z"></path>
             </svg>
@@ -73,13 +95,24 @@
     </div>
     <div id="collapseBasic" [collapse]="!isCollapsed" [isAnimated]="true">
         <div
-            *ngFor="let category of (resultSurvey$|async)?.surveyCategories"
             class="d-flex align-items-center justify-content-between"
-            (click)="selectResult(category.surveyCategoryId)"
+            (click)="selectCategory(null)"
         >
-            <span class="note-label">{{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}}</span>
+            <span class="note-label">{{'Visite.Visite'|translate}}</span>
         </div>
-        <div class="d-flex align-items-center justify-content-between" (click)="selectBestPractice()">
+        <div
+            *ngFor="let category of (survey$|async)?.surveyCategories"
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectCategory(category.surveyCategoryId)"
+        >
+            <span class="note-label">
+                {{category.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle}}
+            </span>
+        </div>
+        <div
+            class="d-flex align-items-center justify-content-between"
+            (click)="selectCategory(goodPracticeId)"
+        >
             <span class="d-flex align-items-center">
                 <svg class="flex-shrink-0 mr-2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
                     <defs>

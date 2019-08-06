@@ -8,7 +8,7 @@ import { ProfileService } from '../../profile/services/profile.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
-import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
 import { filter, take } from 'rxjs/operators';
 import { Question, TYPE_GENERAL, TYPE_TEAM } from '../interfaces/getSurveys/question.interface';
 import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
@@ -58,7 +58,7 @@ export class VisitComponent implements OnInit {
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
   isBestPracticeSelected$: Observable<boolean> = this.surveyService.isBestPracticedSelected();
 
-  bestPracticeId = BEST_PRACTICE_CATEGORY_ID;
+  bestPracticeId = GOOD_PRACTICE_CATEGORY_ID;
 
   loading$: Observable<boolean> = this.surveyService.isLoading();
 

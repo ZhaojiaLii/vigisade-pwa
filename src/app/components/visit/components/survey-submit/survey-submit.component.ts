@@ -80,7 +80,7 @@ export class SurveySubmitComponent {
           resultQuestionId: null,
           resultQuestionResultId: null,
           resultQuestionResultQuestionId: Number(form.group.value.id),
-          resultQuestionResultNotation: form.group.value.selection,
+          resultQuestionResultNotation: Number(form.group.value.selection),
           resultQuestionResultComment: form.group.value.comment,
           resultQuestionResultPhoto: form.group.value.photo,
           teamMemberId: survey.surveyTeam === TEAM_MODE.no
