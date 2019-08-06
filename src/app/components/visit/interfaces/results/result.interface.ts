@@ -1,7 +1,6 @@
 import { ResultTeamMember } from './result-team-member.interface';
 import { ResultQuestion } from './result-question.interface';
 
-
 export interface Result {
   resultId: number;
   resultSurveyId: number;
@@ -14,7 +13,7 @@ export interface Result {
   resultClient: string;
   resultValidated: boolean;
   resultTeamMember?: ResultTeamMember[];
-  resultQuestion: ResultQuestion[];
+  resultQuestion?: ResultQuestion[];
   resultBestPracticeTypeId: string;
   resultBestPracticeDone: string;
   resultBestPracticeComment: string;

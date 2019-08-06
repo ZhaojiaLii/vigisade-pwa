@@ -12,7 +12,7 @@ import { BEST_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/best
 import { filter, take } from 'rxjs/operators';
 import { Question, TYPE_GENERAL, TYPE_TEAM } from '../interfaces/getSurveys/question.interface';
 import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
-import { ResultDraft } from '../interfaces/result-draft.interface';
+import { ResultDraft } from '../interfaces/results/result-draft.interface';
 import { DraftService } from '../../../services/draft.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { TeamMemberType } from '../interfaces/form/team-member-type.interface';

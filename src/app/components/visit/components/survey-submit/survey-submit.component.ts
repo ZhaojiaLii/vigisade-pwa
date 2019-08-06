@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ResultQuestion } from '../../interfaces/create/result-question.interface';
 import { Survey, TEAM_MODE } from '../../interfaces/getSurveys/survey.interface';
-import { ResultTeamMember } from '../../interfaces/create/result-team-member.interface';
-import { Result } from '../../interfaces/create/result.interface';
+import { ResultTeamMember } from '../../interfaces/results/result-team-member.interface';
+import { Result } from '../../interfaces/results/result.interface';
 import { FormGroup } from '@angular/forms';
 import { Category } from '../../interfaces/getSurveys/category.interface';
 import { SurveyService } from '../../services/survey.service';
@@ -13,6 +12,7 @@ import { Question } from '../../interfaces/getSurveys/question.interface';
 import { ToastrService } from 'ngx-toastr';
 import { DraftService } from '../../../../services/draft.service';
 import { User } from '../../../profile/interfaces/user';
+import { ResultQuestion } from '../../interfaces/results/result-question.interface';
 
 @Component({
   selector: 'app-survey-submit',
@@ -80,7 +80,7 @@ export class SurveySubmitComponent {
           resultQuestionId: null,
           resultQuestionResultId: null,
           resultQuestionResultQuestionId: Number(form.group.value.id),
-          resultQuestionResultNotation: Number(form.group.value.selection),
+          resultQuestionResultNotation: form.group.value.selection,
           resultQuestionResultComment: form.group.value.comment,
           resultQuestionResultPhoto: form.group.value.photo,
           teamMemberId: survey.surveyTeam === TEAM_MODE.no

@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { Result } from '../interfaces/create/result.interface';
+import { Result } from '../interfaces/results/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
 @Injectable({

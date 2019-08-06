@@ -1,6 +1,6 @@
-import { Result } from './result.interface';
+import { HistoryResult } from './history-result.interface';
 
 export interface GetResult {
   userId: number;
-  result: Result[];
+  result: HistoryResult[];
 }

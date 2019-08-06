@@ -1,5 +1,5 @@
 
-export interface Result {
+export interface HistoryResult {
   resultId: number;
   resultDirection?: number;
   resultEntity?: number;
@@ -8,5 +8,7 @@ export interface Result {
   resultPlace: string;
   resultClient: string;
   resultUserId: number;
+  resultUserfirstName: string;
+  resultUserlastName: string;
   resultValidated: boolean;
 }

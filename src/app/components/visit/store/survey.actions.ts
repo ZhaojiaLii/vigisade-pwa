@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
-import { Result } from '../interfaces/create/result.interface';
+import { Result } from '../interfaces/results/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 
 export const loadSurveys = createAction('[Survey] Load Surveys');

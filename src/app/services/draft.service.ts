@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { DraftState } from '../store/draft/draft.state';
 import { Observable } from 'rxjs';
-import { ResultDraft } from '../components/visit/interfaces/result-draft.interface';
+import { ResultDraft } from '../components/visit/interfaces/results/result-draft.interface';
 import { getSurveyDraft } from '../store/draft/draft.selectors';
 import { setResultDraft } from '../store/draft/draft.actions';
 

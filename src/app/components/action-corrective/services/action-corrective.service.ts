@@ -14,7 +14,7 @@ import {
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
+import { Result } from '../../visit/interfaces/results/result.interface';
 
 @Injectable({
   providedIn: 'root'

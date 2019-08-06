@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { createResult, loadSurveys, selectSurveyCategory, setLoadingState, updateResult } from '../store/survey.actions';
-import { Result } from '../interfaces/create/result.interface';
+import { Result } from '../interfaces/results/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

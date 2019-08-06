@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { historyInitialState, HistoryState } from './history.state';
-import { loadHistorySuccess, loadResultSuccess, selectCategory, selectResult } from './history.actions';
+import { loadHistorySuccess, loadResultSuccess, selectCategory, selectResult, setHistorySearch } from './history.actions';
 
 export const createHistoryReducer = createReducer(
   historyInitialState,
@@ -13,6 +13,10 @@ export const createHistoryReducer = createReducer(
     layout: {...state.layout, selectedCategory: id},
   })),
   on(loadHistorySuccess, (state, {history}) => ({...state, history})),
+  on(setHistorySearch, (state, {searchParams}) => ({
+    ...state,
+    search: searchParams,
+  })),
   on(loadResultSuccess, (state, {result}) => ({
     ...state,
     results: state.results

@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ResultQuestion } from '../../../history/interfaces/result-question.interface';
+import { ResultQuestion } from '../../../visit/interfaces/results/result-question.interface';
 import { Observable, combineLatest } from 'rxjs';
-import { Result } from '../../../visit/interfaces/getSurveys/result.interface';
 import { HistoryService } from '../../../history/services/history.service';
 import { filter, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SurveyQuestion } from '../../../history/interfaces/surveyQuestion.interface';
 import { IMAGE_PATH } from '../../../../data/image.helpers';
+import { Result } from '../../../visit/interfaces/results/result.interface';
 
 @Component({
   selector: 'app-details-question',

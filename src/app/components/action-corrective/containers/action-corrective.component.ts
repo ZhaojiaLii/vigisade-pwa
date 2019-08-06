@@ -10,9 +10,9 @@ import { HistoryService } from '../../history/services/history.service';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import 'rxjs-compat/add/operator/filter';
 import {IMAGE_PATH} from '../../../data/image.helpers';
+import { Result } from '../../visit/interfaces/results/result.interface';
 
 
 @Component({

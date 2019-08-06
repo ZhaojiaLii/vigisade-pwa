@@ -2,7 +2,7 @@
     <div *ngIf="(user$|async) === null" class="row">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    <form [formGroup]="filterForm" *ngIf="isDesktop">
+    <form [formGroup]="searchForm" *ngIf="deviceService.isDesktop()">
         <div class="card card-full-width mb-10 shadow-none mp-15">
             <div class="card-body px-30">
                 <div class="row align-items-center light-grey mb-20">
@@ -19,27 +19,41 @@
                 </div>
                 <div class="row align-items-center light-grey mb-20">
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
-                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="area">
-                            <option value="{{area.id}}" *ngFor="let area of areas">{{area.name}}</option>
+                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
+                            <option *ngFor="let area of areas$|async" value="{{area.id}}">
+                                {{area.name}}
+                            </option>
                         </select>
                     </div>
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Entité'|translate}} :
-                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="entity">
-                            <option value="{{entity.id}}" *ngFor="let entity of entities">{{entity.name}}</option>
+                        <select
+                            [attr.disabled]="(entities$|async)?.length === 0 ? true : null"
+                            class="form-control" style="border: solid 1px lightgrey"
+                            formControlName="entityId">
+                            <option *ngFor="let entity of entities$|async" value="{{entity.id}}">
+                                {{entity.name}}
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="row align-items-center light-grey mb-20">
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Créateur'|translate}} :
-                        <select class="form-control" style="border: solid 1px lightgrey" formControlName="creator">
-                            <option value="{{creator.id}}" *ngFor="let creator of creators">{{creator.name}}</option>
+                        <select
+                            [attr.disabled]="(user$|async)?.roles?.includes(roles.admin) ? null : 1"
+                            class="form-control"
+                            style="border: solid 1px lightgrey"
+                            formControlName="userId"
+                        >
+                            <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
+                                {{creator.name}}
+                            </option>
                         </select>
                     </div>
                     <div class="col-6 font-weight-bold font-14 d-flex">
-                      <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="filter()" style="margin-top: 16px;margin-bottom: 0px !important;">
+                      <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0px !important;">
                         <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
                       </button>
-                      <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="reInitFilter()" style="margin-top: 16px;margin-bottom: 0px !important;">
+                      <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0px !important;">
                         <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
                       </button>
                     </div>
@@ -47,20 +61,23 @@
             </div>
         </div>
     </form>
-    <div *ngIf="results?.length >= 0" class="row">
-        <div *ngIf="results?.length" [ngPlural]="results?.length" class="total">
-            <ng-template ngPluralCase="=0">Aucun {{'HistoriqueVisites.contrôle trouvé'|translate:{value:''} }}</ng-template>
-            <ng-template ngPluralCase="=1">1 {{'HistoriqueVisites.contrôle trouvé'|translate:{value:''} }}</ng-template>
+    <div *ngIf="(history$|async)?.length > 0" class="row">
+        <div [ngPlural]="(history$|async)?.length" class="total">
+            <ng-template ngPluralCase="=0">
+                Aucun {{'HistoriqueVisites.contrôle trouvé'|translate:{value: ''} }}
+            </ng-template>
+            <ng-template ngPluralCase="=1">
+                1 {{'HistoriqueVisites.contrôle trouvé'|translate:{value: ''} }}
+            </ng-template>
             <ng-template ngPluralCase="other">
-                <strong>{{ countResult }}</strong> {{'HistoriqueVisites.contrôle trouvé'|translate:{value:'s'} }}
+                <strong>{{ (history$|async)?.length }}</strong> {{'HistoriqueVisites.contrôle trouvé'|translate:{value: 's'} }}
             </ng-template>
         </div>
         <app-history-item
-            *ngFor="let result of results"
-            [result]="result.result"
-            [routerLink]="['/history',result.result.resultId]"
+            *ngFor="let result of (history$|async)"
+            [result]="result"
+            [routerLink]="['/history', result.resultId]"
             style="display: block; width: 100%;"
-            [style.display]="result.status ? 'block' : 'none'"
         ></app-history-item>
     </div>
 </div>

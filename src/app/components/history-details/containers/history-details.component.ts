@@ -6,11 +6,11 @@ import { SurveyService } from '../../visit/services/survey.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
-import { ResultQuestion } from '../../history/interfaces/result-question.interface';
+import { ResultQuestion } from '../../visit/interfaces/results/result-question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { Result } from '../../visit/interfaces/results/result.interface';
 
 @Component({
   selector: 'app-detail-visit',

@@ -1,4 +1,4 @@
-import { Result } from '../interfaces/create/result.interface';
+import { Result } from '../interfaces/results/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
 

@@ -1,7 +1,7 @@
 export interface ResultQuestion {
   resultQuestionId: number;
   resultQuestionResultId: number;
-  resultQuestionTeamMemberId: number;
+  resultQuestionTeamMemberId?: number;
   resultQuestionResultNotation: string;
   resultQuestionResultComment: string;
   resultQuestionResultPhoto: string;

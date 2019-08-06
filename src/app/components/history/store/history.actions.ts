@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { HistorySearch } from '../interfaces/history-search.interface';
+import { Result } from '../../visit/interfaces/results/result.interface';
 
 
 export const loadHistory = createAction('[Survey] Load History');
@@ -11,6 +12,11 @@ export const loadHistorySuccess = createAction(
 export const loadHistoryFail = createAction(
   '[Survey] Load History Fail',
   props<{error: any}>(),
+);
+
+export const setHistorySearch = createAction(
+  '[Survey] Set History search',
+  props<{searchParams: HistorySearch}>(),
 );
 
 export const selectResult = createAction(

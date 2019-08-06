@@ -1,14 +1,22 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HistoryState } from './history.state';
-import { Result } from '../../visit/interfaces/getSurveys/result.interface';
 import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
 import { getSurveys } from '../../visit/store/survey.selectors';
 import { getAreas, getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { Category } from '../../visit/interfaces/getSurveys/category.interface';
 import { Question } from '../../visit/interfaces/getSurveys/question.interface';
-import { ResultQuestion } from '../interfaces/result-question.interface';
+import { ResultQuestion } from '../../visit/interfaces/results/result-question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
+import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { getUser } from '../../profile/store/profile.selector';
+import { User } from '../../profile/interfaces/user';
+import { ROLES } from '../../../data/user.helpers';
+import { HistorySearch } from '../interfaces/history-search.interface';
+import { HistoryResult } from '../../visit/interfaces/getResultInterface/history-result.interface';
+import { Result } from '../../visit/interfaces/results/result.interface';
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 export const getHistoryState = createFeatureSelector<HistoryState>('history');
 
@@ -17,12 +25,79 @@ export const getHistory = createSelector(
   (state: HistoryState) => state.history,
 );
 
-// export const getResults = createSelector(
-//   getHistory,
-//   (history: GetResult) => {
-//     return history.result;
-//   }
-// );
+export const getSearchParams = createSelector(
+  getHistoryState,
+  (state: HistoryState) => state.search,
+);
+
+export const getUserHistory = createSelector(
+  getHistory,
+  getUser,
+  (history: GetResult, user: User) => {
+    if (!user || !history || !history.result) {
+      return [];
+    }
+
+    return history.result
+      .filter(result => result.resultUserId === user.id);
+  }
+);
+
+/**
+ * Gets visible history according to the user role.
+ */
+export const getUserHistoryByRole = createSelector(
+  getHistory,
+  getUser,
+  (history: GetResult, user: User) => {
+    if (!user || !history || !history.result) {
+      return [];
+    }
+
+    return history.result.filter(result => {
+      if (user.roles.includes(ROLES.admin)) {
+        return result.resultDirection === user.directionId;
+      } else if (user.roles.includes(ROLES.manager)) {
+        return result.resultEntity === user.entityId;
+      } else {
+        return result.resultUserId === user.id;
+      }
+    });
+  }
+);
+
+export const getFilteredUserHistory = createSelector(
+  getUserHistoryByRole,
+  getSearchParams,
+  (results: HistoryResult[], searchParams: HistorySearch) => {
+    if (!results || !searchParams) {
+      return results;
+    }
+
+    return results.filter(result => {
+      return (
+          !searchParams.startDate
+          || result.resultDate >= moment(searchParams.startDate).format('YYYY-MM-DD')
+        )
+        && (
+          !searchParams.endDate
+          || result.resultDate <= moment(searchParams.endDate).format('YYYY-MM-DD')
+        )
+        && (
+          !searchParams.areaId
+          || result.resultArea === Number(searchParams.areaId)
+        )
+        && (
+          !searchParams.entityId
+          || result.resultEntity === Number(searchParams.entityId)
+        )
+        && (
+          !searchParams.userId
+          || result.resultUserId === Number(searchParams.userId)
+        );
+    });
+  }
+);
 
 export const getResult = createSelector(
   getHistoryState,
