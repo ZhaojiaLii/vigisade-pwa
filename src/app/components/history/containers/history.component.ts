@@ -19,6 +19,8 @@ import { HistoryResult } from '../../visit/interfaces/getResultInterface/history
 })
 export class HistoryComponent implements OnInit {
 
+  isDesktop = false;
+
   searchForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -75,6 +77,8 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     // Refresh history when opening them.
     this.historyService.loadHistory();
+
+    this.isDesktop = this.deviceService.isDesktop();
 
     this.searchForm.valueChanges.pipe(
       startWith(null as HistorySearch),
