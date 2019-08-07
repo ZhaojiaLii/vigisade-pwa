@@ -34,7 +34,7 @@ export class ProfileEffects {
         area_id: action.updatedFields.areaId,
         entity_id: action.updatedFields.entityId,
         image: user.photo,
-        language: user.language,
+        language: action.updatedFields.language,
       };
 
       return this.profileApi.updateUser(payload).pipe(

@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit {
     private dataService: DataService,
     private toastrService: ToastrService,
     private translateService: TranslateService,
-    private surveyService: SurveyService,
   ) {}
 
   ngOnInit(): void {
