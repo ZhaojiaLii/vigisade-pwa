@@ -38,7 +38,7 @@ export class DangerousEffects {
   createDangerousSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(createDangerousSituationSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
-      tap(() => this.toastr.success('Situation dangereuse enregistrée.')),
+      tap(() => this.toastr.success('Situation dangereuse crée')),
     )),
     map(() => setLoadingState({loading: false})),
   ));
