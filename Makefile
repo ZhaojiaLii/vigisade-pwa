@@ -7,3 +7,7 @@ init-packages:
 .PHONY: build-dev
 build-dev:
 	$(NPM) run build
+
+.PHONY: build-prod
+build-dev:
+	$(NPM) run build-prod
