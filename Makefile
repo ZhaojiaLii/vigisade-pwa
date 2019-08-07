@@ -9,5 +9,5 @@ build-dev:
 	$(NPM) run build
 
 .PHONY: build-prod
-build-dev:
+build-prod:
 	$(NPM) run build-prod
