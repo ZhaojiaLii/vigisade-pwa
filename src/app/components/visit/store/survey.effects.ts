@@ -8,6 +8,7 @@ import { SurveyService } from '../services/survey.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { setResultDraft } from '../../../store/draft/draft.actions';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class SurveyEffects {
@@ -18,6 +19,7 @@ export class SurveyEffects {
     private api: SurveyApiService,
     private router: Router,
     private toast: ToastrService,
+    private translateService: TranslateService,
   ) {}
 
   loadSurveys$ = createEffect(() => this.actions$.pipe(
@@ -43,7 +45,7 @@ export class SurveyEffects {
   createResultSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(createResultSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
-      tap(() => this.toast.success('Visite validée.')),
+      tap(() => this.toast.success(this.translateService.instant('Visite.Visite validée'))),
     )),
     map(() => setLoadingState({loading: false}))
   ));
@@ -55,7 +57,7 @@ export class SurveyEffects {
 
   createResultFail$ = createEffect(() => this.actions$.pipe(
     ofType(createResultFail),
-    tap(() => this.toast.error('La validation a échouée. Veuillez réessayer dans quelque instant.')),
+    tap(() => this.toast.error(this.translateService.instant('Visite.La validation a échouée. Veuillez réessayer dans quelque instant.'))),
     map(() => setLoadingState({loading: false}))
   ));
 

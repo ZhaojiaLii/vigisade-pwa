@@ -38,6 +38,10 @@ select {
   margin-bottom: $grid-gutter-width;
 }
 
+form .card input.form-control{
+  text-indent: 3%;
+}
+
 .form-control {
   border: 0;
   border-radius: 0;

@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DraftService } from '../../../../services/draft.service';
 import { User } from '../../../profile/interfaces/user';
 import { ResultQuestion } from '../../interfaces/results/result-question.interface';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-survey-submit',
@@ -35,6 +36,7 @@ export class SurveySubmitComponent {
     private surveyService: SurveyService,
     private profileService: ProfileService,
     private toastr: ToastrService,
+    private translateService: TranslateService
   ) {}
 
   save() {
@@ -49,7 +51,8 @@ export class SurveySubmitComponent {
       questions: this.questionsForms.map(form => form.group.value),
       bestPractice: this.bestPracticeForm.value,
     });
-    this.toastr.success('Brouillon enregistré.');
+
+    this.toastr.success(this.translateService.instant('Visite.Brouillon enregistré.'));
   }
 
   private getNextCategory(currentCategory: Category): Observable<Category> {

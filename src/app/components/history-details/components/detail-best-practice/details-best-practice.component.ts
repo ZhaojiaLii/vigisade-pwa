@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Survey } from '../../../visit/interfaces/getSurveys/survey.interface';
 import { Result } from '../../../visit/interfaces/results/result.interface';
+import {BestPracticeType} from '../../../visit/interfaces/getSurveys/best-practice-type.interface';
 
 @Component({
   selector: 'app-details-best-practice',
@@ -8,10 +9,19 @@ import { Result } from '../../../visit/interfaces/results/result.interface';
   // tslint:disable-next-line:use-host-property-decorator
   host: {class : 'card card-full-width mb-10 shadow-none'},
 })
-export class DetailsBestPracticeComponent {
+export class DetailsBestPracticeComponent implements OnInit {
 
   @Input() survey: Survey;
   @Input() result: Result;
 
+  public currentTypeBestPracticeSurvey: BestPracticeType = null;
+
   isCollapsed = true;
+
+  ngOnInit(): void {
+    this.currentTypeBestPracticeSurvey = this.survey.typeBestPractice.find((el) => {
+      return el.typeBestPracticeId === Number(this.result.resultBestPracticeTypeId);
+    });
+  }
+
 }

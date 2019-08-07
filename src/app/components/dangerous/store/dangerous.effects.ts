@@ -6,6 +6,7 @@ import { DangerousSituationApiService } from '../services/dangerous-situation-ap
 import { from, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class DangerousEffects {
@@ -15,6 +16,7 @@ export class DangerousEffects {
     private dangerousApiService: DangerousSituationApiService,
     private router: Router,
     private toastr: ToastrService,
+    private translateService: TranslateService
   ) {}
 
   createDangerous$ = createEffect(() => this.actions$.pipe(
@@ -38,14 +40,14 @@ export class DangerousEffects {
   createDangerousSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(createDangerousSituationSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
-      tap(() => this.toastr.success('Situation dangereuse crée')),
+      tap(() => this.toastr.success(this.translateService.instant('SituationDangereuse.Situation dangereuse crée'))),
     )),
     map(() => setLoadingState({loading: false})),
   ));
 
   createDangerousFail$ = createEffect(() => this.actions$.pipe(
     ofType(createDangerousSituationFail),
-    tap(() => this.toastr.error('Impossible de contacter le serveur. La situation dangereuse sera synchronisée.')),
+    tap(() => this.toastr.error(this.translateService.instant('SituationDangereuse.Situation dangereuse synchronisee'))),
     map(() => setLoadingState({loading: false})),
   ));
 }

@@ -12,6 +12,7 @@
   "SituationDangereuse.Ajouter une photo": "Agregar una foto",
   "SituationDangereuse.Valider": "Validar",
   "SituationDangereuse.Situation dangereuse crée": "Se creó una situación peligrosa",
+  "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
 
   "Homepage.ActionsTraiter": "No conformidade{{value}} por procesar",
   "Homepage.AucuneactionTraiter": "No conformidade por procesar",

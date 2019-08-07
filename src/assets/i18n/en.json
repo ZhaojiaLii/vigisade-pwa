@@ -12,6 +12,7 @@
   "SituationDangereuse.Ajouter une photo": "Add a photo",
   "SituationDangereuse.Valider": "Confirm",
   "SituationDangereuse.Situation dangereuse crée": "Dangerous situation created",
+  "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
 
   "Homepage.ActionsTraiter": "Non-compliance{{value}} to treat",
   "Homepage.AucuneactionTraiter": "No Non-compliance to treat",

@@ -43,7 +43,7 @@
         </form>
         <div *ngIf="(survey$|async)?.surveyTeam !== teamMode.no">
             <p *ngIf="(survey$|async)?.surveyTeam === teamMode.manager" class="font-medium font-22">{{'Visite.Responsable contrôlé'|translate}}</p>
-            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">{{'Visite.Équipe contrôlée'|translate}}</p>
+            <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="font-medium font-22">{{'Visite.Equipe contrôlée'|translate}}</p>
             <p *ngIf="(survey$|async)?.surveyTeam === teamMode.team" class="group-control-subtitle-text">{{'Visite.Personnel présent sur le chantier'|translate}}</p>
             <app-survey-team-member
                 *ngFor="let group of teamMembersForms"

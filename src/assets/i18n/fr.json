@@ -12,6 +12,7 @@
   "SituationDangereuse.Ajouter une photo": "Ajouter une photo",
   "SituationDangereuse.Valider": "Valider",
   "SituationDangereuse.Situation dangereuse crée": "Situation dangereuse crée",
+  "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
 
   "Homepage.ActionsTraiter": "Action{{value}} à traiter",
   "Homepage.AucuneactionTraiter": "Aucune action à traiter",
