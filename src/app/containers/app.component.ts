@@ -8,6 +8,7 @@ import { ProfileService } from '../components/profile/services/profile.service';
 import { HistoryService } from '../components/history/services/history.service';
 import { SurveyService } from '../components/survey/services/survey.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +25,12 @@ export class AppComponent implements OnInit {
     private historyService: HistoryService,
     private surveyService: SurveyService,
     private translateService: TranslateService,
+    private s: SwPush,
   ) {}
 
   ngOnInit(): void {
+
+    this.s.messages.subscribe(m => console.log('PUSH SW', m));
 
     this.setupLanguage();
 
