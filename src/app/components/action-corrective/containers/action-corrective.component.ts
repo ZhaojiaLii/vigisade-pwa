@@ -4,15 +4,15 @@ import { ActionCorrectiveService } from '../services/action-corrective.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { SurveyService } from '../../visit/services/survey.service';
+import { SurveyService } from '../../survey/services/survey.service';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import 'rxjs-compat/add/operator/filter';
 import {IMAGE_PATH} from '../../../data/image.helpers';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 
 
 @Component({

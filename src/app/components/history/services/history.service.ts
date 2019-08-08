@@ -6,13 +6,13 @@ import { map } from 'rxjs/operators';
 import { goToNextCategory, loadHistory, loadResult, selectCategory, selectResult, setHistorySearch } from '../store/history.actions';
 import { getHistory, getResult, getSelectedResultCategory, getSelectedResult, getSelectedResultEntity, getSelectedResultQuestions, getSelectedResultArea, getSelectedResultBestPractice, getFilteredUserHistory, getUserHistory, getSelectedResultCategoryId } from '../store/history.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Category } from '../../visit/interfaces/getSurveys/category.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { Category } from '../../survey/interfaces/getSurveys/category.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { HistorySearch } from '../interfaces/history-search.interface';
-import { HistoryResult } from '../../visit/interfaces/getResultInterface/history-result.interface';
-import { Result } from '../../visit/interfaces/results/result.interface';
-import { GOOD_PRACTICE_CATEGORY_ID } from '../../visit/interfaces/getResultInterface/bestPractice.interface';
+import { HistoryResult } from '../../survey/interfaces/getResultInterface/history-result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../../survey/interfaces/getResultInterface/bestPractice.interface';
 import { QuestionResult } from '../interfaces/question-result.interface';
 
 @Injectable({

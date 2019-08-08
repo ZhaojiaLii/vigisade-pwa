@@ -1,18 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HistoryState } from './history.state';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
-import { getSurveyQuestions, getSurveys } from '../../visit/store/survey.selectors';
+import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
+import { getSurveyQuestions, getSurveys } from '../../survey/store/survey.selectors';
 import { getAreas, getEntities } from '../../../store/data/data.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { Question } from '../../visit/interfaces/getSurveys/question.interface';
+import { Question } from '../../survey/interfaces/getSurveys/question.interface';
 import { Area } from '../../shared/interfaces/area.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { getUser } from '../../profile/store/profile.selector';
 import { User } from '../../profile/interfaces/user';
 import { ROLES } from '../../../data/user.helpers';
 import { HistorySearch } from '../interfaces/history-search.interface';
-import { HistoryResult } from '../../visit/interfaces/getResultInterface/history-result.interface';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { HistoryResult } from '../../survey/interfaces/getResultInterface/history-result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 import * as moment from 'moment';
 import 'moment/min/locales';
 

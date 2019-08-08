@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SurveyService } from '../../visit/services/survey.service';
+import { SurveyService } from '../../survey/services/survey.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
-import { Category } from '../../visit/interfaces/getSurveys/category.interface';
+import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
+import { Category } from '../../survey/interfaces/getSurveys/category.interface';
 import { Area } from '../../shared/interfaces/area.interface';
-import { Result } from '../../visit/interfaces/results/result.interface';
-import { GOOD_PRACTICE_CATEGORY_ID } from '../../visit/interfaces/getResultInterface/bestPractice.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../../survey/interfaces/getResultInterface/bestPractice.interface';
 import { QuestionResult } from '../../history/interfaces/question-result.interface';
 
 @Component({

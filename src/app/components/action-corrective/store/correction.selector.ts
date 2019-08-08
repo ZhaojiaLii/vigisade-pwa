@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CorrectionState } from './correction.states';
-import { getSurveys } from '../../visit/store/survey.selectors';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
+import { getSurveys } from '../../survey/store/survey.selectors';
+import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { getResult, getSelectedResult } from '../../history/store/history.selectors';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
 

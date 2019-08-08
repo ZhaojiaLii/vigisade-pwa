@@ -9,9 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistorySearch } from '../interfaces/history-search.interface';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { ROLES } from '../../../data/user.helpers';
-import { HistoryResult } from '../../visit/interfaces/getResultInterface/history-result.interface';
+import { HistoryResult } from '../../survey/interfaces/getResultInterface/history-result.interface';
 
 @Component({
   selector: 'app-history',

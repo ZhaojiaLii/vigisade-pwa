@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import { createResult, createResultFail, createResultSuccess, loadSurveys, loadSurveysFail, loadSurveysSuccess, setLoadingState, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
+import { createResult, createResultFail, createResultSuccess, loadSurveys, loadSurveysFail, loadSurveysSuccess, selectSurveyCategory, setLoadingState, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { SurveyService } from '../services/survey.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { setResultDraft } from '../../../store/draft/draft.actions';
-import {TranslateService} from '@ngx-translate/core';
+import { ERROR_CODE } from '../../../data/error.helpers';
+import { addResultToBuffer, delayResultCreation } from '../../../store/buffer/buffer.actions';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class SurveyEffects {
@@ -37,7 +40,13 @@ export class SurveyEffects {
       switchMap(action => {
           return this.api.createResult(action.payload).pipe(
               map(status => createResultSuccess({status})),
-              catchError(error => of(createResultFail({error: error.message}))),
+              catchError(error => {
+                if (error instanceof HttpErrorResponse && error.status === 0) {
+                  return of(delayResultCreation({result: action.payload}));
+                }
+
+                return of(createResultFail({error: error.message}));
+              }),
           );
       })
   ));
@@ -47,7 +56,10 @@ export class SurveyEffects {
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
       tap(() => this.toast.success(this.translateService.instant('Visite.Visite validée'))),
     )),
-    map(() => setLoadingState({loading: false}))
+    switchMap(() => [
+      setLoadingState({loading: false}),
+      selectSurveyCategory({id: null}),
+    ]),
   ));
 
   cleanDraftWhenCreatingResult$ = createEffect(() => this.actions$.pipe(

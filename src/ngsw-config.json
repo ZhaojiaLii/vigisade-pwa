@@ -10,18 +10,34 @@
           "/index.html",
           "/*.css",
           "/*.js",
-          "/assets/**"
-        ]
-      }
-    }, {
-      "name": "fonts",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
+          "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": [
+        "/api/survey/",
+        "/api/direction-zone-entity-type-dangerous-situation",
+        "/api/header/",
+        "/api/user/",
+        "/api/survey/history/"
+      ],
+      "cacheConfig": {
+        "maxAge": "7d",
+        "strategy": "freshness"
+      }
+    }
+  ],
+  "navigationUrls": [
+    "!/api/**",
+    "!/admin/**",
+    "/**",
+    "!/**/*.*",
+    "!/**/*__*",
+    "!/**/*__*/**"
   ]
 }

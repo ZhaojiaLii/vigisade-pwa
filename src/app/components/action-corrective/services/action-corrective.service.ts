@@ -11,10 +11,10 @@ import {
   getCorrectionQuestion, getCorrectionResult,
   getCorrectionSurvey
 } from '../store/correction.selector';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
+import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 
 @Injectable({
   providedIn: 'root'

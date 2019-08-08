@@ -1,6 +1,6 @@
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { HistorySearch } from '../interfaces/history-search.interface';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 
 export interface HistoryState {
   history: GetResult | null;

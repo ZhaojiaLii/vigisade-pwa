@@ -1,4 +1,4 @@
-import { SurveyQuestionTranslation } from '../../visit/interfaces/getSurveys/surveyQuestionTranslation.interface';
+import { SurveyQuestionTranslation } from '../../survey/interfaces/getSurveys/surveyQuestionTranslation.interface';
 
 export interface SurveyQuestion {
   surveyQuestionCategoryId: number;

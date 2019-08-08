@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DraftState } from './draft.state';
 import { getUser } from '../../components/profile/store/profile.selector';
-import { getSurveyOfUser } from '../../components/visit/store/survey.selectors';
-import { Survey } from '../../components/visit/interfaces/getSurveys/survey.interface';
+import { getSurveyOfUser } from '../../components/survey/store/survey.selectors';
+import { Survey } from '../../components/survey/interfaces/getSurveys/survey.interface';
 import { User } from '../../components/profile/interfaces/user';
 
 export const getDraftState = createFeatureSelector<DraftState>('draft');

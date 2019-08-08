@@ -3,7 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SurveyBestPracticeComponent } from './components/survey-best-practice/survey-best-practice.component';
 import { SurveyQuestionComponent } from './components/survey-question/survey-question.component';
 import { SurveyTeamMemberComponent } from './components/survey-team-member/survey-team-member.component';
-import { VisitComponent } from './containers/visit.component';
+import { SurveyComponent } from './containers/survey.component';
 import { SurveySubmitComponent } from './components/survey-submit/survey-submit.component';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { SurveySubmitComponent } from './components/survey-submit/survey-submit.
     SurveyQuestionComponent,
     SurveySubmitComponent,
     SurveyTeamMemberComponent,
-    VisitComponent,
+    SurveyComponent,
   ],
 })
 export class SurveyModule {}

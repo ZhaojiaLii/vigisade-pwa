@@ -1,4 +1,4 @@
-import { ResultDraft } from '../../components/visit/interfaces/results/result-draft.interface';
+import { ResultDraft } from '../../components/survey/interfaces/results/result-draft.interface';
 
 export interface DraftState {
   survey: ResultDraft;

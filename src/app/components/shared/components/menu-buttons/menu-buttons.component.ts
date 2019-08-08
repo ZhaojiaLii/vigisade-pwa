@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SurveyService } from '../../../visit/services/survey.service';
+import { SurveyService } from '../../../survey/services/survey.service';
 import { DataService } from '../../../../services/data.service';
 
 @Component({

@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { Survey } from '../../../visit/interfaces/getSurveys/survey.interface';
-import { Result } from '../../../visit/interfaces/results/result.interface';
-import {BestPracticeType} from '../../../visit/interfaces/getSurveys/best-practice-type.interface';
+import { Component, Input, OnInit} from '@angular/core';
+import { Survey } from '../../../survey/interfaces/getSurveys/survey.interface';
+import { Result } from '../../../survey/interfaces/results/result.interface';
+import { BestPracticeType } from '../../../survey/interfaces/getSurveys/best-practice-type.interface';
 
 @Component({
   selector: 'app-details-best-practice',

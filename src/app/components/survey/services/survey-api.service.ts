@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Survey } from '../interfaces/getSurveys/survey.interface';
 import { Result } from '../interfaces/results/result.interface';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
+import { ERROR_CODE } from '../../../data/error.helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,6 @@ export class SurveyApiService {
   }
 
   createResult(createResult: Result): Observable<number> {
-    console.log('API', createResult);
     return this.http.post(
       '/api/survey/create/',
       createResult,
@@ -35,10 +35,8 @@ export class SurveyApiService {
       ).pipe(
         tap((response: HttpResponse<{status: number}>) => {
           if (response && response.status) {
-              console.log('create result succeed');
               return;
           }
-          throw new Error('Bad credentials.');
         }),
         map(response => response.status)
     );

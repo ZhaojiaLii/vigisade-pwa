@@ -11,7 +11,6 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { languages } from '../../../data/language.helpers';
-import { SurveyService } from '../../visit/services/survey.service';
 import { getDefaultFromAreaId, getDefaultFromDirectionId } from '../../../data/directions.helpers';
 import * as moment from 'moment';
 import 'moment/min/locales';
@@ -73,14 +72,20 @@ export class ProfileComponent implements OnInit {
       pairwise(),
       // Values are sent to API on change.
       switchMap(([prev, changes]: [Partial<User>, Partial<User>]) => {
-        if (prev.directionId.toString() !== changes.directionId.toString()) {
+        if (
+          (prev.directionId === null && changes.directionId !== null)
+          || (prev.directionId.toString() !== changes.directionId.toString())
+        ) {
           return this.dataService.getDirections().pipe(
             map((directions: Direction[]) => ({
               ...changes,
               ...getDefaultFromDirectionId(directions, Number(changes.directionId)),
             })),
           );
-        } else if (prev.areaId.toString() !== changes.areaId.toString()) {
+        } else if (
+          (prev.areaId === null && changes.areaId !== null)
+          || (prev.areaId.toString() !== changes.areaId.toString())
+        ) {
           return this.dataService.getAreas().pipe(
             map((areas: Area[]) => ({
               ...changes,

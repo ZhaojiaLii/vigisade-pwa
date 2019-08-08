@@ -22,7 +22,7 @@ import { ActionCorrectiveComponent } from './components/action-corrective/contai
 import { SecuriteComponent } from './components/securite/containers/securite.component';
 import { loginFeature } from './components/login/store/login.feature';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { surveyFeature } from './components/visit/store/survey.feature';
+import { surveyFeature } from './components/survey/store/survey.feature';
 import { profileFeature } from './components/profile/store/profile.feature';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
 import { correctionFeature } from './components/action-corrective/store/correction.features';
@@ -39,9 +39,10 @@ import { DangerousSituationModule } from './components/dangerous/dangerous-situa
 import { HistoryDetailsModule } from './components/history-details/history-details.module';
 import { historyFeature } from './components/history/store/history.feature';
 import { DeviceDetectorModule } from 'ngx-device-detector';
-import { SurveyModule } from './components/visit/survey.module';
+import { SurveyModule } from './components/survey/survey.module';
 import { draftFeature } from './store/draft/draft.feature';
 import { menuFeature } from './components/shared/components/menu/store/menu.feature';
+import { bufferFeature } from './store/buffer/buffer.feature';
 
 registerLocaleData(localeFr);
 
@@ -60,6 +61,7 @@ const pageModules = [
 ];
 
 const ngrxFeatures = [
+  bufferFeature,
   dataFeature,
   draftFeature,
   correctionFeature,
@@ -99,7 +101,7 @@ const ngrxFeatures = [
       maxAge: 15,
       name: 'Vigisade ' + (environment.production ? 'Prod' : 'Dev'),
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/sw-master.js', { enabled: environment.production }),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),

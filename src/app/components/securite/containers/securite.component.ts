@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs-compat/add/operator/skip';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Survey } from '../../visit/interfaces/getSurveys/survey.interface';
-import { SurveyApiService } from '../../visit/services/survey-api.service';
-import { SurveyService } from '../../visit/services/survey.service';
+import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
+import { SurveyApiService } from '../../survey/services/survey-api.service';
+import { SurveyService } from '../../survey/services/survey.service';
 
 @Component({
   selector: 'app-securite',

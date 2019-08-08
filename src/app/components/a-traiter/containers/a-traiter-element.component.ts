@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SurveyService } from '../../visit/services/survey.service';
+import { SurveyService } from '../../survey/services/survey.service';
 import { Observable } from 'rxjs';
 import { HistoryService } from '../../history/services/history.service';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { Correction } from '../../action-corrective/interfaces/getCorrection/correction.interface';
 import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
 

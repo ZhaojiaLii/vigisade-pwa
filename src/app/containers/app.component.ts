@@ -6,7 +6,7 @@ import { LoginService } from '../components/login/services/login.service';
 import { DataService } from '../services/data.service';
 import { ProfileService } from '../components/profile/services/profile.service';
 import { HistoryService } from '../components/history/services/history.service';
-import { SurveyService } from '../components/visit/services/survey.service';
+import { SurveyService } from '../components/survey/services/survey.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

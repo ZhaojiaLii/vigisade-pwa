@@ -7,7 +7,7 @@ import { ProfileApiService } from '../services/profile-api.service';
 import { ProfileService } from '../services/profile.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { loadSurveys } from '../../visit/store/survey.actions';
+import { loadSurveys } from '../../survey/store/survey.actions';
 import { loadData } from '../../../store/data/data.actions';
 
 

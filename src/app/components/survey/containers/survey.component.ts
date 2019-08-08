@@ -19,11 +19,11 @@ import { TeamMemberType } from '../interfaces/form/team-member-type.interface';
 import { User } from '../../profile/interfaces/user';
 
 @Component({
-  selector: 'app-visit',
-  templateUrl: './visit.component.html',
-  styleUrls: ['./visit.component.scss'],
+  selector: 'app-survey',
+  templateUrl: './survey.component.html',
+  styleUrls: ['./survey.component.scss'],
 })
-export class VisitComponent implements OnInit {
+export class SurveyComponent implements OnInit {
 
   isCollapsed = false;
   updateResultPayload: UpdateResult;

@@ -4,9 +4,9 @@ import { catchError, map, switchMap, filter, withLatestFrom } from 'rxjs/operato
 import { goToNextCategory, loadHistory, loadHistoryFail, loadHistorySuccess, loadResult, loadResultFail, loadResultSuccess, selectCategory } from './history.actions';
 import { HistoryApiService } from '../services/history-api.service';
 import { of } from 'rxjs';
-import { SurveyService } from '../../visit/services/survey.service';
+import { SurveyService } from '../../survey/services/survey.service';
 import { HistoryService } from '../services/history.service';
-import { GOOD_PRACTICE_CATEGORY_ID } from '../../visit/interfaces/getResultInterface/bestPractice.interface';
+import { GOOD_PRACTICE_CATEGORY_ID } from '../../survey/interfaces/getResultInterface/bestPractice.interface';
 
 @Injectable()
 export class HistoryEffects {

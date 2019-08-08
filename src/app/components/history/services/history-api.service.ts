@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetResult } from '../../visit/interfaces/getResultInterface/getResult.interface';
-import { Result } from '../../visit/interfaces/results/result.interface';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
+import { Result } from '../../survey/interfaces/results/result.interface';
 
 @Injectable({
   providedIn: 'root',

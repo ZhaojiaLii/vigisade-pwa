@@ -5,7 +5,7 @@ import { TutorialComponent } from './components/tutorial/containers/tutorial.com
 import { HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { DangerousSituationComponent } from './components/dangerous/containers/dangerous-situation.component';
-import { VisitComponent } from './components/visit/containers/visit.component';
+import { SurveyComponent } from './components/survey/containers/survey.component';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
 import { SecuriteComponent } from './components/securite/containers/securite.component';
 import { BonnePratiqueComponent } from './components/bonne-pratique/containers/bonne-pratique.component';
@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'visit',
-    component: VisitComponent,
+    component: SurveyComponent,
     canActivate: [TokenGuard],
   },
   {

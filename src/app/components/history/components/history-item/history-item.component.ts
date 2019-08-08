@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HistoryResult } from '../../../visit/interfaces/getResultInterface/history-result.interface';
+import { HistoryResult } from '../../../survey/interfaces/getResultInterface/history-result.interface';
 
 @Component({
   selector: 'app-history-item',
