@@ -8,10 +8,8 @@ import { DangerousState } from '../components/dangerous/store/dangerous.states';
 import { HistoryState } from '../components/history/store/history.state';
 import { DraftState } from './draft/draft.state';
 import { MenuState } from '../components/shared/components/menu/store/menu.state';
-import { BufferState } from './buffer/buffer.state';
 
 export interface State {
-    buffer: BufferState;
     dangerous: DangerousState;
     data: DataState;
     draft: DraftState;

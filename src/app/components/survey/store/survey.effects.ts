@@ -8,10 +8,10 @@ import { SurveyService } from '../services/survey.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { setResultDraft } from '../../../store/draft/draft.actions';
-import { ERROR_CODE } from '../../../data/error.helpers';
-import { addResultToBuffer, delayResultCreation } from '../../../store/buffer/buffer.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { BufferService } from '../../../services/buffer.service';
+import { getRandomId } from '../../../data/random.helpers';
 
 @Injectable()
 export class SurveyEffects {
@@ -19,6 +19,7 @@ export class SurveyEffects {
   constructor(
     private actions$: Actions,
     private service: SurveyService,
+    private bufferService: BufferService,
     private api: SurveyApiService,
     private router: Router,
     private toast: ToastrService,
@@ -42,7 +43,13 @@ export class SurveyEffects {
               map(status => createResultSuccess({status})),
               catchError(error => {
                 if (error instanceof HttpErrorResponse && error.status === 0) {
-                  return of(delayResultCreation({result: action.payload}));
+                  this.bufferService.delayPost({
+                    id: getRandomId(),
+                    url: '/api/survey/create/',
+                    payload: action.payload,
+                  });
+
+                  return of(createResultSuccess({status: 200}));
                 }
 
                 return of(createResultFail({error: error.message}));

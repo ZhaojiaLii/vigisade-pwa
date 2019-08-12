@@ -13,10 +13,8 @@ import { historyReducer } from '../components/history/store/history.reducer';
 import { localStorageSyncReducer } from '../data/local-storage.helpers';
 import { draftReducer } from './draft/draft.reducer';
 import { menuReducer } from '../components/shared/components/menu/store/menu.reducer';
-import { bufferReducer } from './buffer/buffer.reducer';
 
 export const reducers: ActionReducerMap<State> = {
-    buffer: bufferReducer,
     dangerous: dangerousReducer,
     data: dataReducer,
     draft: draftReducer,

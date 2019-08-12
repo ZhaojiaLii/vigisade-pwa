@@ -1,12 +1,22 @@
 import { createAction, props } from '@ngrx/store';
-import { Result } from '../../components/survey/interfaces/results/result.interface';
+import { DelayedRequest } from '../../interfaces/delayed-request.interface';
 
-export const delayResultCreation = createAction(
-  '[Buffer] Delay result creation',
-  props<{ result: Result }>(),
+export const delayPost = createAction(
+  '[Buffer] Delay Post',
+  props<{ request: DelayedRequest }>(),
 );
 
-export const addResultToBuffer = createAction(
-  '[Buffer] Add result to buffer',
-  props<{ result: Result }>(),
+export const replayPost = createAction(
+  '[Buffer] Replay Post',
+  props<{ delayedRequest: DelayedRequest }>(),
+);
+
+export const replayPostSuccess = createAction(
+  '[Buffer] Replay Post Success',
+  props<{ id: string }>(),
+);
+
+export const replayPostError = createAction(
+  '[Buffer] Replay Post Error',
+  props<{ error: string }>(),
 );

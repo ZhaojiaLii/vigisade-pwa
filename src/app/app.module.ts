@@ -101,7 +101,7 @@ const ngrxFeatures = [
       maxAge: 15,
       name: 'Vigisade ' + (environment.production ? 'Prod' : 'Dev'),
     }),
-    ServiceWorkerModule.register('/sw-master.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
