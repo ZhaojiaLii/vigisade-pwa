@@ -14,7 +14,6 @@ export class BufferEffects {
   delayPost$ = createEffect(() => this.actions$.pipe(
     ofType(delayPost),
     tap(action => {
-      console.log('STORE REQUEST', action);
       let delayedRequests: any = window.localStorage.getItem('vigisade');
 
       if (delayedRequests) {
