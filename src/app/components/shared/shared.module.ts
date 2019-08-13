@@ -78,7 +78,8 @@ const materialModules = [
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+      useDefaultLang: true
     }),
     MomentModule
   ],

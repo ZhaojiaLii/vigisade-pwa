@@ -3,8 +3,14 @@ import { CorrectionState } from './correction.states';
 import { getSurveys } from '../../survey/store/survey.selectors';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
-import { getResult, getSelectedResult } from '../../history/store/history.selectors';
+import {
+  getResult,
+  getSelectedResult,
+  getUserHistoryByRole, getSearchParams
+} from '../../history/store/history.selectors';
 import { Result } from '../../survey/interfaces/results/result.interface';
+import {getUser} from '../../profile/store/profile.selector';
+import {User} from '../../profile/interfaces/user';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
 
@@ -29,6 +35,21 @@ export const getCorrection = createSelector(
 //     return resultsArray || null;
 //   }
 // );
+
+export const getUserMobileCorrection = createSelector(
+  getCorrection,
+  getUser,
+  (results: Correction[], user: User) => {
+
+    if (!user || !results) {
+      return [];
+    }
+
+    return results.filter(result => {
+      return (result.user_id === user.id && result.status === 'A traiter');
+    });
+  }
+);
 
 export const getCorrectionResult = createSelector(
   getCorrection,

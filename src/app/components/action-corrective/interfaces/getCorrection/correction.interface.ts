@@ -7,4 +7,5 @@ export interface Correction {
   status: string;
   comment_question: string;
   image: string;
+  user_id: number;
 }

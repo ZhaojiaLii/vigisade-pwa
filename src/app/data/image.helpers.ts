@@ -11,4 +11,5 @@ export const compress = (event, options) => from(
 
 export const IMAGE_PATH = {
   result: '/pwa/uploads/images/result/',
+  profile: '/admin/uploads/images/users/'
 };

@@ -9,7 +9,7 @@ import {
   getCorrection,
   getCorrectionCategory,
   getCorrectionQuestion, getCorrectionResult,
-  getCorrectionSurvey
+  getCorrectionSurvey, getUserMobileCorrection
 } from '../store/correction.selector';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
@@ -31,8 +31,18 @@ export class ActionCorrectiveService {
     return this.store.pipe(select(getCorrection));
   }
 
+  getMobileCorrection(): Observable<Correction[]> {
+    return this.store.pipe(select(getUserMobileCorrection));
+  }
+
   countCorrection(): Observable<number> {
     return this.getCorrection().pipe(
+      map(correction => correction ? correction.length : null),
+    );
+  }
+
+  countMobileCorrection(): Observable<number> {
+    return this.getMobileCorrection().pipe(
       map(correction => correction ? correction.length : null),
     );
   }

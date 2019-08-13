@@ -9,9 +9,14 @@ import { DataService } from '../../../services/data.service';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
-import { TranslateService } from '@ngx-translate/core';
 import { languages } from '../../../data/language.helpers';
 import { getDefaultFromAreaId, getDefaultFromDirectionId } from '../../../data/directions.helpers';
+import {IMAGE_PATH} from '../../../data/image.helpers';
+
+import { TranslateService } from '@ngx-translate/core';
+import {BsLocaleService} from 'ngx-bootstrap';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+
 import * as moment from 'moment';
 import 'moment/min/locales';
 
@@ -35,11 +40,14 @@ export class ProfileComponent implements OnInit {
   area$: Observable<Area[]> = this.profileService.getUserAreas();
   entity$: Observable<Entity[]> = this.profileService.getUserEntities();
 
+  photo: string = '../../../../assets/images/profile/brocelia.jpeg';
+
   constructor(
     private profileService: ProfileService,
     private dataService: DataService,
     private toastrService: ToastrService,
     private translateService: TranslateService,
+    private BsDatepickerlocaleService: BsLocaleService
   ) {}
 
   ngOnInit(): void {
@@ -47,8 +55,6 @@ export class ProfileComponent implements OnInit {
       filter(user => !!user),
       take(1),
     ).subscribe(user => {
-      // Define moment locale.
-      moment.locale(user.language + '-' + user.language);
 
       const defaultValue: Partial<User> = {
         language: user.language,
@@ -56,6 +62,8 @@ export class ProfileComponent implements OnInit {
         areaId: user.areaId,
         entityId: user.entityId
       };
+
+      if(user.photo){this.photo = IMAGE_PATH.profile + user.photo}
 
       this.setDefaultValues(defaultValue);
       this.listenChanges(defaultValue);
@@ -104,8 +112,18 @@ export class ProfileComponent implements OnInit {
         entityId: changes.entityId ? Number(changes.entityId) : null,
       })),
     ).subscribe((changes) => {
-      this.translateService.setDefaultLang(changes.language);
-      this.profileService.updateUser(changes);
+        this.profileService.updateUser(changes);
+
+        const language = (changes.language !== null) ? changes.language : 'fr';
+        this.translateService.setDefaultLang(language);
+
+        /* Define moment locale */
+        moment.locale(language + '-' + language);
+
+        /* Bootstrap DatePicker */
+        this.BsDatepickerlocaleService.use(language);
+
+
     });
   }
 }

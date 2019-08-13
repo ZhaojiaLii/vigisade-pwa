@@ -9,6 +9,12 @@ import { HistoryService } from '../components/history/services/history.service';
 import { SurveyService } from '../components/survey/services/survey.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwPush } from '@angular/service-worker';
+import {BsLocaleService} from 'ngx-bootstrap';
+import { frLocale, esLocale, enGbLocale } from 'ngx-bootstrap/locale';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 @Component({
   selector: 'app-root',
@@ -26,13 +32,14 @@ export class AppComponent implements OnInit {
     private surveyService: SurveyService,
     private translateService: TranslateService,
     private s: SwPush,
-  ) {}
+    private BsDatepickerlocaleService: BsLocaleService
+  ) {
+    this.setupLanguage();
+  }
 
   ngOnInit(): void {
 
     this.s.messages.subscribe(m => console.log('PUSH SW', m));
-
-    this.setupLanguage();
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -51,6 +58,11 @@ export class AppComponent implements OnInit {
   }
 
   private setupLanguage(): void {
+
+    defineLocale('es', esLocale);
+    defineLocale('en', enGbLocale);
+    defineLocale('fr', frLocale);
+
     this.translateService.addLangs(['fr', 'en', 'es']);
     this.translateService.setDefaultLang('fr');
 
@@ -58,7 +70,16 @@ export class AppComponent implements OnInit {
       filter(user => !!user),
       take(1),
     ).subscribe(user => {
-      this.translateService.setDefaultLang(user.language);
+
+      const language = (user.language !== null) ? user.language : 'fr';
+      this.translateService.setDefaultLang(language);
+
+      /* Define moment locale */
+      moment.locale(language + '-' + language);
+
+      /* Bootstrap DatePicker */
+      this.BsDatepickerlocaleService.use(language);
+
     });
   }
 }
