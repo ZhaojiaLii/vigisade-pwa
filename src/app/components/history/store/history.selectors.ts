@@ -122,8 +122,10 @@ export const getSelectedResultSurvey = createSelector(
     if (!result) {
       return null;
     }
-    const resultSurvey = surveys.find(survey => survey.surveyId === result.resultSurveyId);
-    return resultSurvey || null;
+    if (surveys) {
+      const resultSurvey = surveys.find(survey => survey.surveyId === result.resultSurveyId);
+      return resultSurvey || null;
+    }
   }
 );
 
