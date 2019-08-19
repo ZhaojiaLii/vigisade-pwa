@@ -117,7 +117,7 @@ export class ActionCorrectiveComponent implements OnInit {
 
   validForm() {
     if (this.correction.value.comment === '' || this.correction.value.photo === '') {
-      this.toastrService.error('champs vide');
+      this.toastrService.error('Tous les champs sont obligatoires');
     } else {
       const correctionPayload: CreateCorrection = {
         id: this.thisCorrection.id,
@@ -132,7 +132,7 @@ export class ActionCorrectiveComponent implements OnInit {
       };
       // console.log(correctionPayload);
       this.correctionService.updateCorrection(correctionPayload);
-      this.toastrService.success('maj succèss');
+      this.toastrService.success('Action corrective mise à jour');
       this.router.navigate(['/atraiter']);
       window.scroll(0, 0);
     }
