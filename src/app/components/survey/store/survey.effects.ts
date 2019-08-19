@@ -62,6 +62,7 @@ export class SurveyEffects {
     ofType(createResultSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
       tap(() => this.toast.success(this.translateService.instant('Visite.Visite validée'))),
+      tap(() => window.location.reload()),
     )),
     switchMap(() => [
       setLoadingState({loading: false}),
