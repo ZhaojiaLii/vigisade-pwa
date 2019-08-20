@@ -55,6 +55,7 @@ export class HistoryDetailsComponent implements OnInit, OnDestroy {
   selectCategory(id: number): void {
     this.historyService.selectResultCategory(id);
     this.isCollapsed = !this.isCollapsed;
+    window.scroll(0, 0);
   }
 
   goToNextCategory() {

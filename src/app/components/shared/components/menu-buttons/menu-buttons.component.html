@@ -2,7 +2,8 @@
     <div class="col-12 col-md-6">
         <button [attr.disabled]="(hasSurvey$|async) ? null : 1"
                 class="btn btn-info w-100 mb-4 mb-md-0 d-flex align-items-center justify-content-center"
-                routerLink="/visit">
+                routerLink="/visit"
+                (click)="scroll()">
             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="29" viewBox="0 0 23 29">
                 <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6.875 6H5v18h15V6h-1.875M8.75 10.5h7.5M8.75 15h7.5m-7.5 4.5h7.5"></path>
@@ -15,7 +16,9 @@
     </div>
     <div class="col-12 col-md-6">
         <button [attr.disabled]="(hasDangerousType$|async) ? null : 1"
-            class="btn btn-warning w-100 d-flex align-items-center justify-content-center" routerLink="/dangerous">
+            class="btn btn-warning w-100 d-flex align-items-center justify-content-center"
+                routerLink="/dangerous"
+                (click)="scroll()">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="0 0 28 25">
                 <g fill="none" fill-rule="evenodd">
                     <path fill="#FFF"

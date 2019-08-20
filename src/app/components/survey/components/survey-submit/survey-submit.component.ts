@@ -5,15 +5,16 @@ import { Result } from '../../interfaces/results/result.interface';
 import { FormGroup } from '@angular/forms';
 import { Category } from '../../interfaces/getSurveys/category.interface';
 import { SurveyService } from '../../services/survey.service';
-import { Observable, combineLatest, of } from 'rxjs';
-import { take, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { ToastrService } from 'ngx-toastr';
 import { DraftService } from '../../../../services/draft.service';
 import { User } from '../../../profile/interfaces/user';
 import { ResultQuestion } from '../../interfaces/results/result-question.interface';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { HistoryService } from '../../../history/services/history.service';
 
 @Component({
   selector: 'app-survey-submit',
@@ -36,7 +37,8 @@ export class SurveySubmitComponent {
     private surveyService: SurveyService,
     private profileService: ProfileService,
     private toastr: ToastrService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private historyService: HistoryService,
   ) {}
 
   save() {
@@ -120,6 +122,8 @@ export class SurveySubmitComponent {
 
       this.surveyService.setLoadingState(true);
       this.surveyService.createResult(result);
+      this.surveyService.loadSurveys();
+      this.historyService.loadHistory();
     });
   }
 }

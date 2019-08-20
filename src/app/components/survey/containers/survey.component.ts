@@ -147,6 +147,7 @@ export class SurveyComponent implements OnInit {
   selectSurveyCategory(id: number): void {
     this.isCollapsed = false;
     this.surveyService.selectSurveyCategory(id);
+    window.scrollTo(0, 0);
   }
 
   countSurveyFields(): number {

@@ -42,6 +42,7 @@ export class ActionCorrectiveComponent implements OnInit {
   getCorrectionResult$: Observable<Result> = this.correctionService.getCorrectionResult();
 
   imagePath = IMAGE_PATH.result;
+  imagePathAC = IMAGE_PATH.action_corrective;
 
   constructor(
     private correctionService: ActionCorrectiveService,

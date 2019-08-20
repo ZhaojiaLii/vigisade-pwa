@@ -11,11 +11,9 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { ToastrService } from 'ngx-toastr';
 import { languages } from '../../../data/language.helpers';
 import { getDefaultFromAreaId, getDefaultFromDirectionId } from '../../../data/directions.helpers';
-import {IMAGE_PATH} from '../../../data/image.helpers';
-
+import { IMAGE_PATH } from '../../../data/image.helpers';
 import { TranslateService } from '@ngx-translate/core';
-import {BsLocaleService} from 'ngx-bootstrap';
-import { defineLocale } from 'ngx-bootstrap/chronos';
+import { BsLocaleService } from 'ngx-bootstrap';
 
 import * as moment from 'moment';
 import 'moment/min/locales';
@@ -40,14 +38,14 @@ export class ProfileComponent implements OnInit {
   area$: Observable<Area[]> = this.profileService.getUserAreas();
   entity$: Observable<Entity[]> = this.profileService.getUserEntities();
 
-  photo: string = '../../../../assets/images/profile/brocelia.jpeg';
+  photo = '../../../../assets/images/profile/brocelia.jpeg';
 
   constructor(
     private profileService: ProfileService,
     private dataService: DataService,
     private toastrService: ToastrService,
     private translateService: TranslateService,
-    private BsDatepickerlocaleService: BsLocaleService
+    private BsDatepickerlocaleService: BsLocaleService,
   ) {}
 
   ngOnInit(): void {
@@ -60,10 +58,12 @@ export class ProfileComponent implements OnInit {
         language: user.language,
         directionId: user.directionId,
         areaId: user.areaId,
-        entityId: user.entityId
+        entityId: user.entityId,
       };
 
-      if(user.photo){this.photo = IMAGE_PATH.profile + user.photo}
+      if (user.photo) {
+        this.photo = IMAGE_PATH.profile + user.photo;
+      }
 
       this.setDefaultValues(defaultValue);
       this.listenChanges(defaultValue);
@@ -85,6 +85,7 @@ export class ProfileComponent implements OnInit {
           || (prev.directionId.toString() !== changes.directionId.toString())
         ) {
           return this.dataService.getDirections().pipe(
+            take(1),
             map((directions: Direction[]) => ({
               ...changes,
               ...getDefaultFromDirectionId(directions, Number(changes.directionId)),
@@ -95,10 +96,11 @@ export class ProfileComponent implements OnInit {
           || (prev.areaId.toString() !== changes.areaId.toString())
         ) {
           return this.dataService.getAreas().pipe(
+            take(1),
             map((areas: Area[]) => ({
               ...changes,
               ...getDefaultFromAreaId(areas, Number(changes.areaId)),
-            }))
+            })),
           );
         }
 
@@ -112,18 +114,12 @@ export class ProfileComponent implements OnInit {
         entityId: changes.entityId ? Number(changes.entityId) : null,
       })),
     ).subscribe((changes) => {
-        this.profileService.updateUser(changes);
+      this.profileService.updateUser(changes);
 
-        const language = (changes.language !== null) ? changes.language : 'fr';
-        this.translateService.setDefaultLang(language);
-
-        /* Define moment locale */
-        moment.locale(language + '-' + language);
-
-        /* Bootstrap DatePicker */
-        this.BsDatepickerlocaleService.use(language);
-
-
+      const language = changes.language || 'fr';
+      this.translateService.setDefaultLang(language);
+      moment.locale(language + '-' + language);
+      this.BsDatepickerlocaleService.use(language);
     });
   }
 }
