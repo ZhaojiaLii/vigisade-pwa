@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { DataService } from '../../../services/data.service';
 import { Header } from '../../../interfaces/header.interface';
 
@@ -24,6 +23,5 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 }
