@@ -8,7 +8,6 @@
   "SituationDangereuse.Commentaire": "Commentaire",
   "SituationDangereuse.Commentaire court": "Commentaire court",
   "SituationDangereuse.Correctif": "Correctif",
-  "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Ajouter une photo": "Ajouter une photo",
   "SituationDangereuse.Valider": "Valider",
   "SituationDangereuse.Situation dangereuse crée": "Situation dangereuse crée",
@@ -102,6 +101,16 @@
   "ConsultationVisite.Fonction": "Fonction",
   "ConsultationVisite.Suivant": "Suivant",
   "ConsultationVisite.Bonne pratique":"Bonne pratique",
+
+  "Atraiter.Filtres de recherche": "Filtres de recherche",
+  "Atraiter.Date début": "Date début",
+  "Atraiter.Date fin": "Date fin",
+  "Atraiter.Statut": "Status",
+  "Atraiter.Zone": "Zone",
+  "Atraiter.Entité": "Entité",
+  "Atraiter.Responsable": "Responsable",
+  "Atraiter.Rechercher":"Rechercher",
+  "Atraiter.Réinitialiser":"Réinitialiser",
 
   "Tous les champs sont obligatoires.": "Tous les champs sont obligatoires.",
 

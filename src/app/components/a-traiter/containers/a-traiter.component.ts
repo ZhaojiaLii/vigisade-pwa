@@ -10,6 +10,7 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { map } from 'rxjs/operators';
 import { HistorySearch } from '../../history/interfaces/history-search.interface';
 import { User } from '../../profile/interfaces/user';
+import { ROLES } from '../../../data/user.helpers';
 
 @Component({
   selector: 'app-a-traiter',
@@ -20,6 +21,8 @@ export class ATraiterComponent implements OnInit {
   countCorrection$: Observable<number>;
 
   isDesktop = false;
+
+  roles = ROLES;
 
   searchForm = new FormGroup({
     startDate: new FormControl(''),
@@ -46,6 +49,24 @@ export class ATraiterComponent implements OnInit {
       return selectedArea ? selectedArea.entity : [];
     }),
   );
+  creators$: Observable<{id: number}[]> = this.correctionService.getCorrection().pipe(
+    map((corrections: Correction[]) => {
+      const uniqueCorrectionId = [];
+      if (corrections) {
+        return corrections.map(correction => ({
+          id: correction.user_id,
+          // name: correction.userfirstName + ' ' + correction.userlastName,
+        })).filter(creator => {
+          if (uniqueCorrectionId.includes(creator.id)) {
+            return false;
+          }
+
+          uniqueCorrectionId.push(creator.id);
+          return true;
+        });
+      }
+    }),
+  );
   constructor(
     private correctionService: ActionCorrectiveService,
     private deviceService: DeviceDetectorService,
@@ -59,12 +80,21 @@ export class ATraiterComponent implements OnInit {
     this.isDesktop = this.deviceService.isDesktop();
 
     if (this.deviceService.isDesktop()) {
-      this.correction$ = this.correctionService.getCorrection();
+      this.correction$ = this.correctionService.getDesktopCorrection();
       this.countCorrection$ = this.correctionService.countCorrection();
     } else {
       this.correction$ = this.correctionService.getMobileCorrection();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
+  }
+
+  search(): void {
+    this.correctionService.setSearch(this.searchForm.value);
+  }
+
+  resetSearch(): void {
+    this.searchForm.reset();
+    this.search();
   }
 
 }

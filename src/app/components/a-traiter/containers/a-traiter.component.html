@@ -6,26 +6,26 @@
     <div class="card card-full-width mb-10 shadow-none mp-15">
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Filtres de recherche'|translate}}</div>
+          <div class="col-6 font-demiBold">{{'Atraiter.Filtres de recherche'|translate}}</div>
         </div>
         <hr/>
         <div class="row align-items-center light-grey mb-20">
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date début'|translate}} :
+          <div class="col-6 font-demiBold">{{'Atraiter.Date début'|translate}} :
             <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate">
           </div>
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date fin'|translate}} :
+          <div class="col-6 font-demiBold">{{'Atraiter.Date fin'|translate}} :
             <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate">
           </div>
         </div>
         <div class="row align-items-center light-grey mb-20">
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
-            <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
+          <div class="col-6 font-demiBold">{{'Atraiter.Statut'|translate}} :
+            <select class="form-control" style="border: solid 1px lightgrey" formControlName="status">
               <option value="A traiter">A traiter</option>
               <option value="A valider">A valider</option>
               <option value="Validé">Validé</option>
             </select>
           </div>
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
+          <div class="col-6 font-demiBold">{{'Atraiter.Zone'|translate}} :
             <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
               <option *ngFor="let area of areas$|async" value="{{area.id}}">
                 {{area.name}}
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="row align-items-center light-grey mb-20">
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Entité'|translate}} :
+          <div class="col-6 font-demiBold">{{'Atraiter.Entité'|translate}} :
             <select
               [attr.disabled]="(entities$|async)?.length === 0 ? true : null"
               class="form-control" style="border: solid 1px lightgrey"
@@ -44,15 +44,14 @@
               </option>
             </select>
           </div>
-          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Créateur'|translate}} :
+          <div class="col-6 font-demiBold">{{'Atraiter.Responsable'|translate}} :
             <select
               [attr.disabled]="(user$|async)?.roles?.includes(roles.admin) ? null : 1"
               class="form-control"
               style="border: solid 1px lightgrey"
-              formControlName="userId"
-            >
+              formControlName="responsible">
               <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
-                {{creator.name}}
+                {{creator.id}}
               </option>
             </select>
           </div>
@@ -60,11 +59,11 @@
         <div class="row align-items-center light-grey mb-20">
           <div class="col-6 font-weight-bold font-14 d-flex"></div>
           <div class="col-6 font-weight-bold font-14 d-flex">
-            <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" style="margin-top: 16px;margin-bottom: 0px !important;">
-              <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
+            <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'Atraiter.Rechercher'|translate}}</span>
             </button>
-            <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" style="margin-top: 16px;margin-bottom: 0px !important;">
-              <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
+            <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'Atraiter.Réinitialiser'|translate}}</span>
             </button>
           </div>
         </div>
