@@ -21,4 +21,8 @@ export class MenuButtonsComponent {
     private surveyService: SurveyService,
     private dataService: DataService,
   ) {}
+
+  scroll() {
+    window.scroll(0, 0);
+  }
 }
