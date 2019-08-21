@@ -76,8 +76,13 @@
               <div class="line"></div>
             </div>
           </div>
+          <div *ngIf="result.resultBestPracticePhoto">
+            <div *ngIf="loading" class="spinner-container">
+              <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            </div>
+          </div>
           <div *ngIf="result.resultBestPracticePhoto" class="mx-30 mb-25">
-            <img src="{{result.resultBestPracticePhoto}}" alt="Preview failed" style="width: 100%;">
+            <img [hidden]="loading" src="{{result.resultBestPracticePhoto}}" (error)="error()" alt="Preview failed" style="width: 100%;" (load)="loadingImage()">
           </div>
         </form>
       </div>

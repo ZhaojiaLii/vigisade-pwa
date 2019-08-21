@@ -17,11 +17,19 @@ export class DetailsBestPracticeComponent implements OnInit {
   public currentTypeBestPracticeSurvey: BestPracticeType = null;
 
   isCollapsed = true;
+  loading = true;
 
   ngOnInit(): void {
     this.currentTypeBestPracticeSurvey = this.survey.typeBestPractice.find((el) => {
       return el.typeBestPracticeId === Number(this.result.resultBestPracticeTypeId);
     });
+  }
+
+  loadingImage() {
+    this.loading = false;
+  }
+  error() {
+    this.loading = false;
   }
 
 }

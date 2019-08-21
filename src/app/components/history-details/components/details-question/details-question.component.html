@@ -95,8 +95,16 @@
         </div>
     </div>
     <div class="row" *ngIf="questionResult.result.resultQuestionResultPhoto">
-        <div class="col">
-            <img class="image-preview" src="{{imagePath + questionResult.result.resultQuestionResultPhoto}}" alt="Illustration de la question" style="width: 100%;"/>
+        <div class="spinner-container" *ngIf="loading">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
         </div>
+    </div>
+    <div class="row" *ngIf="questionResult.result.resultQuestionResultPhoto">
+        <div class="col">
+            <img [hidden]="loading" class="image-preview" (error)="error()" src="{{imagePath + questionResult.result.resultQuestionResultPhoto}}" alt="Illustration de la question" style="width: 100%;" (load)="loadingImage()"/>
+        </div>
+<!--      <div class="col">-->
+<!--        <img [hidden]="loading" class="image-preview" (error)="error()" src="https://cc.tvbs.com.tw/img/_data/i/upload/2017/02/18/20170218141055-0c536626-me.jpg" alt="Illustration de la question" style="width: 100%;" (load)="loadingImage()"/>-->
+<!--      </div>-->
     </div>
 </div>

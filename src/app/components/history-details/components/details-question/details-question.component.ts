@@ -11,7 +11,17 @@ import { QuestionResult } from '../../../history/interfaces/question-result.inte
 export class DetailsQuestionComponent {
 
   @Input() questionResult: QuestionResult;
+  @Input() diameter: number;
 
+  loading = true;
+  color = 'primary';
   isCollapsed = true;
   imagePath = IMAGE_PATH.result;
+
+  loadingImage() {
+    this.loading = false;
+  }
+  error() {
+    this.loading = false;
+  }
 }
