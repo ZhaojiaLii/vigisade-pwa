@@ -6,7 +6,7 @@ import {
   createCorrectionSuccess,
   loadCorrection,
   loadCorrectionFail,
-  loadCorrectionSuccess,
+  loadCorrectionSuccess, setATraiterSearch,
   updateCorrection,
   updateCorrectionFail,
   updateCorrectionSuccess
@@ -23,6 +23,7 @@ export const createCorrectionReducer = createReducer(
   on(updateCorrection, state => state),
   on(updateCorrectionSuccess, (state, {status}) => ({...state, status})),
   on(updateCorrectionFail, state => state),
+  on(setATraiterSearch, (state, {searchParams}) => ({...state, search: searchParams})),
 );
 
 export function correctionReducer(state: CorrectionState | undefined, action: Action) {

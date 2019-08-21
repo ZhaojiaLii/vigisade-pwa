@@ -8,7 +8,6 @@
   "SituationDangereuse.Commentaire": "Observaciones",
   "SituationDangereuse.Commentaire court": "Observaciones",
   "SituationDangereuse.Correctif": "Correctivo",
-  "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Ajouter une photo": "Agregar una foto",
   "SituationDangereuse.Valider": "Validar",
   "SituationDangereuse.Situation dangereuse crée": "Se creó una situación peligrosa",
@@ -102,6 +101,16 @@
   "ConsultationVisite.Fonction": "Cargo",
   "ConsultationVisite.Suivant": "Siguiente",
   "ConsultationVisite.Bonne pratique":"Buena practica/Astucia",
+
+  "Atraiter.Filtres de recherche": "Filtro de busqueda",
+  "Atraiter.Date début": "Fecha inicio",
+  "Atraiter.Date fin": "Fecha final",
+  "Atraiter.Statut": "estatus",
+  "Atraiter.Zone": "Zona",
+  "Atraiter.Entité": "Entidad",
+  "Atraiter.Responsable": "Responsable",
+  "Atraiter.Rechercher":"Buscar",
+  "Atraiter.Réinitialiser":"Reinicializar",
 
   "Tous les champs sont obligatoires.": "Todos los campos son obligatorios.",
 
