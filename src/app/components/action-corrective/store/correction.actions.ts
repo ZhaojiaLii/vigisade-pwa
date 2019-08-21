@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
+import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
 
 export const loadCorrection = createAction(
     '[correction] Load Correction',
@@ -45,5 +46,10 @@ export const updateCorrectionSuccess = createAction(
 export const updateCorrectionFail = createAction(
   '[correction] Update Correction fail',
   props<{ error: any }>(),
+);
+
+export const setATraiterSearch = createAction(
+  '[Survey] Set A traiter search',
+  props<{searchParams: ATraiterSearch}>(),
 );
 

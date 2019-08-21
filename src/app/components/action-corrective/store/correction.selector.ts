@@ -3,20 +3,24 @@ import { CorrectionState } from './correction.states';
 import { getSurveys } from '../../survey/store/survey.selectors';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
-import {
-  getResult,
-  getSelectedResult,
-  getUserHistoryByRole, getSearchParams
-} from '../../history/store/history.selectors';
+import { getHistory, getSelectedResult } from '../../history/store/history.selectors';
 import { Result } from '../../survey/interfaces/results/result.interface';
-import {getUser} from '../../profile/store/profile.selector';
-import {User} from '../../profile/interfaces/user';
+import { getUser } from '../../profile/store/profile.selector';
+import { User } from '../../profile/interfaces/user';
+import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
+import * as moment from 'moment';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
 
 export const getCorrection = createSelector(
   getCorrectionState,
-  (state: CorrectionState) => state.correctiveAction,
+  (state: CorrectionState) => {
+    if (!state) {
+      return null;
+    }
+    return state.correctiveAction;
+  },
 );
 
 // export const getCorrectionResults = createSelector(
@@ -58,6 +62,50 @@ export const getCorrectionResult = createSelector(
     if (corrections && results) {
       return results;
     }
+  }
+);
+
+export const getSearchParams = createSelector(
+  getCorrectionState,
+  (state: CorrectionState) => state.search,
+);
+
+export const getFilteredUserAtraiter = createSelector(
+  getCorrection,
+  getSearchParams,
+  getHistory,
+  (corrections: Correction[], searchParams: ATraiterSearch, history: GetResult) => {
+    if (!corrections || !searchParams) {
+      return corrections;
+    }
+    return corrections.filter(correction => {
+      return (
+          !searchParams.startDate
+          || history.result.find(result => result.resultId === correction.result_id).resultDate
+          >= moment(searchParams.startDate).format('YYYY-MM-DD')
+        )
+        && (
+          !searchParams.endDate
+          || history.result.find(result => result.resultId === correction.result_id).resultDate
+          <= moment(searchParams.startDate).format('YYYY-MM-DD')
+        )
+        && (
+          !searchParams.status
+          || correction.status === searchParams.status
+        )
+        && (
+          !searchParams.areaId
+          || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+        )
+        && (
+          !searchParams.entityId
+          || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+        )
+        && (
+          !searchParams.responsible
+          || correction.user_id === Number(searchParams.responsible)
+        );
+    });
   }
 );
 
