@@ -111,6 +111,11 @@
   "Atraiter.Responsable": "Responsible",
   "Atraiter.Rechercher":"Search",
   "Atraiter.Réinitialiser":"Reset",
+  "Atraiter.AucuneactionTraiter":"No Non-compliance corrective action",
+  "Atraiter.Actions":"Non-compliance{{value}}",
+  "Atraiter.ActionsATraiter":"Non-compliance{{value}} to treat",
+  "Atraiter.ActionsAValider":"Non-compliance{{value}} to validate",
+  "Atraiter.ActionsValidées":"Non-compliance{{value}} validated",
 
   "Tous les champs sont obligatoires.": "All fields are mandatory.",
 

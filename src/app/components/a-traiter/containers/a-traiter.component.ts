@@ -21,8 +21,8 @@ export class ATraiterComponent implements OnInit {
   countCorrection$: Observable<number>;
 
   isDesktop = false;
-
   roles = ROLES;
+  status: string;
 
   searchForm = new FormGroup({
     startDate: new FormControl(''),
@@ -75,6 +75,7 @@ export class ATraiterComponent implements OnInit {
 
   ngOnInit() {
 
+    this.status = null;
     this.correctionService.loadCorrection();
 
     this.isDesktop = this.deviceService.isDesktop();
@@ -89,10 +90,12 @@ export class ATraiterComponent implements OnInit {
   }
 
   search(): void {
+    this.status = this.searchForm.get('status').value;
     this.correctionService.setSearch(this.searchForm.value);
   }
 
   resetSearch(): void {
+    this.status = null;
     this.searchForm.reset();
     this.search();
   }
