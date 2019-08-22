@@ -4,6 +4,9 @@ export interface Correction {
   category_id: number;
   question_id: number;
   result_id: number;
+  resultUserfirstName: string;
+  resultUserlastName: string;
+  result_question_id: string;
   status: string;
   comment_question: string;
   image: string;

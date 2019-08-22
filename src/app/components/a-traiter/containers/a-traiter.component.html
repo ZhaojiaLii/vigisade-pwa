@@ -51,7 +51,7 @@
               style="border: solid 1px lightgrey"
               formControlName="responsible">
               <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
-                {{creator.id}}
+                {{creator.name}}
               </option>
             </select>
           </div>
