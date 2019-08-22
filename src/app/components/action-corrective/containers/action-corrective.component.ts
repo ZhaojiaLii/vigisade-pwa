@@ -44,6 +44,7 @@ export class ActionCorrectiveComponent implements OnInit {
   imagePath = IMAGE_PATH.result;
   imagePathAC = IMAGE_PATH.action_corrective;
 
+  loading = true;
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -139,4 +140,11 @@ export class ActionCorrectiveComponent implements OnInit {
     }
   }
 
+  loadingImage() {
+    this.loading = false;
+  }
+
+  error() {
+    this.loading = false;
+  }
 }
