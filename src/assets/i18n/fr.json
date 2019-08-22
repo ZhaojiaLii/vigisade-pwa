@@ -111,6 +111,11 @@
   "Atraiter.Responsable": "Responsable",
   "Atraiter.Rechercher":"Rechercher",
   "Atraiter.Réinitialiser":"Réinitialiser",
+  "Atraiter.AucuneactionTraiter":"Aucune action corrective",
+  "Atraiter.Actions":"Action{{value}} corrective{{value}}",
+  "Atraiter.ActionsATraiter":"Action{{value}} à traiter",
+  "Atraiter.ActionsAValider":"Action{{value}} à valider",
+  "Atraiter.ActionsValidées":"Action{{value}} validée{{value}}",
 
   "Tous les champs sont obligatoires.": "Tous les champs sont obligatoires.",
 

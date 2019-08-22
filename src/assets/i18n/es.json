@@ -111,6 +111,11 @@
   "Atraiter.Responsable": "Responsable",
   "Atraiter.Rechercher":"Buscar",
   "Atraiter.Réinitialiser":"Reinicializar",
+  "Atraiter.AucuneactionTraiter":"Ninguna acción correctiva",
+  "Atraiter.Actions":"Acción{{value}} correctiva{{value}}",
+  "Atraiter.ActionsATraiter":"No conformidade{{value}} por procesar",
+  "Atraiter.ActionsAValider":"No conformidade{{value}} a validar",
+  "Atraiter.ActionsValidées":"No conformidade{{value}} validado",
 
   "Tous les champs sont obligatoires.": "Todos los campos son obligatorios.",
 
