@@ -14,8 +14,8 @@ export class SurveyBestPracticeComponent {
   @Input() survey: Survey;
 
   showError = false;
-
   isCollapsed = true;
+  imageloading = false;
 
   encode(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -23,6 +23,10 @@ export class SurveyBestPracticeComponent {
         this.group.patchValue({photo: dataUrl});
       });
     }
+    this.imageloading = true;
+  }
+  imageLoaded() {
+    this.imageloading = false;
   }
 
   updateValidators(required: boolean): void {

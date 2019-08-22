@@ -81,7 +81,14 @@
           </div>
         </div>
         <div *ngIf="thisCorrection.image">
-          <img [hidden]="loading" (error)="error()" [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/img-test-correction.jpg'" class="img-fluid w-100" alt="image not found" (load)="loadingImage()"/>
+          <img
+            [hidden]="loading"
+            (error)="error()"
+            (load)="loadingImage()"
+            [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/img-test-correction.jpg'"
+            class="img-fluid w-100"
+            alt="image not found"
+          />
         </div>
 <!--        <div class="col">-->
 <!--          <img [hidden]="loading" class="image-preview" src="https://cc.tvbs.com.tw/img/_data/i/upload/2017/02/18/20170218141055-0c536626-me.jpg" alt="Illustration de la question" style="width: 100%;" (load)="loadingImage()"/>-->

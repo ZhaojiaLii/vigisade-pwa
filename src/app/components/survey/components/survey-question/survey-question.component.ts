@@ -16,6 +16,7 @@ export class SurveyQuestionComponent implements OnChanges {
 
   isCollapsed = false;
   showError = false;
+  imageloading = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.group.valueChanges.subscribe((values) => {
@@ -38,6 +39,7 @@ export class SurveyQuestionComponent implements OnChanges {
         this.group.patchValue({photo: dataUrl});
       });
     }
+    this.imageloading = true;
   }
 
   updateValidators(required: boolean): void {
@@ -48,5 +50,9 @@ export class SurveyQuestionComponent implements OnChanges {
       this.group.get('comment').clearValidators();
       this.group.get('comment').updateValueAndValidity();
     }
+  }
+
+  imageLoaded() {
+    this.imageloading = false;
   }
 }
