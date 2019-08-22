@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, filter, withLatestFrom } from 'rxjs/operators';
-import { goToNextCategory, loadHistory, loadHistoryFail, loadHistorySuccess, loadResult, loadResultFail, loadResultSuccess, selectCategory } from './history.actions';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  goToNextCategory,
+  loadHistory,
+  loadHistoryFail,
+  loadHistorySuccess,
+  loadResult,
+  loadResultFail,
+  loadResultSuccess,
+  selectCategory
+} from './history.actions';
 import { HistoryApiService } from '../services/history-api.service';
 import { of } from 'rxjs';
 import { SurveyService } from '../../survey/services/survey.service';
@@ -52,7 +61,6 @@ export class HistoryEffects {
       ) {
         return selectCategory({id: null});
       }
-
       if (!selectedCategory) {
         return selectCategory({id: survey.surveyCategories[0].surveyCategoryId});
       } else if (selectedCategory.surveyCategoryId === GOOD_PRACTICE_CATEGORY_ID) {
@@ -61,10 +69,9 @@ export class HistoryEffects {
 
       const currentCategoryIndex = survey.surveyCategories
         .findIndex(category => category.surveyCategoryId === selectedCategory.surveyCategoryId);
-
       if (survey.surveyCategories.length > (currentCategoryIndex + 1)) {
         return selectCategory({
-          id: survey.surveyCategories[selectedCategory.surveyCategoryId + 1].surveyCategoryId,
+          id: survey.surveyCategories[currentCategoryIndex + 1].surveyCategoryId,
         });
       } else {
         return selectCategory({id: GOOD_PRACTICE_CATEGORY_ID});
