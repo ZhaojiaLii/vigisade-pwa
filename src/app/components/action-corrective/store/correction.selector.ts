@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CorrectionState } from './correction.states';
+import {AllUsersState, CorrectionState} from './correction.states';
 import { getSurveys } from '../../survey/store/survey.selectors';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
+export const getAllUsersState = createFeatureSelector<AllUsersState>('users');
 
 export const getCorrection = createSelector(
   getCorrectionState,
@@ -21,6 +22,13 @@ export const getCorrection = createSelector(
     }
     return state.correctiveAction;
   },
+);
+
+export const getAllUsers = createSelector(
+  getAllUsersState,
+  (state: AllUsersState) => {
+    return state.users;
+  }
 );
 
 // export const getCorrectionResults = createSelector(

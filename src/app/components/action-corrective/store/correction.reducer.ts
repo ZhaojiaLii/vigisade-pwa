@@ -1,5 +1,5 @@
 import {Action, createReducer, on} from '@ngrx/store';
-import {correctionInitialState, CorrectionState} from './correction.states';
+import {allUsersInitialState, AllUsersState, correctionInitialState, CorrectionState} from './correction.states';
 import {
   createCorrection,
   createCorrectionFail,
@@ -9,7 +9,8 @@ import {
   loadCorrectionSuccess, setATraiterSearch,
   updateCorrection,
   updateCorrectionFail,
-  updateCorrectionSuccess
+  loadAllUsers,
+  updateCorrectionSuccess, loadAllUsersSuccess, loadAllUsersFail
 } from './correction.actions';
 
 export const createCorrectionReducer = createReducer(
@@ -26,6 +27,17 @@ export const createCorrectionReducer = createReducer(
   on(setATraiterSearch, (state, {searchParams}) => ({...state, search: searchParams})),
 );
 
+export const createAllUsersReducer = createReducer(
+  allUsersInitialState,
+  on(loadAllUsers, state => state),
+  on(loadAllUsersSuccess, (state, {users}) => ({...state, users})),
+  on(loadAllUsersFail, state => state),
+);
+
 export function correctionReducer(state: CorrectionState | undefined, action: Action) {
   return createCorrectionReducer(state, action);
+}
+
+export function allUsersReducer(state: AllUsersState | undefined, action: Action) {
+  return createAllUsersReducer(state, action);
 }

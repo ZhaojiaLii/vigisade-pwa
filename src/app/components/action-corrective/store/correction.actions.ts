@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
+import {User} from '../../profile/interfaces/user';
 import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
 
 export const loadCorrection = createAction(
@@ -48,6 +49,19 @@ export const updateCorrectionFail = createAction(
   props<{ error: any }>(),
 );
 
+export const loadAllUsers = createAction(
+  '[All Users] Load All Users',
+);
+
+export const loadAllUsersSuccess = createAction(
+  '[All Users] Load All Users success',
+  props<{ users: User[] }>(),
+);
+
+export const loadAllUsersFail = createAction(
+  '[All Users] Load All Users fail',
+  props<{ error: any }>(),
+);
 export const setATraiterSearch = createAction(
   '[Survey] Set A traiter search',
   props<{searchParams: ATraiterSearch}>(),

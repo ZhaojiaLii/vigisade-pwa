@@ -15,3 +15,10 @@ export const getToken = createSelector(
     return state.token;
   },
 );
+
+export const getSpinnerEnable = createSelector(
+  getLoginState,
+  (state: LoginState) => {
+    return state.spinnerEnable;
+  },
+);

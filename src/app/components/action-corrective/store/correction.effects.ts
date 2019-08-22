@@ -4,6 +4,7 @@ import {
   createCorrection,
   createCorrectionFail,
   createCorrectionSuccess,
+  loadAllUsers, loadAllUsersFail, loadAllUsersSuccess,
   loadCorrection,
   loadCorrectionFail,
   loadCorrectionSuccess,
@@ -30,6 +31,17 @@ export class CorrectionEffects {
       return this.correctionApi.loadCorrection().pipe(
         map(correctiveAction => loadCorrectionSuccess({correctiveAction})),
         catchError(error => of(loadCorrectionFail({error: error.message}))),
+      );
+    })
+  ));
+
+  @Effect()
+  loadUsers$ = createEffect(() => this.actions$.pipe(
+    ofType(loadAllUsers),
+    switchMap(() => {
+      return this.correctionApi.loadAllUsers().pipe(
+        map( users => loadAllUsersSuccess({users})),
+        catchError(error => of(loadAllUsersFail({error: error.message}))),
       );
     })
   ));

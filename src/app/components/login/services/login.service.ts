@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { getToken } from '../store/login.selectors';
+import {getSpinnerEnable, getToken} from '../store/login.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +20,15 @@ export class LoginService {
   }
 
   setToken(token: string): void {
-    this.store.dispatch(setToken({token}));
+    this.store.dispatch(setToken({token: token, spinnerEnable: false}));
   }
 
   getToken(): Observable<string> {
     return this.store.pipe(select(getToken));
+  }
+
+  getSpinnerEnable(): Observable<boolean> {
+    return this.store.pipe(select(getSpinnerEnable));
   }
 
   isLogged(): Observable<boolean> {

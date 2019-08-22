@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
 import { filter, take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {TranslateService} from '@ngx-translate/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,23 +17,33 @@ export class LoginComponent implements OnInit {
   //   - check if the token is available and OK
   //   - redirect if necessary,
 
-  spinnerEnable = false;
+  spinnerEnable$: Observable<boolean> = this.loginService.getSpinnerEnable();
+
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  });
 
   constructor(
     private loginService: LoginService,
     private router: Router,
+    private toastrService: ToastrService,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
-      tap(() => this.spinnerEnable = false),
+      tap(() => {}),
     ).subscribe(() => this.router.navigate(['home']));
   }
 
   login(username: string, password: string): void {
-    this.loginService.login(username, password);
-    this.spinnerEnable = true;
+    if(username && password){
+      this.loginService.login(username, password);
+    }else{
+      this.toastrService.error('Formulaire incomplet')
+    }
   }
 }

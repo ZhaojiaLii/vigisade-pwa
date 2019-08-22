@@ -8,15 +8,20 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Login] Login Success',
-  props<{ token: string }>(),
+  props<{ token: string, spinnerEnable: boolean }>(),
 );
 
 export const loginFail = createAction(
   '[Login] Login fail',
-  props<{ error: any }>(),
+  props<{ error: any, spinnerEnable: boolean}>(),
 );
 
 export const setToken = createAction(
   '[Login] Set Token',
-  props<{ token: string}>(),
+  props<{ token: string, spinnerEnable: boolean}>(),
+);
+
+export const setSpinnerEnable = createAction(
+  '[SpinnerEnable] Set SpinnerEnable',
+  props<{ spinnerEnable: boolean }>(),
 );

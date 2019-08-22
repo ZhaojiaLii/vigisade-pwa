@@ -2,6 +2,7 @@
   "Login.Login": "Login",
   "Login.Mot de passe": "Password",
   "Login.Connexion": "Login",
+  "Login.Error": "login fail",
 
   "SituationDangereuse.Signaler": "Report",
   "SituationDangereuse.Type": "Type",
@@ -40,6 +41,8 @@
   "Profil.Entité": "Entity",
   "Profil.Succès Votre profil a été mis à jour avec une nouvelle langue":"Your language has been update successfully",
   "Profil.Succès Votre profil a été mis à jour": "Your profil has been updated succesfully",
+  "Profil.User_id": "Responsable de l'action",
+  "Profil.Status": "Statut",
 
   "Anglais": "English",
   "Français": "French",
@@ -102,6 +105,8 @@
   "ConsultationVisite.Suivant": "Next",
   "ConsultationVisite.Bonne pratique":"Good practice",
 
+  "Action corrective mise à jour": "Remedial measure updated",
+
   "Atraiter.Filtres de recherche": "Search filter",
   "Atraiter.Date début": "Start date",
   "Atraiter.Date fin": "End date",
@@ -119,5 +124,9 @@
 
   "Tous les champs sont obligatoires.": "All fields are mandatory.",
 
-  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "Avez-vous identifié une pratique remarquable au cours de cette visite ?"
+  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "Avez-vous identifié une pratique remarquable au cours de cette visite ?",
+
+  "A traiter":"A traiter",
+  "A valider":"A valider",
+  "Validé":"Validé"
 }

@@ -2,6 +2,7 @@ import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrectio
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
+import {User} from '../../profile/interfaces/user';
 
 /**
  * get correction state
@@ -19,3 +20,12 @@ export const correctionInitialState = {
   updateCorrection: null,
   search: null,
 };
+
+export interface AllUsersState {
+  users: User[] | null;
+}
+
+export const allUsersInitialState = {
+  users: null
+};
+

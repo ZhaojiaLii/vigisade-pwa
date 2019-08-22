@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
-import { createCorrection, loadCorrection, setATraiterSearch, updateCorrection } from '../store/correction.actions';
+import {createCorrection, loadAllUsers, loadCorrection, setATraiterSearch, updateCorrection} from '../store/correction.actions';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Observable } from 'rxjs';
 import {
+  getAllUsers,
   getCorrection,
   getCorrectionCategory,
   getCorrectionQuestion,
@@ -18,6 +19,7 @@ import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
 import { Result } from '../../survey/interfaces/results/result.interface';
+import {User} from '../../profile/interfaces/user';
 import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
 
 @Injectable({
@@ -29,6 +31,14 @@ export class ActionCorrectiveService {
 
   loadCorrection(): void {
     this.store.dispatch(loadCorrection());
+  }
+
+  loadAllUsers(): void {
+    this.store.dispatch(loadAllUsers());
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.store.pipe(select(getAllUsers))
   }
 
   getCorrection(): Observable<Correction[]> {

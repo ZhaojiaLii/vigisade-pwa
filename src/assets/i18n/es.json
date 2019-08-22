@@ -2,6 +2,7 @@
   "Login.Login": "Iniciar sesión",
   "Login.Mot de passe": "Contraseña",
   "Login.Connexion": "Conexión",
+  "Login.Error": "Conexión fail",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",
@@ -40,6 +41,8 @@
   "Profil.Entité": "Entidad",
   "Profil.Succès Votre profil a été mis à jour avec une nouvelle langue":"Su idioma a sido actualizado de manera exitosa",
   "Profil.Succès Votre profil a été mis à jour": "Su perfil a sido actualizado de manera exitosa",
+  "Profil.User_id": "Responsable de l'action",
+  "Profil.Status": "Statut",
 
   "Anglais": "Ingles",
   "Français": "Frances",
@@ -102,6 +105,8 @@
   "ConsultationVisite.Suivant": "Siguiente",
   "ConsultationVisite.Bonne pratique":"Buena practica/Astucia",
 
+  "Action corrective mise à jour": "Medida correctiva mise à jour",
+
   "Atraiter.Filtres de recherche": "Filtro de busqueda",
   "Atraiter.Date début": "Fecha inicio",
   "Atraiter.Date fin": "Fecha final",
@@ -119,5 +124,9 @@
 
   "Tous les champs sont obligatoires.": "Todos los campos son obligatorios.",
 
-  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "¿Identificó una práctica notable durante esta visita?"
+  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "¿Identificó una práctica notable durante esta visita?",
+
+  "A traiter":"A traiter",
+  "A valider":"A valider",
+  "Validé":"Validé"
 }
