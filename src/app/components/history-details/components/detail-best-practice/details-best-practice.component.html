@@ -70,10 +70,9 @@
           <div *ngIf="result.resultBestPracticeComment" class="form-row">
             <div class="form-group col-12">
               <label for="commentaire"></label>
-              <textarea appHighlight class="form-control" id="commentaire" rows="2" [attr.disabled]="false" style="resize: none">
+              <p appHighlight class="form-control mx-3" id="commentaire" [attr.disabled]="false">
                 {{result.resultBestPracticeComment}}
-              </textarea>
-              <div class="line"></div>
+              </p>
             </div>
           </div>
           <div *ngIf="result.resultBestPracticePhoto" class="mx-30 mb-25">
