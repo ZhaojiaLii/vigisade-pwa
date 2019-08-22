@@ -1,16 +1,14 @@
 <div class="container">
   <div class="row mb-50">
     <div class="card card-full-width">
-      <div class="card-body">
-        <p class="card-text font-14">
-          {{(header$|async)?.news}}
-        </p>
+      <div class="card-body font-14" [innerHTML]="(header$|async)?.news">
+        <p class="card-text"></p>
       </div>
     </div>
   </div>
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
-    <div class="card-body text-center text-info"> 
+    <div class="card-body text-center text-info">
       <a class="nav-link-homepage d-flex align-items-center" routerLink="/atraiter" style="justify-content: center !important;">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
