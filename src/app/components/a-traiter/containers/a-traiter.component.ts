@@ -49,13 +49,13 @@ export class ATraiterComponent implements OnInit {
       return selectedArea ? selectedArea.entity : [];
     }),
   );
-  creators$: Observable<{id: number}[]> = this.correctionService.getCorrection().pipe(
+  creators$: Observable<{id: number, name: string}[]> = this.correctionService.getCorrection().pipe(
     map((corrections: Correction[]) => {
       const uniqueCorrectionId = [];
       if (corrections) {
         return corrections.map(correction => ({
           id: correction.user_id,
-          // name: correction.userfirstName + ' ' + correction.userlastName,
+          name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
         })).filter(creator => {
           if (uniqueCorrectionId.includes(creator.id)) {
             return false;
