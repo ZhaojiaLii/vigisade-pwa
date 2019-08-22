@@ -3,13 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
-import { Observable, combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { ProfileService } from '../../profile/services/profile.service';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { Category } from '../interfaces/getSurveys/category.interface';
 import { GOOD_PRACTICE_CATEGORY_ID } from '../interfaces/getResultInterface/bestPractice.interface';
-import { filter, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { Question, TYPE_GENERAL, TYPE_TEAM } from '../interfaces/getSurveys/question.interface';
 import { buildQuestionForm, buildTeamMemberForm } from '../data/form.helpers';
 import { ResultDraft } from '../interfaces/results/result-draft.interface';
@@ -27,7 +27,6 @@ export class SurveyComponent implements OnInit {
 
   isCollapsed = false;
   updateResultPayload: UpdateResult;
-
   /** Forms */
   mainForm = new FormGroup({
     entity: new FormControl('', [Validators.required]),
@@ -51,6 +50,20 @@ export class SurveyComponent implements OnInit {
   survey$: Observable<Survey> = this.surveyService.getSurveyOfUser();
   surveyArea$: Observable<Area> = this.surveyService.getSurveyArea();
   userEntities$: Observable<Entity[]> = this.profileService.getUserEntities();
+  userEntity$: Observable<Entity> = combineLatest([this.user$, this.userEntities$]).pipe(
+    map(([user, userEntities]: [User, Entity[]]) => {
+      if (!user || !userEntities) {
+        return null;
+      }
+      const userEntity: Entity = userEntities.find(entity => entity.id === user.entityId);
+      if (userEntity) {
+        return userEntity;
+      } else {
+        return null;
+      }
+    }),
+  );
+  userEntity: Entity;
 
   teamMode = TEAM_MODE;
   surveyTeamMode = this.teamMode.no;
@@ -95,6 +108,13 @@ export class SurveyComponent implements OnInit {
 
       this.surveyTeamMode = survey.surveyTeam;
     });
+    this.userEntity$.subscribe(val => { this.userEntity = val; });
+    const defaultValue = {entity: this.userEntity.id, place: '', client: '', date: ''};
+    this.setDefaultValue(defaultValue);
+  }
+
+  private setDefaultValue(defaultValue): void {
+    this.mainForm.patchValue(defaultValue);
   }
 
   addTeamMember(): void {
