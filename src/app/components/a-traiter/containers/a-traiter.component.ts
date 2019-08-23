@@ -86,9 +86,6 @@ export class ATraiterComponent implements OnInit {
       this.correction$ = this.correctionService.getMobileCorrection();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
-    this.countCorrection$.subscribe(val => {
-      console.log(val);
-    });
   }
 
   search(): void {
