@@ -71,43 +71,33 @@
     </div>
   </form>
   <div *ngIf="(correction$|async)?.length >= 0" class="row">
-    <div *ngIf="status">
-      <div *ngIf="status === 'A traiter'">
-        <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
-          <ng-template ngPluralCase="=0">{{'Atraiter.AucuneactionTraiter'|translate}}</ng-template>
-          <ng-template ngPluralCase="=1">1 {{('Atraiter.ActionsATraiter'|translate:{value:''}).toLowerCase() }}</ng-template>
-          <ng-template ngPluralCase="other">
-            <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsATraiter'|translate:{value:'s'}).toLowerCase() }}
-          </ng-template>
-        </div>
-      </div>
-      <div *ngIf="status === 'A valider'">
-        <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
-          <ng-template ngPluralCase="=0">{{'Atraiter.AucuneactionTraiter'|translate}}</ng-template>
-          <ng-template ngPluralCase="=1">1 {{('Atraiter.ActionsAValider'|translate:{value:''}).toLowerCase() }}</ng-template>
-          <ng-template ngPluralCase="other">
-            <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsAValider'|translate:{value:'s'}).toLowerCase() }}
-          </ng-template>
-        </div>
-      </div>
-      <div *ngIf="status === 'Validé'">
-        <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
-          <ng-template ngPluralCase="=0">{{'Atraiter.AucuneactionTraiter'|translate}}</ng-template>
-          <ng-template ngPluralCase="=1">1 {{('Atraiter.ActionsValidées'|translate:{value:''}).toLowerCase() }}</ng-template>
-          <ng-template ngPluralCase="other">
-            <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsValidées'|translate:{value:'s'}).toLowerCase() }}
-          </ng-template>
-        </div>
-      </div>
+    <div *ngIf="(status === 'A traiter')" [ngPlural]="countCorrection$|async" class="total">
+      <ng-template ngPluralCase="=0"><strong>{{'Atraiter.AucuneactionTraiter'|translate}}</strong></ng-template>
+      <ng-template ngPluralCase="=1"><strong>1 </strong>{{('Atraiter.ActionsATraiter'|translate:{value:''}).toLowerCase() }}</ng-template>
+      <ng-template ngPluralCase="other">
+        <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsATraiter'|translate:{value:'s'}).toLowerCase() }}
+      </ng-template>
     </div>
-    <div *ngIf="!status">
-      <div *ngIf="countCorrection$|async" [ngPlural]="countCorrection$|async" class="total">
-        <ng-template ngPluralCase="=0">{{'Atraiter.AucuneactionTraiter'|translate}}</ng-template>
-        <ng-template ngPluralCase="=1">1 {{('Atraiter.Actions'|translate:{value:''}).toLowerCase() }}</ng-template>
-        <ng-template ngPluralCase="other">
-          <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.Actions'|translate:{value:'s'}).toLowerCase() }}
-        </ng-template>
-      </div>
+    <div *ngIf="(status === 'A valider')" [ngPlural]="countCorrection$|async" class="total">
+      <ng-template ngPluralCase="=0"><strong>{{'Atraiter.AucuneactionTraiter'|translate}}</strong></ng-template>
+      <ng-template ngPluralCase="=1"><strong>1 </strong>{{('Atraiter.ActionsAValider'|translate:{value:''}).toLowerCase() }}</ng-template>
+      <ng-template ngPluralCase="other">
+        <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsAValider'|translate:{value:'s'}).toLowerCase() }}
+      </ng-template>
+    </div>
+    <div *ngIf="(status === 'Validé')" [ngPlural]="countCorrection$|async" class="total">
+      <ng-template ngPluralCase="=0"><strong>{{'Atraiter.AucuneactionTraiter'|translate}}</strong></ng-template>
+      <ng-template ngPluralCase="=1"><strong>1 </strong>{{('Atraiter.ActionsValidées'|translate:{value:''}).toLowerCase() }}</ng-template>
+      <ng-template ngPluralCase="other">
+        <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.ActionsValidées'|translate:{value:'s'}).toLowerCase() }}
+      </ng-template>
+    </div>
+    <div *ngIf="!status" [ngPlural]="countCorrection$|async" class="total">
+      <ng-template ngPluralCase="=0">{{'Atraiter.AucuneactionTraiter'|translate}}</ng-template>
+      <ng-template ngPluralCase="=1">1 {{('Atraiter.Actions'|translate:{value:''}).toLowerCase() }}</ng-template>
+      <ng-template ngPluralCase="other">
+        <strong>{{ countCorrection$|async }}</strong> {{('Atraiter.Actions'|translate:{value:'s'}).toLowerCase() }}
+      </ng-template>
     </div>
     <app-a-traiter-element
         *ngFor="let correction of (correction$|async)"
