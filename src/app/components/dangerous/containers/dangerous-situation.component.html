@@ -15,6 +15,7 @@
       <form [formGroup]="dangerousSituationGroup">
         <div class="form-row">
           <div class="form-group col-12">
+            <label for="typeSelect">{{'SituationDangereuse.Type'|translate}}</label>
             <select class="form-control" appHighlight id="typeSelect" formControlName="type">
               <option
                   *ngFor="let type of (types$|async)"
@@ -23,7 +24,6 @@
                 {{type.typeDangerousSituationTranslation?.typeDangerousSituationTranslationType}}
               </option>
             </select>
-            <label for="typeSelect">{{'SituationDangereuse.Type'|translate}}</label>
             <div class="line"></div>
           </div>
           <div class="form-group col-12">
