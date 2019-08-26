@@ -75,6 +75,7 @@
         <app-history-item
             *ngFor="let result of (history$|async)"
             [result]="result"
+            [isDesktop]="isDesktop"
             [routerLink]="['/history', result.resultId]"
             style="display: block; width: 100%;"
         ></app-history-item>

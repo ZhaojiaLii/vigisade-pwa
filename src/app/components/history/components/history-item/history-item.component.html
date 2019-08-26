@@ -1,21 +1,24 @@
 <div class="card card-full-width mb-10 shadow-none">
-    <div class="card-body px-30">
-        <div class="row align-items-center light-grey mb-20">
-            <div class="col-6 font-demiBold">{{result?.resultClient}}</div>
-            <div class="col-6 text-right font-12">{{result?.resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD-MM-YYYY'}}</div>
-        </div>
-        <div class="row align-items-end mb-2">
-            <div class="col-6 font-demiBold font-14">
-                {{result?.resultPlace}}
-            </div>
-            <div
-                *ngIf="result"
-                class="col-6 text-right font-weight-bold font-14"
-                [style.color]="result.resultValidated ? '#20a15f' : '#d94545'"
-            >
-                {{result.resultValidated ? ('HistoriqueVisites.Validé'|translate) : ('HistoriqueVisites.En cours'|translate) }}
-            </div>
-        </div>
+  <div class="card-body px-30">
+    <div class="row align-items-center light-grey mb-20">
+      <div class="col-6 font-demiBold">{{result?.resultClient}}</div>
+      <div class="col-6 text-right font-12">{{result?.resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD-MM-YYYY'}}</div>
     </div>
+    <div *ngIf="isDesktop" class="row light-grey font-14">
+      <div class="col-6 font-demiBold">{{result?.resultUserfirstName + ' ' + result?.resultUserlastName}}</div>
+    </div>
+    <div class="row align-items-end mb-2">
+      <div class="col-6 font-demiBold font-14">
+          {{result?.resultPlace}}
+      </div>
+      <div
+          *ngIf="result"
+          class="col-6 text-right font-weight-bold font-14"
+          [style.color]="result.resultValidated ? '#20a15f' : '#d94545'"
+      >
+          {{result.resultValidated ? ('HistoriqueVisites.Validé'|translate) : ('HistoriqueVisites.En cours'|translate) }}
+      </div>
+    </div>
+  </div>
 </div>
 

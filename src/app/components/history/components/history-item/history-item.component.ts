@@ -7,4 +7,5 @@ import { HistoryResult } from '../../../survey/interfaces/getResultInterface/his
 })
 export class HistoryItemComponent {
   @Input() result: HistoryResult;
+  @Input() isDesktop: boolean;
 }
