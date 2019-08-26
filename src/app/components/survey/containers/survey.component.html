@@ -89,6 +89,11 @@
         </div>
     </div>
 </div>
+<div class="container mb-50" *ngIf="categoryNavigation">
+  <div class="mx-30">
+    <button class="btn btn-info d-block w-100" (click)="nextCategory()">{{'Visite.Suivant'|translate}}</button>
+  </div>
+</div>
 <div *ngIf="(survey$|async) && (loading$|async) === false" class="container mb-90">
     <app-survey-submit
         [isFormValid]="countTotal() === countValidTotal()"

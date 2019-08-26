@@ -68,6 +68,10 @@ export class SurveyComponent implements OnInit {
   teamMode = TEAM_MODE;
   surveyTeamMode = this.teamMode.no;
 
+  surveyCategoryIds = [];
+  categorySelected: number;
+  categoryNavigation = false;
+
   selectedCategory$: Observable<Category> = this.surveyService.getSurveySelectedCategory();
   isBestPracticeSelected$: Observable<boolean> = this.surveyService.isBestPracticedSelected();
 
@@ -83,6 +87,7 @@ export class SurveyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.categoryNavigation = true;
     // Initialize questions forms.
     combineLatest([
       this.profileService.getUser(),
@@ -95,6 +100,7 @@ export class SurveyComponent implements OnInit {
 
       // Merge questions in a single array to make initialization easier.
       survey.surveyCategories.forEach((category: Category) => {
+        this.surveyCategoryIds.push(category.surveyCategoryId);
         category.surveyQuestion.forEach((question: Question) => {
           this.questions.push(question);
         });
@@ -167,7 +173,24 @@ export class SurveyComponent implements OnInit {
   selectSurveyCategory(id: number): void {
     this.isCollapsed = false;
     this.surveyService.selectSurveyCategory(id);
+    this.categorySelected = id;
+    if (id !== -1) { this.categoryNavigation = true; }
     window.scrollTo(0, 0);
+  }
+
+  nextCategory() {
+    const indexCategory = this.surveyCategoryIds.findIndex(categoryId => categoryId === this.categorySelected);
+    const nextCategory = this.surveyCategoryIds[indexCategory + 1];
+    this.categorySelected = nextCategory;
+    if (indexCategory + 1 < this.surveyCategoryIds.length) {
+      this.surveyService.selectSurveyCategory(nextCategory);
+      window.scrollTo(0, 0);
+      this.categoryNavigation = true;
+    } else {
+      this.surveyService.selectSurveyCategory(this.bestPracticeId);
+      window.scrollTo(0, 0);
+      this.categoryNavigation = false;
+    }
   }
 
   countSurveyFields(): number {

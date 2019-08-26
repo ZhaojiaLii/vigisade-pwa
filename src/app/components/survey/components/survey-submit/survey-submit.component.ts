@@ -26,12 +26,10 @@ export class SurveySubmitComponent {
 
   @Input() user: User;
   @Input() surveyId: number;
-
   @Input() mainForm: FormGroup;
   @Input() teamMembersForms: FormGroup[];
   @Input() questionsForms: {group: FormGroup, question: Question}[];
   @Input() bestPracticeForm: FormGroup;
-
   constructor(
     private draftService: DraftService,
     private surveyService: SurveyService,
