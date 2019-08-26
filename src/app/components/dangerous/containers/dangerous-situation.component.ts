@@ -18,6 +18,7 @@ export class DangerousSituationComponent {
     comment: new FormControl('', [Validators.required, Validators.minLength(1)]),
     photo: new FormControl(''),
   });
+  loading = false;
 
   constructor(
     private dataService: DataService,
@@ -30,6 +31,7 @@ export class DangerousSituationComponent {
         this.dangerousSituationGroup.patchValue({photo: dataUrl});
       });
     }
+    this.loading = true;
   }
 
   createDangerous() {
@@ -38,5 +40,13 @@ export class DangerousSituationComponent {
       dangerousSituationComment: this.dangerousSituationGroup.value.comment,
       dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
     });
+  }
+
+  loadingImage() {
+    this.loading = false;
+  }
+
+  error() {
+    this.loading = false;
   }
 }

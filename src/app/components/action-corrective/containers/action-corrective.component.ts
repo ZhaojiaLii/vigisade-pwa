@@ -11,13 +11,13 @@ import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import 'rxjs-compat/add/operator/filter';
-import {IMAGE_PATH} from '../../../data/image.helpers';
+import { compress, IMAGE_PATH } from '../../../data/image.helpers';
 import { Result } from '../../survey/interfaces/results/result.interface';
 import { TranslateService } from '@ngx-translate/core';
 import {ROLES} from '../../../data/user.helpers';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {STATUS} from "../../../data/status.const";
-import {Correction} from "../interfaces/getCorrection/correction.interface";
+import {STATUS} from '../../../data/status.const';
+import {Correction} from '../interfaces/getCorrection/correction.interface';
 
 @Component({
   selector: 'app-action-corrective',
@@ -30,7 +30,7 @@ export class ActionCorrectiveComponent implements OnInit {
     user_id: new FormControl(''),
     status: new FormControl(''),
   });
-  isAdminOrManager:boolean = false;
+  isAdminOrManager = false;
   thisCorrection: Correction;
   resultId: number;
   questionId: number;
@@ -40,6 +40,7 @@ export class ActionCorrectiveComponent implements OnInit {
   resultQuestion: any;
   userId: number;
   result: any;
+  actionStatus: string;
   correctionID: number;
   history$: Observable<GetResult> = this.historyService.getHistory();
   correction$: Observable<any> = this.correctionService.getCorrection();
@@ -52,11 +53,11 @@ export class ActionCorrectiveComponent implements OnInit {
   imagePath = IMAGE_PATH.result;
   imagePathAC = IMAGE_PATH.action_corrective;
 
-  isDesktop : boolean = false;
+  isDesktop = false;
 
   public status = {};
 
-  loading = true;
+  loading = false;
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -98,11 +99,12 @@ export class ActionCorrectiveComponent implements OnInit {
             this.categoryId = correction.category_id;
             this.historyService.selectResult(this.resultId);
             this.historyService.loadResult(this.resultId);
-
+            this.actionStatus = correction.status;
             this.correction.patchValue({status: this.thisCorrection.status});
             this.correction.patchValue({user_id: this.thisCorrection.user_id});
           }
         }
+        console.log(this.actionStatus);
       }
     );
     this.historyService.getSelectedResult();
@@ -135,7 +137,8 @@ export class ActionCorrectiveComponent implements OnInit {
     this.user$.subscribe(user => {
       this.userId = user.id;
       // this.correction.patchValue({user_id: this.userId});
-      this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager)
+      this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
+      console.log('is admin ' + this.isAdminOrManager);
     });
 
 
@@ -143,14 +146,12 @@ export class ActionCorrectiveComponent implements OnInit {
   }
   encode(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (Event: any) => {
-        this.correction.patchValue({photo: Event.target.result});
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
+        this.correction.patchValue({photo: dataUrl});
+      });
     }
+    this.loading = true;
   }
-
   validForm() {
 
     if (this.correction.value.comment === '' || this.correction.value.photo === '') {
@@ -163,11 +164,10 @@ export class ActionCorrectiveComponent implements OnInit {
         category_id: this.thisCorrection.category_id,
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
-        status: this.correction.value.status,//'Validé',
+        status: this.correction.value.status,
         comment_question: this.correction.value.comment,
         image: this.correction.value.photo,
       };
-      // console.log(correctionPayload);
       this.correctionService.updateCorrection(correctionPayload);
       this.toastrService.success(this.translateService.instant('Action corrective mise à jour'));
       this.router.navigate(['/atraiter']);
