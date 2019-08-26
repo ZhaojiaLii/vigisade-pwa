@@ -101,6 +101,7 @@
     </div>
     <app-a-traiter-element
         *ngFor="let correction of (correction$|async)"
+        [isDesktop]="isDesktop"
         [resultId]="correction.result_id"
         [correctionId]="correction.id"
         [routerLink]="['/atraiter',correction.id]"

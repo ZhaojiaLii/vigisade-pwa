@@ -107,7 +107,7 @@ export class SurveySubmitComponent {
         resultUserId: user.id,
         resultDirectionId: user.directionId,
         resultAreaId: user.areaId,
-        resultEntityId: user.entityId,
+        resultEntityId: this.mainForm.get('entity').value,
         resultDate: this.mainForm.get('date').value,
         resultPlace: this.mainForm.get('place').value,
         resultClient: this.mainForm.get('client').value,
@@ -119,7 +119,6 @@ export class SurveySubmitComponent {
         resultBestPracticeComment: this.bestPracticeForm.value.comment,
         resultBestPracticePhoto: this.bestPracticeForm.value.photo,
       };
-
       this.surveyService.setLoadingState(true);
       this.surveyService.createResult(result);
       this.surveyService.loadSurveys();

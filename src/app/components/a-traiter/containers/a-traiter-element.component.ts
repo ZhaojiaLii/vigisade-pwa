@@ -13,6 +13,7 @@ import { ActionCorrectiveService } from '../../action-corrective/services/action
 export class ATraiterElementComponent implements OnInit {
   @Input() resultId;
   @Input() correctionId;
+  @Input() isDesktop: boolean;
   result: any;
   categoryId: number;
   categoryTitle: string;
