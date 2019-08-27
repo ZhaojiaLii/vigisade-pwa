@@ -87,32 +87,61 @@ export const getFilteredUserAtraiter = createSelector(
       return corrections;
     }
     return corrections.filter(correction => {
-      return (
-          !searchParams.startDate
-          || history.result.find(result => result.resultId === correction.result_id).resultDate
-          >= moment(searchParams.startDate).format('YYYY-MM-DD')
-        )
-        && (
-          !searchParams.endDate
-          || history.result.find(result => result.resultId === correction.result_id).resultDate
-          <= moment(searchParams.startDate).format('YYYY-MM-DD')
-        )
-        && (
-          !searchParams.status
-          || correction.status === searchParams.status
-        )
-        && (
-          !searchParams.areaId
-          || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
-        )
-        && (
-          !searchParams.entityId
-          || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
-        )
-        && (
-          !searchParams.responsible
-          || correction.user_id === Number(searchParams.responsible)
-        );
+      if (searchParams.status && (searchParams.status === 'Validé')) {
+        return (
+            !searchParams.startDate
+            || history.result.find(result => result.resultId === correction.result_id).resultDate
+            >= moment(searchParams.startDate).format('YYYY-MM-DD')
+          )
+          && (
+            !searchParams.endDate
+            || history.result.find(result => result.resultId === correction.result_id).resultDate
+            <= moment(searchParams.endDate).format('YYYY-MM-DD')
+          )
+          && (
+            !searchParams.status
+            || correction.status === searchParams.status || correction.status === 'Corrigé'
+          )
+          && (
+            !searchParams.areaId
+            || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+          )
+          && (
+            !searchParams.entityId
+            || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+          )
+          && (
+            !searchParams.responsible
+            || correction.user_id === Number(searchParams.responsible)
+          );
+      } else {
+        return (
+            !searchParams.startDate
+            || history.result.find(result => result.resultId === correction.result_id).resultDate
+            >= moment(searchParams.startDate).format('YYYY-MM-DD')
+          )
+          && (
+            !searchParams.endDate
+            || history.result.find(result => result.resultId === correction.result_id).resultDate
+            <= moment(searchParams.endDate).format('YYYY-MM-DD')
+          )
+          && (
+            !searchParams.status
+            || correction.status === searchParams.status
+          )
+          && (
+            !searchParams.areaId
+            || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+          )
+          && (
+            !searchParams.entityId
+            || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+          )
+          && (
+            !searchParams.responsible
+            || correction.user_id === Number(searchParams.responsible)
+          );
+      }
     });
   }
 );
