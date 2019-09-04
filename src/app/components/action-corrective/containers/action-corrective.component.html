@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="card card-full-width shadow-none" *ngIf="thisCorrection.status === 'A traiter' && (isAdminOrManager && isDesktop)">
+    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
       <div class="card-body">
         <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
@@ -126,7 +126,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-30 my-45" *ngIf="thisCorrection.status === 'A traiter' && (isAdminOrManager && isDesktop)">
+  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
     <button class="btn btn-info d-block w-100" (click)="validForm()">{{'SituationDangereuse.Valider'|translate}}</button>
   </div>
 </div>
