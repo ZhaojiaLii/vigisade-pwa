@@ -38,7 +38,7 @@
               <input
                   type="radio" name="radioGood" value="good"
                   [attr.disabled]="true"
-                  [attr.checked]="result.resultBestPracticeDone ? true : null"
+                  [attr.checked]="(result.resultBestPracticeDone === '1') ? true : null"
               >
               <div class="radiobtn svg-green circle-white-icon shadow-01">
                 <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="11 9 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +50,7 @@
               <input
                   type="radio" name="radioBad" value="bad"
                   [attr.disabled]="true"
-                  [attr.checked]="result.resultBestPracticeDone ? null : true"
+                  [attr.checked]="(result.resultBestPracticeDone === '2') ? null : true"
               >
               <div class="radiobtn svg-danger circle-white-icon shadow-01">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="11 9 40 40">
