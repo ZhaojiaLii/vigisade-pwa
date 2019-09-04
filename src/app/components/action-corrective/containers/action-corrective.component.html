@@ -9,7 +9,7 @@
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
             <div class="col-6 font-demiBold">{{categoryTitle}}</div>
-            <div class="col-6 text-right font-12">{{result?.resultDate}}</div>
+            <div class="col-6 text-right font-12">{{result?.resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD-MM-YYYY'}}</div>
         </div>
         <p class="font-demiBold mb-2">
           {{result?.resultPlace}}
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="card card-full-width shadow-none" *ngIf="thisCorrection.status === 'A traiter' && (isAdminOrManager && isDesktop)">
+    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
       <div class="card-body">
         <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
@@ -126,7 +126,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-30 my-45" *ngIf="thisCorrection.status === 'A traiter' && (isAdminOrManager && isDesktop)">
+  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
     <button class="btn btn-info d-block w-100" (click)="validForm()">{{'SituationDangereuse.Valider'|translate}}</button>
   </div>
 </div>
