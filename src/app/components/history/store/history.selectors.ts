@@ -41,6 +41,24 @@ export const getUserHistory = createSelector(
   }
 );
 
+export const getUserHistoryByDate = createSelector(
+  getUserHistory,
+  (results: HistoryResult[]) => {
+    results.sort((a, b) => {
+      const dateA = a.resultDate;
+      const dateB = b.resultDate;
+      if (dateA > dateB) {
+        return -1;
+      }
+      if (dateA < dateB) {
+        return 1;
+      }
+      return 0;
+    });
+    return results;
+  }
+);
+
 /**
  * Gets visible history according to the user role.
  */
@@ -94,6 +112,24 @@ export const getFilteredUserHistory = createSelector(
           || result.resultUserId === Number(searchParams.userId)
         );
     });
+  }
+);
+
+export const getDesktopHistoryByDate = createSelector(
+  getFilteredUserHistory,
+  (results: HistoryResult[]) => {
+    results.sort((a, b) => {
+      const dateA = a.resultDate;
+      const dateB = b.resultDate;
+      if (dateA > dateB) {
+        return -1;
+      }
+      if (dateA < dateB) {
+        return 1;
+      }
+      return 0;
+    });
+    return results;
   }
 );
 
