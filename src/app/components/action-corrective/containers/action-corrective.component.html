@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="card card-full-width shadow-none" *ngIf="thisCorrection.status === 'A traiter' && (isAdminOrManager && isDesktop)">
+    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
       <div class="card-body">
         <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
