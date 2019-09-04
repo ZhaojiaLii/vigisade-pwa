@@ -104,7 +104,6 @@ export class ActionCorrectiveComponent implements OnInit {
             this.correction.patchValue({user_id: this.thisCorrection.user_id});
           }
         }
-        console.log(this.actionStatus);
       }
     );
     this.historyService.getSelectedResult();
@@ -138,7 +137,6 @@ export class ActionCorrectiveComponent implements OnInit {
       this.userId = user.id;
       // this.correction.patchValue({user_id: this.userId});
       this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
-      console.log('is admin ' + this.isAdminOrManager);
     });
 
 

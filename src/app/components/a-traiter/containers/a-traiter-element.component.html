@@ -2,7 +2,7 @@
   <div class="card-body px-30">
     <div class="row align-items-center light-grey mb-20">
       <div class="col-6 font-demiBold">{{categoryTitle}}</div>
-      <div class="col-6 text-right font-12">{{result?.resultDate}}</div>
+      <div class="col-6 text-right font-12">{{result?.resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD-MM-YYYY'}}</div>
     </div>
     <div *ngIf="isDesktop" class="row light-grey font-14">
       <div class="col-6 font-demiBold">{{result?.resultUserfirstName + ' ' + result?.resultUserlastName}}</div>
