@@ -77,7 +77,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     // Refresh history when opening them.
     this.historyService.loadHistory();
-
+    this.historyService.getHistoryOrderedByDate().subscribe();
     this.isDesktop = this.deviceService.isDesktop();
 
     this.searchForm.valueChanges.pipe(
@@ -90,9 +90,9 @@ export class HistoryComponent implements OnInit {
     });
 
     if (this.deviceService.isDesktop()) {
-      this.history$ = this.historyService.getDesktopHistory();
+      this.history$ = this.historyService.getHistoryOrderedByDate();
     } else {
-      this.history$ = this.historyService.getMobileHistory();
+      this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
   }
 

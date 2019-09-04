@@ -3,8 +3,28 @@ import { select, Store } from '@ngrx/store';
 import { HistoryState } from '../store/history.state';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { goToNextCategory, loadHistory, loadResult, selectCategory, selectResult, setHistorySearch } from '../store/history.actions';
-import { getHistory, getResult, getSelectedResultCategory, getSelectedResult, getSelectedResultEntity, getSelectedResultQuestions, getSelectedResultArea, getSelectedResultBestPractice, getFilteredUserHistory, getUserHistory, getSelectedResultCategoryId } from '../store/history.selectors';
+import {
+  goToNextCategory,
+  loadHistory,
+  loadResult,
+  selectCategory,
+  selectResult,
+  setHistorySearch
+} from '../store/history.actions';
+import {
+  getDesktopHistoryByDate,
+  getFilteredUserHistory,
+  getHistory,
+  getResult,
+  getSelectedResult,
+  getSelectedResultArea,
+  getSelectedResultCategory,
+  getSelectedResultCategoryId,
+  getSelectedResultEntity,
+  getSelectedResultQuestions,
+  getUserHistory,
+  getUserHistoryByDate
+} from '../store/history.selectors';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { Category } from '../../survey/interfaces/getSurveys/category.interface';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
@@ -54,8 +74,16 @@ export class HistoryService {
     return this.store.pipe(select(getFilteredUserHistory));
   }
 
+  getHistoryOrderedByDate(): Observable<HistoryResult[]> {
+    return this.store.pipe(select(getDesktopHistoryByDate));
+  }
+
   getMobileHistory(): Observable<HistoryResult[]> {
     return this.store.pipe(select(getUserHistory));
+  }
+
+  getUserHistoryOrderedByDate(): Observable<HistoryResult[]> {
+    return this.store.pipe(select(getUserHistoryByDate));
   }
 
   getResult(): Observable<Result[]> {
