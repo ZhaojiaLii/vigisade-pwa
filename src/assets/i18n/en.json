@@ -12,7 +12,7 @@
   "SituationDangereuse.Ajouter une photo": "Add a photo",
   "SituationDangereuse.Valider": "Confirm",
   "SituationDangereuse.Situation dangereuse crée": "Dangerous situation created",
-  "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
+  "SituationDangereuse.Situation dangereuse synchronisee": "Impossible to contact to the server. The dangerous situation will be synchronized in background.",
 
   "Homepage.ActionsTraiter": "Non-compliance{{value}} to treat",
   "Homepage.AucuneactionTraiter": "No Non-compliance to treat",
@@ -24,7 +24,7 @@
   "Menu.Accueil": "Home",
   "Menu.Atraiter":"Non-compliance to treat",
   "Menu.Historique des visites": "Record inspections",
-  "Menu.Mon profil": "My profil",
+  "Menu.Mon profil": "My profile",
   "Menu.Tutoriel": "Tutorial",
   "Menu.Nouvelle visite": "New inspection",
   "Menu.Situation dangereuse": "Dangerous situation",
@@ -40,9 +40,9 @@
   "Profil.Zone": "Zone",
   "Profil.Entité": "Entity",
   "Profil.Succès Votre profil a été mis à jour avec une nouvelle langue":"Your language has been update successfully",
-  "Profil.Succès Votre profil a été mis à jour": "Your profil has been updated succesfully",
-  "Profil.User_id": "Responsable de l'action",
-  "Profil.Status": "Statut",
+  "Profil.Succès Votre profil a été mis à jour": "Your profile has been updated successfully",
+  "Profil.User_id": "Responsible de l'action",
+  "Profil.Status": "Status",
 
   "Anglais": "English",
   "Français": "French",
@@ -125,7 +125,7 @@
 
   "Tous les champs sont obligatoires.": "All fields are mandatory.",
 
-  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "Avez-vous identifié une pratique remarquable au cours de cette visite ?",
+  "Avez-vous identifié une pratique remarquable au cours de cette visite ?": "Have you identified a remarkable practice during this visit ?",
 
   "A traiter":"A traiter",
   "A valider":"A valider",
