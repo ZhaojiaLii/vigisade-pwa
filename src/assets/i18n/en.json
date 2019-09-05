@@ -28,6 +28,7 @@
   "Menu.Tutoriel": "Tutorial",
   "Menu.Nouvelle visite": "New inspection",
   "Menu.Situation dangereuse": "Dangerous situation",
+  "Menu.Action corrective": "Corrective action",
 
   "Tutoriel.Conforme":"Compliant",
   "Tutoriel.Sans objet / Non vu":"Non applicable/ Unseen",
@@ -111,7 +112,7 @@
   "Atraiter.Filtres de recherche": "Search filter",
   "Atraiter.Date début": "Start date",
   "Atraiter.Date fin": "End date",
-  "Atraiter.Statut": "Statut",
+  "Atraiter.Statut": "Status",
   "Atraiter.Zone": "Zone",
   "Atraiter.Entité": "Entity",
   "Atraiter.Responsable": "Responsible",

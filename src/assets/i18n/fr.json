@@ -28,6 +28,7 @@
   "Menu.Tutoriel": "Tutoriel",
   "Menu.Nouvelle visite": "Nouvelle visite",
   "Menu.Situation dangereuse": "Situation dangereuse",
+  "Menu.Action corrective": "Action corrective",
 
   "Tutoriel.Conforme":"Conforme",
   "Tutoriel.Sans objet / Non vu":"Sans objet / Non vu",
@@ -112,7 +113,7 @@
   "Atraiter.Filtres de recherche": "Filtres de recherche",
   "Atraiter.Date début": "Date début",
   "Atraiter.Date fin": "Date fin",
-  "Atraiter.Statut": "Status",
+  "Atraiter.Statut": "Statut",
   "Atraiter.Zone": "Zone",
   "Atraiter.Entité": "Entité",
   "Atraiter.Responsable": "Responsable",

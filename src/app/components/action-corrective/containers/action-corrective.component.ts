@@ -39,6 +39,7 @@ export class ActionCorrectiveComponent implements OnInit {
   question: any;
   resultQuestion: any;
   userId: number;
+  responsibleId: number;
   result: any;
   actionStatus: string;
   correctionID: number;
@@ -97,6 +98,7 @@ export class ActionCorrectiveComponent implements OnInit {
             this.resultId = correction.result_id;
             this.questionId = correction.question_id;
             this.categoryId = correction.category_id;
+            this.responsibleId = correction.user_id;
             this.historyService.selectResult(this.resultId);
             this.historyService.loadResult(this.resultId);
             this.actionStatus = correction.status;
@@ -152,26 +154,42 @@ export class ActionCorrectiveComponent implements OnInit {
     setTimeout(() => { this.loading = false; }, 5000);
   }
   validForm() {
-
-    if (this.correction.value.comment === '' || this.correction.value.photo === '') {
+    if (this.actionStatus !== this.correction.value.status) {
+      // tslint:disable-next-line:max-line-length
+      if ( (this.correction.value.comment === '') && (this.correction.value.photo === '')) {
+        this.toastrService.error(this.translateService.instant('Aucune autre modification des autres champs.'));
+      } else {
+        this.sendActionCorrective();
+      }
+    } else if (Number(this.correction.value.user_id) !== this.responsibleId) {
+      if (this.correction.value.comment !== '' || this.correction.value.photo !== '') {
+        this.toastrService.error(this.translateService.instant('Commentaire et photo doit être vide.'));
+      } else {
+        this.sendActionCorrective();
+      }
+    } else if (this.correction.value.comment === '' || this.correction.value.photo === '') {
       this.toastrService.error(this.translateService.instant('Tous les champs sont obligatoires.'));
     } else {
-      const correctionPayload: CreateCorrection = {
-        id: this.thisCorrection.id,
-        user_id: Number(this.correction.value.user_id),
-        survey_id: this.thisCorrection.survey_id,
-        category_id: this.thisCorrection.category_id,
-        question_id: this.thisCorrection.question_id,
-        result_id: this.thisCorrection.result_id,
-        status: this.correction.value.status,
-        comment_question: this.correction.value.comment,
-        image: this.correction.value.photo,
-      };
-      this.correctionService.updateCorrection(correctionPayload);
-      this.toastrService.success(this.translateService.instant('Action corrective mise à jour'));
-      this.router.navigate(['/atraiter']);
-      window.scroll(0, 0);
+      this.sendActionCorrective();
     }
+  }
+
+  sendActionCorrective() {
+    const correctionPayload: CreateCorrection = {
+      id: this.thisCorrection.id,
+      user_id: Number(this.correction.value.user_id),
+      survey_id: this.thisCorrection.survey_id,
+      category_id: this.thisCorrection.category_id,
+      question_id: this.thisCorrection.question_id,
+      result_id: this.thisCorrection.result_id,
+      status: this.correction.value.status,
+      comment_question: this.correction.value.comment,
+      image: this.correction.value.photo,
+    };
+    this.correctionService.updateCorrection(correctionPayload);
+    this.toastrService.success(this.translateService.instant('Action corrective mise à jour'));
+    this.router.navigate(['/atraiter']);
+    window.scroll(0, 0);
   }
 
   loadingImage() {

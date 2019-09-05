@@ -35,17 +35,13 @@
           <div *ngIf="resultQuestion.resultQuestionResultPhoto">
             <img [hidden]="loading" (load)="loadingImage()" (error)="error()" src="{{resultQuestion? (imagePath + resultQuestion.resultQuestionResultPhoto) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
           </div>
-<!--          <div class="col">-->
-<!--            <img [hidden]="loading" class="image-preview" (error)="error()" src="https://cc.tvbs.com.tw/img/_data/i/upload/2017/02/18/20170218141055-0c536626-me.jpg" alt="Illustration de la question" style="width: 100%;" (load)="loadingImage()"/>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
 
-    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
+    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && isAdminOrManager">
       <div class="card card-full-width mb-10 shadow-none lineH-24px"
-           *ngIf="((thisCorrection.status === 'A traiter') && (thisCorrection.comment_question !== null))
-           || ((thisCorrection.status === 'A valider') && (thisCorrection.comment_question !== null))"
+           *ngIf="( ( (thisCorrection.status === 'A traiter') || (thisCorrection.status === 'A valider') ) && (thisCorrection.comment_question !== null))"
       >
         <div class="card-body">
           <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
@@ -66,8 +62,8 @@
             />
           </div>
         </div>
+        <hr>
       </div>
-      <hr>
       <div class="card-body">
         <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
@@ -78,7 +74,7 @@
               <div class="line"></div>
             </div>
 
-            <div class="form-group col-md-6" *ngIf="isAdminOrManager && isDesktop">
+            <div class="form-group col-md-6" *ngIf="isAdminOrManager">
               <label for="user_id">{{'Profil.User_id'|translate}}</label>
               <select class="form-control has-value" appHighlight id="user_id" formControlName="user_id">
                 <option *ngFor="let user of allUsers$|async" value="{{user.id}}">
@@ -88,7 +84,7 @@
               <div class="line"></div>
             </div>
 
-            <div class="form-group col-md-6" *ngIf="isAdminOrManager && isDesktop">
+            <div class="form-group col-md-6" *ngIf="isAdminOrManager">
               <label for="status">{{'Profil.Status'|translate}}</label>
               <select class="form-control has-value" appHighlight id="status" formControlName="status">
                 <option *ngFor="let stat of status" value="{{stat}}">
@@ -151,7 +147,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
+  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && isAdminOrManager">
     <button class="btn btn-info d-block w-100" (click)="validForm()">{{'SituationDangereuse.Valider'|translate}}</button>
   </div>
 </div>

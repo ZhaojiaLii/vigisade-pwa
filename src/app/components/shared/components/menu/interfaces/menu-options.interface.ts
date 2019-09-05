@@ -16,5 +16,5 @@ export const MENU_SETUP: {[key: string]: MenuOptions} = {
   'history/:id': {...DEFAULT_MENU_OPTIONS, displayBackNav: true, routeLabel: 'Visite.Visite'},
   profile: {...DEFAULT_MENU_OPTIONS, displayBackNav: false, routeLabel: 'Menu.Mon profil'},
   atraiter: {...DEFAULT_MENU_OPTIONS, displayBackNav: false, routeLabel: 'Menu.Atraiter'},
-  'atraiter/:id': {...DEFAULT_MENU_OPTIONS, displayBackNav: true, routeLabel: 'Menu.Atraiter'},
+  'atraiter/:id': {...DEFAULT_MENU_OPTIONS, displayBackNav: true, routeLabel: 'Menu.Action corrective'},
 };

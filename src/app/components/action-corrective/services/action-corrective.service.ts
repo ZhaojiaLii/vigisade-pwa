@@ -38,7 +38,7 @@ export class ActionCorrectiveService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.store.pipe(select(getAllUsers))
+    return this.store.pipe(select(getAllUsers));
   }
 
   getCorrection(): Observable<Correction[]> {

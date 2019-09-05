@@ -98,5 +98,4 @@ export class ATraiterComponent implements OnInit {
     this.searchForm.reset();
     this.search();
   }
-
 }
