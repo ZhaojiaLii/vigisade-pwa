@@ -149,6 +149,7 @@ export class ActionCorrectiveComponent implements OnInit {
       });
     }
     this.loading = true;
+    setTimeout(() => { this.loading = false; }, 5000);
   }
   validForm() {
 

@@ -43,6 +43,31 @@
     </div>
 
     <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && (isAdminOrManager && isDesktop)">
+      <div class="card card-full-width mb-10 shadow-none lineH-24px"
+           *ngIf="((thisCorrection.status === 'A traiter') && (thisCorrection.comment_question !== null))
+           || ((thisCorrection.status === 'A valider') && (thisCorrection.comment_question !== null))"
+      >
+        <div class="card-body">
+          <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
+          <p class="px-10 font-14 mb-30">{{thisCorrection.comment_question}}</p>
+          <div *ngIf="thisCorrection.image">
+            <div class="spinner-container" *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            </div>
+          </div>
+          <div *ngIf="thisCorrection.image">
+            <img
+              [hidden]="loading"
+              (error)="error()"
+              (load)="loadingImage()"
+              [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/img-test-correction.jpg'"
+              class="img-fluid w-100"
+              alt="image not found"
+            />
+          </div>
+        </div>
+      </div>
+      <hr>
       <div class="card-body">
         <div class="font-22 font-demiBold">{{'SituationDangereuse.Correctif'|translate}}</div>
         <form [formGroup]="correction">
@@ -104,7 +129,7 @@
         </form>
       </div>
     </div>
-    <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.status !== 'A traiter'">
+    <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="(thisCorrection.status === 'Validé')">
       <div class="card-body">
         <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
         <p class="px-10 font-14 mb-30">{{thisCorrection.comment_question}}</p>
