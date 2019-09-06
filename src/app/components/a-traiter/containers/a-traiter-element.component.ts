@@ -29,11 +29,9 @@ export class ATraiterElementComponent implements OnInit {
   ngOnInit() {
     this.historyService.loadHistory();
     this.history$.subscribe(histories => {
-      if (histories.result == null) {
-        this.result = [];
-        return;
+      if (histories) {
+        this.result = histories.result.find(result => result.resultId === this.resultId);
       }
-      this.result = histories.result.find(result => result.resultId === this.resultId);
     });
     this.correction$.subscribe(
       corrections => {
@@ -45,8 +43,10 @@ export class ATraiterElementComponent implements OnInit {
       }
     );
     this.getCorrectionCategory$.subscribe(categories => {
-      this.categoryTitle = categories.find(category =>
-        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
+      if (categories) {
+        const temp = categories.find(category => category.surveyCategoryId === this.categoryId);
+        this.categoryTitle = temp ? temp.surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle : null;
+      }
     });
   }
 

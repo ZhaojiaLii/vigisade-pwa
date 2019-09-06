@@ -169,10 +169,10 @@ export const getCorrectionCategory = createSelector(
     const categories = [];
     for (const survey of surveys) {
       const allCategories = survey.surveyCategories;
-      if (corrections !== null) {
+      if (corrections) {
         for (const correction of corrections) {
           correctionCategory = allCategories.find(category => category.surveyCategoryId === correction.category_id);
-          if (!categories.includes(correctionCategory)) {
+          if (!categories.includes(correctionCategory) && correctionCategory ) {
             categories.push(correctionCategory);
           }
         }
@@ -193,9 +193,11 @@ export const getCorrectionQuestion = createSelector(
     }
     for (const correction of corrections) {
       for (const category of categories) {
-        correctionQuestion = category.surveyQuestion.find(question => question.surveyQuestionId === correction.question_id);
-        if (correctionQuestion && !questions.includes(correctionQuestion)) {
-          questions.push(correctionQuestion);
+        if (category) {
+          correctionQuestion = category.surveyQuestion.find(question => question.surveyQuestionId === correction.question_id);
+          if (correctionQuestion && !questions.includes(correctionQuestion)) {
+            questions.push(correctionQuestion);
+          }
         }
       }
     }

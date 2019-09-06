@@ -49,7 +49,6 @@ export class HistoryComponent implements OnInit {
     filter(history => history && !!history.result),
     map((history: GetResult) => {
       const uniqueHistoryId = [];
-
       return history.result.map(result => ({
         id: result.resultUserId,
         name: result.resultUserfirstName + ' ' + result.resultUserlastName,
@@ -57,7 +56,6 @@ export class HistoryComponent implements OnInit {
         if (uniqueHistoryId.includes(creator.id)) {
           return false;
         }
-
         uniqueHistoryId.push(creator.id);
         return true;
       });
@@ -94,6 +92,10 @@ export class HistoryComponent implements OnInit {
     } else {
       this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
+
+    this.creators$.subscribe(value => {
+      console.log(value);
+    });
   }
 
   search(): void {

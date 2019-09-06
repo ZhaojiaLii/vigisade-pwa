@@ -16,7 +16,7 @@ export class LoginApiService {
   login(username: string, password: string): Observable<string> {
     return this.http.post(
       '/api/login_check',
-      {username, password},
+      {username : username.trim(), password},
       {observe: 'response'}
     ).pipe(
       tap((response: HttpResponse<{token: string}>) => {
@@ -26,7 +26,7 @@ export class LoginApiService {
 
         throw new Error('Bad credentials.');
       }),
-      map(response => response.body.token)
+      map(response => response.body.token),
     );
   }
 }
