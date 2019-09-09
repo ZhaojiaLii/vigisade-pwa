@@ -23,7 +23,7 @@ export class ATraiterComponent implements OnInit {
   isDesktop = false;
   roles = ROLES;
   status: string;
-
+  entityToken = true;
   searchForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -43,7 +43,7 @@ export class ATraiterComponent implements OnInit {
       if (!areas || areas.length === 0 || !changes || !changes.areaId) {
         return [];
       }
-
+      this.entityToken = false;
       const selectedArea = areas.find(area => area.id === Number(changes.areaId));
 
       return selectedArea ? selectedArea.entity : [];
@@ -76,7 +76,7 @@ export class ATraiterComponent implements OnInit {
   ngOnInit() {
     this.status = null;
     this.correctionService.loadCorrection();
-
+    this.entityToken = true;
     this.isDesktop = this.deviceService.isDesktop();
 
     if (this.deviceService.isDesktop()) {
@@ -96,6 +96,7 @@ export class ATraiterComponent implements OnInit {
   resetSearch(): void {
     this.status = null;
     this.searchForm.reset();
+    this.entityToken = true;
     this.search();
   }
 }

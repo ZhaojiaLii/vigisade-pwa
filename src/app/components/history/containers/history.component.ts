@@ -28,7 +28,7 @@ export class HistoryComponent implements OnInit {
     entityId: new FormControl(''),
     userId: new FormControl(''),
   });
-
+  entityToken = true;
   user$: Observable<User> = this.profileService.getUser();
   areas$: Observable<Area[]> = this.profileService.getUserAreas();
   entities$: Observable<Entity[]> = combineLatest([
@@ -39,7 +39,7 @@ export class HistoryComponent implements OnInit {
       if (!areas || areas.length === 0 || !changes || !changes.areaId) {
         return [];
       }
-
+      this.entityToken = false;
       const selectedArea = areas.find(area => area.id === Number(changes.areaId));
 
       return selectedArea ? selectedArea.entity : [];
@@ -77,7 +77,6 @@ export class HistoryComponent implements OnInit {
     this.historyService.loadHistory();
     this.historyService.getHistoryOrderedByDate().subscribe();
     this.isDesktop = this.deviceService.isDesktop();
-
     this.searchForm.valueChanges.pipe(
       startWith(null as HistorySearch),
       pairwise(),
@@ -92,6 +91,7 @@ export class HistoryComponent implements OnInit {
     } else {
       this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
+    this.entityToken = true;
   }
 
   search(): void {
@@ -101,5 +101,6 @@ export class HistoryComponent implements OnInit {
   resetSearch(): void {
     this.searchForm.reset();
     this.search();
+    this.entityToken = true;
   }
 }

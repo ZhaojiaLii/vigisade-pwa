@@ -20,6 +20,7 @@
                 <div class="row align-items-center light-grey mb-20">
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
                         <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
+                            <option style='display: none' value=''></option>
                             <option *ngFor="let area of areas$|async" value="{{area.id}}">
                                 {{area.name}}
                             </option>
@@ -27,9 +28,10 @@
                     </div>
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Entité'|translate}} :
                         <select
-                            [attr.disabled]="(entities$|async)?.length === 0 ? true : null"
+                            [attr.disabled]="entityToken ? true : null"
                             class="form-control" style="border: solid 1px lightgrey"
                             formControlName="entityId">
+                            <option style='display: none' value=''></option>
                             <option *ngFor="let entity of entities$|async" value="{{entity.id}}">
                                 {{entity.name}}
                             </option>
@@ -43,6 +45,7 @@
                             class="form-control"
                             style="border: solid 1px lightgrey"
                             formControlName="userId">
+                            <option style='display: none' value=''></option>
                             <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
                                 {{creator.name}}
                             </option>
