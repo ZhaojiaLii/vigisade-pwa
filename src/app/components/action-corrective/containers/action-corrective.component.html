@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && isAdminOrManager">
+    <div class="card card-full-width shadow-none" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider')">
       <div class="card card-full-width mb-10 shadow-none lineH-24px"
            *ngIf="( ( (thisCorrection.status === 'A traiter') || (thisCorrection.status === 'A valider') ) && (thisCorrection.comment_question !== null))"
       >
@@ -147,7 +147,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider') && isAdminOrManager">
+  <div class="mx-30 my-45" *ngIf="(thisCorrection.status === 'A traiter' || thisCorrection.status === 'A valider')">
     <button class="btn btn-info d-block w-100" (click)="validForm()">{{'SituationDangereuse.Valider'|translate}}</button>
   </div>
 </div>

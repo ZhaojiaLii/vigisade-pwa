@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {AllUsersState, CorrectionState} from './correction.states';
+import { AllUsersState, CorrectionState } from './correction.states';
 import { getSurveys } from '../../survey/store/survey.selectors';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
@@ -60,6 +60,27 @@ export const getUserMobileCorrection = createSelector(
     return results.filter(result => {
       return (result.user_id === user.id && result.status === 'A traiter');
     });
+  }
+);
+
+export const getMobileATraiterByDate = createSelector(
+  getUserMobileCorrection,
+  getHistory,
+  (corrections: Correction[],  history: GetResult) => {
+    if (corrections && history) {
+      corrections.sort((a, b) => {
+        const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
+        const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+        if (dateA > dateB) {
+          return -1;
+        }
+        if (dateA < dateB) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    return corrections;
   }
 );
 
@@ -143,6 +164,29 @@ export const getFilteredUserAtraiter = createSelector(
           );
       }
     });
+  }
+);
+
+export const getDesktopATraiterByDate = createSelector(
+  getFilteredUserAtraiter,
+  getHistory,
+  (corrections: Correction[],  history: GetResult) => {
+    if (corrections && history) {
+      // corrections.sort((a, b) => {
+      //   if (history && corrections) {
+      //     const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
+      //     const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+      //     if (dateA > dateB) {
+      //       return -1;
+      //     }
+      //     if (dateA < dateB) {
+      //       return 1;
+      //     }
+      //     return 0;
+      //   }
+      // });
+    }
+    return corrections;
   }
 );
 

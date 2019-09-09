@@ -80,10 +80,10 @@ export class ATraiterComponent implements OnInit {
     this.isDesktop = this.deviceService.isDesktop();
 
     if (this.deviceService.isDesktop()) {
-      this.correction$ = this.correctionService.getDesktopCorrection();
+      this.correction$ = this.correctionService.getDesktopCorrectionByDate();
       this.countCorrection$ = this.correctionService.countCorrection();
     } else {
-      this.correction$ = this.correctionService.getMobileCorrection();
+      this.correction$ = this.correctionService.getMobileCorrectionByDate();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
   }

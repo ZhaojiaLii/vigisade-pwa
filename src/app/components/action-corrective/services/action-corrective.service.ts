@@ -11,8 +11,8 @@ import {
   getCorrectionCategory,
   getCorrectionQuestion,
   getCorrectionResult,
-  getCorrectionSurvey,
-  getFilteredUserAtraiter,
+  getCorrectionSurvey, getDesktopATraiterByDate,
+  getFilteredUserAtraiter, getMobileATraiterByDate,
   getUserMobileCorrection
 } from '../store/correction.selector';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
@@ -49,18 +49,26 @@ export class ActionCorrectiveService {
     return this.store.pipe(select(getFilteredUserAtraiter));
   }
 
+  getDesktopCorrectionByDate(): Observable<Correction[]> {
+    return this.store.pipe(select(getDesktopATraiterByDate));
+  }
+
   getMobileCorrection(): Observable<Correction[]> {
     return this.store.pipe(select(getUserMobileCorrection));
   }
 
+  getMobileCorrectionByDate(): Observable<Correction[]> {
+    return this.store.pipe(select(getMobileATraiterByDate));
+  }
+
   countCorrection(): Observable<number> {
-    return this.getDesktopCorrection().pipe(
+    return this.getDesktopCorrectionByDate().pipe(
       map(correction => correction ? correction.length : null),
     );
   }
 
   countMobileCorrection(): Observable<number> {
-    return this.getMobileCorrection().pipe(
+    return this.getMobileCorrectionByDate().pipe(
       map(correction => correction ? correction.length : null),
     );
   }
