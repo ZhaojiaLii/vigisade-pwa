@@ -172,21 +172,20 @@ export const getDesktopATraiterByDate = createSelector(
   getHistory,
   (corrections: Correction[],  history: GetResult) => {
     if (corrections && history) {
-      // corrections.sort((a, b) => {
-      //   if (history && corrections) {
-      //     const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
-      //     const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
-      //     if (dateA > dateB) {
-      //       return -1;
-      //     }
-      //     if (dateA < dateB) {
-      //       return 1;
-      //     }
-      //     return 0;
-      //   }
-      // });
+      const unfreezeCorrections = corrections.slice();
+      unfreezeCorrections.sort((a, b) => {
+        const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
+        const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+        if (dateA > dateB) {
+          return -1;
+        }
+        if (dateA < dateB) {
+          return 1;
+        }
+        return 0;
+      });
+      return unfreezeCorrections;
     }
-    return corrections;
   }
 );
 
@@ -211,13 +210,15 @@ export const getCorrectionCategory = createSelector(
   (corrections: Correction[], surveys: Survey[]) => {
     let correctionCategory;
     const categories = [];
-    for (const survey of surveys) {
-      const allCategories = survey.surveyCategories;
-      if (corrections) {
-        for (const correction of corrections) {
-          correctionCategory = allCategories.find(category => category.surveyCategoryId === correction.category_id);
-          if (!categories.includes(correctionCategory) && correctionCategory ) {
-            categories.push(correctionCategory);
+    if (surveys) {
+      for (const survey of surveys) {
+        const allCategories = survey.surveyCategories;
+        if (corrections) {
+          for (const correction of corrections) {
+            correctionCategory = allCategories.find(category => category.surveyCategoryId === correction.category_id);
+            if (!categories.includes(correctionCategory) && correctionCategory ) {
+              categories.push(correctionCategory);
+            }
           }
         }
       }

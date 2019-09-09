@@ -92,10 +92,6 @@ export class HistoryComponent implements OnInit {
     } else {
       this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
-
-    this.creators$.subscribe(value => {
-      console.log(value);
-    });
   }
 
   search(): void {
