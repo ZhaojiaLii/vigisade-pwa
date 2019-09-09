@@ -56,7 +56,7 @@ export class ActionCorrectiveComponent implements OnInit {
 
   isDesktop = false;
 
-  public status = {};
+  public status = [];
 
   loading = false;
   constructor(
