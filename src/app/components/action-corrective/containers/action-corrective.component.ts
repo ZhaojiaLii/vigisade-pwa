@@ -175,17 +175,32 @@ export class ActionCorrectiveComponent implements OnInit {
   }
 
   sendActionCorrective() {
-    const correctionPayload: CreateCorrection = {
-      id: this.thisCorrection.id,
-      user_id: Number(this.correction.value.user_id),
-      survey_id: this.thisCorrection.survey_id,
-      category_id: this.thisCorrection.category_id,
-      question_id: this.thisCorrection.question_id,
-      result_id: this.thisCorrection.result_id,
-      status: this.correction.value.status,
-      comment_question: this.correction.value.comment,
-      image: this.correction.value.photo,
-    };
+    let correctionPayload: CreateCorrection;
+    if (!this.isAdminOrManager && this.thisCorrection.status === 'A traiter') {
+      correctionPayload = {
+        id: this.thisCorrection.id,
+        user_id: Number(this.correction.value.user_id),
+        survey_id: this.thisCorrection.survey_id,
+        category_id: this.thisCorrection.category_id,
+        question_id: this.thisCorrection.question_id,
+        result_id: this.thisCorrection.result_id,
+        status: 'A valider',
+        comment_question: this.correction.value.comment,
+        image: this.correction.value.photo,
+      };
+    } else {
+      correctionPayload = {
+        id: this.thisCorrection.id,
+        user_id: Number(this.correction.value.user_id),
+        survey_id: this.thisCorrection.survey_id,
+        category_id: this.thisCorrection.category_id,
+        question_id: this.thisCorrection.question_id,
+        result_id: this.thisCorrection.result_id,
+        status: this.correction.value.status,
+        comment_question: this.correction.value.comment,
+        image: this.correction.value.photo,
+      };
+    }
     this.correctionService.updateCorrection(correctionPayload);
     this.toastrService.success(this.translateService.instant('Action corrective mise à jour'));
     this.router.navigate(['/atraiter']);
