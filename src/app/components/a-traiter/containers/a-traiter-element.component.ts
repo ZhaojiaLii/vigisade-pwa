@@ -27,7 +27,6 @@ export class ATraiterElementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.historyService.loadHistory();
     this.history$.subscribe(histories => {
       if (histories && histories.result) {
         this.result = histories.result.find(result => result.resultId === this.resultId);

@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { HistorySearch } from '../../history/interfaces/history-search.interface';
 import { User } from '../../profile/interfaces/user';
 import { ROLES } from '../../../data/user.helpers';
+import { HistoryService } from '../../history/services/history.service';
 
 @Component({
   selector: 'app-a-traiter',
@@ -45,7 +46,6 @@ export class ATraiterComponent implements OnInit {
       }
       this.entityToken = false;
       const selectedArea = areas.find(area => area.id === Number(changes.areaId));
-
       return selectedArea ? selectedArea.entity : [];
     }),
   );
@@ -71,6 +71,7 @@ export class ATraiterComponent implements OnInit {
     private correctionService: ActionCorrectiveService,
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
+    private historyService: HistoryService,
   ) { }
 
   ngOnInit() {
@@ -78,7 +79,7 @@ export class ATraiterComponent implements OnInit {
     this.correctionService.loadCorrection();
     this.entityToken = true;
     this.isDesktop = this.deviceService.isDesktop();
-
+    this.historyService.loadHistory();
     if (this.deviceService.isDesktop()) {
       this.correction$ = this.correctionService.getDesktopCorrectionByDate();
       this.countCorrection$ = this.correctionService.countCorrection();

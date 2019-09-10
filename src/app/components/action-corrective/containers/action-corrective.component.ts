@@ -154,8 +154,15 @@ export class ActionCorrectiveComponent implements OnInit {
     setTimeout(() => { this.loading = false; }, 5000);
   }
   validForm() {
-    if (this.actionStatus !== this.correction.value.status) {
-      // tslint:disable-next-line:max-line-length
+    if (this.actionStatus !== this.correction.value.status && this.isAdminOrManager) {
+      if ( (this.correction.value.comment === '') && (this.correction.value.photo === '')) {
+        this.sendActionCorrective();
+      } else if ((this.correction.value.comment !== '') && (this.correction.value.photo !== '')) {
+        this.sendActionCorrective();
+      } else {
+        this.toastrService.error(this.translateService.instant('Aucune autre modification des autres champs.'));
+      }
+    } else if (this.actionStatus !== this.correction.value.status && !this.isAdminOrManager) {
       if ( (this.correction.value.comment === '') && (this.correction.value.photo === '')) {
         this.toastrService.error(this.translateService.instant('Aucune autre modification des autres champs.'));
       } else {

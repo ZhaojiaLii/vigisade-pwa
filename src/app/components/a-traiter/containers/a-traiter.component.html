@@ -49,7 +49,7 @@
           </div>
           <div class="col-6 font-demiBold">{{'Atraiter.Responsable'|translate}} :
             <select
-              [attr.disabled]="(user$|async)?.roles?.includes(roles.admin) ? null : 1"
+              [attr.disabled]="((user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager)) ? null : 1"
               class="form-control"
               style="border: solid 1px lightgrey"
               formControlName="responsible">
