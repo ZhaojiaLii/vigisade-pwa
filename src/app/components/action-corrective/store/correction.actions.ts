@@ -67,3 +67,10 @@ export const setATraiterSearch = createAction(
   props<{searchParams: ATraiterSearch}>(),
 );
 
+export const isFromHomepage = createAction(
+  '[Navigate] From Homepage click A traiter',
+);
+
+export const isFromMenu = createAction(
+  '[Navigate] From Menu click A traiter',
+);

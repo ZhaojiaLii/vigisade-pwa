@@ -10,7 +10,7 @@ import {
   updateCorrection,
   updateCorrectionFail,
   loadAllUsers,
-  updateCorrectionSuccess, loadAllUsersSuccess, loadAllUsersFail
+  updateCorrectionSuccess, loadAllUsersSuccess, loadAllUsersFail, isFromHomepage, isFromMenu
 } from './correction.actions';
 
 export const createCorrectionReducer = createReducer(
@@ -25,6 +25,8 @@ export const createCorrectionReducer = createReducer(
   on(updateCorrectionSuccess, (state, {status}) => ({...state, status})),
   on(updateCorrectionFail, state => state),
   on(setATraiterSearch, (state, {searchParams}) => ({...state, search: searchParams})),
+  on(isFromHomepage, (state) => ({...state, fromHomepage: true})),
+  on(isFromMenu, (state) => ({...state, fromHomepage: false})),
 );
 
 export const createAllUsersReducer = createReducer(

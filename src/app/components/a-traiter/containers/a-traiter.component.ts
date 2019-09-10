@@ -20,6 +20,7 @@ import { HistoryService } from '../../history/services/history.service';
 export class ATraiterComponent implements OnInit {
   correction$: Observable<Correction[]>;
   countCorrection$: Observable<number>;
+  routingState$: Observable<boolean> = this.correctionService.getRoutingState();
 
   isDesktop = false;
   roles = ROLES;
@@ -72,7 +73,8 @@ export class ATraiterComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
     private historyService: HistoryService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.status = null;
@@ -87,6 +89,19 @@ export class ATraiterComponent implements OnInit {
       this.correction$ = this.correctionService.getMobileCorrectionByDate();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
+    this.routingState$.subscribe(state => {
+      if (state) {
+        const searchByAtraiter = {
+          areaId: '',
+          endDate: '',
+          entityId: '',
+          responsible: '',
+          startDate: '',
+          status: 'A traiter',
+        };
+        this.correctionService.setSearch(searchByAtraiter);
+      }
+    });
   }
 
   search(): void {

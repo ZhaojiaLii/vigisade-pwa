@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
-import {createCorrection, loadAllUsers, loadCorrection, setATraiterSearch, updateCorrection} from '../store/correction.actions';
+import {
+  createCorrection,
+  isFromHomepage, isFromMenu,
+  loadAllUsers,
+  loadCorrection,
+  setATraiterSearch,
+  updateCorrection
+} from '../store/correction.actions';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
 import { Observable } from 'rxjs';
@@ -13,7 +20,8 @@ import {
   getCorrectionResult,
   getCorrectionSurvey, getDesktopATraiterByDate,
   getFilteredUserAtraiter, getMobileATraiterByDate,
-  getUserMobileCorrection
+  getUserMobileCorrection,
+  getRoutingState,
 } from '../store/correction.selector';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
@@ -99,5 +107,17 @@ export class ActionCorrectiveService {
 
   setSearch(searchParams: ATraiterSearch): void {
     this.store.dispatch(setATraiterSearch({searchParams}));
+  }
+
+  fromHomepage(): void {
+    this.store.dispatch(isFromHomepage());
+  }
+
+  getRoutingState(): Observable<boolean> {
+    return this.store.pipe(select(getRoutingState));
+  }
+
+  fromMenu(): void {
+    this.store.dispatch(isFromMenu());
   }
 }

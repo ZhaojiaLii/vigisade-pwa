@@ -7,3 +7,8 @@ export const isMenuOpen = createSelector(
   getLayoutState,
   (state: LayoutState) => state.menuOpen,
 );
+
+export const redirectHome = createSelector(
+  getLayoutState,
+  (state: LayoutState) => state.redirectHome,
+);

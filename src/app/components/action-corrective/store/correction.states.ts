@@ -12,6 +12,7 @@ export interface CorrectionState {
   createCorrection: CreateCorrection | null;
   updateCorrection: UpdateCorrection | null;
   search: ATraiterSearch;
+  fromHomepage: boolean;
 }
 
 export const correctionInitialState = {
@@ -19,6 +20,7 @@ export const correctionInitialState = {
   createCorrection: null,
   updateCorrection: null,
   search: null,
+  fromHomepage: false,
 };
 
 export interface AllUsersState {

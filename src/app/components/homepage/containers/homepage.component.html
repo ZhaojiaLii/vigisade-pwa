@@ -9,7 +9,7 @@
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
     <div class="card-body text-center text-info">
-      <a class="nav-link-homepage d-flex align-items-center" routerLink="/atraiter" style="justify-content: center !important;">
+      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important;">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
