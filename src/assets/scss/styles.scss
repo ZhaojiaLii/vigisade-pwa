@@ -1,13 +1,11 @@
 @import "setup/bootstrap";
-
 @import "mixins/mixins";
-
 @import "common/global";
 @import "common/menu";
 @import "common/card";
 @import "common/form";
 @import "common/footer";
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../../../node_modules/ngx-toastr/toastr.css";
 .toast-top-center {
   top: 12px;

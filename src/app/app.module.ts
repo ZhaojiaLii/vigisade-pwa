@@ -15,7 +15,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from './store/app.reducer';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
-import { HomepageComponent } from './components/homepage/containers/homepage.component';
+import { DZESelectComponent, HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
@@ -43,7 +43,6 @@ import { SurveyModule } from './components/survey/survey.module';
 import { draftFeature } from './store/draft/draft.feature';
 import { menuFeature } from './components/shared/components/menu/store/menu.feature';
 import { bufferFeature } from './store/buffer/buffer.feature';
-import { DZESelectComponent } from './components/homepage/containers/dze-select.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 registerLocaleData(localeFr);
@@ -53,6 +52,7 @@ const pageComponents = [
   TutorialComponent,
   HomepageComponent,
   ProfileComponent,
+  DZESelectComponent,
 ];
 
 const pageModules = [
@@ -125,5 +125,6 @@ const ngrxFeatures = [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [DZESelectComponent],
 })
 export class AppModule { }

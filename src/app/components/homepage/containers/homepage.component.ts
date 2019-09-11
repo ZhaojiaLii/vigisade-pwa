@@ -6,6 +6,7 @@ import { DataService } from '../../../services/data.service';
 import { Header } from '../../../interfaces/header.interface';
 import { Router } from '@angular/router';
 import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class HomepageComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private actionCorrectiveService: ActionCorrectiveService,
+    public dialog: MatDialog,
   ) {}
 
   clickAtraiter() {
@@ -28,14 +30,20 @@ export class HomepageComponent implements OnInit {
    this.actionCorrectiveService.fromHomepage();
   }
 
-  ngOnInit(): void {
+  openDialog() {
+    const dialogRef = this.dialog.open(DZESelectComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
+  ngOnInit(): void {
+    this.openDialog();
   }
 }
 
 @Component({
   selector: 'app-dze-select',
   templateUrl: './dze-select.component.html',
-  styleUrls: ['./dze-select.component.scss']
 })
 export class DZESelectComponent {}
