@@ -72,7 +72,6 @@ export class ATraiterComponent implements OnInit {
     private correctionService: ActionCorrectiveService,
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
-    private historyService: HistoryService,
   ) {
   }
 
@@ -81,7 +80,6 @@ export class ATraiterComponent implements OnInit {
     this.correctionService.loadCorrection();
     this.entityToken = true;
     this.isDesktop = this.deviceService.isDesktop();
-    this.historyService.loadHistory();
     if (this.deviceService.isDesktop()) {
       this.correction$ = this.correctionService.getDesktopCorrectionByDate();
       this.countCorrection$ = this.correctionService.countCorrection();
