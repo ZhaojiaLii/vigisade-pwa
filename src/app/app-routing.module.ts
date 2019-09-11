@@ -19,6 +19,11 @@ const extraOptions: ExtraOptions = {};
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {
@@ -80,6 +85,9 @@ const routes: Routes = [
     path: 'atraiter/:id',
     component: ActionCorrectiveComponent,
     canActivate: [TokenGuard],
+  },
+  { path: '**',
+    redirectTo: 'login',
   }
 ];
 

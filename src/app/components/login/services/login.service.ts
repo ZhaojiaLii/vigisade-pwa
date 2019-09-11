@@ -20,7 +20,7 @@ export class LoginService {
   }
 
   setToken(token: string): void {
-    this.store.dispatch(setToken({token: token, spinnerEnable: false}));
+    this.store.dispatch(setToken({token, spinnerEnable: false}));
   }
 
   getToken(): Observable<string> {

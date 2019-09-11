@@ -15,8 +15,9 @@ import {
   updateCorrectionSuccess
 } from './correction.actions';
 import { ActionCorrectiveApiService } from '../services/action-corrective-api.service';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ProfileService } from '../../profile/services/profile.service';
 
 @Injectable()
 export class CorrectionEffects {
@@ -24,6 +25,7 @@ export class CorrectionEffects {
   constructor(
     private actions$: Actions,
     private correctionApi: ActionCorrectiveApiService,
+    private user: ProfileService,
   ) {}
 
   @Effect()
@@ -54,6 +56,7 @@ export class CorrectionEffects {
     switchMap(action => {
       return this.correctionApi.updateCorrection(action.updateCorrectionPayload).pipe(
         map(status => updateCorrectionSuccess({status})),
+        tap( () => this.user.loadUser() ),
         catchError(error => of(updateCorrectionFail({error: error.message}))),
       );
     })

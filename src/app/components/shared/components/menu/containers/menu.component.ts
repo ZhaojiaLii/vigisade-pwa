@@ -6,7 +6,6 @@ import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/rou
 import { filter, map } from 'rxjs/operators';
 import { MenuOptions } from '../interfaces/menu-options.interface';
 import { MenuService } from '../services/menu.service';
-import { ActionCorrectiveService } from '../../../../action-corrective/services/action-corrective.service';
 
 @Component({
   selector: 'app-menu',
@@ -29,7 +28,6 @@ export class MenuComponent {
     private layoutService: LayoutService,
     private loginService: LoginService,
     private menuService: MenuService,
-    private actionCorrectiveService: ActionCorrectiveService,
   ) {}
 
   toggleMenu(): void {
@@ -38,27 +36,5 @@ export class MenuComponent {
 
   goBack(): void {
     window.history.back();
-  }
-
-  navigateHomepage() {
-    this.router.navigate(['/home']);
-    this.layoutService.redirectTotHome();
-  }
-
-  navigateAtraiter() {
-    this.router.navigate(['/atraiter']);
-    this.actionCorrectiveService.fromMenu();
-  }
-
-  navigateProfile() {
-    this.router.navigate(['/profile']);
-  }
-
-  navigateTutorial() {
-    this.router.navigate(['/tutorial']);
-  }
-
-  navigateHistory() {
-    this.router.navigate(['/history']);
   }
 }

@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { BufferService } from '../../../services/buffer.service';
 import { getRandomId } from '../../../data/random.helpers';
+import { ProfileService } from '../../profile/services/profile.service';
 
 @Injectable()
 export class SurveyEffects {
@@ -24,6 +25,7 @@ export class SurveyEffects {
     private router: Router,
     private toast: ToastrService,
     private translateService: TranslateService,
+    private profileService: ProfileService,
   ) {}
 
   loadSurveys$ = createEffect(() => this.actions$.pipe(
@@ -62,7 +64,7 @@ export class SurveyEffects {
     ofType(createResultSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
       tap(() => this.toast.success(this.translateService.instant('Visite.Visite validée'))),
-      tap(() => window.location.reload()),
+      tap(() => this.profileService.loadUser()),
     )),
     switchMap(() => [
       setLoadingState({loading: false}),

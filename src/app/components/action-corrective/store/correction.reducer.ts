@@ -1,16 +1,20 @@
-import {Action, createReducer, on} from '@ngrx/store';
-import {allUsersInitialState, AllUsersState, correctionInitialState, CorrectionState} from './correction.states';
+import { Action, createReducer, on } from '@ngrx/store';
+import { allUsersInitialState, AllUsersState, correctionInitialState, CorrectionState } from './correction.states';
 import {
   createCorrection,
   createCorrectionFail,
   createCorrectionSuccess,
+  isFromHomepage,
+  loadAllUsers,
+  loadAllUsersFail,
+  loadAllUsersSuccess,
   loadCorrection,
   loadCorrectionFail,
-  loadCorrectionSuccess, setATraiterSearch,
+  loadCorrectionSuccess,
+  setATraiterSearch,
   updateCorrection,
   updateCorrectionFail,
-  loadAllUsers,
-  updateCorrectionSuccess, loadAllUsersSuccess, loadAllUsersFail, isFromHomepage, isFromMenu
+  updateCorrectionSuccess
 } from './correction.actions';
 
 export const createCorrectionReducer = createReducer(
@@ -26,7 +30,6 @@ export const createCorrectionReducer = createReducer(
   on(updateCorrectionFail, state => state),
   on(setATraiterSearch, (state, {searchParams}) => ({...state, search: searchParams})),
   on(isFromHomepage, (state) => ({...state, fromHomepage: true})),
-  on(isFromMenu, (state) => ({...state, fromHomepage: false})),
 );
 
 export const createAllUsersReducer = createReducer(
