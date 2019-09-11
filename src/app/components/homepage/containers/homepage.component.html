@@ -1,50 +1,68 @@
 <div class="container">
-  <div class="row mb-50">
-    <div class="card card-full-width">
-      <div class="card-body font-14" [innerHTML]="(header$|async)?.news">
-        <p class="card-text"></p>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
-    <div class="card-body text-center text-info">
-      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important;">
-        <span class="font-30 font-weight-bold mr-2">
-          <strong>{{(user$|async)?.countRemainingActions}}</strong>
-        </span>
-        <span class="font-25">
-          <span [ngPlural]="(user$|async)?.countRemainingActions">
-            <ng-template ngPluralCase="=1">{{'Homepage.ActionsTraiter'|translate:{value:''} }}</ng-template>
-            <ng-template ngPluralCase="other">{{'Homepage.ActionsTraiter'|translate:{value:'s'} }}</ng-template>
-          </span>
-        </span>
-      </a>
-    </div>
-  </div>
-
-  <div class="row text-center mb-30">
-    <div class="col-6 ">
-      <div class="welcome-visit-card mb-2">
-        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
-          <span class="circle-white">
-            <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
-          </span>
-        </a>
-      </div>
-      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites ce mois-ci'|translate:{value:((user$|async)?.countCurrentMonthVisits > 1) ? 's' : ''} }}</span>
-    </div>
-    <div class="col-6">
-      <div class="welcome-visit-card mb-2">
-        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
-          <span class="circle-white">
-            <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
-          </span>
-        </a>
-      </div>
-      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites le mois dernier'|translate:{value:((user$|async)?.countLastMonthVisits > 1) ? 's' : '' } }}</span>
-    </div>
-  </div>
-
-  <app-menu-buttons></app-menu-buttons>
+  <label for="direction">{{'Profil.Direction'|translate}}</label>
+  <select class="form-control has-value"  appHighlight id="direction" formControlName="language">
+    <option value="111">111</option>
+  </select>
+  <div class="line"></div>
+  <label for="zone">{{'Profil.Zone'|translate}}</label>
+  <select class="form-control has-value"  appHighlight id="zone" formControlName="language">
+    <option value="111">111</option>
+  </select>
+  <div class="line"></div>
+  <label for="entity">{{'Profil.Entity'|translate}}</label>
+  <select class="form-control has-value"  appHighlight id="entity" formControlName="language">
+    <option value="111">111</option>
+  </select>
+  <div class="line"></div>
 </div>
+
+<!--<div class="container">-->
+<!--  <div class="row mb-50">-->
+<!--    <div class="card card-full-width">-->
+<!--      <div class="card-body font-14" [innerHTML]="(header$|async)?.news">-->
+<!--        <p class="card-text"></p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">-->
+<!--    <div class="card-body text-center text-info">-->
+<!--      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important;">-->
+<!--        <span class="font-30 font-weight-bold mr-2">-->
+<!--          <strong>{{(user$|async)?.countRemainingActions}}</strong>-->
+<!--        </span>-->
+<!--        <span class="font-25">-->
+<!--          <span [ngPlural]="(user$|async)?.countRemainingActions">-->
+<!--            <ng-template ngPluralCase="=1">{{'Homepage.ActionsTraiter'|translate:{value:''} }}</ng-template>-->
+<!--            <ng-template ngPluralCase="other">{{'Homepage.ActionsTraiter'|translate:{value:'s'} }}</ng-template>-->
+<!--          </span>-->
+<!--        </span>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="row text-center mb-30">-->
+<!--    <div class="col-6 ">-->
+<!--      <div class="welcome-visit-card mb-2">-->
+<!--        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">-->
+<!--          <span class="circle-white">-->
+<!--            <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>-->
+<!--          </span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites ce mois-ci'|translate:{value:((user$|async)?.countCurrentMonthVisits > 1) ? 's' : ''} }}</span>-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="welcome-visit-card mb-2">-->
+<!--        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">-->
+<!--          <span class="circle-white">-->
+<!--            <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>-->
+<!--          </span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <span class="font-ultaLight" style="font-size: 20px">{{'Homepage.Visites le mois dernier'|translate:{value:((user$|async)?.countLastMonthVisits > 1) ? 's' : '' } }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <app-menu-buttons></app-menu-buttons>-->
+<!--</div>-->

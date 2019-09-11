@@ -43,6 +43,8 @@ import { SurveyModule } from './components/survey/survey.module';
 import { draftFeature } from './store/draft/draft.feature';
 import { menuFeature } from './components/shared/components/menu/store/menu.feature';
 import { bufferFeature } from './store/buffer/buffer.feature';
+import { DZESelectComponent } from './components/homepage/containers/dze-select.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 registerLocaleData(localeFr);
 
@@ -86,6 +88,7 @@ const ngrxFeatures = [
     SecuriteComponent,
     BonnePratiqueComponent,
     ATraiterComponent,
+    DZESelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,7 @@ const ngrxFeatures = [
       maxAge: 15,
       name: 'Vigisade ' + (environment.production ? 'Prod' : 'Dev'),
     }),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -114,12 +117,13 @@ const ngrxFeatures = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ...pageModules
+    ...pageModules,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

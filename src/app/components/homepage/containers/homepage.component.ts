@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import { ActionCorrectiveService } from '../../action-corrective/services/action
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
 
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
@@ -27,4 +27,15 @@ export class HomepageComponent {
    this.router.navigate(['/atraiter']);
    this.actionCorrectiveService.fromHomepage();
   }
+
+  ngOnInit(): void {
+
+  }
 }
+
+@Component({
+  selector: 'app-dze-select',
+  templateUrl: './dze-select.component.html',
+  styleUrls: ['./dze-select.component.scss']
+})
+export class DZESelectComponent {}
