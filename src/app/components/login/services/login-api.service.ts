@@ -13,7 +13,7 @@ export class LoginApiService {
   /**
    * Gets authentication token.
    */
-  login(username: string, password: string): Observable<string> {
+  login(username: string, password: string, localConnection: boolean): Observable<string> {
     return this.http.post(
       '/api/login_check',
       {username : username.trim(), password},

@@ -16,10 +16,10 @@ export class LoginEffects {
     ofType(login),
     switchMap(action => {
       return this.loginApiService.login(action.username, action.password).pipe(
-        map((token) => loginSuccess({token: token, spinnerEnable: false})),
+        map((token) => loginSuccess({token, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
-          return of(loginFail({error: error.message, spinnerEnable: false}))
+          return of(loginFail({error: error.message, spinnerEnable: false}));
         }),
       );
     }),

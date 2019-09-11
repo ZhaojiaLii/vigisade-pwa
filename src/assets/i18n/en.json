@@ -3,6 +3,7 @@
   "Login.Mot de passe": "Password",
   "Login.Connexion": "Login",
   "Login.Error": "login fail",
+  "Login.ConnexionLocal": "Local Connection",
 
   "SituationDangereuse.Signaler": "Report",
   "SituationDangereuse.Type": "Type",
