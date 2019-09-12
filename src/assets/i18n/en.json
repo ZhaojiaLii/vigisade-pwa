@@ -20,6 +20,9 @@
   "Homepage.Visites le mois dernier": "Inspection{{value}} of the last month",
   "Homepage.Nouvelle visite": "New inspection",
   "Homepage.Situation dangereuse": "Dangerous situation",
+  "Homepage.Logout": "Logout",
+  "Homepage.Next": "Next",
+  "Homepage.Title": "Please select your Direction, Zone, Entity:",
 
   "Menu.Accueil": "Home",
   "Menu.Atraiter":"Non-compliance to treat",

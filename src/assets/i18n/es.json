@@ -20,6 +20,9 @@
   "Homepage.Visites le mois dernier": "Visita{{value}} del mes pasado",
   "Homepage.Nouvelle visite": "Nueva visita",
   "Homepage.Situation dangereuse": "Situacion peligrosa",
+  "Homepage.Logout": "desconexión",
+  "Homepage.Next": "Próximo",
+  "Homepage.Title": "Por favor seleccione su Dirección, Zona, Entidad:",
 
   "Menu.Accueil": "Inicio",
   "Menu.Atraiter":"No conformidades por procesar",
