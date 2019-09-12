@@ -4,7 +4,7 @@ import { LoginApiService } from '../services/login-api.service';
 import { login, loginFail, loginSuccess } from './login.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { CookieService } from '../../../services/cookie.service';
+import { CookieServices } from '../../../services/cookie-services.service';
 import { TOKEN_KEY } from '../../../data/auth.const';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
@@ -16,10 +16,10 @@ export class LoginEffects {
     ofType(login),
     switchMap(action => {
       return this.loginApiService.login(action.username, action.password).pipe(
-        map((token) => loginSuccess({token: token, spinnerEnable: false})),
+        map((token) => loginSuccess({token, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
-          return of(loginFail({error: error.message, spinnerEnable: false}))
+          return of(loginFail({error: error.message, spinnerEnable: false}));
         }),
       );
     }),
@@ -32,7 +32,7 @@ export class LoginEffects {
 
   constructor(
     private actions$: Actions,
-    private cookie: CookieService,
+    private cookie: CookieServices,
     private loginApiService: LoginApiService,
     private toastrService: ToastrService,
     private translateService: TranslateService,

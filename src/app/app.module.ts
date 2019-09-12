@@ -44,6 +44,7 @@ import { draftFeature } from './store/draft/draft.feature';
 import { menuFeature } from './components/shared/components/menu/store/menu.feature';
 import { bufferFeature } from './store/buffer/buffer.feature';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(localeFr);
 
@@ -118,11 +119,12 @@ const ngrxFeatures = [
     ReactiveFormsModule,
     FormsModule,
     ...pageModules,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' },
+    CookieService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [DZESelectComponent],

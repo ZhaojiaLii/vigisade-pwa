@@ -11,6 +11,8 @@ import { Direction } from '../../shared/interfaces/direction.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { FormControl, FormGroup } from '@angular/forms';
+import { LoginService } from '../../login/services/login.service';
+import { LoginApiService } from '../../login/services/login-api.service';
 
 
 @Component({
@@ -26,6 +28,8 @@ export class HomepageComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private actionCorrectiveService: ActionCorrectiveService,
+    private loginService: LoginService,
+    private loginApiService: LoginApiService,
     public dialog: MatDialog,
   ) {}
   loading = false;
@@ -42,6 +46,12 @@ export class HomepageComponent implements OnInit {
         setTimeout(() => {
           this.loading = false;
         }, 2000);
+      } else {
+        this.loginApiService.logout();
+        setTimeout(() => {
+          this.loading = false;
+          window.location.reload();
+        }, 500);
       }
     });
   }

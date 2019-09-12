@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { CookieService } from '../cookie.service';
+import { CookieServices } from '../cookie-services.service';
 import { TOKEN_KEY } from '../../data/auth.const';
 import { LoginService } from '../../components/login/services/login.service';
 import { switchMap, filter } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class TokenGuard implements CanActivate {
 
   constructor(
     private loginService: LoginService,
-    private cookie: CookieService,
+    private cookie: CookieServices,
     private router: Router,
   ) {}
 
@@ -26,9 +26,7 @@ export class TokenGuard implements CanActivate {
         if (token) {
           return of(true);
         }
-
         const savedToken = this.cookie.get(TOKEN_KEY);
-
         if (!savedToken) {
           return this.router.navigate(['/']);
         } else {
