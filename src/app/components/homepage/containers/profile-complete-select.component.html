@@ -1,0 +1,27 @@
+<div>
+  <h1 mat-dialog-title>Please select your Direction Zone and Entity</h1>
+  <mat-dialog-content style="display: flex; flex-direction: column;" [formGroup]="profileCompleteForm">
+    <mat-form-field>
+      <mat-select placeholder="{{'Profil.Direction'|translate}}" formControlName="directionId">
+        <mat-option *ngFor="let direction of direction$|async" value="{{direction.id}}">{{direction.name|translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field >
+      <mat-select placeholder="{{'Profil.Zone'|translate}}" formControlName="areaId">
+        <mat-option *ngFor="let area of area$|async" value="{{area.id}}">{{area.name|translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field >
+      <mat-select placeholder="{{'Profil.Entité'|translate}}" formControlName="entityId">
+        <mat-option  *ngFor="let entity of entity$|async" value="{{entity.id}}">{{entity.name|translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button>Logout</button>
+    <button mat-button [mat-dialog-close]="true" (click)="sendForm()" id="confirm">Confirm</button>
+  </mat-dialog-actions>
+</div>
+

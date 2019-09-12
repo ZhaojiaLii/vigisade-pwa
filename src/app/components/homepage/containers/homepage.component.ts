@@ -7,6 +7,10 @@ import { Header } from '../../../interfaces/header.interface';
 import { Router } from '@angular/router';
 import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Direction } from '../../shared/interfaces/direction.interface';
+import { Area } from '../../shared/interfaces/area.interface';
+import { Entity } from '../../shared/interfaces/entity.interface';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -24,16 +28,21 @@ export class HomepageComponent implements OnInit {
     private actionCorrectiveService: ActionCorrectiveService,
     public dialog: MatDialog,
   ) {}
-
+  loading = false;
   clickAtraiter() {
    this.router.navigate(['/atraiter']);
    this.actionCorrectiveService.fromHomepage();
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DZESelectComponent);
+    const dialogRef = this.dialog.open(DZESelectComponent, {disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.loading = true;
+      if (result) {
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
+      }
     });
   }
 
@@ -44,6 +53,29 @@ export class HomepageComponent implements OnInit {
 
 @Component({
   selector: 'app-dze-select',
-  templateUrl: './dze-select.component.html',
+  templateUrl: './profile-complete-select.component.html',
 })
-export class DZESelectComponent {}
+export class DZESelectComponent {
+  direction$: Observable<Direction[]> = this.dataService.getDirections();
+  area$: Observable<Area[]> = this.profileService.getUserAreas();
+  entity$: Observable<Entity[]> = this.profileService.getUserEntities();
+  profileCompleteForm = new FormGroup({
+    directionId: new FormControl(''),
+    areaId: new FormControl(''),
+    entityId: new FormControl(''),
+  });
+  constructor(
+    private dataService: DataService,
+    private profileService: ProfileService,
+  ) {}
+
+  sendForm() {
+    const formData: Partial<User> = {
+      directionId: Number(this.profileCompleteForm.get('directionId').value),
+      areaId: Number(this.profileCompleteForm.get('areaId').value),
+      entityId: Number(this.profileCompleteForm.get('entityId').value),
+    };
+    console.log(formData);
+    // this.profileService.updateUser(formData);
+  }
+}
