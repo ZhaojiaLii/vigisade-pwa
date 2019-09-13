@@ -31,7 +31,6 @@ export class TokenGuard implements CanActivate {
           return this.router.navigate(['/']);
         } else {
           this.loginService.setToken(savedToken);
-
           return this.loginService.isLogged().pipe(
             filter(isLogged => isLogged),
           );

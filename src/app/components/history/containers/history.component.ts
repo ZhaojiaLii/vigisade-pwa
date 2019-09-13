@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { HistoryService } from '../services/history.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -17,7 +17,8 @@ import { HistoryResult } from '../../survey/interfaces/getResultInterface/histor
   selector: 'app-history',
   templateUrl: './history.component.html'
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, AfterViewInit {
+
 
   isDesktop = false;
 
@@ -74,7 +75,7 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     // Refresh history when opening them.
-    this.historyService.loadHistory();
+    // this.historyService.loadHistory();
     this.historyService.getHistoryOrderedByDate().subscribe();
     this.isDesktop = this.deviceService.isDesktop();
     this.searchForm.valueChanges.pipe(
@@ -92,6 +93,10 @@ export class HistoryComponent implements OnInit {
       this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
     this.entityToken = true;
+  }
+
+  ngAfterViewInit(): void {
+    console.log('init');
   }
 
   search(): void {

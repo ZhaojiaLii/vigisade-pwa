@@ -57,7 +57,11 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openDialog();
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+    // this.openDialog();
   }
 }
 

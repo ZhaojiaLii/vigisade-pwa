@@ -45,6 +45,7 @@ import { menuFeature } from './components/shared/components/menu/store/menu.feat
 import { bufferFeature } from './store/buffer/buffer.feature';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 registerLocaleData(localeFr);
 
@@ -120,6 +121,7 @@ const ngrxFeatures = [
     FormsModule,
     ...pageModules,
     MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
