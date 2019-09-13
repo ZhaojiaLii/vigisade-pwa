@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { TOKEN_KEY } from '../../../data/auth.const';
+import { GOOGLE_TOKEN_KEY } from '../../../data/auth.const';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,6 @@ export class LoginApiService {
   }
 
   logout() {
-    this.cookie.delete(TOKEN_KEY);
+    this.cookie.delete(GOOGLE_TOKEN_KEY);
   }
 }

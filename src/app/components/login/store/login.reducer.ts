@@ -4,7 +4,7 @@ import {
   googleLoginSuccess,
   login,
   loginFail,
-  loginSuccess,
+  loginSuccess, setGoogleToken,
   setSpinnerEnable,
   setToken
 } from './login.actions';
@@ -16,7 +16,7 @@ const createLoginReducer = createReducer(
   on(loginSuccess, setToken, (state, {token}) => ({...state, token, spinnerEnable: false})),
   on(loginFail, (state, {error}) => ({...state, error, spinnerEnable: false})),
   on(googleLogin, (state, {}) => ({...state, spinnerEnable: true})),
-  on(googleLoginSuccess, setToken, (state, {token}) => ({...state, token, spinnerEnable: false})),
+  on(googleLoginSuccess, setGoogleToken, (state, {googleToken}) => ({...state, googleToken, spinnerEnable: false})),
   on(googleLoginFail, (state, {error}) => ({...state, error, spinnerEnable: false})),
 );
 

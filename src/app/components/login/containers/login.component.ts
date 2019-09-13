@@ -38,15 +38,20 @@ export class LoginComponent implements OnInit {
       take(1),
       tap(() => {}),
     ).subscribe(() => this.router.navigate(['home']));
+
+    this.loginService.isGoogleAccount().pipe(
+      filter(isLogged => isLogged),
+      take(1),
+      tap(() => {}),
+    ).subscribe(() => this.router.navigate(['home']));
   }
 
   login(username: string, password: string, localConnection: boolean): void {
     if (username && password) {
       if (localConnection) {
-        this.loginService.login(username, password);
+        this.loginService.login(username, password, true);
       } else {
-        // @TODO: google login here
-        this.toastrService.success('connexion google');
+        this.loginService.googleLogin(username, password, false);
       }
     } else {
       this.toastrService.error('Formulaire incomplet');

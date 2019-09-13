@@ -23,6 +23,8 @@ export class HomepageComponent implements OnInit {
 
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
+  google$: Observable<boolean> = this.loginService.isGoogleAccount();
+  isGoogleConnection = false;
   constructor(
     private dataService: DataService,
     private profileService: ProfileService,
@@ -58,10 +60,15 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.google$.subscribe(google => {
+      this.isGoogleConnection = google;
+    });
     setTimeout(() => {
       this.loading = false;
     }, 4000);
-    this.openDialog();
+    if (this.isGoogleConnection) {
+      this.openDialog();
+    }
   }
 }
 

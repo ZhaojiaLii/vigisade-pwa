@@ -33,10 +33,15 @@ export const googleLogin = createAction(
 
 export const googleLoginSuccess = createAction(
   '[Google account login] Login with Google Succeed',
-  props<{ token: string, spinnerEnable: boolean }>(),
+  props<{ googleToken: string, spinnerEnable: boolean }>(),
 );
 
 export const googleLoginFail = createAction(
   '[Google account login] Login with Google Fail',
   props<{ error: any, spinnerEnable: boolean}>(),
+);
+
+export const setGoogleToken = createAction(
+  '[Login] Set Token',
+  props<{ googleToken: string, spinnerEnable: boolean}>(),
 );

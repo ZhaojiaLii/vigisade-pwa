@@ -7,7 +7,7 @@
     <p>external connection</p> -->
     <div class="container-input-field d-flex flex-column">
 
-      <form #f [formGroup]="loginForm" (ngSubmit)="login(username.value, password.value, !!localConnection.value)">
+      <form #f [formGroup]="loginForm" (ngSubmit)="login(username.value, password.value, checkbox)">
         <div class="form-row">
           <div class="form-group col-12 mb-2">
               <input appHighlight type="text" class="username form-control" formControlName="username" required #username/>
@@ -22,7 +22,7 @@
               <div class="line"></div>
           </div>
         </div>
-        <input class="mr-2" type="checkbox" id="localConnection" value="{{checkbox}}" formControlName="localConnection" #localConnection (click)="checkState()" style="cursor: pointer;"/>
+        <input class="mr-2" type="checkbox" id="localConnection" value="{{checkbox}}" formControlName="localConnection" (click)="checkState()" style="cursor: pointer;"/>
         <span class="font-14">{{'Login.ConnexionLocal' | translate}}</span>
         <button class="btn btn-info btn-block mt-1" [disabled]="!loginForm.valid" type="submit" >{{'Login.Connexion' | translate}}</button>
       </form>
