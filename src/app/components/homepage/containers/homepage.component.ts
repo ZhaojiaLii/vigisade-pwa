@@ -60,8 +60,8 @@ export class HomepageComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-    }, 2000);
-    // this.openDialog();
+    }, 4000);
+    this.openDialog();
   }
 }
 
@@ -89,7 +89,6 @@ export class DZESelectComponent {
       areaId: Number(this.profileCompleteForm.get('areaId').value),
       entityId: Number(this.profileCompleteForm.get('entityId').value),
     };
-    console.log(formData);
     // this.profileService.updateUser(formData);
   }
 }

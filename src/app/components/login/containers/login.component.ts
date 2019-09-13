@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
         this.loginService.login(username, password);
       } else {
         // @TODO: google login here
+        this.toastrService.success('connexion google');
       }
     } else {
       this.toastrService.error('Formulaire incomplet');
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   checkState() {
+    // @ts-ignore
     this.checkbox = document.querySelector('#localConnection').checked;
   }
 }
