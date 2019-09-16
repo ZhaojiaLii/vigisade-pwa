@@ -3,6 +3,7 @@
   "Login.Mot de passe": "Mode de passe",
   "Login.Connexion": "Connexion",
   "Login.Error": "Erreur de connexion",
+  "Login.ConnexionLocal": "Connexion locale",
 
   "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Type": "Type",
@@ -20,6 +21,9 @@
   "Homepage.Visites le mois dernier": "Visite{{value}} le mois dernier",
   "Homepage.Nouvelle visite": "Nouvelle visite",
   "Homepage.Situation dangereuse": "Situation dangereuse",
+  "Homepage.Logout": "Déconnxion",
+  "Homepage.Next": "Suivant",
+  "Homepage.Title": "Veuillez sélectionner votre Direction, Zone, Entité:",
 
   "Menu.Accueil": "Accueil",
   "Menu.Atraiter":"A traiter",

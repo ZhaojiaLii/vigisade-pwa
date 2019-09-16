@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="spinner-container" *ngIf="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
   <div class="row mb-50">
     <div class="card card-full-width">
       <div class="card-body font-14" [innerHTML]="(header$|async)?.news">
@@ -9,7 +12,7 @@
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
     <div class="card-body text-center text-info">
-      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important;">
+      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important; cursor: pointer;">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>

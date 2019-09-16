@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class CookieService {
+export class CookieServices {
+
 
   set(key: string, value: string, expires?: Date): void {
     let cookieValue = `${key}=${value}`;

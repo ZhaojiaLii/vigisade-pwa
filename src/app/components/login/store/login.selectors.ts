@@ -16,6 +16,13 @@ export const getToken = createSelector(
   },
 );
 
+export const getGoogleToken = createSelector(
+  getLoginState,
+  (state: LoginState) => {
+    return state.googleToken;
+  },
+);
+
 export const getSpinnerEnable = createSelector(
   getLoginState,
   (state: LoginState) => {

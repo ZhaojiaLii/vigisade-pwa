@@ -15,7 +15,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from './store/app.reducer';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
-import { HomepageComponent } from './components/homepage/containers/homepage.component';
+import { DZESelectComponent, HomepageComponent } from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
@@ -43,6 +43,9 @@ import { SurveyModule } from './components/survey/survey.module';
 import { draftFeature } from './store/draft/draft.feature';
 import { menuFeature } from './components/shared/components/menu/store/menu.feature';
 import { bufferFeature } from './store/buffer/buffer.feature';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 registerLocaleData(localeFr);
 
@@ -51,6 +54,7 @@ const pageComponents = [
   TutorialComponent,
   HomepageComponent,
   ProfileComponent,
+  DZESelectComponent,
 ];
 
 const pageModules = [
@@ -86,6 +90,7 @@ const ngrxFeatures = [
     SecuriteComponent,
     BonnePratiqueComponent,
     ATraiterComponent,
+    DZESelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +106,7 @@ const ngrxFeatures = [
       maxAge: 15,
       name: 'Vigisade ' + (environment.production ? 'Prod' : 'Dev'),
     }),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     SharedModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -114,12 +119,16 @@ const ngrxFeatures = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ...pageModules
+    ...pageModules,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR' },
+    CookieService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DZESelectComponent],
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 <div class="container mb-90">
-  <div *ngIf="(correction$|async) === null" class="row">
+  <div *ngIf="(correction$|async) === null || loading" class="spinner-container">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
   <form [formGroup]="searchForm" *ngIf="isDesktop">
@@ -109,7 +109,7 @@
         [resultId]="correction.result_id"
         [correctionId]="correction.id"
         [routerLink]="['/atraiter',correction.id]"
-        style="display: block; width: 100%;"
+        style="display: block; width: 100%; cursor: pointer;"
     ></app-a-traiter-element>
   </div>
 </div>

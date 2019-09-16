@@ -3,6 +3,7 @@
   "Login.Mot de passe": "Password",
   "Login.Connexion": "Login",
   "Login.Error": "login fail",
+  "Login.ConnexionLocal": "Local Connection",
 
   "SituationDangereuse.Signaler": "Report",
   "SituationDangereuse.Type": "Type",
@@ -20,6 +21,9 @@
   "Homepage.Visites le mois dernier": "Inspection{{value}} of the last month",
   "Homepage.Nouvelle visite": "New inspection",
   "Homepage.Situation dangereuse": "Dangerous situation",
+  "Homepage.Logout": "Logout",
+  "Homepage.Next": "Next",
+  "Homepage.Title": "Please select your Direction, Area, Entity:",
 
   "Menu.Accueil": "Home",
   "Menu.Atraiter":"Non-compliance to treat",

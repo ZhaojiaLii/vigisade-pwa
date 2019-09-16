@@ -55,6 +55,15 @@ export class AppComponent implements OnInit {
       this.profileService.loadUser();
       this.historyService.loadHistory();
     });
+
+    this.loginService.isGoogleAccount().pipe(
+      filter(isLogged => isLogged),
+      take(1),
+    ).subscribe(() => {
+      this.dataService.loadData();
+      this.dataService.loadHeader();
+      this.profileService.loadUser();
+    });
   }
 
   private setupLanguage(): void {

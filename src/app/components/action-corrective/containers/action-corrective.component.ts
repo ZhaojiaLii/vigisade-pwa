@@ -82,14 +82,10 @@ export class ActionCorrectiveComponent implements OnInit {
 
     this.isDesktop = this.deviceService.isDesktop();
 
-    this.correctionService.loadCorrection();
-
 
     /**
      * If is Admin or Manager !
      */
-    this.correctionService.loadAllUsers();
-
     this.correction$.subscribe(
       corrections => {
         for (const correction of corrections) {

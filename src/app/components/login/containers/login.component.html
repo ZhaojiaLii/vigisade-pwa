@@ -7,22 +7,24 @@
     <p>external connection</p> -->
     <div class="container-input-field d-flex flex-column">
 
-      <form #f [formGroup]="loginForm" (ngSubmit)="login(username.value, password.value)">
+      <form #f [formGroup]="loginForm" (ngSubmit)="login(username.value, password.value, checkbox)">
         <div class="form-row">
           <div class="form-group col-12 mb-2">
               <input appHighlight type="text" class="username form-control" formControlName="username" required #username/>
-              <label>{{'Login.Login'|translate}}</label>
+              <label>{{'Login.Login' | translate}}</label>
               <div class="line"></div>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-12">
               <input appHighlight type="password" class="password form-control" formControlName="password" required #password/>
-              <label>{{'Login.Mot de passe'|translate}}</label>
+              <label>{{'Login.Mot de passe' | translate}}</label>
               <div class="line"></div>
           </div>
         </div>
-        <button class="btn btn-info btn-block" [disabled]="!loginForm.valid" type="submit" >{{'Login.Connexion'|translate}}</button>
+        <input class="mr-2" type="checkbox" id="localConnection" value="{{checkbox}}" formControlName="localConnection" (click)="checkState()" style="cursor: pointer;"/>
+        <span class="font-14">{{'Login.ConnexionLocal' | translate}}</span>
+        <button class="btn btn-info btn-block mt-1" [disabled]="!loginForm.valid" type="submit" >{{'Login.Connexion' | translate}}</button>
       </form>
     </div>
   </div>

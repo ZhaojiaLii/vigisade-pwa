@@ -1,5 +1,5 @@
 <div
-    *ngIf="(isMenuOpen$|async) === false && (isLogged$|async) === true"
+    *ngIf="(isMenuOpen$|async) === false && (isLogged$|async) === true || (isGoogleLogged$|async) === true"
     class="menu-bar bg-primary"
     [ngClass]="{'justify-content-center': (menuOptions$|async)?.routeLabel === null}"
 >
