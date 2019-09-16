@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
 import { HistorySearch } from '../../history/interfaces/history-search.interface';
 import { User } from '../../profile/interfaces/user';
 import { ROLES } from '../../../data/user.helpers';
-import { HistoryService } from '../../history/services/history.service';
 
 @Component({
   selector: 'app-a-traiter',
@@ -21,7 +20,7 @@ export class ATraiterComponent implements OnInit {
   correction$: Observable<Correction[]>;
   countCorrection$: Observable<number>;
   routingState$: Observable<boolean> = this.correctionService.getRoutingState();
-
+  loading = false;
   isDesktop = false;
   roles = ROLES;
   status: string;
@@ -76,6 +75,11 @@ export class ATraiterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.correctionService.loadAllUsers();
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
     this.status = null;
     this.correctionService.loadCorrection();
     this.entityToken = true;

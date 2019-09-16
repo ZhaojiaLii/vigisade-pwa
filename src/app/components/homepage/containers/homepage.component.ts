@@ -65,7 +65,7 @@ export class HomepageComponent implements OnInit {
     });
     setTimeout(() => {
       this.loading = false;
-    }, 4000);
+    }, 3500);
     if (this.isGoogleConnection) {
       this.openDialog();
     }
