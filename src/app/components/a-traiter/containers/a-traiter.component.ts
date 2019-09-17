@@ -49,22 +49,23 @@ export class ATraiterComponent implements OnInit {
       return selectedArea ? selectedArea.entity : [];
     }),
   );
-  creators$: Observable<{id: number, name: string}[]> = this.correctionService.getCorrection().pipe(
-    map((corrections: Correction[]) => {
-      const uniqueCorrectionId = [];
-      if (corrections) {
-        return corrections.map(correction => ({
-          id: correction.user_id,
-          name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
-        })).filter(creator => {
-          if (uniqueCorrectionId.includes(creator.id)) {
-            return false;
-          }
-
-          uniqueCorrectionId.push(creator.id);
-          return true;
-        });
-      }
+  creators$: Observable<{id: number, name: string, email: string}[]> = combineLatest(
+    [this.correctionService.getCorrection(), this.correctionService.getAllUsers()]).pipe(
+    map(([corrections, users]: [Correction[], User[]]) => {
+       if (corrections && users) {
+         const uniqueCorrectionId = [];
+         return corrections.map(correction => ({
+           id: correction.user_id,
+           name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
+           email: users.find(user => user.id === correction.user_id).mail,
+         })).filter(creator => {
+           if (uniqueCorrectionId.includes(creator.id)) {
+             return false;
+           }
+           uniqueCorrectionId.push(creator.id);
+           return true;
+         });
+       }
     }),
   );
   constructor(
@@ -75,7 +76,6 @@ export class ATraiterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.correctionService.loadAllUsers();
     this.loading = true;
     setTimeout(() => {
       this.loading = false;

@@ -15,6 +15,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 
 import * as moment from 'moment';
 import 'moment/min/locales';
+import { ActionCorrectiveService } from '../components/action-corrective/services/action-corrective.service';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
     private historyService: HistoryService,
     private surveyService: SurveyService,
     private translateService: TranslateService,
+    private correctionService: ActionCorrectiveService,
     private s: SwPush,
     private BsDatepickerlocaleService: BsLocaleService
   ) {
@@ -54,6 +56,7 @@ export class AppComponent implements OnInit {
       this.dataService.loadHeader();
       this.profileService.loadUser();
       this.historyService.loadHistory();
+      this.correctionService.loadAllUsers();
     });
 
     this.loginService.isGoogleAccount().pipe(
