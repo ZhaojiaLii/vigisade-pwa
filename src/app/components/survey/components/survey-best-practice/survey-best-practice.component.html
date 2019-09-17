@@ -50,7 +50,7 @@
                         </div>
                     </label>
                 </div>
-                <div class="form-row">
+                <div class="form-row" *ngIf="hide">
                     <div class="form-group col-12">
                         <label for="bp-type">{{'Visite.Type'|translate}}</label>
                         <select
@@ -83,7 +83,7 @@
                         <div class="line"></div>
                     </div>
                 </div>
-                <div class="mx-30 mb-25">
+                <div class="mx-30 mb-25" *ngIf="hide">
                     <input type="hidden" value="" formControlName="photo">
                     <input style="display: none" type="file" (change)="encode($event)" #uploadImage>
                     <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center" (click)="uploadImage.click()" >
