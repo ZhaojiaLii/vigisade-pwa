@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   createCorrection,
   createCorrectionFail,
@@ -28,7 +28,7 @@ export class CorrectionEffects {
     private user: ProfileService,
   ) {}
 
-  @Effect()
+
   loadCorrection$ = createEffect(() => this.actions$.pipe(
     ofType(loadCorrection),
     switchMap(() => {
@@ -39,7 +39,7 @@ export class CorrectionEffects {
     })
   ));
 
-  @Effect()
+
   loadUsers$ = createEffect(() => this.actions$.pipe(
     ofType(loadAllUsers),
     switchMap(() => {
@@ -50,7 +50,7 @@ export class CorrectionEffects {
     })
   ));
 
-  @Effect()
+
   updateCorrection$ = createEffect(() => this.actions$.pipe(
     ofType(updateCorrection),
     switchMap(action => {
@@ -62,7 +62,7 @@ export class CorrectionEffects {
     })
   ));
 
-  @Effect()
+
   createCorrection$ = createEffect(() => this.actions$.pipe(
     ofType(createCorrection),
     switchMap( action => {
