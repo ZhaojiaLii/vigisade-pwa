@@ -137,7 +137,17 @@ export class ActionCorrectiveComponent implements OnInit {
       this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
     });
 
-
+    this.correction.valueChanges.subscribe(val => {
+      if (this.actionStatus !== val.status) {
+        document.getElementById('photo').disabled = true;
+        document.getElementById('commentaire').disabled = true;
+        document.getElementById('user_id').disabled = true;
+      } else {
+        document.getElementById('photo').disabled = false;
+        document.getElementById('commentaire').disabled = false;
+        document.getElementById('user_id').disabled = false;
+      }
+    });
 
   }
   encode(event: any) {
