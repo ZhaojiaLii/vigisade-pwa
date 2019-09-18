@@ -26,7 +26,15 @@
               <option value="Validé">Validé</option>
             </select>
           </div>
-          <div class="col-6 font-demiBold">{{'Atraiter.Zone'|translate}} :
+          <div class="col-6 font-weight-bold font-14 d-flex" *ngIf="!((user$|async)?.roles?.includes(roles.admin))">
+            <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'Atraiter.Rechercher'|translate}}</span>
+            </button>
+            <button class="col-6 btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'Atraiter.Réinitialiser'|translate}}</span>
+            </button>
+          </div>
+          <div class="col-6 font-demiBold" *ngIf="(user$|async)?.roles?.includes(roles.admin)">{{'Atraiter.Zone'|translate}} :
             <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
               <option style='display: none' value=''></option>
               <option *ngFor="let area of areas$|async" value="{{area.id}}">
@@ -35,7 +43,7 @@
             </select>
           </div>
         </div>
-        <div class="row align-items-center light-grey mb-20">
+        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin)">
           <div class="col-6 font-demiBold">{{'Atraiter.Entité'|translate}} :
             <select
               [attr.disabled]="entityToken ? true : null"
@@ -60,13 +68,13 @@
             </select>
           </div>
         </div>
-        <div class="row align-items-center light-grey mb-20">
+        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin)">
           <div class="col-6 font-weight-bold font-14 d-flex"></div>
           <div class="col-6 font-weight-bold font-14 d-flex">
-            <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+            <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
               <span>{{'Atraiter.Rechercher'|translate}}</span>
             </button>
-            <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+            <button class="col-6 btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
               <span>{{'Atraiter.Réinitialiser'|translate}}</span>
             </button>
           </div>

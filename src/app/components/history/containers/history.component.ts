@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { HistoryService } from '../services/history.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
-import { filter, map, startWith, pairwise } from 'rxjs/operators';
+import { filter, map, pairwise, startWith } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
@@ -17,7 +17,7 @@ import { HistoryResult } from '../../survey/interfaces/getResultInterface/histor
   selector: 'app-history',
   templateUrl: './history.component.html'
 })
-export class HistoryComponent implements OnInit, AfterViewInit {
+export class HistoryComponent implements OnInit {
 
 
   isDesktop = false;
@@ -93,10 +93,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       this.history$ = this.historyService.getUserHistoryOrderedByDate();
     }
     this.entityToken = true;
-  }
-
-  ngAfterViewInit(): void {
-    console.log('init');
   }
 
   search(): void {
