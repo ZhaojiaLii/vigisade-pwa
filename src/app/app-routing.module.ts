@@ -14,18 +14,22 @@ import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.c
 import { TokenGuard } from './services/guards/token-guard.service';
 import { HistoryComponent } from './components/history/containers/history.component';
 
-const extraOptions: ExtraOptions = {};
+const extraOptions: ExtraOptions = {onSameUrlNavigation: 'reload'};
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'login',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
     component: LoginComponent,
   },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent,
+  // },
   {
     path: 'tutorial',
     component: TutorialComponent,
@@ -86,9 +90,9 @@ const routes: Routes = [
     component: ActionCorrectiveComponent,
     canActivate: [TokenGuard],
   },
-  { path: '**',
-    redirectTo: 'login',
-  }
+  // { path: '**',
+  //   redirectTo: 'login',
+  // }
 ];
 
 @NgModule({
