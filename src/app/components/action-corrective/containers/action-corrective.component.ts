@@ -55,7 +55,8 @@ export class ActionCorrectiveComponent implements OnInit {
   imagePathAC = IMAGE_PATH.action_corrective;
 
   isDesktop = false;
-
+  disableResponsible = true;
+  disableCommentPhoto = true;
   public status = [];
 
   loading = false;
@@ -137,17 +138,11 @@ export class ActionCorrectiveComponent implements OnInit {
       this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
     });
 
-    // this.correction.valueChanges.subscribe(val => {
-    //   if (this.actionStatus !== val.status) {
-    //     document.getElementById('photo').disabled = true;
-    //     document.getElementById('commentaire').disabled = true;
-    //     document.getElementById('user_id').disabled = true;
-    //   } else {
-    //     document.getElementById('photo').disabled = false;
-    //     document.getElementById('commentaire').disabled = false;
-    //     document.getElementById('user_id').disabled = false;
-    //   }
-    // });
+    this.correction.valueChanges.subscribe(val => {
+      this.disableResponsible = (val.comment === '' &&  val.photo === '');
+      // tslint:disable-next-line:max-line-length
+      this.disableCommentPhoto = (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId);
+    });
 
   }
   encode(event: any) {
@@ -160,28 +155,12 @@ export class ActionCorrectiveComponent implements OnInit {
     setTimeout(() => { this.loading = false; }, 5000);
   }
   validForm() {
-    if (this.actionStatus !== this.correction.value.status && this.isAdminOrManager) {
-      if ( (this.correction.value.comment === '') && (this.correction.value.photo === '')) {
-        this.sendActionCorrective();
-      } else if ((this.correction.value.comment !== '') && (this.correction.value.photo !== '')) {
+    if (Number(this.correction.value.user_id) === this.responsibleId && this.actionStatus === this.correction.value.status) {
+      if (this.correction.value.comment !== '' && this.correction.value.photo !== '') {
         this.sendActionCorrective();
       } else {
-        this.toastrService.error(this.translateService.instant('Aucune autre modification des autres champs.'));
+        this.toastrService.error(this.translateService.instant('Tous les champs sont obligatoires.'));
       }
-    } else if (this.actionStatus !== this.correction.value.status && !this.isAdminOrManager) {
-      if ( (this.correction.value.comment === '') && (this.correction.value.photo === '')) {
-        this.toastrService.error(this.translateService.instant('Aucune autre modification des autres champs.'));
-      } else {
-        this.sendActionCorrective();
-      }
-    } else if (Number(this.correction.value.user_id) !== this.responsibleId) {
-      if (this.correction.value.comment !== '' || this.correction.value.photo !== '') {
-        this.toastrService.error(this.translateService.instant('Commentaire et photo doit être vide.'));
-      } else {
-        this.sendActionCorrective();
-      }
-    } else if (this.correction.value.comment === '' || this.correction.value.photo === '') {
-      this.toastrService.error(this.translateService.instant('Tous les champs sont obligatoires.'));
     } else {
       this.sendActionCorrective();
     }
@@ -201,7 +180,34 @@ export class ActionCorrectiveComponent implements OnInit {
         comment_question: this.correction.value.comment,
         image: this.correction.value.photo,
       };
-    } else {
+    } else if (this.isAdminOrManager && this.correction.value.comment !== '' && this.correction.value.photo !== '') {
+      // only modify photo and comment
+      correctionPayload = {
+        id: this.thisCorrection.id,
+        user_id: this.thisCorrection.user_id,
+        survey_id: this.thisCorrection.survey_id,
+        category_id: this.thisCorrection.category_id,
+        question_id: this.thisCorrection.question_id,
+        result_id: this.thisCorrection.result_id,
+        status: 'A valider',
+        comment_question: this.correction.value.comment,
+        image: this.correction.value.photo,
+      };
+    } else if (this.isAdminOrManager && this.actionStatus !== this.correction.value.status) {
+      // only modify status
+      correctionPayload = {
+        id: this.thisCorrection.id,
+        user_id: this.thisCorrection.user_id,
+        survey_id: this.thisCorrection.survey_id,
+        category_id: this.thisCorrection.category_id,
+        question_id: this.thisCorrection.question_id,
+        result_id: this.thisCorrection.result_id,
+        status: this.correction.value.status,
+        comment_question: this.thisCorrection.comment_question,
+        image: this.thisCorrection.image,
+      };
+    } else if (this.isAdminOrManager && Number(this.correction.value.user_id) !== this.responsibleId) {
+      // only modify responsible
       correctionPayload = {
         id: this.thisCorrection.id,
         user_id: Number(this.correction.value.user_id),
@@ -209,9 +215,9 @@ export class ActionCorrectiveComponent implements OnInit {
         category_id: this.thisCorrection.category_id,
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
-        status: this.correction.value.status,
-        comment_question: this.correction.value.comment,
-        image: this.correction.value.photo,
+        status: this.thisCorrection.status,
+        comment_question: this.thisCorrection.comment_question,
+        image: this.thisCorrection.image,
       };
     }
     this.correctionService.updateCorrection(correctionPayload);

@@ -69,14 +69,14 @@
         <form [formGroup]="correction">
           <div class="form-row">
             <div class="form-group col-12">
-              <textarea appHighlight class="form-control" id="commentaire" rows="3" formControlName="comment"></textarea>
+              <textarea appHighlight class="form-control" id="commentaire" rows="3" formControlName="comment" [attr.disabled]="disableCommentPhoto ? null : 1"></textarea>
               <label for="commentaire" class="light-grey font-14">{{ 'SituationDangereuse.Commentaire'|translate }}</label>
               <div class="line"></div>
             </div>
 
             <div class="form-group col-md-6" *ngIf="isAdminOrManager">
               <label for="user_id">{{'Profil.User_id'|translate}}</label>
-              <select class="form-control has-value" appHighlight id="user_id" formControlName="user_id">
+              <select class="form-control has-value" appHighlight id="user_id" formControlName="user_id" [attr.disabled]="( isAdminOrManager && actionStatus === 'A traiter' && disableResponsible) ? null : 1">
                 <option *ngFor="let user of allUsers$|async" value="{{user.id}}">
                   {{user.firstName}} {{user.lastName}} ({{user.mail}})
                 </option>
@@ -84,9 +84,9 @@
               <div class="line"></div>
             </div>
 
-            <div class="form-group col-md-6" *ngIf="isAdminOrManager">
+            <div class="form-group col-md-6">
               <label for="status">{{'Profil.Status'|translate}}</label>
-              <select class="form-control has-value" appHighlight id="status" formControlName="status">
+              <select class="form-control has-value" appHighlight id="status" formControlName="status" [attr.disabled]="( isAdminOrManager && actionStatus === 'A valider' && disableResponsible) ? null : 1">
                 <option *ngFor="let stat of status" value="{{stat}}">
                   {{stat|translate}}
                 </option>
@@ -98,7 +98,9 @@
           <div class="mx-30 mb-25">
             <input type="hidden" value="" formControlName="photo">
             <input style="display: none" type="file" accept="image/*" (change)="encode($event)" #uploadImage>
-            <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center" id="photo"
+            <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center"
+                    id="photo"
+                    [attr.disabled]="disableCommentPhoto ? null : 1"
                     (click)="uploadImage.click()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
                   <g fill="#363636" fill-rule="evenodd" stroke="#363636">
