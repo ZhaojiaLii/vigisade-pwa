@@ -17,19 +17,19 @@ import { HistoryComponent } from './components/history/containers/history.compon
 const extraOptions: ExtraOptions = {onSameUrlNavigation: 'reload'};
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: LoginComponent,
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  // },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'tutorial',
     component: TutorialComponent,
@@ -90,9 +90,9 @@ const routes: Routes = [
     component: ActionCorrectiveComponent,
     canActivate: [TokenGuard],
   },
-  // { path: '**',
-  //   redirectTo: 'login',
-  // }
+  { path: '**',
+    redirectTo: 'login',
+  }
 ];
 
 @NgModule({
