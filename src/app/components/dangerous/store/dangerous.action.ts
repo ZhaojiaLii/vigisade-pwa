@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { DangerousSituationPayload } from '../interfaces/create/dangerous-situation.interface';
 import { DangerousSituationHistory } from '../interfaces/dangerous-situation-history.interface';
+import { DangerousSearch } from '../../history-dangerous/interfaces/dangerous-search.interface';
 
 export const createDangerousSituation = createAction(
   '[dangerous] Create Dangerous Situation',
@@ -33,4 +34,9 @@ export const loadHistoryDangerousSuccess = createAction(
 export const loadHistoryDangerousFail = createAction(
   '[dangerous] Load History of Situation Dangerous Failed',
   props<{ error: any }>(),
+);
+
+export const setDangerousSearch = createAction(
+  '[dangerous] Set a dangerous situation search',
+  props<{searchParams: DangerousSearch}>(),
 );

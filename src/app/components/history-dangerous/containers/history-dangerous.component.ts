@@ -6,9 +6,7 @@ import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 import { HistorySearch } from '../../history/interfaces/history-search.interface';
-import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { ROLES } from '../../../data/user.helpers';
-import { HistoryResult } from '../../survey/interfaces/getResultInterface/history-result.interface';
 import { HistoryService } from '../../history/services/history.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ProfileService } from '../../profile/services/profile.service';
@@ -48,13 +46,13 @@ export class HistoryDangerousComponent implements OnInit {
       return selectedArea ? selectedArea.entity : [];
     }),
   );
-  creators$: Observable<{id: number, name: string}[]> = this.historyService.getHistory().pipe(
-    filter(history => history && !!history.result),
-    map((history: GetResult) => {
+  creators$: Observable<{id: number, name: string}[]> = this.dangerousService.getDangerousHistory().pipe(
+    filter(history => history && !!history),
+    map((histories: DangerousSituationHistory[]) => {
       const uniqueHistoryId = [];
-      return history.result.map(result => ({
-        id: result.resultUserId,
-        name: result.resultUserfirstName + ' ' + result.resultUserlastName,
+      return histories.map(result => ({
+        id: result.DangerousSituationUser,
+        name: result.DangerousSituationFirstName + ' ' + result.DangerousSituationLastName,
       })).filter(creator => {
         if (uniqueHistoryId.includes(creator.id)) {
           return false;
@@ -69,7 +67,6 @@ export class HistoryDangerousComponent implements OnInit {
 
   roles = ROLES;
 
-  history$: Observable<HistoryResult[]>;
 
   constructor(
     private historyService: HistoryService,
@@ -79,9 +76,6 @@ export class HistoryDangerousComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Refresh history when opening them.
-    // this.historyService.loadHistory();
-    this.historyService.getHistoryOrderedByDate().subscribe();
     this.isDesktop = this.deviceService.isDesktop();
     this.searchForm.valueChanges.pipe(
       startWith(null as HistorySearch),
@@ -91,17 +85,11 @@ export class HistoryDangerousComponent implements OnInit {
         this.searchForm.patchValue({entityId: null});
       }
     });
-
-    if (this.deviceService.isDesktop()) {
-      this.history$ = this.historyService.getHistoryOrderedByDate();
-    } else {
-      this.history$ = this.historyService.getUserHistoryOrderedByDate();
-    }
     this.entityToken = true;
   }
 
   search(): void {
-    this.historyService.setSearch(this.searchForm.value);
+    this.dangerousService.setSearch(this.searchForm.value);
   }
 
   resetSearch(): void {

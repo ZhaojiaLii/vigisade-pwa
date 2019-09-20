@@ -4,7 +4,7 @@ import {
   createDangerousSituationFail,
   loadHistoryDangerous,
   loadHistoryDangerousFail,
-  loadHistoryDangerousSuccess,
+  loadHistoryDangerousSuccess, setDangerousSearch,
   setLoadingState
 } from './dangerous.action';
 import { getRandomId } from '../../../data/random.helpers';
@@ -22,6 +22,7 @@ export const createDangerousReducer = createReducer(
   on(loadHistoryDangerous, state => state),
   on(loadHistoryDangerousSuccess, (state, {dangerousHistory}) => ({...state, dangerousHistory})),
   on(loadHistoryDangerousFail, state => state),
+  on(setDangerousSearch, (state, {searchParams}) => ({...state, search: searchParams})),
 );
 
 export function dangerousReducer(state: DangerousState | undefined, action: Action) {
