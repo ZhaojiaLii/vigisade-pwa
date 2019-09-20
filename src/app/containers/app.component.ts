@@ -9,13 +9,14 @@ import { HistoryService } from '../components/history/services/history.service';
 import { SurveyService } from '../components/survey/services/survey.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwPush } from '@angular/service-worker';
-import {BsLocaleService} from 'ngx-bootstrap';
-import { frLocale, esLocale, enGbLocale } from 'ngx-bootstrap/locale';
+import { BsLocaleService } from 'ngx-bootstrap';
+import { enGbLocale, esLocale, frLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 
 import * as moment from 'moment';
 import 'moment/min/locales';
 import { ActionCorrectiveService } from '../components/action-corrective/services/action-corrective.service';
+import { DangerousService } from '../components/dangerous/services/dangerous.service';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit {
     private translateService: TranslateService,
     private correctionService: ActionCorrectiveService,
     private s: SwPush,
-    private BsDatepickerlocaleService: BsLocaleService
+    private BsDatepickerlocaleService: BsLocaleService,
+    private dangerousService: DangerousService,
   ) {
     this.setupLanguage();
   }
@@ -57,6 +59,7 @@ export class AppComponent implements OnInit {
       this.profileService.loadUser();
       this.historyService.loadHistory();
       this.correctionService.loadAllUsers();
+      this.dangerousService.loadDangerousHistory();
     });
 
     this.loginService.isGoogleAccount().pipe(

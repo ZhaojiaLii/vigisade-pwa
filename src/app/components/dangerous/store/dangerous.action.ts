@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { DangerousSituationPayload } from '../interfaces/create/dangerous-situation.interface';
+import { DangerousSituationHistory } from '../interfaces/dangerous-situation-history.interface';
 
 export const createDangerousSituation = createAction(
   '[dangerous] Create Dangerous Situation',
@@ -18,4 +19,18 @@ export const createDangerousSituationFail = createAction(
 export const setLoadingState = createAction(
   '[dangerous] Set loading state',
   props<{ loading: boolean }>(),
+);
+
+export const loadHistoryDangerous = createAction(
+  '[dangerous] Load History of Situation Dangerous',
+);
+
+export const loadHistoryDangerousSuccess = createAction(
+  '[dangerous] Load History of Situation Dangerous Success',
+  props<{ dangerousHistory: DangerousSituationHistory[] }>(),
+);
+
+export const loadHistoryDangerousFail = createAction(
+  '[dangerous] Load History of Situation Dangerous Failed',
+  props<{ error: any }>(),
 );

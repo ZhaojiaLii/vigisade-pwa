@@ -1,6 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { dangerousInitialState, DangerousState } from './dangerous.states';
-import { createDangerousSituation, createDangerousSituationFail, createDangerousSituationSuccess, setLoadingState } from './dangerous.action';
+import {
+  createDangerousSituationFail,
+  loadHistoryDangerous,
+  loadHistoryDangerousFail,
+  loadHistoryDangerousSuccess,
+  setLoadingState
+} from './dangerous.action';
 import { getRandomId } from '../../../data/random.helpers';
 
 export const createDangerousReducer = createReducer(
@@ -13,6 +19,9 @@ export const createDangerousReducer = createReducer(
       dangerousSituation,
     }),
   })),
+  on(loadHistoryDangerous, state => state),
+  on(loadHistoryDangerousSuccess, (state, {dangerousHistory}) => ({...state, dangerousHistory})),
+  on(loadHistoryDangerousFail, state => state),
 );
 
 export function dangerousReducer(state: DangerousState | undefined, action: Action) {

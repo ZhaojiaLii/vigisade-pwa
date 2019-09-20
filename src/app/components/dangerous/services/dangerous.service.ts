@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { createDangerousSituation } from '../store/dangerous.action';
+import { select, Store } from '@ngrx/store';
+import { createDangerousSituation, loadHistoryDangerous } from '../store/dangerous.action';
 import { DangerousSituationPayload } from '../interfaces/create/dangerous-situation.interface';
 import { DangerousState } from '../store/dangerous.states';
+import { getDangerousSituationHistory } from '../store/dangerous.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +16,13 @@ export class DangerousService {
 
   createDangerousSituation(dangerousSituation: DangerousSituationPayload): void {
     this.store.dispatch(createDangerousSituation({dangerousSituation}));
+  }
+
+  loadDangerousHistory(): void {
+    this.store.dispatch(loadHistoryDangerous());
+  }
+
+  getDangerousHistory() {
+    return this.store.pipe(select(getDangerousSituationHistory));
   }
 }
