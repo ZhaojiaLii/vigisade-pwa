@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card card-full-width mb-10 shadow-none">
+    <div class="card-body px-30">
+      <div class="row align-items-center">
+        <div class="col-3 font-demiBold">
+          <div class="">
+            <div class="row align-text-top">
+              <div class="font-demiBold light-grey font-14">{{responsible}}</div>
+            </div>
+            <div class="row">
+              <div class="font-demiBold light-grey font-12 mb-20">{{date | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
+            </div>
+            <div class="row">
+              <div class="font-demiBold">{{dangerousTypeName}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-5 font-14 pl-3">{{comment}}</div>
+        <div class="col-4 text-right font-12">
+          <img class="img-fluid w-100" src="{{photo ? (imagePATH+photo) : '../../../../assets/images/img-test-correction.jpg'}}" alt="image not found"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

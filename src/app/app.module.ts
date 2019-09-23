@@ -46,6 +46,8 @@ import { bufferFeature } from './store/buffer/buffer.feature';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HistoryDangerousComponent } from './components/history-dangerous/containers/history-dangerous.component';
+import { HistoryDangerousItemComponent } from './components/history-dangerous/components/history-dangerous-item/history-dangerous-item.component';
 
 registerLocaleData(localeFr);
 
@@ -91,6 +93,8 @@ const ngrxFeatures = [
     BonnePratiqueComponent,
     ATraiterComponent,
     DZESelectComponent,
+    HistoryDangerousComponent,
+    HistoryDangerousItemComponent,
   ],
   imports: [
     BrowserModule,
