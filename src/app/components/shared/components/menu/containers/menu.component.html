@@ -133,6 +133,17 @@
                             <span>{{'Menu.Tutoriel'|translate}}</span>
                         </a>
                     </li>
+                    <li class="nav-item" *ngIf="isDesktop">
+                      <a class="nav-link d-flex align-items-center" routerLink="/history-dangerous">
+                          <span class="d-flex justify-content-center w-60px flex-shrink-0">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23">
+                              <path fill="#1E272E" fill-rule="evenodd"
+                                    d="M17.69 7.666c1.44-.63 2.4 1.646.995 2.31l-4.457 1.821-.926 2.555c-.548 1.61-2.811.56-2.297-.875l1.063-3.01c.137-.315.308-.56.583-.666l5.039-2.135zm7.062 3.711c0 6.266-5.005 11.377-11.142 11.377a10.944 10.944 0 0 1-7.885-3.36l1.714-1.75c1.577 1.574 3.771 2.59 6.171 2.59 4.8 0 8.674-3.956 8.674-8.857 0-4.9-3.874-8.857-8.674-8.857a8.673 8.673 0 0 0-8.536 7.037l2.777-.42-3.943 5.636L0 9.137l2.605.384C3.428 4.096 8.022 0 13.61 0c6.137 0 11.142 5.076 11.142 11.377z"></path>
+                          </svg>
+                          </span>
+                        <span>{{'Menu.Historique des situations dangereuses'|translate}}</span>
+                      </a>
+                    </li>
                 </ul>
             </div>
             <app-menu-buttons></app-menu-buttons>

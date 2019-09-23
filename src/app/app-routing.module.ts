@@ -13,6 +13,7 @@ import { HistoryDetailsComponent } from './components/history-details/containers
 import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.component';
 import { TokenGuard } from './services/guards/token-guard.service';
 import { HistoryComponent } from './components/history/containers/history.component';
+import { HistoryDangerousComponent } from './components/history-dangerous/containers/history-dangerous.component';
 
 const extraOptions: ExtraOptions = {onSameUrlNavigation: 'reload'};
 
@@ -48,6 +49,11 @@ const routes: Routes = [
   {
     path: 'dangerous',
     component: DangerousSituationComponent,
+    canActivate: [TokenGuard],
+  },
+  {
+    path: 'history-dangerous',
+    component: HistoryDangerousComponent,
     canActivate: [TokenGuard],
   },
   {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../../../../services/layout.service';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../../../login/services/login.service';
@@ -6,13 +6,15 @@ import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/rou
 import { filter, map } from 'rxjs/operators';
 import { MenuOptions } from '../interfaces/menu-options.interface';
 import { MenuService } from '../services/menu.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
 
+  isDesktop = false;
   isMenuOpen$: Observable<boolean> = this.layoutService.isMenuOpen();
   isLogged$: Observable<boolean> = this.loginService.isLogged();
   isGoogleLogged$: Observable<boolean> = this.loginService.isGoogleAccount();
@@ -29,6 +31,7 @@ export class MenuComponent {
     private layoutService: LayoutService,
     private loginService: LoginService,
     private menuService: MenuService,
+    private deviceService: DeviceDetectorService,
   ) {}
 
   toggleMenu(): void {
@@ -37,5 +40,9 @@ export class MenuComponent {
 
   goBack(): void {
     window.history.back();
+  }
+
+  ngOnInit(): void {
+    this.isDesktop = this.deviceService.isDesktop();
   }
 }
