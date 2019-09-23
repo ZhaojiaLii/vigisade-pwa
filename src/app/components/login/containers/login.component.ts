@@ -5,6 +5,7 @@ import { filter, take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -30,9 +31,11 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private toastrService: ToastrService,
+    private cookieService: CookieService,
   ) {}
 
   ngOnInit(): void {
+    this.cookieService.deleteAll();
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
