@@ -3,5 +3,5 @@ export interface DangerousSearch {
   endDate: string;
   areaId: string;
   entityId: string;
-  responsible: string;
+  userId: string;
 }

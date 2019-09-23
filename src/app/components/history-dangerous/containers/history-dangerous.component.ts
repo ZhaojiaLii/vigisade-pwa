@@ -12,6 +12,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ProfileService } from '../../profile/services/profile.service';
 import { DangerousService } from '../../dangerous/services/dangerous.service';
 import { DangerousSituationHistory } from '../../dangerous/interfaces/dangerous-situation-history.interface';
+import { DangerousSearch } from '../interfaces/dangerous-search.interface';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history-dangerous',
@@ -21,7 +24,7 @@ export class HistoryDangerousComponent implements OnInit {
 
 
   isDesktop = false;
-
+  loading = false;
   searchForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -62,8 +65,7 @@ export class HistoryDangerousComponent implements OnInit {
       });
     }),
   );
-  historyDangerous$: Observable<DangerousSituationHistory[]> = this.dangerousService.getDangerousHistory();
-
+  historyDangerous$: Observable<DangerousSituationHistory[]>;
 
   roles = ROLES;
 
@@ -73,19 +75,33 @@ export class HistoryDangerousComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
     private dangerousService: DangerousService,
+    private toastrService: ToastrService,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit() {
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
     this.isDesktop = this.deviceService.isDesktop();
     this.searchForm.valueChanges.pipe(
-      startWith(null as HistorySearch),
+      startWith(null as DangerousSearch),
       pairwise(),
-    ).subscribe(([prev, changes]: [HistorySearch, HistorySearch]) => {
+    ).subscribe(([prev, changes]: [DangerousSearch, DangerousSearch]) => {
       if (prev !== null && prev.areaId !== changes.areaId) {
         this.searchForm.patchValue({entityId: null});
       }
     });
     this.entityToken = true;
+    this.historyDangerous$ = this.dangerousService.getFilteredDangerous();
+    this.historyDangerous$.subscribe(history => {
+      // @ts-ignore
+      if (history.message) {
+        // return {code:200, message: 'no result'} when length of history is 0
+        this.toastrService.error(this.translateService.instant('Rien à afficher'));
+      }
+    });
   }
 
   search(): void {

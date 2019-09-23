@@ -1,5 +1,8 @@
 <div class="container">
-  <form [formGroup]="searchForm" *ngIf="isDesktop">
+  <div *ngIf="(historyDangerous$|async) === null || loading" class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <form [formGroup]="searchForm">
     <div class="card card-full-width mb-10 shadow-none mp-15">
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
@@ -35,10 +38,10 @@
             </select>
           </div>
         </div>
-        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin)">
+        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager)">
           <div class="col-6 font-demiBold">{{'HistoriqueVisites.Créateur'|translate}} :
             <select
-              [attr.disabled]="(user$|async)?.roles?.includes(roles.admin) ? null : 1"
+              [attr.disabled]="((user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager)) ? null : 1"
               class="form-control"
               style="border: solid 1px lightgrey"
               formControlName="userId">
@@ -49,16 +52,16 @@
             </select>
           </div>
           <div class="col-6 font-weight-bold font-14 d-flex">
-            <button class="btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+            <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
               <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
             </button>
-            <button class="btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+            <button class="col-6 btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
               <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
             </button>
           </div>
         </div>
-        <div class="row align-items-center light-grey mb-20" *ngIf="!((user$|async)?.roles?.includes(roles.admin))">
-          <div class="col-6 font-weight-bold font-14 d-flex"></div>
+        <div class="row align-items-center light-grey mb-20" *ngIf="!((user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager))">
+          <div class="col-6 font-demiBold"></div>
           <div class="col-6 font-weight-bold font-14 d-flex">
             <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
               <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>

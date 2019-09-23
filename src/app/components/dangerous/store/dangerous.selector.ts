@@ -45,8 +45,8 @@ export const getFilteredDangerous = createSelector(
           || history.DangerousSituationEntity === Number(searchParams.entityId)
         )
         && (
-          !searchParams.responsible
-          || history.DangerousSituationUser === Number(searchParams.responsible)
+          !searchParams.userId
+          || history.DangerousSituationUser === Number(searchParams.userId)
         );
     });
   }
