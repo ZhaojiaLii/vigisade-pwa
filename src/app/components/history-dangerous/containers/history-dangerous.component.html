@@ -1,0 +1,86 @@
+<div class="container">
+  <div *ngIf="(historyDangerous$|async) === null || loading" class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <form [formGroup]="searchForm">
+    <div class="card card-full-width mb-10 shadow-none mp-15">
+      <div class="card-body px-30">
+        <div class="row align-items-center light-grey mb-20">
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Filtres de recherche'|translate}}</div>
+        </div>
+        <hr/>
+        <div class="row align-items-center light-grey mb-20">
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date début'|translate}} :
+            <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate">
+          </div>
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date fin'|translate}} :
+            <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate">
+          </div>
+        </div>
+        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin)">
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Zone'|translate}} :
+            <select class="form-control" style="border: solid 1px lightgrey" formControlName="areaId">
+              <option style='display: none' value=''></option>
+              <option *ngFor="let area of areas$|async" value="{{area.id}}">
+                {{area.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Entité'|translate}} :
+            <select
+              [attr.disabled]="entityToken ? true : null"
+              class="form-control" style="border: solid 1px lightgrey"
+              formControlName="entityId">
+              <option style='display: none' value=''></option>
+              <option *ngFor="let entity of entities$|async" value="{{entity.id}}">
+                {{entity.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager)">
+          <div class="col-6 font-demiBold">{{'HistoriqueVisites.Créateur'|translate}} :
+            <select
+              [attr.disabled]="((user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager)) ? null : 1"
+              class="form-control"
+              style="border: solid 1px lightgrey"
+              formControlName="userId">
+              <option style='display: none' value=''></option>
+              <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
+                {{creator.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-6 font-weight-bold font-14 d-flex">
+            <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
+            </button>
+            <button class="col-6 btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
+            </button>
+          </div>
+        </div>
+        <div class="row align-items-center light-grey mb-20" *ngIf="!((user$|async)?.roles?.includes(roles.admin) || (user$|async)?.roles?.includes(roles.manager))">
+          <div class="col-6 font-demiBold"></div>
+          <div class="col-6 font-weight-bold font-14 d-flex">
+            <button class="col-6 btn btn-info w-40 mb-2 mr-4 d-flex align-items-center justify-content-center" (click)="search()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'HistoriqueVisites.Rechercher'|translate}}</span>
+            </button>
+            <button class="col-6 btn btn-info w-40 mb-2 d-flex align-items-center justify-content-center" (click)="resetSearch()" style="margin-top: 16px;margin-bottom: 0 !important;">
+              <span>{{'HistoriqueVisites.Réinitialiser'|translate}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <app-history-dangerous-item
+    *ngFor="let history of historyDangerous$|async"
+    [responsible]="history.DangerousSituationFirstName + ' ' + history.DangerousSituationLastName"
+    [date]="history.DangerousSituationDate"
+    [photo]="history.DangerousSituationPhoto"
+    [comment]="history.DangerousSituationComment"
+    [dangerousType]="history.DangerousSituationTypeDangerousSituation"
+  ></app-history-dangerous-item>
+</div>
+
