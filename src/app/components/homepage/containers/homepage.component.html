@@ -4,7 +4,7 @@
   </div>
   <div class="row mb-50">
     <div class="card card-full-width">
-      <div class="card-body font-14" [innerHTML]="(header$|async)?.news">
+      <div class="card-body font-14" [innerHTML]="(header$|async)?.news" style="user-select: none;">
         <p class="card-text"></p>
       </div>
     </div>
@@ -12,7 +12,7 @@
 
   <div *ngIf="(user$|async)?.countRemainingActions > 0" class="card card-block mb-30">
     <div class="card-body text-center text-info">
-      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important; cursor: pointer;">
+      <a class="nav-link-homepage d-flex align-items-center" (click)="clickAtraiter()" style="justify-content: center !important; cursor: pointer; user-select: none;">
         <span class="font-30 font-weight-bold mr-2">
           <strong>{{(user$|async)?.countRemainingActions}}</strong>
         </span>
@@ -29,7 +29,7 @@
   <div class="row text-center mb-30">
     <div class="col-6 ">
       <div class="welcome-visit-card mb-2">
-        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important; user-select: none;">
           <span class="circle-white">
             <strong>{{(user$|async)?.countCurrentMonthVisits || 0}}</strong>
           </span>
@@ -39,7 +39,7 @@
     </div>
     <div class="col-6">
       <div class="welcome-visit-card mb-2">
-        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important;">
+        <a class="nav-link-homepage d-flex align-items-center" routerLink="/history" style="justify-content: center !important; user-select: none;">
           <span class="circle-white">
             <strong>{{(user$|async)?.countLastMonthVisits || 0}}</strong>
           </span>
