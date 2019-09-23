@@ -22,10 +22,8 @@
               <div class="line"></div>
           </div>
         </div>
-        <label for="localConnection" style="cursor: pointer; user-select: none;">
-          <input class="mr-2" type="checkbox" id="localConnection" value="{{checkbox}}" formControlName="localConnection" (click)="checkState()"/>
-          <span class="font-14">{{'Login.ConnexionLocal' | translate}}</span>
-        </label>
+        <input class="mr-2" type="checkbox" id="localConnection" value="{{checkbox}}" formControlName="localConnection" (click)="checkState()" style="cursor: pointer;"/>
+        <span class="font-14">{{'Login.ConnexionLocal' | translate}}</span>
         <button class="btn btn-info btn-block mt-1" [disabled]="!loginForm.valid" type="submit" >{{'Login.Connexion' | translate}}</button>
       </form>
     </div>
