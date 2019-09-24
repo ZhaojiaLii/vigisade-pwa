@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { DataService } from '../../../services/data.service';
 import { Header } from '../../../interfaces/header.interface';
 import { Router } from '@angular/router';
@@ -13,6 +13,8 @@ import { Entity } from '../../shared/interfaces/entity.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LoginService } from '../../login/services/login.service';
 import { LoginApiService } from '../../login/services/login-api.service';
+import { map } from 'rxjs/operators';
+import { ProfileComplete } from '../interfaces/profileComplete.interface';
 
 
 @Component({
@@ -24,7 +26,6 @@ export class HomepageComponent implements OnInit {
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
   google$: Observable<boolean> = this.loginService.isGoogleAccount();
-  isGoogleConnection = false;
   constructor(
     private dataService: DataService,
     private profileService: ProfileService,
@@ -60,15 +61,16 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.google$.subscribe(google => {
-      this.isGoogleConnection = google;
+    this.user$.subscribe(user => {
+      if (user) {
+        if (!user.directionId || !user.areaId || !user.entityId) {
+          this.openDialog();
+        }
+      }
     });
     setTimeout(() => {
       this.loading = false;
-    }, 3500);
-    if (this.isGoogleConnection) {
-      this.openDialog();
-    }
+    }, 3000);
   }
 }
 
@@ -77,14 +79,31 @@ export class HomepageComponent implements OnInit {
   templateUrl: './profile-complete-select.component.html',
 })
 export class DZESelectComponent {
-  direction$: Observable<Direction[]> = this.dataService.getDirections();
-  area$: Observable<Area[]> = this.profileService.getUserAreas();
-  entity$: Observable<Entity[]> = this.profileService.getUserEntities();
   profileCompleteForm = new FormGroup({
     directionId: new FormControl(''),
     areaId: new FormControl(''),
     entityId: new FormControl(''),
   });
+  direction$: Observable<Direction[]> = this.dataService.getDirections();
+  area$: Observable<Area[]> = combineLatest([this.profileCompleteForm.valueChanges, this.direction$]).pipe(
+    map(([changes, directions]: [ProfileComplete, Direction[]]) => {
+      if (!directions || directions.length === 0 || !changes || !changes.directionId) {
+        return [];
+      }
+      const selectedDirection = directions.find(direction => direction.id === Number(changes.directionId));
+      return selectedDirection ? selectedDirection.area : [];
+    }),
+  );
+  entity$: Observable<Entity[]> = combineLatest([this.profileCompleteForm.valueChanges, this.area$]).pipe(
+    map(([changes, areas]: [ProfileComplete, Area[]]) => {
+      if (!areas || areas.length === 0 || !changes || !changes.areaId) {
+        return [];
+      }
+      const selectedArea = areas.find(area => area.id === Number(changes.areaId));
+      return selectedArea ? selectedArea.entity : [];
+    })
+  );
+
   constructor(
     private dataService: DataService,
     private profileService: ProfileService,
@@ -96,6 +115,6 @@ export class DZESelectComponent {
       areaId: Number(this.profileCompleteForm.get('areaId').value),
       entityId: Number(this.profileCompleteForm.get('entityId').value),
     };
-    // this.profileService.updateUser(formData);
+    this.profileService.updateUser(formData);
   }
 }

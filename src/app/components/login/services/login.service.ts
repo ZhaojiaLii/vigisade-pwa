@@ -15,12 +15,12 @@ export class LoginService {
     private store: Store<State>,
   ) {}
 
-  login(username: string, password: string, localConnection: boolean): void {
-    this.store.dispatch(login({ username, password, localConnection }));
+  login(username: string, password: string): void {
+    this.store.dispatch(login({ username, password }));
   }
 
-  googleLogin(username: string, password: string, localConnection: boolean): void {
-    this.store.dispatch(googleLogin({ username, password, localConnection }));
+  googleLogin(username: string, password: string): void {
+    this.store.dispatch(googleLogin({ username, password }));
   }
 
   setToken(token: string): void {

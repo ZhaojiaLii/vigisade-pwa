@@ -15,7 +15,7 @@ export class LoginEffects {
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
     switchMap(action => {
-      return this.loginApiService.login(action.username, action.password, true).pipe(
+      return this.loginApiService.login(action.username, action.password).pipe(
         map((token) => loginSuccess({token, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
@@ -33,7 +33,7 @@ export class LoginEffects {
   googleLogin$ = createEffect(() => this.actions$.pipe(
     ofType(googleLogin),
     switchMap(action => {
-      return this.loginApiService.login(action.username, action.password, false).pipe(
+      return this.loginApiService.googleLogin(action.username, action.password).pipe(
         map((googleToken) => googleLoginSuccess({googleToken, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));

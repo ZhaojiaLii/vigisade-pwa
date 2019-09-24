@@ -66,9 +66,13 @@ export class AppComponent implements OnInit {
       filter(isLogged => isLogged),
       take(1),
     ).subscribe(() => {
+      this.surveyService.loadSurveys();
       this.dataService.loadData();
       this.dataService.loadHeader();
       this.profileService.loadUser();
+      this.historyService.loadHistory();
+      this.correctionService.loadAllUsers();
+      this.dangerousService.loadDangerousHistory();
     });
   }
 

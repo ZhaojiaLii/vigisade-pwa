@@ -1,9 +1,9 @@
 {
-  "Login.Login": "Login",
+  "Login.Login": "Username",
   "Login.Mot de passe": "Password",
-  "Login.Connexion": "Login",
+  "Login.Connexion": "Local connection",
   "Login.Error": "login fail",
-  "Login.ConnexionLocal": "Local Connection",
+  "Login.GoogleConnexion": "Google connection",
 
   "SituationDangereuse.Signaler": "Report",
   "SituationDangereuse.Type": "Type",

@@ -1,9 +1,9 @@
 {
   "Login.Login": "Iniciar sesión",
   "Login.Mot de passe": "Contraseña",
-  "Login.Connexion": "Conexión",
+  "Login.Connexion": "Conexión local",
   "Login.Error": "Conexión fail",
-  "Login.ConnexionLocal": "Conexión local",
+  "Login.GoogleConnexion": "Conéctate con Google",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",
