@@ -22,7 +22,6 @@ import { ProfileComplete } from '../interfaces/profileComplete.interface';
   templateUrl: './homepage.component.html',
 })
 export class HomepageComponent implements OnInit {
-
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
   constructor(
