@@ -52,3 +52,24 @@ export const getFilteredDangerous = createSelector(
   }
 );
 
+export const getFilteredDangerousByDate = createSelector(
+  getFilteredDangerous,
+  (histories: DangerousSituationHistory[]) => {
+    if (histories) {
+      const unfreezeHistory = histories.slice();
+      unfreezeHistory.sort((a, b) => {
+        const dateA = a.DangerousSituationDate;
+        const dateB = b.DangerousSituationDate;
+        if (dateA > dateB) {
+          return -1;
+        }
+        if (dateA < dateB) {
+          return 1;
+        }
+        return 0;
+      });
+      return unfreezeHistory;
+    }
+  }
+);
+

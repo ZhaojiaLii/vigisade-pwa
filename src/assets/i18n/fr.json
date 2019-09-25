@@ -15,6 +15,8 @@
   "SituationDangereuse.Situation dangereuse crée": "Situation dangereuse crée",
   "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
 
+  "HistoryDangerous.Non situation dangereuse": "Il n'y a aucune situation dangereuse répertoriée.",
+
   "Homepage.ActionsTraiter": "Action{{value}} à traiter",
   "Homepage.AucuneactionTraiter": "Aucune action à traiter",
   "Homepage.Visites ce mois-ci": "Visite{{value}} ce mois-ci",

@@ -15,6 +15,8 @@
   "SituationDangereuse.Situation dangereuse crée": "Dangerous situation created",
   "SituationDangereuse.Situation dangereuse synchronisee": "Impossible to contact to the server. The dangerous situation will be synchronized in background.",
 
+  "HistoryDangerous.Non situation dangereuse": "There is no dangerous situation listed.",
+
   "Homepage.ActionsTraiter": "Non-compliance{{value}} to treat",
   "Homepage.AucuneactionTraiter": "No Non-compliance to treat",
   "Homepage.Visites ce mois-ci": "Inspection{{value}} of this month",
