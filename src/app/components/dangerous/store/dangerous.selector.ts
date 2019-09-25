@@ -9,7 +9,7 @@ export const getDangerousState = createFeatureSelector<DangerousState>('dangerou
 export const getDangerousSituationHistory = createSelector(
   getDangerousState,
   (state: DangerousState) => {
-    if (state.dangerousHistory) {
+    if (state && state.dangerousHistory) {
       return state.dangerousHistory;
     }
   }

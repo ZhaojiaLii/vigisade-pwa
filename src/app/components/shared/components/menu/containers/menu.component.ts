@@ -17,7 +17,6 @@ export class MenuComponent implements OnInit {
   isDesktop = false;
   isMenuOpen$: Observable<boolean> = this.layoutService.isMenuOpen();
   isLogged$: Observable<boolean> = this.loginService.isLogged();
-  isGoogleLogged$: Observable<boolean> = this.loginService.isGoogleAccount();
   route$: Observable<string> = this.router.events.pipe(
     filter((event: RouterEvent) => event instanceof NavigationEnd),
     map((event: NavigationEnd) => event.url),

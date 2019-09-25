@@ -25,7 +25,6 @@ export class HomepageComponent implements OnInit {
 
   user$: Observable<User> = this.profileService.getUser();
   header$: Observable<Header> = this.dataService.getHeader();
-  google$: Observable<boolean> = this.loginService.isGoogleAccount();
   constructor(
     private dataService: DataService,
     private profileService: ProfileService,

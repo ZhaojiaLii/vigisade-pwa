@@ -5,7 +5,6 @@ import { filter, take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -25,24 +24,15 @@ export class LoginComponent implements OnInit {
     localConnection: new FormControl(''),
   });
 
-  checkbox: boolean;
-
   constructor(
     private loginService: LoginService,
     private router: Router,
     private toastrService: ToastrService,
-    private cookieService: CookieService,
   ) {}
 
   ngOnInit(): void {
-    this.cookieService.deleteAll();
-    this.loginService.isLogged().pipe(
-      filter(isLogged => isLogged),
-      take(1),
-      tap(() => {}),
-    ).subscribe(() => this.router.navigate(['home']));
 
-    this.loginService.isGoogleAccount().pipe(
+    this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
       tap(() => {}),
@@ -58,6 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogle() {
+    this.loginService.googleLogin(this.loginForm.get('username').value, this.loginForm.get('password').value);
     this.toastrService.error('Google login not ready');
   }
 }
