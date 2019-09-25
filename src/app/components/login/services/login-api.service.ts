@@ -36,9 +36,21 @@ export class LoginApiService {
     );
   }
 
-  googleLogin(username: string, password: string) {
-    return this.http.get(
+  googleLogin(username: string, password: string): Observable<string> {
+    return this.http.post(
       '/api/connect/google',
+      {username : username.trim(), password},
+      {observe: 'response'},
+    ).pipe(
+      tap((response: HttpResponse<{token: string}>) => {
+        if (response.status === 200 && response.body && response.body.token) {
+          return;
+        }
+        throw new Error('Bad credentials.');
+      }),
+      map(response => {
+        return response.body.token;
+      }),
     );
   }
 
