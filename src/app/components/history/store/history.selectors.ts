@@ -44,18 +44,22 @@ export const getUserHistory = createSelector(
 export const getUserHistoryByDate = createSelector(
   getUserHistory,
   (results: HistoryResult[]) => {
-    results.sort((a, b) => {
-      const dateA = a.resultDate;
-      const dateB = b.resultDate;
-      if (dateA > dateB) {
-        return -1;
-      }
-      if (dateA < dateB) {
-        return 1;
-      }
-      return 0;
-    });
-    return results;
+    if (results.length > 1) {
+      results.sort((a, b) => {
+        const dateA = a.resultDate;
+        const dateB = b.resultDate;
+        if (dateA > dateB) {
+          return -1;
+        }
+        if (dateA < dateB) {
+          return 1;
+        }
+        return 0;
+      });
+      return results;
+    } else {
+      return [];
+    }
   }
 );
 
