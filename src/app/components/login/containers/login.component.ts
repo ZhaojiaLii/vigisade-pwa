@@ -35,10 +35,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cookie.get('vigisade-tkn'));
-    if (this.cookie.get(TOKEN_KEY)) {
-      this.loginService.setToken(this.cookie.get('vigisade-tkn'));
-    }
+    const token = this.cookie.get(TOKEN_KEY);
+    this.loginService.setToken(token);
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
