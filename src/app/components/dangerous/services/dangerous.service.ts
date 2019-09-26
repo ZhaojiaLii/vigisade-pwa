@@ -3,7 +3,11 @@ import { select, Store } from '@ngrx/store';
 import { createDangerousSituation, loadHistoryDangerous, setDangerousSearch } from '../store/dangerous.action';
 import { DangerousSituationPayload } from '../interfaces/create/dangerous-situation.interface';
 import { DangerousState } from '../store/dangerous.states';
-import { getDangerousSituationHistory, getFilteredDangerous } from '../store/dangerous.selector';
+import {
+  getDangerousSituationHistory,
+  getFilteredDangerous,
+  getFilteredDangerousByDate
+} from '../store/dangerous.selector';
 import { DangerousSearch } from '../../history-dangerous/interfaces/dangerous-search.interface';
 
 @Injectable({
@@ -29,6 +33,10 @@ export class DangerousService {
 
   getFilteredDangerous() {
     return this.store.pipe(select(getFilteredDangerous));
+  }
+
+  getDangerousByDate() {
+    return this.store.pipe(select(getFilteredDangerousByDate));
   }
 
   setSearch(searchParams: DangerousSearch) {

@@ -5,9 +5,9 @@ import { googleLogin, googleLoginFail, googleLoginSuccess, login, loginFail, log
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CookieServices } from '../../../services/cookie-services.service';
-import { GOOGLE_TOKEN_KEY, TOKEN_KEY } from '../../../data/auth.const';
-import {ToastrService} from 'ngx-toastr';
-import {TranslateService} from '@ngx-translate/core';
+import { TOKEN_KEY } from '../../../data/auth.const';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class LoginEffects {
@@ -15,7 +15,7 @@ export class LoginEffects {
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
     switchMap(action => {
-      return this.loginApiService.login(action.username, action.password, true).pipe(
+      return this.loginApiService.login(action.username, action.password).pipe(
         map((token) => loginSuccess({token, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
@@ -33,8 +33,8 @@ export class LoginEffects {
   googleLogin$ = createEffect(() => this.actions$.pipe(
     ofType(googleLogin),
     switchMap(action => {
-      return this.loginApiService.login(action.username, action.password, false).pipe(
-        map((googleToken) => googleLoginSuccess({googleToken, spinnerEnable: false})),
+      return this.loginApiService.googleLogin(action.username, action.password).pipe(
+        map((token) => googleLoginSuccess({token, spinnerEnable: false})),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
           return of(googleLoginFail({error: error.message, spinnerEnable: false}));
@@ -45,7 +45,7 @@ export class LoginEffects {
 
   postGoogleLoginSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(googleLoginSuccess),
-    tap(action => this.cookie.setWithExpiryInHours(GOOGLE_TOKEN_KEY, action.googleToken, 23))
+    tap(action => this.cookie.setWithExpiryInHours(TOKEN_KEY, action.token, 23))
   ), {dispatch: false});
 
   constructor(

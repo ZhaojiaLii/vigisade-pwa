@@ -1,9 +1,9 @@
 {
   "Login.Login": "Iniciar sesión",
   "Login.Mot de passe": "Contraseña",
-  "Login.Connexion": "Conexión",
+  "Login.Connexion": "Conexión local",
   "Login.Error": "Conexión fail",
-  "Login.ConnexionLocal": "Conexión local",
+  "Login.GoogleConnexion": "Conéctate con Google",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",
@@ -14,6 +14,8 @@
   "SituationDangereuse.Valider": "Validar",
   "SituationDangereuse.Situation dangereuse crée": "Se creó una situación peligrosa",
   "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
+
+  "HistoryDangerous.Non situation dangereuse": "No hay ninguna situación peligrosa en la lista.",
 
   "Homepage.ActionsTraiter": "No conformidade{{value}} por procesar",
   "Homepage.AucuneactionTraiter": "No conformidade por procesar",

@@ -52,7 +52,7 @@ const routes: Routes = [
     canActivate: [TokenGuard],
   },
   {
-    path: 'history-dangerous',
+    path: 'historyDangerous',
     component: HistoryDangerousComponent,
     canActivate: [TokenGuard],
   },

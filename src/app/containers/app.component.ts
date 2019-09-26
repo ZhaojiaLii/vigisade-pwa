@@ -61,15 +61,6 @@ export class AppComponent implements OnInit {
       this.correctionService.loadAllUsers();
       this.dangerousService.loadDangerousHistory();
     });
-
-    this.loginService.isGoogleAccount().pipe(
-      filter(isLogged => isLogged),
-      take(1),
-    ).subscribe(() => {
-      this.dataService.loadData();
-      this.dataService.loadHeader();
-      this.profileService.loadUser();
-    });
   }
 
   private setupLanguage(): void {

@@ -24,8 +24,6 @@ export class LoginComponent implements OnInit {
     localConnection: new FormControl(''),
   });
 
-  checkbox: boolean;
-
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -33,33 +31,20 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
       tap(() => {}),
     ).subscribe(() => this.router.navigate(['home']));
-
-    this.loginService.isGoogleAccount().pipe(
-      filter(isLogged => isLogged),
-      take(1),
-      tap(() => {}),
-    ).subscribe(() => this.router.navigate(['home']));
   }
 
-  login(username: string, password: string, localConnection: boolean): void {
+  login(username: string, password: string): void {
     if (username && password) {
-      if (localConnection) {
-        this.loginService.login(username, password, true);
-      } else {
-        this.loginService.googleLogin(username, password, false);
-      }
+      this.loginService.login(username, password);
     } else {
       this.toastrService.error('Formulaire incomplet');
     }
   }
 
-  checkState() {
-    // @ts-ignore
-    this.checkbox = document.querySelector('#localConnection').checked;
-  }
 }

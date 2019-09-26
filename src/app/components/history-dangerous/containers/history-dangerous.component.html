@@ -74,6 +74,9 @@
       </div>
     </div>
   </form>
+  <div *ngIf="showContent" class="row">
+    <span class="total">{{'HistoryDangerous.Non situation dangereuse' | translate}}</span>
+  </div>
   <app-history-dangerous-item
     *ngFor="let history of historyDangerous$|async"
     [responsible]="history.DangerousSituationFirstName + ' ' + history.DangerousSituationLastName"

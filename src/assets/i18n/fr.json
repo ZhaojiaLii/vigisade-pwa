@@ -1,9 +1,9 @@
 {
-  "Login.Login": "Login",
+  "Login.Login": "E-mail",
   "Login.Mot de passe": "Mot de passe",
-  "Login.Connexion": "Connexion",
+  "Login.Connexion": "Connexion local",
   "Login.Error": "Erreur de connexion",
-  "Login.ConnexionLocal": "Connexion locale",
+  "Login.GoogleConnexion": "Google connexion",
 
   "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Type": "Type",
@@ -14,6 +14,8 @@
   "SituationDangereuse.Valider": "Valider",
   "SituationDangereuse.Situation dangereuse crée": "Situation dangereuse crée",
   "SituationDangereuse.Situation dangereuse synchronisee": "Impossible de contacter le serveur. La situation dangereuse sera synchronisée.",
+
+  "HistoryDangerous.Non situation dangereuse": "Il n'y a aucune situation dangereuse répertoriée.",
 
   "Homepage.ActionsTraiter": "Action{{value}} à traiter",
   "Homepage.AucuneactionTraiter": "Aucune action à traiter",

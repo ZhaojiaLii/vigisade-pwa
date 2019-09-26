@@ -25,6 +25,7 @@ export class HistoryDangerousComponent implements OnInit {
 
   isDesktop = false;
   loading = false;
+  showContent = false;
   searchForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -53,19 +54,21 @@ export class HistoryDangerousComponent implements OnInit {
     filter(history => history && !!history),
     map((histories: DangerousSituationHistory[]) => {
       const uniqueHistoryId = [];
-      return histories.map(result => ({
-        id: result.DangerousSituationUser,
-        name: result.DangerousSituationFirstName + ' ' + result.DangerousSituationLastName,
-      })).filter(creator => {
-        if (uniqueHistoryId.includes(creator.id)) {
-          return false;
-        }
-        uniqueHistoryId.push(creator.id);
-        return true;
-      });
+      if (histories) {
+        return histories.map(result => ({
+          id: result.DangerousSituationUser,
+          name: result.DangerousSituationFirstName + ' ' + result.DangerousSituationLastName,
+        })).filter(creator => {
+          if (uniqueHistoryId.includes(creator.id)) {
+            return false;
+          }
+          uniqueHistoryId.push(creator.id);
+          return true;
+        });
+      }
     }),
   );
-  historyDangerous$: Observable<DangerousSituationHistory[]>;
+  historyDangerous$: Observable<DangerousSituationHistory[]> = this.dangerousService.getDangerousByDate();
 
   roles = ROLES;
 
@@ -94,12 +97,12 @@ export class HistoryDangerousComponent implements OnInit {
       }
     });
     this.entityToken = true;
-    this.historyDangerous$ = this.dangerousService.getFilteredDangerous();
     this.historyDangerous$.subscribe(history => {
       // @ts-ignore
       if (history.message) {
         // return {code:200, message: 'no result'} when length of history is 0
         this.toastrService.error(this.translateService.instant('Rien à afficher'));
+        this.showContent = true;
       }
     });
   }

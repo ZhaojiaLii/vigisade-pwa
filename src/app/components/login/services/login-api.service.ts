@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
-import { GOOGLE_TOKEN_KEY } from '../../../data/auth.const';
+import { TOKEN_KEY } from '../../../data/auth.const';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class LoginApiService {
   /**
    * Gets authentication token.
    */
-  login(username: string, password: string, localConnection: boolean): Observable<string> {
+  login(username: string, password: string): Observable<string> {
     return this.http.post(
       '/api/login_check',
       {username : username.trim(), password},
@@ -36,7 +36,25 @@ export class LoginApiService {
     );
   }
 
+  googleLogin(username: string, password: string): Observable<string> {
+    return this.http.post(
+      '/api/connect/google',
+      {username : username.trim(), password},
+      {observe: 'response'},
+    ).pipe(
+      tap((response: HttpResponse<{token: string}>) => {
+        if (response.status === 200 && response.body && response.body.token) {
+          return;
+        }
+        throw new Error('Bad credentials.');
+      }),
+      map(response => {
+        return response.body.token;
+      }),
+    );
+  }
+
   logout() {
-    this.cookie.delete(GOOGLE_TOKEN_KEY);
+    this.cookie.delete(TOKEN_KEY);
   }
 }
