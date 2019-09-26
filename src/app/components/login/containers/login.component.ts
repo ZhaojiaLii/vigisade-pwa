@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.cookie.get(TOKEN_KEY);
+    console.log(token);
     this.loginService.setToken(token);
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
