@@ -181,19 +181,23 @@ export const getDesktopATraiterByDate = createSelector(
   getHistory,
   (corrections: Correction[],  history: GetResult) => {
     if (corrections && history) {
-      const unfreezeCorrections = corrections.slice();
-      unfreezeCorrections.sort((a, b) => {
-        const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
-        const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
-        if (dateA > dateB) {
-          return -1;
-        }
-        if (dateA < dateB) {
-          return 1;
-        }
-        return 0;
-      });
-      return unfreezeCorrections;
+      if (corrections.length > 1) {
+        const unfreezeCorrections = corrections.slice();
+        unfreezeCorrections.sort((a, b) => {
+          const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
+          const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+          if (dateA > dateB) {
+            return -1;
+          }
+          if (dateA < dateB) {
+            return 1;
+          }
+          return 0;
+        });
+        return unfreezeCorrections;
+      } else {
+        return [];
+      }
     }
   }
 );
