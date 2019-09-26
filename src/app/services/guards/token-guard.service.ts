@@ -14,7 +14,6 @@ export class TokenGuard implements CanActivate {
   constructor(
     private loginService: LoginService,
     private cookie: CookieServices,
-    private cookieService: CookieService,
     private router: Router,
   ) {}
 
@@ -28,8 +27,7 @@ export class TokenGuard implements CanActivate {
           return of(true);
         }
         const savedToken = this.cookie.get(TOKEN_KEY);
-        console.log(this.cookie.get(TOKEN_KEY));
-        console.log(this.cookieService.get(TOKEN_KEY));
+        console.log(document.cookie);
         if (!savedToken) {
           return this.router.navigate(['/']);
         } else {
