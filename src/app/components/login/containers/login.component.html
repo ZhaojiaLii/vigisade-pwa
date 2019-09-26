@@ -25,10 +25,14 @@
           <span class="font-14">{{'Login.Connexion' | translate}}</span>
         </button>
       </form>
-      <a class="btn btn-google btn-block mt-3 pt-2" href="/api/connect/google">
+<!--      <a class="btn btn-google btn-block mt-3 pt-2" href="/api/connect/google">-->
+<!--        <img height="25px" width="25px" src="../../../../assets/icons/Google.svg" alt="" style="float: left;"/>-->
+<!--        <span class="font-14">{{'Login.GoogleConnexion' | translate}}</span>-->
+<!--      </a>-->
+      <button class="btn btn-google btn-block mt-3">
         <img height="25px" width="25px" src="../../../../assets/icons/Google.svg" alt="" style="float: left;"/>
         <span class="font-14">{{'Login.GoogleConnexion' | translate}}</span>
-      </a>
+      </button>
     </div>
   </div>
   <div *ngIf="spinnerEnable$|async" class="spinner-container">

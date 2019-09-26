@@ -47,8 +47,4 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginGoogle() {
-    this.loginService.googleLogin(this.loginForm.get('username').value, this.loginForm.get('password').value);
-    this.toastrService.error('Google login not ready');
-  }
 }
