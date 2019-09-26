@@ -22,7 +22,6 @@ export class TokenGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.loginService.getToken().pipe(
       switchMap(token => {
-        console.log(token);
         if (token) {
           return of(true);
         }

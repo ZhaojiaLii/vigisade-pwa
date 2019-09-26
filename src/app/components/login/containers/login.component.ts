@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { CookieServices } from '../../../services/cookie-services.service';
+import { TOKEN_KEY } from '../../../data/auth.const';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private toastrService: ToastrService,
-    private cookieService: CookieService,
+    private cookie: CookieServices,
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class LoginComponent implements OnInit {
       take(1),
       tap(() => {}),
     ).subscribe(() => this.router.navigate(['home']));
+
+    if (this.cookie.get(TOKEN_KEY)) {
+      this.loginService.setToken(TOKEN_KEY);
+    }
   }
 
   login(username: string, password: string): void {
