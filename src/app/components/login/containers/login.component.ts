@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    console.log(this.cookie.get(TOKEN_KEY));
     if (this.cookie.get(TOKEN_KEY)) {
       this.loginService.setToken(TOKEN_KEY);
     }
