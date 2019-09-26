@@ -17,6 +17,8 @@ import * as moment from 'moment';
 import 'moment/min/locales';
 import { ActionCorrectiveService } from '../components/action-corrective/services/action-corrective.service';
 import { DangerousService } from '../components/dangerous/services/dangerous.service';
+import { CookieServices } from '../services/cookie-services.service';
+import { TOKEN_KEY } from '../data/auth.const';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit {
     private s: SwPush,
     private BsDatepickerlocaleService: BsLocaleService,
     private dangerousService: DangerousService,
+    private cookie: CookieServices,
   ) {
     this.setupLanguage();
   }
@@ -49,6 +52,10 @@ export class AppComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => this.layoutService.closeMenu());
 
+    const token = this.cookie.get(TOKEN_KEY);
+    if (token) {
+      this.loginService.setToken(token);
+    }
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),

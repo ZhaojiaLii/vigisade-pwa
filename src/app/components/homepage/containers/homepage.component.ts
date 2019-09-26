@@ -61,9 +61,10 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.cookie.get(TOKEN_KEY)) {
-      this.loginService.setToken(this.cookie.get(TOKEN_KEY));
-    }
+    // const token = this.cookie.get(TOKEN_KEY);
+    // if (token) {
+    //   this.loginService.setToken(token);
+    // }
     this.loading = true;
     this.user$.subscribe(user => {
       if (user) {
