@@ -36,15 +36,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this.cookie.get(TOKEN_KEY)) {
+      this.loginService.setToken(TOKEN_KEY);
+    }
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
       tap(() => {}),
     ).subscribe(() => this.router.navigate(['home']));
-
-    if (this.cookie.get(TOKEN_KEY)) {
-      this.loginService.setToken(TOKEN_KEY);
-    }
   }
 
   login(username: string, password: string): void {
