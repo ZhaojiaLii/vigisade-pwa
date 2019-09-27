@@ -62,7 +62,7 @@ export class HomepageComponent implements OnInit {
     this.user$.subscribe(user => {
       if (user) {
         if (!user.directionId || !user.areaId || !user.entityId) {
-          // this.openDialog();
+          this.openDialog();
         }
       }
     });
@@ -112,6 +112,7 @@ export class DZESelectComponent {
       directionId: Number(this.profileCompleteForm.get('directionId').value),
       areaId: Number(this.profileCompleteForm.get('areaId').value),
       entityId: Number(this.profileCompleteForm.get('entityId').value),
+      language: 'fr',
     };
     this.profileService.updateUser(formData);
   }

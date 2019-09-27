@@ -5,6 +5,7 @@ import { CookieServices } from '../cookie-services.service';
 import { TOKEN_KEY } from '../../data/auth.const';
 import { LoginService } from '../../components/login/services/login.service';
 import { filter, switchMap } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',

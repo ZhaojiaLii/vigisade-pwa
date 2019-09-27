@@ -20,15 +20,15 @@
               <div class="line"></div>
           </div>
         </div>
-        <button class="btn btn-info btn-block" [disabled]="!loginForm.valid" type="submit" >
-          <img height="25px" width="25px" src="../../../../assets/icons/Sade.svg" alt="" style="float: left;" />
+        <button class="btn btn-info btn-block" [disabled]="!loginForm.valid" type="submit">
+          <img height="25px" width="25px" src="../../../../assets/icons/Sade.svg" alt="" style="float: left; margin-top: 2px;" />
           <span class="font-14">{{'Login.Connexion' | translate}}</span>
         </button>
       </form>
-<!--      <a class="btn btn-google btn-block mt-3 pt-2" href="/api/connect/google">-->
-<!--        <img height="25px" width="25px" src="../../../../assets/icons/Google.svg" alt="" style="float: left;"/>-->
-<!--        <span class="font-14">{{'Login.GoogleConnexion' | translate}}</span>-->
-<!--      </a>-->
+      <a class="btn btn-google btn-block mt-3 pt-2" href="/api/connect/google">
+        <img height="25px" width="25px" src="../../../../assets/icons/Google.svg" alt="" style="float: left; margin-top: 4px;"/>
+        <span class="font-14">{{'Login.GoogleConnexion' | translate}}</span>
+      </a>
     </div>
   </div>
   <div *ngIf="spinnerEnable$|async" class="spinner-container">
