@@ -51,6 +51,7 @@ export class HomepageComponent implements OnInit {
         this.loginApiService.logout();
         setTimeout(() => {
           this.loading = false;
+          window.location.reload();
         }, 500);
       }
     });
