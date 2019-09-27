@@ -15,7 +15,6 @@ import { LoginService } from '../../login/services/login.service';
 import { LoginApiService } from '../../login/services/login-api.service';
 import { map } from 'rxjs/operators';
 import { ProfileComplete } from '../interfaces/profileComplete.interface';
-import { CookieServices } from '../../../services/cookie-services.service';
 
 
 @Component({
@@ -52,7 +51,7 @@ export class HomepageComponent implements OnInit {
         this.loginApiService.logout();
         setTimeout(() => {
           this.loading = false;
-          window.location.reload();
+          this.router.navigate(['/']);
         }, 500);
       }
     });
