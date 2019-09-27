@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       filter(isLogged => isLogged),
       take(1),
       tap(() => {}),
-    ).subscribe(() => this.router.navigate(['home']));
+    ).subscribe(() => this.router.navigate(['/home']));
   }
 
   login(username: string, password: string): void {
