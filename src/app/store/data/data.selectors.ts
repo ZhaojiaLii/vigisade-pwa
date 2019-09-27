@@ -13,7 +13,9 @@ export const getDirections = createSelector(
 export const getAreas = createSelector(
   getDirections,
   (directions: Direction[]) => {
-    return directions.reduce((areas, direction) => [...areas, ...direction.area], []);
+    if (directions) {
+      return directions.reduce((areas, direction) => [...areas, ...direction.area], []);
+    }
   }
 );
 
