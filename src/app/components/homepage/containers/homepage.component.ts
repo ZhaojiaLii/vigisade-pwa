@@ -15,7 +15,6 @@ import { LoginService } from '../../login/services/login.service';
 import { LoginApiService } from '../../login/services/login-api.service';
 import { map } from 'rxjs/operators';
 import { ProfileComplete } from '../interfaces/profileComplete.interface';
-import { TOKEN_KEY } from '../../../data/auth.const';
 import { CookieServices } from '../../../services/cookie-services.service';
 
 
@@ -34,7 +33,6 @@ export class HomepageComponent implements OnInit {
     private loginService: LoginService,
     private loginApiService: LoginApiService,
     public dialog: MatDialog,
-    private cookie: CookieServices,
   ) {}
   loading = false;
   clickAtraiter() {
@@ -115,6 +113,7 @@ export class DZESelectComponent {
       directionId: Number(this.profileCompleteForm.get('directionId').value),
       areaId: Number(this.profileCompleteForm.get('areaId').value),
       entityId: Number(this.profileCompleteForm.get('entityId').value),
+      language: 'fr',
     };
     this.profileService.updateUser(formData);
   }

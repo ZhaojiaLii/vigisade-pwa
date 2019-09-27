@@ -99,7 +99,7 @@ export class HistoryDangerousComponent implements OnInit {
     this.entityToken = true;
     this.historyDangerous$.subscribe(history => {
       // @ts-ignore
-      if (history.message) {
+      if (history && history.message) {
         // return {code:200, message: 'no result'} when length of history is 0
         this.toastrService.error(this.translateService.instant('Rien à afficher'));
         this.showContent = true;

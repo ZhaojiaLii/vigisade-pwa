@@ -5,9 +5,7 @@ import { filter, take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { CookieServices } from '../../../services/cookie-services.service';
-import { TOKEN_KEY } from '../../../data/auth.const';
 
 @Component({
   selector: 'app-login',
@@ -31,13 +29,9 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private toastrService: ToastrService,
-    private cookie: CookieServices,
   ) {}
 
   ngOnInit(): void {
-    const token = this.cookie.get(TOKEN_KEY);
-    console.log(token);
-    this.loginService.setToken(token);
     this.loginService.isLogged().pipe(
       filter(isLogged => isLogged),
       take(1),
