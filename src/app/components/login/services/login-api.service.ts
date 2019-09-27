@@ -58,5 +58,6 @@ export class LoginApiService {
   logout() {
     this.cookie.deleteAll();
     this.router.navigate(['/login']);
+    window.location.reload();
   }
 }
