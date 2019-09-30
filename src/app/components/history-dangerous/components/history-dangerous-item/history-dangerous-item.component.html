@@ -1,14 +1,14 @@
 <div class="container">
   <div class="card card-full-width mb-10 shadow-none">
-    <div class="card-body px-30">
-      <div class="row align-items-center">
+    <div class="card-body-dangerous px-30">
+      <div class="row">
         <div class="col-3 font-demiBold">
           <div class="">
-            <div class="row align-text-top">
-              <div class="font-demiBold light-grey font-14">{{responsible}}</div>
+            <div class="row">
+              <div class="font-demiBold dark-light-grey font-14">{{responsible}}</div>
             </div>
             <div class="row">
-              <div class="font-demiBold light-grey font-12 mb-20">{{date | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
+              <div class="font-demiBold light-grey font-12 mb-20" [ngStyle]="{'margin-bottom': centerType ? '15px' : '0'}">{{date | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
             </div>
             <div class="row">
               <div class="font-demiBold">{{dangerousTypeName}}</div>

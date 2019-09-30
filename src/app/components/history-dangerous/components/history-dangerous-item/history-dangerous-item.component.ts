@@ -16,6 +16,7 @@ export class HistoryDangerousItemComponent implements OnInit {
   @Input() photo: string;
   @Input() comment: string;
   @Input() dangerousType: number;
+  centerType = false;
   dangerousTypeName: string;
   imagePATH = IMAGE_PATH.dangerous_situation;
   dangerousTypes$: Observable<DangerousSituationType[]> = this.dataService.getDangerousSituationTypes();
@@ -31,6 +32,9 @@ export class HistoryDangerousItemComponent implements OnInit {
         this.dangerousTypeName = TYPE.typeDangerousSituationTranslation.typeDangerousSituationTranslationType;
       }
     });
+    if (this.photo || this.comment.length > 10) {
+      this.centerType = true;
+    }
   }
 
 }
