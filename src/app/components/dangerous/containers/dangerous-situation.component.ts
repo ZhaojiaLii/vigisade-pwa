@@ -34,12 +34,37 @@ export class DangerousSituationComponent {
     this.loading = true;
   }
 
+  // createDangerous() {
+  //   this.dangerousService.createDangerousSituation({
+  //     typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
+  //     dangerousSituationComment: this.dangerousSituationGroup.value.comment,
+  //     dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
+  //   });
+  // }
+
   createDangerous() {
-    this.dangerousService.createDangerousSituation({
+    let msg;
+    const POST = {
       typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
       dangerousSituationComment: this.dangerousSituationGroup.value.comment,
       dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
-    });
+    };
+    if (navigator.onLine) {
+      this.dangerousService.createDangerousSituation(POST);
+    } else {
+      // save the POST payload into indexedDB and get the payload in Service worker to POST
+      msg = {POSTdata: POST};
+      navigator.serviceWorker.controller.postMessage(msg);
+      navigator.serviceWorker.ready
+        .then(registration => {
+          const syncTag = 'syncDangerousPOST';
+          registration.sync.register(syncTag);
+        })
+        .then(() => console.log('Registered background sync'))
+        .catch(err => console.error('Error registering background sync', err));
+      this.dangerousService.createDangerousSituation(POST);
+    }
+
   }
 
   loadingImage() {
