@@ -15,10 +15,11 @@
             </div>
           </div>
         </div>
-        <div class="col-5 font-14 pl-3">{{comment}}</div>
+        <div class="col-5 font-14 pl-3" *ngIf="photo">{{comment}}</div>
         <div class="col-4 text-right font-12" *ngIf="photo">
           <img class="img-fluid w-100" src="{{imagePATH + photo}}" alt="image not found"/>
         </div>
+        <div class="col-9 font-14 pl-3" *ngIf="!photo">{{comment}}</div>
       </div>
     </div>
   </div>
