@@ -12,6 +12,7 @@ export class HistoryApiService {
   constructor(private http: HttpClient) {}
 
   getHistory(): Observable<GetResult> {
+    console.log('get history');
     return this.http.get<GetResult>('/api/survey/history/');
   }
 

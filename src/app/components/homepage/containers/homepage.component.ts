@@ -15,6 +15,7 @@ import { LoginService } from '../../login/services/login.service';
 import { LoginApiService } from '../../login/services/login-api.service';
 import { map } from 'rxjs/operators';
 import { ProfileComplete } from '../interfaces/profileComplete.interface';
+import { HistoryService } from '../../history/services/history.service';
 
 
 @Component({
@@ -28,15 +29,16 @@ export class HomepageComponent implements OnInit {
     private dataService: DataService,
     private profileService: ProfileService,
     private router: Router,
-    private actionCorrectiveService: ActionCorrectiveService,
     private loginService: LoginService,
     private loginApiService: LoginApiService,
+    private correctionService: ActionCorrectiveService,
+    private historyService: HistoryService,
     public dialog: MatDialog,
   ) {}
   loading = false;
   clickAtraiter() {
    this.router.navigate(['/atraiter']);
-   this.actionCorrectiveService.fromHomepage();
+   this.correctionService.fromHomepage();
   }
 
   openDialog() {
