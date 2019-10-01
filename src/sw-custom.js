@@ -127,7 +127,7 @@ function sendPostToServer () {
         }).then(function (response) {
           // console.log('server response', response);
           if (response.status < 400) {
-            console.log(`request sync finished`);
+            // console.log(`request sync finished`);
             getObjectStore('post_requests', 'readwrite').delete(savedRequest.id);
           }
         }).catch(function (error) {
