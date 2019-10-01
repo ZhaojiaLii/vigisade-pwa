@@ -31,9 +31,7 @@ export class HistoryEffects {
     ofType(loadHistory),
     switchMap(() => {
       return this.api.getHistory().pipe(
-        map(history => {
-          return loadHistorySuccess({history});
-        }),
+        map(history => loadHistorySuccess({history})),
         catchError(error => of(loadHistoryFail({error: error.message}))),
       );
     })

@@ -55,7 +55,7 @@ export const getFilteredDangerous = createSelector(
 export const getFilteredDangerousByDate = createSelector(
   getFilteredDangerous,
   (histories: DangerousSituationHistory[]) => {
-    if (histories) {
+    if (histories.length !== undefined) {
       const unfreezeHistory = histories.slice();
       unfreezeHistory.sort((a, b) => {
         const dateA = a.DangerousSituationDate;
@@ -69,6 +69,8 @@ export const getFilteredDangerousByDate = createSelector(
         return 0;
       });
       return unfreezeHistory;
+    } else {
+      return [];
     }
   }
 );
