@@ -5,6 +5,7 @@ import { DangerousService } from '../services/dangerous.service';
 import { DangerousSituationType } from '../interfaces/dangerous-situation-type.interface';
 import { DataService } from '../../../services/data.service';
 import { compress } from '../../../data/image.helpers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dangerous',
@@ -23,6 +24,7 @@ export class DangerousSituationComponent {
   constructor(
     private dataService: DataService,
     private dangerousService: DangerousService,
+    private router: Router,
   ) {}
 
   updateImage(event: any) {
@@ -34,12 +36,38 @@ export class DangerousSituationComponent {
     this.loading = true;
   }
 
+  // createDangerous() {
+  //   this.dangerousService.createDangerousSituation({
+  //     typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
+  //     dangerousSituationComment: this.dangerousSituationGroup.value.comment,
+  //     dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
+  //   });
+  // }
+
   createDangerous() {
-    this.dangerousService.createDangerousSituation({
+    let msg;
+    const POST = {
       typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
       dangerousSituationComment: this.dangerousSituationGroup.value.comment,
       dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
-    });
+    };
+    if (navigator.onLine) {
+      this.dangerousService.createDangerousSituation(POST);
+    } else {
+      this.router.navigate(['/home']);
+      // save the POST payload into indexedDB and get the payload in Service worker to POST
+      msg = {POSTdata: POST};
+      navigator.serviceWorker.controller.postMessage(msg);
+      navigator.serviceWorker.ready
+        .then(registration => {
+          const syncTag = 'syncDangerousPOST';
+          registration.sync.register(syncTag);
+        })
+        .then(() => console.log('Registered background sync for dangerous situation'))
+        .catch(err => console.error('Error registering background sync', err));
+      this.dangerousService.createDangerousSituation(POST);
+    }
+
   }
 
   loadingImage() {

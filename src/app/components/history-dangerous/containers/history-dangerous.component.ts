@@ -54,7 +54,7 @@ export class HistoryDangerousComponent implements OnInit {
     filter(history => history && !!history),
     map((histories: DangerousSituationHistory[]) => {
       const uniqueHistoryId = [];
-      if (histories) {
+      if (histories.length > 0) {
         return histories.map(result => ({
           id: result.DangerousSituationUser,
           name: result.DangerousSituationFirstName + ' ' + result.DangerousSituationLastName,
@@ -98,9 +98,8 @@ export class HistoryDangerousComponent implements OnInit {
     });
     this.entityToken = true;
     this.historyDangerous$.subscribe(history => {
-      // @ts-ignore
-      if (history && history.message) {
-        // return {code:200, message: 'no result'} when length of history is 0
+      if (history && history.length === 0) {
+        // return [ ] when length of history is 0
         this.toastrService.error(this.translateService.instant('Rien à afficher'));
         this.showContent = true;
       }
