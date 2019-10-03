@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card card-full-width mb-10 shadow-none">
-    <div class="card-body-dangerous px-30">
+    <div class="card-body-dangerous px-30 py-2">
       <div class="row">
         <div class="col-3 font-demiBold">
           <div class="">
@@ -15,7 +15,7 @@
             </div>
           </div>
         </div>
-        <div class="col-5 font-14 pl-3" *ngIf="photo">{{comment}}</div>
+        <div class="col-5 font-14 pl-3 text-justify" *ngIf="photo">{{comment}}</div>
         <div class="col-4 text-right font-12" *ngIf="photo">
           <img class="img-fluid w-100" src="{{imagePATH + photo}}" alt="image not found"/>
         </div>
