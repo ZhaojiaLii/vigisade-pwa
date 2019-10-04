@@ -5,20 +5,20 @@ import {
   googleLoginSuccess,
   login,
   loginFail,
-  loginSuccess,
-  setSpinnerEnable,
-  setToken
+  loginSuccess, loginWait, setSpinnerEnable,
+  setToken,
 } from './login.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 
 const createLoginReducer = createReducer(
   loginInitialState,
-  on(login, setSpinnerEnable, (state, {}) => ({...state, spinnerEnable: true})),
+  on(login, (state, {}) => ({...state, spinnerEnable: true})),
   on(loginSuccess, setToken, (state, {token}) => ({...state, token, spinnerEnable: false})),
   on(loginFail, (state, {error}) => ({...state, error, spinnerEnable: false})),
   on(googleLogin, (state, {}) => ({...state, spinnerEnable: true})),
   on(googleLoginSuccess, setToken, (state, {token}) => ({...state, token, spinnerEnable: false})),
   on(googleLoginFail, (state, {error}) => ({...state, error, spinnerEnable: false})),
+  on(loginWait, setSpinnerEnable, (state) => ({...state, spinnerEnable: false})),
 );
 
 export function loginReducer(state: LoginState | undefined, action: Action) {
