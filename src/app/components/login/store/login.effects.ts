@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoginApiService } from '../services/login-api.service';
-import { googleLogin, googleLoginFail, googleLoginSuccess, login, loginFail, loginSuccess } from './login.actions';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import {
+  googleLogin,
+  googleLoginFail,
+  googleLoginSuccess,
+  login,
+  loginFail,
+  loginSuccess,
+  loginWait,
+} from './login.actions';
+import { catchError, map, skip, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CookieServices } from '../../../services/cookie-services.service';
 import { TOKEN_KEY } from '../../../data/auth.const';
@@ -16,7 +24,14 @@ export class LoginEffects {
     ofType(login),
     switchMap(action => {
       return this.loginApiService.login(action.username, action.password).pipe(
-        map((token) => loginSuccess({token, spinnerEnable: false})),
+        map((token) => {
+          const tkn = this.cookie.get(TOKEN_KEY);
+          if (!tkn) {
+            return loginSuccess({token, spinnerEnable: false});
+          } else {
+            return loginWait();
+          }
+        }),
         catchError(error => {
           this.toastrService.error(this.translateService.instant('Login.Error'));
           return of(loginFail({error: error.message, spinnerEnable: false}));
@@ -25,9 +40,16 @@ export class LoginEffects {
     }),
   ));
 
+  wait$ = createEffect(() => this.actions$.pipe(
+    ofType(loginWait),
+    skip(1)
+  ));
+
   postLoginSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(loginSuccess),
-    tap(action => this.cookie.setWithExpiryInHours(TOKEN_KEY, action.token, 23))
+    tap(action => {
+      this.cookie.setWithExpiryInHours(TOKEN_KEY, action.token, 23);
+    })
   ), {dispatch: false});
 
   googleLogin$ = createEffect(() => this.actions$.pipe(

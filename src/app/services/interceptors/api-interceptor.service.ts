@@ -8,7 +8,6 @@ import 'rxjs-compat/add/operator/catch';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  token = '';
   constructor(
     private loginService: LoginService,
   ) {}

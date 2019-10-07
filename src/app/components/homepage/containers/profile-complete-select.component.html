@@ -1,27 +1,29 @@
 <div>
   <h1 mat-dialog-title>{{'Homepage.Title' | translate}}</h1>
-  <mat-dialog-content style="display: flex; flex-direction: column;" [formGroup]="profileCompleteForm">
-    <mat-form-field>
-      <mat-select placeholder="{{'Profil.Direction' | translate}}" formControlName="directionId">
-        <mat-option *ngFor="let direction of direction$|async" value="{{direction.id}}">{{direction.name | translate}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br>
-    <mat-form-field >
-      <mat-select placeholder="{{'Profil.Zone' | translate}}" formControlName="areaId">
-        <mat-option *ngFor="let area of area$|async" value="{{area.id}}">{{area.name | translate}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br>
-    <mat-form-field >
-      <mat-select placeholder="{{'Profil.Entité' | translate}}" formControlName="entityId">
-        <mat-option  *ngFor="let entity of entity$|async" value="{{entity.id}}">{{entity.name | translate}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="false">{{'Homepage.Logout' | translate}}</button>
-    <button mat-button [mat-dialog-close]="true" (click)="sendForm()" id="confirm">{{'Homepage.Next' | translate}}</button>
-  </mat-dialog-actions>
+  <form [formGroup]="profileCompleteForm" (ngSubmit)="sendForm()">
+    <mat-dialog-content style="display: flex; flex-direction: column;">
+      <mat-form-field>
+        <mat-select placeholder="{{'Profil.Direction' | translate}}" formControlName="directionId" style="user-select: none;">
+          <mat-option *ngFor="let direction of direction$|async" value="{{direction.id}}">{{direction.name | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field >
+        <mat-select placeholder="{{'Profil.Zone' | translate}}" formControlName="areaId">
+          <mat-option *ngFor="let area of area$|async" value="{{area.id}}">{{area.name | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field >
+        <mat-select placeholder="{{'Profil.Entité' | translate}}" formControlName="entityId">
+          <mat-option  *ngFor="let entity of entity$|async" value="{{entity.id}}">{{entity.name | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions style="float: right">
+      <button mat-button [mat-dialog-close]="false">{{'Homepage.Logout' | translate}}</button>
+      <button mat-button [mat-dialog-close]="true" type="submit" [disabled]="!profileCompleteForm.valid" id="confirm">{{'Homepage.Next' | translate}}</button>
+    </mat-dialog-actions>
+  </form>
 </div>
 

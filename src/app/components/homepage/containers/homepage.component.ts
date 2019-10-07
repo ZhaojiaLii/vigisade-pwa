@@ -10,12 +10,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Direction } from '../../shared/interfaces/direction.interface';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../login/services/login.service';
 import { LoginApiService } from '../../login/services/login-api.service';
 import { map } from 'rxjs/operators';
 import { ProfileComplete } from '../interfaces/profileComplete.interface';
-import { HistoryService } from '../../history/services/history.service';
+import { SurveyService } from '../../survey/services/survey.service';
 
 
 @Component({
@@ -24,15 +24,18 @@ import { HistoryService } from '../../history/services/history.service';
 })
 export class HomepageComponent implements OnInit {
   user$: Observable<User> = this.profileService.getUser();
+  userHasDirection$: Observable<boolean> = this.profileService.getUser().pipe(
+    map((user) => { if (user) { return !!user.directionId; }})
+  );
   header$: Observable<Header> = this.dataService.getHeader();
   constructor(
     private dataService: DataService,
     private profileService: ProfileService,
+    private surveyService: SurveyService,
     private router: Router,
     private loginService: LoginService,
     private loginApiService: LoginApiService,
     private correctionService: ActionCorrectiveService,
-    private historyService: HistoryService,
     public dialog: MatDialog,
   ) {}
   loading = false;
@@ -68,6 +71,9 @@ export class HomepageComponent implements OnInit {
         }
       }
     });
+    this.userHasDirection$.subscribe(status => {
+      if (status) { this.surveyService.loadSurveys(); }
+    });
     setTimeout(() => {
       this.loading = false;
     }, 3000);
@@ -80,9 +86,9 @@ export class HomepageComponent implements OnInit {
 })
 export class DZESelectComponent {
   profileCompleteForm = new FormGroup({
-    directionId: new FormControl(''),
-    areaId: new FormControl(''),
-    entityId: new FormControl(''),
+    directionId: new FormControl('', [Validators.required]),
+    areaId: new FormControl('', [Validators.required]),
+    entityId: new FormControl('', [Validators.required]),
   });
   direction$: Observable<Direction[]> = this.dataService.getDirections();
   area$: Observable<Area[]> = combineLatest([this.profileCompleteForm.valueChanges, this.direction$]).pipe(

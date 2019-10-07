@@ -34,8 +34,8 @@ self.addEventListener('fetch', function(event) {
   const req = event.request.clone();
   if (req.method === "POST") {
     event.respondWith(
-      fetch(event.request.clone()
-      ).catch(function () {
+      fetch(event.request.clone())
+        .catch(function () {
         // console.log('error when POST in fetch listener', error);
         if (data) {
           savePostRequests(event.request.clone().url, data, 'POST');

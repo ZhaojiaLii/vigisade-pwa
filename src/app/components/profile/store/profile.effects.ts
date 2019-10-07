@@ -26,7 +26,6 @@ export class ProfileEffects {
   updateUser$ = createEffect(() => this.actions$.pipe(
     ofType(updateUser),
     withLatestFrom(this.profileService.getUser()),
-    // @ts-ignore
     switchMap(([action, user]) => {
       const payload = {
         lastname: user.lastName,

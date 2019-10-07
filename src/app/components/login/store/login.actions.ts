@@ -16,6 +16,10 @@ export const loginFail = createAction(
   props<{ error: any, spinnerEnable: boolean}>(),
 );
 
+export const loginWait = createAction(
+  '[Login] Login wait',
+);
+
 export const setToken = createAction(
   '[Login] Set Token',
   props<{ token: string, spinnerEnable: boolean}>(),
