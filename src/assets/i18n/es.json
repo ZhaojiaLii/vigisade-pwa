@@ -4,6 +4,8 @@
   "Login.Connexion": "Conexión local",
   "Login.Error": "Conexión fail",
   "Login.GoogleConnexion": "Conéctate con Google",
+  "Login.LoginError": "No se puede conectar, comuníquese con un administrador de red",
+  "Login.FormulaireError": "Forma incompleta",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       tap(() => {}),
     ).subscribe(() => this.router.navigate(['/home']));
     if (this.cookie.get('login-error')) {
-      this.toastrService.error(this.translateService.instant(this.cookie.get('login-error')));
+      this.toastrService.error(this.translateService.instant('Login.LoginError'));
     }
   }
 
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     if (username && password) {
       this.loginService.login(username, password);
     } else {
-      this.toastrService.error('Formulaire incomplet');
+      this.toastrService.error(this.translateService.instant('Login.FormulaireError'));
     }
   }
 

@@ -4,6 +4,8 @@
   "Login.Connexion": "Connexion local",
   "Login.Error": "Erreur de connexion",
   "Login.GoogleConnexion": "Google connexion",
+  "Login.LoginError": "Connexion impossible, veuillez contacter un administateur réseau",
+  "Login.FormulaireError": "Formulaire incomplet ",
 
   "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Type": "Type",
