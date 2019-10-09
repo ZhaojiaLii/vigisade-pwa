@@ -14,7 +14,6 @@ import { DraftService } from '../../../../services/draft.service';
 import { User } from '../../../profile/interfaces/user';
 import { ResultQuestion } from '../../interfaces/results/result-question.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { HistoryService } from '../../../history/services/history.service';
 
 @Component({
   selector: 'app-survey-submit',
@@ -36,7 +35,6 @@ export class SurveySubmitComponent {
     private profileService: ProfileService,
     private toastr: ToastrService,
     private translateService: TranslateService,
-    private historyService: HistoryService,
   ) {}
 
   save() {
@@ -119,8 +117,6 @@ export class SurveySubmitComponent {
       };
       this.surveyService.setLoadingState(true);
       this.surveyService.createResult(result);
-      this.surveyService.loadSurveys();
-      this.historyService.loadHistory();
     });
   }
 }

@@ -119,23 +119,31 @@ export class ActionCorrectiveComponent implements OnInit {
       }
     });
     this.getCorrectionCategory$.subscribe(categories => {
-      this.categoryTitle = categories.find(category =>
-        category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
+      if (categories) {
+        this.categoryTitle = categories.find(category =>
+          category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
+      }
     });
     this.history$.subscribe(histories => {
-      this.result = histories.result.find(result => result.resultId === this.resultId);
+      if (histories) {
+        this.result = histories.result.find(result => result.resultId === this.resultId);
+      }
     });
     this.correctionQuestions$.subscribe(questions => {
-      for (const question of questions) {
-        if (question.surveyQuestionId === Number(this.questionId)) {
-          this.question = question;
+      if (questions) {
+        for (const question of questions) {
+          if (question.surveyQuestionId === Number(this.questionId)) {
+            this.question = question;
+          }
         }
       }
     });
     this.user$.subscribe(user => {
-      this.userId = user.id;
-      // this.correction.patchValue({user_id: this.userId});
-      this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
+      if (user) {
+        this.userId = user.id;
+        // this.correction.patchValue({user_id: this.userId});
+        this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
+      }
     });
 
     this.correction.valueChanges.subscribe(val => {

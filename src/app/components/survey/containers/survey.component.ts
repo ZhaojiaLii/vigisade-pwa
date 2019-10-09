@@ -67,7 +67,7 @@ export class SurveyComponent implements OnInit {
 
   teamMode = TEAM_MODE;
   surveyTeamMode = this.teamMode.no;
-
+  defaultValue: object;
   surveyCategoryIds = [];
   categorySelected: number;
   categoryNavigation = false;
@@ -114,9 +114,13 @@ export class SurveyComponent implements OnInit {
 
       this.surveyTeamMode = survey.surveyTeam;
     });
-    this.userEntity$.subscribe(val => { this.userEntity = val; });
-    const defaultValue = {entity: this.userEntity.id, place: '', client: '', date: ''};
-    this.setDefaultValue(defaultValue);
+    this.userEntity$.subscribe(val => {
+      if (val) {
+        this.userEntity = val;
+        this.defaultValue = {entity: this.userEntity.id, place: '', client: '', date: ''};
+        this.setDefaultValue(this.defaultValue);
+      }
+    });
   }
 
   private setDefaultValue(defaultValue): void {
