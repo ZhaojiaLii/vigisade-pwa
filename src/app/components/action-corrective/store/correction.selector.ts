@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AllUsersState, CorrectionState } from './correction.states';
-import { getSurveys } from '../../survey/store/survey.selectors';
+import { getSurveyOfUser, getSurveys } from '../../survey/store/survey.selectors';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { getHistory, getSelectedResult } from '../../history/store/history.selectors';
@@ -25,11 +25,14 @@ export const getRoutingState = createSelector(
 
 export const getCorrection = createSelector(
   getCorrectionState,
-  (state: CorrectionState) => {
+  getSurveyOfUser,
+  (state: CorrectionState, survey: Survey) => {
     if (!state) {
       return null;
     }
-    return state.correctiveAction;
+    if (state.correctiveAction && survey) {
+      return state.correctiveAction.filter(correction => correction.survey_id === survey.surveyId );
+    }
   },
 );
 
