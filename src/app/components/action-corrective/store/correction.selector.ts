@@ -198,6 +198,8 @@ export const getDesktopATraiterByDate = createSelector(
           return 0;
         });
         return unfreezeCorrections;
+      } else if (corrections.length === 1) {
+        return corrections;
       } else {
         return [];
       }
