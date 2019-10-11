@@ -57,6 +57,8 @@ export const getUserHistoryByDate = createSelector(
         return 0;
       });
       return results;
+    } else if (results.length === 1) {
+      return results;
     } else {
       return [];
     }
