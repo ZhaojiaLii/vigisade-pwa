@@ -33,6 +33,15 @@ import 'core-js/es6/array';
 import 'core-js/es6/regexp';
 import 'core-js/es6/map';
 import 'core-js/es6/set';
+
+import 'core-js/es7/symbol';
+import 'core-js/es7/object';
+import 'core-js/es7/math';
+import 'core-js/es7/string';
+import 'core-js/es7/array';
+import 'core-js/es7/map';
+import 'core-js/es7/set';
+
 import 'web-animations-js';
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 import 'classlist.js';  // Run `npm install --save classlist.js`.
