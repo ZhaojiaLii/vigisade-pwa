@@ -13,6 +13,9 @@ select {
   padding-right: 5px;
   text-indent: 3%;
 }
+select::-ms-expand {
+  display: none;
+}
 [bsDatepicker] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -45,7 +48,7 @@ form .card input.form-control{
 .form-control {
   border: 0;
   border-radius: 0;
-  padding: 0;  
+  padding: 0;
   background-color: transparent;
   position: relative;
   z-index: 2;
@@ -54,7 +57,7 @@ form .card input.form-control{
   &:not(textarea) {
     height: 44px;
   }
-  
+
   + label {
     position: absolute;
     z-index: 1;
@@ -65,27 +68,27 @@ form .card input.form-control{
     left: $input-padding-horizontal;
     right: $input-padding-horizontal;
   }
-  
+
   &:focus {
     box-shadow: none;
     background-color: transparent;
   }
-  
+
   &:focus {
     + label {
       color: $primary;
     }
   }
-  
+
   &:focus, &.has-value {
-    
+
     + label {
       font-size: 0.75rem;
       top: 0;
     }
-    
+
   }
-  
+
 }
 
 // Position labels for when javascript is disabled
