@@ -2,7 +2,7 @@ NPM=.bin/npm
 
 .PHONY: init-packages
 init-packages:
-	$(NPM) i
+	$(NPM) install
 
 .PHONY: build-dev
 build-dev:
