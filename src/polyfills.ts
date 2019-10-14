@@ -21,7 +21,6 @@
  * IE9, IE10 and IE11 requires all of the following polyfills.
  */
 
-import 'core-js/es7/array';
 
 import 'web-animations-js';
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
