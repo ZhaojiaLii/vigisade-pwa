@@ -17,6 +17,7 @@
           <div class="form-group col-12">
             <label for="typeSelect">{{'SituationDangereuse.Type'|translate}}</label>
             <select class="form-control" appHighlight id="typeSelect" formControlName="type">
+              <option style='display: none' value=''></option>
               <option
                   *ngFor="let type of (types$|async)"
                   value="{{type.typeDangerousSituationsId}}"
