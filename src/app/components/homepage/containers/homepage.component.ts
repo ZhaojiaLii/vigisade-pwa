@@ -72,11 +72,11 @@ export class HomepageComponent implements OnInit {
       }
     });
     this.userHasDirection$.subscribe(status => {
-      if (status) { this.surveyService.loadSurveys(); }
+      if (status && navigator.onLine) { this.surveyService.loadSurveys(); }
     });
     setTimeout(() => {
       this.loading = false;
-    }, 3000);
+    }, 2000);
   }
 }
 
