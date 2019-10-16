@@ -57,14 +57,17 @@ export class DangerousSituationComponent {
       this.router.navigate(['/home']);
       // save the POST payload into indexedDB and get the payload in Service worker to POST
       msg = {POSTdata: POST};
-      navigator.serviceWorker.controller.postMessage(msg);
-      navigator.serviceWorker.ready
-        .then(registration => {
-          const syncTag = 'syncDangerousPOST';
-          registration.sync.register(syncTag);
-        })
-        .then(() => console.log('Registered background sync for dangerous situation'))
-        .catch(err => console.error('Error registering background sync', err));
+      // console.log(msg);
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage(msg);
+        navigator.serviceWorker.ready
+          .then(registration => {
+            const syncTag = 'syncDangerousPOST';
+            registration.sync.register(syncTag);
+          })
+          .then(() => console.log('Registered background sync for dangerous situation'))
+          .catch(err => console.error('Error registering background sync', err));
+      }
       this.dangerousService.createDangerousSituation(POST);
     }
 
