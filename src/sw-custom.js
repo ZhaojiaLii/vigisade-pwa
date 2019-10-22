@@ -1,7 +1,7 @@
 const CACHE = 'pwa-angular-cache-v1';
 const ROUTES_TO_CACHE = [
   '/',
-  'index.html',
+  '/index.html',
   '/AvenirNext-Bold.woff',
   '/AvenirNext-Bold.woff2',
   '/AvenirNext-DemiBold.woff',
