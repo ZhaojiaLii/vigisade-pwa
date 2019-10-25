@@ -1,7 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SurveyApiService } from '../services/survey-api.service';
-import { createResult, createResultFail, createResultSuccess, loadSurveys, loadSurveysFail, loadSurveysSuccess, selectSurveyCategory, setLoadingState, updateResult, updateResultFail, updateResultSuccess } from './survey.actions';
+import {
+  createResult,
+  createResultFail,
+  createResultSuccess,
+  loadSurveys,
+  loadSurveysFail,
+  loadSurveysSuccess,
+  selectSurveyCategory,
+  setLoadingState,
+  updateResult,
+  updateResultFail,
+  updateResultSuccess,
+} from './survey.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { SurveyService } from '../services/survey.service';
@@ -71,6 +83,7 @@ export class SurveyEffects {
         this.surveyService.loadSurveys();
         this.historyService.loadHistory();
         this.profileService.loadUser();
+        localStorage.setItem('redirect', 'redirect');
       }),
     )),
     switchMap(() => [

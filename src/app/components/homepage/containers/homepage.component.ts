@@ -62,6 +62,13 @@ export class HomepageComponent implements OnInit {
     });
   }
 
+  openRedirectDialog() {
+    const dialogRef = this.dialog.open(RedirectDangerousComponent, {disableClose: true});
+    dialogRef.afterClosed().subscribe(() => {
+    });
+    // dialogRef.updatePosition({ top: `30px`, right: `40px`});
+  }
+
   ngOnInit(): void {
     this.loading = true;
     this.user$.subscribe(user => {
@@ -71,6 +78,10 @@ export class HomepageComponent implements OnInit {
         }
       }
     });
+    if (localStorage.getItem('redirect')) {
+      this.openRedirectDialog();
+      localStorage.removeItem('redirect');
+    }
     this.userHasDirection$.subscribe(status => {
       if (status && navigator.onLine) { this.surveyService.loadSurveys(); }
     });
@@ -78,6 +89,20 @@ export class HomepageComponent implements OnInit {
       this.loading = false;
     }, 2000);
   }
+}
+
+@Component({
+  selector: 'app-redirect-dangerous',
+  templateUrl: './redirect-dangerous-popin.html',
+})
+export class RedirectDangerousComponent {
+  constructor(
+    private router: Router,
+  ) {}
+  redirect() {
+    this.router.navigate(['/dangerous']);
+  }
+
 }
 
 @Component({

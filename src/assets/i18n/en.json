@@ -28,6 +28,7 @@
   "Homepage.Logout": "Logout",
   "Homepage.Next": "Next",
   "Homepage.Title": "Please select your Direction, Area, Entity:",
+  "Homepage.RedirectQuestion": "Do you want to report a dangerous situation?",
 
   "Menu.Accueil": "Home",
   "Menu.Atraiter":"Non-compliance to treat",
@@ -139,5 +140,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Yes",
+  "Non": "No"
 }
