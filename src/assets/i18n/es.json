@@ -117,6 +117,7 @@
   "ConsultationVisite.Bonne pratique":"Buena practica/Astucia",
 
   "Action corrective mise à jour": "Medida correctiva mise à jour",
+  "Rien à afficher": "Nada que mostrar",
 
   "Atraiter.Filtres de recherche": "Filtro de busqueda",
   "Atraiter.Date début": "Fecha inicio",
@@ -132,6 +133,7 @@
   "Atraiter.ActionsATraiter":"No conformidade{{value}} por procesar",
   "Atraiter.ActionsAValider":"No conformidade{{value}} a validar",
   "Atraiter.ActionsValidées":"No conformidade{{value}} validado",
+  "Atraiter.HistoriqueCommentaire": "Historial de comentarios",
 
   "Tous les champs sont obligatoires.": "Todos los campos son obligatorios.",
 
