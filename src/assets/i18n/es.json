@@ -28,6 +28,7 @@
   "Homepage.Logout": "desconexión",
   "Homepage.Next": "Próximo",
   "Homepage.Title": "Por favor seleccione su Dirección, Zona, Entidad:",
+  "Homepage.RedirectQuestion": "¿Quieres denunciar una situación peligrosa?",
 
   "Menu.Accueil": "Inicio",
   "Menu.Atraiter":"No conformidades por procesar",
@@ -139,5 +140,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Sí",
+  "Non": "No"
 }

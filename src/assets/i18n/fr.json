@@ -28,6 +28,7 @@
   "Homepage.Logout": "Déconnexion",
   "Homepage.Next": "Suivant",
   "Homepage.Title": "Veuillez sélectionner votre Direction, Zone, Entité:",
+  "Homepage.RedirectQuestion": "Voulez-vous signaler une situation dangereuse?",
 
   "Menu.Accueil": "Accueil",
   "Menu.Atraiter":"A traiter",
@@ -140,5 +141,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Oui",
+  "Non": "Non"
 }

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<div>
+  <div mat-dialog-content>
+    <p>{{'Homepage.RedirectQuestion' | translate}}</p>
+  </div>
+  <div mat-dialog-actions style="display: block; text-align: center;">
+    <button mat-button [mat-dialog-close]="false">{{'Non' | translate}}</button>
+    <button mat-button (click)="redirect()" [mat-dialog-close]="true">{{'Oui' | translate}}</button>
+  </div>
+</div>
+
