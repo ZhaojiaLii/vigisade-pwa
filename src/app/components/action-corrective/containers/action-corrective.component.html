@@ -43,9 +43,12 @@
       <div class="card card-full-width mb-10 shadow-none lineH-24px"
            *ngIf="( ( (thisCorrection.status === 'A traiter') || (thisCorrection.status === 'A valider') ) && (thisCorrection.comment_question !== null))"
       >
+        <app-action-corrective-comment-element
+          [thisCorrection]="thisCorrection"
+        ></app-action-corrective-comment-element>
         <div class="card-body">
           <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
-          <p class="px-10 font-14 mb-30">{{thisCorrection.comment_question}}</p>
+          <p class="px-10 font-14 mb-30">{{latestComment}}</p>
           <div *ngIf="thisCorrection.image">
             <div class="spinner-container" *ngIf="loading">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
@@ -56,7 +59,7 @@
               [hidden]="loading"
               (error)="error()"
               (load)="loadingImage()"
-              [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/img-test-correction.jpg'"
+              [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/error.png'"
               class="img-fluid w-100"
               alt="image not found"
             />

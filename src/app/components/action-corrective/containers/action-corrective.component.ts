@@ -39,10 +39,12 @@ export class ActionCorrectiveComponent implements OnInit {
   question: any;
   resultQuestion: any;
   userId: number;
+  userName: string;
   responsibleId: number;
   result: any;
   actionStatus: string;
   correctionID: number;
+  latestComment: string;
   history$: Observable<GetResult> = this.historyService.getHistory();
   correction$: Observable<any> = this.correctionService.getCorrection();
   allUsers$: Observable<User[]> = this.correctionService.getAllUsers();
@@ -82,7 +84,6 @@ export class ActionCorrectiveComponent implements OnInit {
     this.status = Object.keys(STATUS);
 
     this.isDesktop = this.deviceService.isDesktop();
-
 
     /**
      * If is Admin or Manager !
@@ -138,6 +139,7 @@ export class ActionCorrectiveComponent implements OnInit {
         }
       }
     });
+
     this.user$.subscribe(user => {
       if (user) {
         this.userId = user.id;
@@ -146,11 +148,20 @@ export class ActionCorrectiveComponent implements OnInit {
       }
     });
 
+    this.allUsers$.subscribe(users => {
+      const thisUser = users.find(user => user.id === this.userId);
+      this.userName = thisUser.firstName + ' ' + thisUser.lastName;
+    });
+
     this.correction.valueChanges.subscribe(val => {
       this.disableResponsible = (val.comment === '' &&  val.photo === '');
       // tslint:disable-next-line:max-line-length
       this.disableCommentPhoto = (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId);
     });
+    // get latest comment
+    const commentArray = this.thisCorrection.comment_question.split('~');
+    const latestCommentElement = commentArray[commentArray.length - 1].split('-');
+    this.latestComment = latestCommentElement[latestCommentElement.length - 1];
 
   }
   encode(event: any) {
@@ -176,6 +187,12 @@ export class ActionCorrectiveComponent implements OnInit {
 
   sendActionCorrective() {
     let correctionPayload: CreateCorrection;
+    const time = `${new Date().getDate()}/${new Date().getMonth() + 1}`;
+    const executor = this.userName;
+    const previousComment = this.thisCorrection.comment_question;
+    const newComment = previousComment ?
+      `${previousComment}~${time} - ${executor} - ${this.correction.value.comment}` :
+      `${time} - ${executor} - ${this.correction.value.comment}`;
     if (!this.isAdminOrManager && this.thisCorrection.status === 'A traiter') {
       correctionPayload = {
         id: this.thisCorrection.id,
@@ -185,7 +202,7 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: 'A valider',
-        comment_question: this.correction.value.comment,
+        comment_question: newComment,
         image: this.correction.value.photo,
       };
     } else if (this.isAdminOrManager && this.correction.value.comment !== '' && this.correction.value.photo !== '') {
@@ -198,7 +215,7 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: 'A valider',
-        comment_question: this.correction.value.comment,
+        comment_question: newComment,
         image: this.correction.value.photo,
       };
     } else if (this.isAdminOrManager && this.actionStatus !== this.correction.value.status) {
@@ -211,7 +228,7 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: this.correction.value.status,
-        comment_question: this.thisCorrection.comment_question,
+        comment_question: previousComment,
         image: this.thisCorrection.image,
       };
     } else if (this.isAdminOrManager && Number(this.correction.value.user_id) !== this.responsibleId) {
@@ -224,7 +241,7 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: this.thisCorrection.status,
-        comment_question: this.thisCorrection.comment_question,
+        comment_question: previousComment,
         image: this.thisCorrection.image,
       };
     }

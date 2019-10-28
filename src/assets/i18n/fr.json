@@ -118,6 +118,7 @@
   "ConsultationVisite.Bonne pratique":"Bonne pratique",
 
   "Action corrective mise à jour": "Action corrective mise à jour",
+  "Rien à afficher": "Rien à afficher",
 
   "Atraiter.Filtres de recherche": "Filtres de recherche",
   "Atraiter.Date début": "Date début",
@@ -133,6 +134,7 @@
   "Atraiter.ActionsATraiter":"Action{{value}} à traiter",
   "Atraiter.ActionsAValider":"Action{{value}} à valider",
   "Atraiter.ActionsValidées":"Action{{value}} validée{{value}}",
+  "Atraiter.HistoriqueCommentaire": "Historique des commentaires",
 
   "Tous les champs sont obligatoires.": "Tous les champs sont obligatoires.",
 
