@@ -58,8 +58,6 @@
           [thisCorrection]="thisCorrection"
         ></app-action-corrective-comment-element>
         <div class="card-body">
-          <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
-          <p class="px-10 font-14 mb-30">{{latestComment}}</p>
           <div *ngIf="thisCorrection.image">
             <div class="spinner-container" *ngIf="loading">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
