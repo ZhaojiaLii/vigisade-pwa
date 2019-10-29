@@ -7,4 +7,5 @@ export interface UpdateCorrection {
   result_id: number;
   comment_question: string;
   image: string;
+  type_dangerous_id: number;
 }
