@@ -28,6 +28,7 @@
   "Homepage.Logout": "Déconnexion",
   "Homepage.Next": "Suivant",
   "Homepage.Title": "Veuillez sélectionner votre Direction, Zone, Entité:",
+  "Homepage.RedirectQuestion": "Voulez-vous signaler une situation dangereuse?",
 
   "Menu.Accueil": "Accueil",
   "Menu.Atraiter":"A traiter",
@@ -37,7 +38,6 @@
   "Menu.Nouvelle visite": "Nouvelle visite",
   "Menu.Situation dangereuse": "Situation dangereuse",
   "Menu.Action corrective": "Action corrective",
-  "Menu.Historique des situations dangereuses": "Historique des situations dangereuses",
 
   "Tutoriel.Conforme":"Conforme",
   "Tutoriel.Sans objet / Non vu":"Sans objet / Non vu",
@@ -140,5 +140,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Oui",
+  "Non": "Non"
 }

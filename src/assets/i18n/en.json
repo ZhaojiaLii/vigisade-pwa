@@ -28,6 +28,7 @@
   "Homepage.Logout": "Logout",
   "Homepage.Next": "Next",
   "Homepage.Title": "Please select your Direction, Area, Entity:",
+  "Homepage.RedirectQuestion": "Do you want to report a dangerous situation?",
 
   "Menu.Accueil": "Home",
   "Menu.Atraiter":"Non-compliance to treat",
@@ -37,7 +38,6 @@
   "Menu.Nouvelle visite": "New inspection",
   "Menu.Situation dangereuse": "Dangerous situation",
   "Menu.Action corrective": "Corrective action",
-  "Menu.Historique des situations dangereuses": "History of dangerous situations",
 
   "Tutoriel.Conforme":"Compliant",
   "Tutoriel.Sans objet / Non vu":"Non applicable/ Unseen",
@@ -139,5 +139,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Yes",
+  "Non": "No"
 }

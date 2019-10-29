@@ -15,7 +15,11 @@ import { SharedModule } from './components/shared/shared.module';
 import { metaReducers, reducers } from './store/app.reducer';
 import { LoginComponent } from './components/login/containers/login.component';
 import { TutorialComponent } from './components/tutorial/containers/tutorial.component';
-import { DZESelectComponent, HomepageComponent } from './components/homepage/containers/homepage.component';
+import {
+  DZESelectComponent,
+  HomepageComponent,
+  RedirectDangerousComponent,
+} from './components/homepage/containers/homepage.component';
 import { ProfileComponent } from './components/profile/containers/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActionCorrectiveComponent } from './components/action-corrective/containers/action-corrective.component';
@@ -57,6 +61,7 @@ const pageComponents = [
   HomepageComponent,
   ProfileComponent,
   DZESelectComponent,
+  RedirectDangerousComponent,
 ];
 
 const pageModules = [
@@ -93,6 +98,7 @@ const ngrxFeatures = [
     BonnePratiqueComponent,
     ATraiterComponent,
     DZESelectComponent,
+    RedirectDangerousComponent,
     HistoryDangerousComponent,
     HistoryDangerousItemComponent,
   ],
@@ -135,6 +141,6 @@ const ngrxFeatures = [
     CookieService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DZESelectComponent],
+  entryComponents: [DZESelectComponent, RedirectDangerousComponent],
 })
 export class AppModule { }

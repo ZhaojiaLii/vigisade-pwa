@@ -28,6 +28,7 @@
   "Homepage.Logout": "desconexión",
   "Homepage.Next": "Próximo",
   "Homepage.Title": "Por favor seleccione su Dirección, Zona, Entidad:",
+  "Homepage.RedirectQuestion": "¿Quieres denunciar una situación peligrosa?",
 
   "Menu.Accueil": "Inicio",
   "Menu.Atraiter":"No conformidades por procesar",
@@ -37,7 +38,6 @@
   "Menu.Nouvelle visite": "Nueva visita",
   "Menu.Situation dangereuse": "Situacion peligrosa",
   "Menu.Action corrective": "Acción correctiva",
-  "Menu.Historique des situations dangereuses": "Historia de situaciones peligrosas",
 
   "Tutoriel.Conforme":"Conforme",
   "Tutoriel.Sans objet / Non vu":"Sin objeto/ no evaluado",
@@ -139,5 +139,7 @@
 
   "A traiter":"A traiter",
   "A valider":"A valider",
-  "Validé":"Validé"
+  "Validé":"Validé",
+  "Oui": "Sí",
+  "Non": "No"
 }
