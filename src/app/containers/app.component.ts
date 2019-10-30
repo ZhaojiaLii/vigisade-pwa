@@ -66,6 +66,7 @@ export class AppComponent implements OnInit {
       this.historyService.loadHistory();
       this.correctionService.loadAllUsers();
       this.dangerousService.loadDangerousHistory();
+      this.surveyService.loadSurveys();
     });
   }
 
