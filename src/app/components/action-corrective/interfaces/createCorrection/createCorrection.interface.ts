@@ -8,4 +8,5 @@ export interface CreateCorrection {
   status: string;
   comment_question: string;
   image: string;
+  type_dangerous_id: number;
 }

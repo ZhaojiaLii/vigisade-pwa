@@ -1,23 +1,34 @@
 <!--{{correction.value|json}}-->
 <!--{{thisCorrection|json}}-->
-<div *ngIf="!resultQuestion" class="spinner-container">
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</div>
+<!--<div *ngIf="!resultQuestion" class="spinner-container">-->
+<!--  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>-->
+<!--</div>-->
 <div class="container">
-  <div class="row {{thisCorrection.status === 'Validé' ? 'mb-90' : ''}}">
-    <div class="card card-full-width mb-10 shadow-none">
+  <div class="row">
+    <!-- category name, result time, result place -->
+    <!-- type of dangerous situation, dangerous situation time -->
+    <div class="card card-full-width mb-10 shadow-none" *ngIf="!dangerousId">
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
             <div class="col-6 font-demiBold">{{categoryTitle}}</div>
-            <div class="col-6 text-right font-12">{{result?.resultDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
+            <div class="col-6 text-right font-12">{{correctionDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
         </div>
         <p class="font-demiBold mb-2">
-          {{result?.resultPlace}}
+          {{result ? result.resultPlace : ''}}
         </p>
       </div>
     </div>
+    <div class="card card-full-width mb-10 shadow-none" *ngIf="dangerousId">
+      <div class="card-body px-30">
+        <div class="row align-items-center light-grey mb-20">
+          <div class="col-6 font-demiBold">{{type$ | async}}</div>
+          <div class="col-6 text-right font-12">{{correctionDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
+        </div>
+      </div>
+    </div>
+    <!-- question name, question help, result photo, result comment -->
     <div class="card card-full-width mb-10 shadow-none lineH-24px">
-      <div class="card-body">
+      <div class="card-body" *ngIf="!dangerousId">
         <div>{{question ? question.surveyQuestionTranslation.surveyQuestionTranslationLabel : ' '}}
           <div>
             <span class="light-grey font-14 mb-50">{{question ? question.surveyQuestionTranslation.surveyQuestionTranslationHelp : ' '}}</span>
@@ -44,8 +55,6 @@
         <!-- element for the history of all the comments -->
         <app-action-corrective-comment-element [thisCorrection]="thisCorrection"></app-action-corrective-comment-element>
         <div class="card-body">
-          <div class="font-20 font-demiBold">{{'Tutoriel.Action corrective'|translate}}</div>
-          <p class="px-10 font-14 mb-30">{{latestComment}}</p>
           <div *ngIf="thisCorrection.image">
             <div class="spinner-container" *ngIf="loading">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
@@ -59,6 +68,16 @@
               [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/error.png'"
               class="img-fluid w-100"
               alt="image not found"
+              *ngIf="!isFirstComment"
+            />
+            <img
+              [hidden]="loading"
+              (error)="error()"
+              (load)="loadingImage()"
+              [src]="thisCorrection.image? (imagePathD + thisCorrection.image) : '../../../../assets/images/error.png'"
+              class="img-fluid w-100"
+              alt="image not found"
+              *ngIf="isFirstComment"
             />
           </div>
         </div>

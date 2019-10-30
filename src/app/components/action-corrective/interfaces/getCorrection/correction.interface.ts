@@ -7,8 +7,10 @@ export interface Correction {
   resultUserfirstName: string;
   resultUserlastName: string;
   result_question_id: string;
+  type_dangerous_id: number;
   status: string;
   comment_question: string;
   image: string;
   user_id: number;
+  date: string;
 }

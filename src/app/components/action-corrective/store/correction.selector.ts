@@ -31,9 +31,18 @@ export const getCorrection = createSelector(
       return null;
     }
     if (state.correctiveAction && survey) {
-      return state.correctiveAction.filter(correction => correction.survey_id === survey.surveyId );
+      return state.correctiveAction.filter(correction => correction.survey_id === survey.surveyId);
     }
   },
+);
+
+export const getDangerousCorrection = createSelector(
+  getCorrectionState,
+  (state: CorrectionState) => {
+    if (state.correctiveAction) {
+      return state.correctiveAction.filter(correction => correction.survey_id === null);
+    }
+  }
 );
 
 export const getAllUsers = createSelector(
@@ -62,14 +71,15 @@ export const getAllUsers = createSelector(
 
 export const getUserMobileCorrection = createSelector(
   getCorrection,
+  getDangerousCorrection,
   getUser,
-  (results: Correction[], user: User) => {
+  (results: Correction[], dangerous: Correction[], user: User) => {
 
-    if (!user || !results) {
+    if (!user || !results || !dangerous) {
       return [];
     }
-
-    return results.filter(result => {
+    const correctionDangerous = [...results, ...dangerous];
+    return correctionDangerous.filter(result => {
       return (result.user_id === user.id && result.status === 'A traiter');
     });
   }
@@ -81,8 +91,8 @@ export const getMobileATraiterByDate = createSelector(
   (corrections: Correction[],  history: GetResult) => {
     if (corrections && history) {
       corrections.sort((a, b) => {
-        const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
-        const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+        const dateA = a.date;
+        const dateB = b.date;
         if (dateA > dateB) {
           return -1;
         }
@@ -114,68 +124,81 @@ export const getSearchParams = createSelector(
 export const getFilteredUserAtraiter = createSelector(
   getCorrection,
   getSearchParams,
+  getDangerousCorrection,
   getHistory,
-  (corrections: Correction[], searchParams: ATraiterSearch, history: GetResult) => {
-    if (!corrections || !searchParams) {
-      return corrections;
-    }
-    return corrections.filter(correction => {
-      if (searchParams.status && (searchParams.status === 'Validé')) {
-        return (
-            !searchParams.startDate
-            || history.result.find(result => result.resultId === correction.result_id).resultDate
-            >= moment(searchParams.startDate).format('YYYY-MM-DD')
-          )
-          && (
-            !searchParams.endDate
-            || history.result.find(result => result.resultId === correction.result_id).resultDate
-            <= moment(searchParams.endDate).format('YYYY-MM-DD')
-          )
-          && (
-            !searchParams.status
-            || correction.status === searchParams.status || correction.status === 'Corrigé'
-          )
-          && (
-            !searchParams.areaId
-            || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
-          )
-          && (
-            !searchParams.entityId
-            || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
-          )
-          && (
-            !searchParams.responsible
-            || correction.user_id === Number(searchParams.responsible)
-          );
-      } else {
-        return (
-            !searchParams.startDate
-            || history.result.find(result => result.resultId === correction.result_id).resultDate
-            >= moment(searchParams.startDate).format('YYYY-MM-DD')
-          )
-          && (
-            !searchParams.endDate
-            || history.result.find(result => result.resultId === correction.result_id).resultDate
-            <= moment(searchParams.endDate).format('YYYY-MM-DD')
-          )
-          && (
-            !searchParams.status
-            || correction.status === searchParams.status
-          )
-          && (
-            !searchParams.areaId
-            || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
-          )
-          && (
-            !searchParams.entityId
-            || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
-          )
-          && (
-            !searchParams.responsible
-            || correction.user_id === Number(searchParams.responsible)
-          );
+  (corrections: Correction[], searchParams: ATraiterSearch, dangerous: Correction[], history: GetResult) => {
+    // if (!corrections || !searchParams || !dangerous) {
+    //   return [...corrections, ...dangerous];
+    // }
+    if (dangerous || corrections) {
+      let all;
+      if (dangerous && !corrections) {
+        all = [...dangerous];
+      } else if (dangerous && corrections) {
+        all = [...corrections, ...dangerous];
+      } else if (!dangerous && corrections) {
+        all = [...corrections];
       }
-    });
+      return all.filter(correction => {
+        if (searchParams && searchParams.status && (searchParams.status === 'Validé')) {
+          return (
+              !searchParams.startDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              >= moment(searchParams.startDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.endDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              <= moment(searchParams.endDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.status
+              || correction.status === searchParams.status || correction.status === 'Corrigé'
+            )
+            && (
+              !searchParams.areaId
+              || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+            )
+            && (
+              !searchParams.entityId
+              || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+            )
+            && (
+              !searchParams.responsible
+              || correction.user_id === Number(searchParams.responsible)
+            );
+        } else if (searchParams && searchParams.status) {
+          return (
+              !searchParams.startDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              >= moment(searchParams.startDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.endDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              <= moment(searchParams.endDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.status
+              || correction.status === searchParams.status
+            )
+            && (
+              !searchParams.areaId
+              || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+            )
+            && (
+              !searchParams.entityId
+              || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+            )
+            && (
+              !searchParams.responsible
+              || correction.user_id === Number(searchParams.responsible)
+            );
+        } else {
+          return correction;
+        }
+      });
+    }
   }
 );
 
@@ -187,8 +210,8 @@ export const getDesktopATraiterByDate = createSelector(
       if (corrections.length > 1) {
         const unfreezeCorrections = corrections.slice();
         unfreezeCorrections.sort((a, b) => {
-          const dateA = history.result.find(result => result.resultId === a.result_id).resultDate;
-          const dateB = history.result.find(result => result.resultId === b.result_id).resultDate;
+          const dateA = a.date;
+          const dateB = b.date;
           if (dateA > dateB) {
             return -1;
           }
