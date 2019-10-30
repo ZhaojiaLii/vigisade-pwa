@@ -51,7 +51,7 @@
     </div>
 
     <div class="card card-full-width shadow-none">
-      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="latestComment !== null">
+      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null">
         <!-- element for the history of all the comments -->
         <app-action-corrective-comment-element [thisCorrection]="thisCorrection"></app-action-corrective-comment-element>
         <div class="card-body">

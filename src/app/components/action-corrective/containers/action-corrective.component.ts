@@ -161,7 +161,6 @@ export class ActionCorrectiveComponent implements OnInit {
         }
       }
     });
-
     this.user$.subscribe(user => {
       if (user) {
         this.userId = user.id;
@@ -169,7 +168,6 @@ export class ActionCorrectiveComponent implements OnInit {
         this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
       }
     });
-
     this.allUsers$.subscribe(users => {
       const thisUser = users.find(user => user.id === this.userId);
       this.userName = thisUser.firstName + ' ' + thisUser.lastName;
@@ -209,7 +207,6 @@ export class ActionCorrectiveComponent implements OnInit {
       this.sendActionCorrective();
     }
   }
-
   sendActionCorrective() {
     let correctionPayload: CreateCorrection;
     const time = `${new Date().getDate()}/${new Date().getMonth() + 1}`;
