@@ -10,11 +10,12 @@ export const createDangerousSituation = createAction(
 
 export const createDangerousSituationSuccess = createAction(
   '[dangerous] Create Dangerous Situation Success',
+  props<{status: number}>(),
 );
 
 export const createDangerousSituationFail = createAction(
   '[dangerous] Create Dangerous Situation Fail',
-  props<{ error: any; dangerousSituation: DangerousSituationPayload; }>(),
+  props<{ error: any}>(),
 );
 
 export const setLoadingState = createAction(

@@ -7,7 +7,7 @@ import {
   loadHistoryDangerous,
   loadHistoryDangerousFail,
   loadHistoryDangerousSuccess,
-  setLoadingState
+  setLoadingState,
 } from './dangerous.action';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { DangerousSituationApiService } from '../services/dangerous-situation-api.service';
@@ -16,6 +16,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DangerousService } from '../services/dangerous.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { getRandomId } from '../../../data/random.helpers';
+import { BufferService } from '../../../services/buffer.service';
 
 @Injectable()
 export class DangerousEffects {
@@ -26,6 +29,7 @@ export class DangerousEffects {
     private dangerousService: DangerousService,
     private router: Router,
     private toastr: ToastrService,
+    private bufferService: BufferService,
     private translateService: TranslateService,
   ) {}
 
@@ -33,11 +37,21 @@ export class DangerousEffects {
     ofType(createDangerousSituation),
     switchMap(action => {
       return this.dangerousApiService.postDangerous(action.dangerousSituation).pipe(
-        map(() => createDangerousSituationSuccess()),
-        catchError(error => of(createDangerousSituationFail({
-          error: error.message,
-          dangerousSituation: action.dangerousSituation
-        }))),
+        map(status => createDangerousSituationSuccess({status})),
+        catchError(error => {
+          if (error instanceof HttpErrorResponse && error.status === 0) {
+            this.bufferService.delayPost({
+              id: getRandomId(),
+              url: '/api/dangerous-situation/create/',
+              payload: action.dangerousSituation,
+            });
+
+            // return of(createDangerousSituationSuccess({status: 200}));
+          }
+          return of(createDangerousSituationFail({error: error.message}));
+        }
+        ),
+        tap(() => this.toastr.error(this.translateService.instant('SituationDangereuse.Situation dangereuse synchronisee')))
       );
     })
   ));

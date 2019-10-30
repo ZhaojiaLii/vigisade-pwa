@@ -6,7 +6,6 @@ import { DangerousSituationType } from '../interfaces/dangerous-situation-type.i
 import { DataService } from '../../../services/data.service';
 import { compress } from '../../../data/image.helpers';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dangerous',
@@ -26,7 +25,6 @@ export class DangerousSituationComponent {
     private dataService: DataService,
     private dangerousService: DangerousService,
     private router: Router,
-    private cookie: CookieService,
   ) {}
 
   updateImage(event: any) {
@@ -47,7 +45,6 @@ export class DangerousSituationComponent {
   // }
 
   createDangerous() {
-    let msg;
     const POST = {
       typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
       dangerousSituationComment: this.dangerousSituationGroup.value.comment,
@@ -58,21 +55,23 @@ export class DangerousSituationComponent {
     } else {
       this.router.navigate(['/home']);
       // save the POST payload into indexedDB and get the payload in Service worker to POST
-      msg = {POSTdata: POST, token: this.cookie.get('vigisade-tkn')};
+      // msg = {POSTdata: POST, token: this.cookie.get('vigisade-tkn')};
       // console.log(msg);
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage(msg);
-        navigator.serviceWorker.ready
-          .then(registration => {
-            const syncTag = 'syncDangerousPOST';
-            registration.sync.register(syncTag);
-          })
-          .then(() => console.log('Registered background sync for dangerous situation'))
-          .catch(err => console.error('Error registering background sync', err));
-      }
+      // if (navigator.serviceWorker.controller) {
+      //   navigator.serviceWorker.controller.postMessage(msg);
+      //   navigator.serviceWorker.ready
+      //     .then(registration => {
+      //       const syncTag = 'syncDangerousPOST';
+      //       registration.sync.register(syncTag);
+      //     })
+      //     .then(() => {
+      //       console.log('Registered background sync for dangerous situation');
+      //       this.dangerousService.createDangerousSituation(POST);
+      //     })
+      //     .catch(err => console.error('Error registering background sync', err));
+      // }
       this.dangerousService.createDangerousSituation(POST);
     }
-
   }
 
   loadingImage() {
