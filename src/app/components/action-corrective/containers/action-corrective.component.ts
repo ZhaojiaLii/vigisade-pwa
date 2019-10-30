@@ -179,13 +179,12 @@ export class ActionCorrectiveComponent implements OnInit {
       this.disableCommentPhoto = (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId);
     });
     // get latest comment
-    if (this.thisCorrection) {
+    if (this.thisCorrection && this.thisCorrection.comment_question) {
       const commentArray = this.thisCorrection.comment_question.split('~');
       const latestCommentElement = commentArray[commentArray.length - 1].split('-');
       this.latestComment = latestCommentElement[latestCommentElement.length - 1];
+      this.isFirstComment = this.thisCorrection.comment_question.indexOf('~') === -1;
     }
-
-    this.isFirstComment = this.thisCorrection.comment_question.indexOf('~') === -1;
   }
   encode(event: any) {
     if (event.target.files && event.target.files[0]) {

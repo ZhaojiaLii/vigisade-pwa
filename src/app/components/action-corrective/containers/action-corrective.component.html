@@ -54,13 +54,13 @@
       <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null">
         <!-- element for the history of all the comments -->
         <app-action-corrective-comment-element [thisCorrection]="thisCorrection"></app-action-corrective-comment-element>
-        <div class="card-body">
-          <div *ngIf="thisCorrection.image">
+        <div class="card-body" *ngIf="thisCorrection.image">
+          <div>
             <div class="spinner-container" *ngIf="loading">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             </div>
           </div>
-          <div *ngIf="thisCorrection.image">
+          <div>
             <img
               [hidden]="loading"
               (error)="error()"

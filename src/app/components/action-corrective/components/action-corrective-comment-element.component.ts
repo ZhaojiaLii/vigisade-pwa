@@ -17,7 +17,7 @@ export class ActionCorrectiveCommentElementComponent implements OnInit {
   @Input() thisCorrection: Correction;
   comments: Array<string>;
   ngOnInit() {
-   this.comments = this.thisCorrection.comment_question.split('~');
+   this.comments = this.thisCorrection.comment_question ? this.thisCorrection.comment_question.split('~') : [];
   }
 
 }
