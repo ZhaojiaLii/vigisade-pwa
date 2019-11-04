@@ -49,6 +49,23 @@
         </div>
       </div>
     </div>
+    <div class="card card-full-width mb-10 shadow-none lineH-24px">
+      <div class="card-body" *ngIf="dangerousId">
+        <div class="mb-25">{{thisCorrection.dangerous_situation_comment}}</div>
+        <div *ngIf="thisCorrection">
+          <div *ngIf="thisCorrection.dangerous_situation_image">
+            <div class="spinner-container" *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="thisCorrection">
+          <div *ngIf="thisCorrection.dangerous_situation_image">
+            <img [hidden]="loading" (load)="loadingImage()" (error)="error()" src="{{thisCorrection.dangerous_situation_image ? (imagePathD + thisCorrection.dangerous_situation_image) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="card card-full-width shadow-none">
       <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null || thisCorrection.dangerous_situation_comment !== null">
