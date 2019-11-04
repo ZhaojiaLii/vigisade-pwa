@@ -10,14 +10,16 @@ import { HistoryService } from '../../history/services/history.service';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
-import 'rxjs-compat/add/operator/filter';
 import { compress, IMAGE_PATH } from '../../../data/image.helpers';
 import { Result } from '../../survey/interfaces/results/result.interface';
 import { TranslateService } from '@ngx-translate/core';
-import {ROLES} from '../../../data/user.helpers';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {STATUS} from '../../../data/status.const';
-import {Correction} from '../interfaces/getCorrection/correction.interface';
+import { ROLES } from '../../../data/user.helpers';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { STATUS } from '../../../data/status.const';
+import { Correction } from '../interfaces/getCorrection/correction.interface';
+import { DataService } from '../../../services/data.service';
+import 'rxjs-compat/add/operator/filter';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-action-corrective',
@@ -39,20 +41,27 @@ export class ActionCorrectiveComponent implements OnInit {
   question: any;
   resultQuestion: any;
   userId: number;
+  userName: string;
   responsibleId: number;
   result: any;
   actionStatus: string;
   correctionID: number;
+  latestComment: string;
+  dangerousId: number;
+  correctionDate: string;
+  isFirstComment: boolean;
   history$: Observable<GetResult> = this.historyService.getHistory();
-  correction$: Observable<any> = this.correctionService.getCorrection();
+  correction$: Observable<Correction[]>;
   allUsers$: Observable<User[]> = this.correctionService.getAllUsers();
   user$: Observable<User> = this.profileService.getUser();
+  type$: Observable<string>;
   getCorrectionCategory$: Observable<any> = this.correctionService.getCorrectionCategory();
   correctionQuestions$: Observable<any> = this.correctionService.getCorrectionQuestion();
   getCorrectionResult$: Observable<Result> = this.correctionService.getCorrectionResult();
 
   imagePath = IMAGE_PATH.result;
   imagePathAC = IMAGE_PATH.action_corrective;
+  imagePathD = IMAGE_PATH.dangerous_situation;
 
   isDesktop = false;
   disableResponsible = true;
@@ -70,6 +79,7 @@ export class ActionCorrectiveComponent implements OnInit {
     private router: Router,
     private translateService: TranslateService,
     private deviceService: DeviceDetectorService,
+    private dataService: DataService,
   ) {
     this.router.events.filter((event: any) => event instanceof NavigationEnd)
       .subscribe(event => {
@@ -79,10 +89,15 @@ export class ActionCorrectiveComponent implements OnInit {
 
   ngOnInit() {
 
+    if (this.deviceService.isDesktop()) {
+      this.correction$ = this.correctionService.getDesktopCorrectionByDate();
+    } else {
+      this.correction$ = this.correctionService.getMobileCorrectionByDate();
+    }
+
     this.status = Object.keys(STATUS);
 
     this.isDesktop = this.deviceService.isDesktop();
-
 
     /**
      * If is Admin or Manager !
@@ -101,9 +116,17 @@ export class ActionCorrectiveComponent implements OnInit {
             this.actionStatus = correction.status;
             this.correction.patchValue({status: this.thisCorrection.status});
             this.correction.patchValue({user_id: this.thisCorrection.user_id});
+            this.dangerousId = correction.type_dangerous_id;
+            this.correctionDate = correction.date;
           }
         }
       }
+    );
+    this.type$ = this.dataService.getDangerousSituationTypes().pipe(
+      map(types => {
+        const getType = types.find(type => type.typeDangerousSituationsId === this.dangerousId);
+        return getType.typeDangerousSituationTranslation.typeDangerousSituationTranslationType;
+      })
     );
     this.historyService.getSelectedResult();
     this.getCorrectionResult$.subscribe(result => {
@@ -119,18 +142,18 @@ export class ActionCorrectiveComponent implements OnInit {
       }
     });
     this.getCorrectionCategory$.subscribe(categories => {
-      if (categories) {
-        this.categoryTitle = categories.find(category =>
-          category.surveyCategoryId === this.categoryId).surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
+      if (categories && !this.dangerousId) {
+        this.categoryTitle = categories.find(category => category.surveyCategoryId === this.categoryId)
+          .surveyCategoryTitleTranslation.surveyCategoryTranslatableTitle;
       }
     });
     this.history$.subscribe(histories => {
-      if (histories) {
+      if (histories && !this.dangerousId) {
         this.result = histories.result.find(result => result.resultId === this.resultId);
       }
     });
     this.correctionQuestions$.subscribe(questions => {
-      if (questions) {
+      if (questions && !this.dangerousId) {
         for (const question of questions) {
           if (question.surveyQuestionId === Number(this.questionId)) {
             this.question = question;
@@ -145,13 +168,23 @@ export class ActionCorrectiveComponent implements OnInit {
         this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
       }
     });
+    this.allUsers$.subscribe(users => {
+      const thisUser = users.find(user => user.id === this.userId);
+      this.userName = thisUser.firstName + ' ' + thisUser.lastName;
+    });
 
     this.correction.valueChanges.subscribe(val => {
       this.disableResponsible = (val.comment === '' &&  val.photo === '');
       // tslint:disable-next-line:max-line-length
       this.disableCommentPhoto = (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId);
     });
-
+    // get latest comment
+    if (this.thisCorrection && this.thisCorrection.comment_question) {
+      const commentArray = this.thisCorrection.comment_question.split('~');
+      const latestCommentElement = commentArray[commentArray.length - 1].split('-');
+      this.latestComment = latestCommentElement[latestCommentElement.length - 1];
+      this.isFirstComment = this.thisCorrection.comment_question.indexOf('~') === -1;
+    }
   }
   encode(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -173,9 +206,14 @@ export class ActionCorrectiveComponent implements OnInit {
       this.sendActionCorrective();
     }
   }
-
   sendActionCorrective() {
     let correctionPayload: CreateCorrection;
+    const time = `${new Date().getDate()}/${new Date().getMonth() + 1}`;
+    const executor = this.userName;
+    const previousComment = this.thisCorrection.comment_question;
+    const newComment = previousComment ?
+      `${previousComment}~${time} - ${executor} - ${this.correction.value.comment}` :
+      `${time} - ${executor} - ${this.correction.value.comment}`;
     if (!this.isAdminOrManager && this.thisCorrection.status === 'A traiter') {
       correctionPayload = {
         id: this.thisCorrection.id,
@@ -185,8 +223,9 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: 'A valider',
-        comment_question: this.correction.value.comment,
+        comment_question: newComment,
         image: this.correction.value.photo,
+        type_dangerous_id: this.dangerousId,
       };
     } else if (this.isAdminOrManager && this.correction.value.comment !== '' && this.correction.value.photo !== '') {
       // only modify photo and comment
@@ -198,8 +237,9 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: 'A valider',
-        comment_question: this.correction.value.comment,
+        comment_question: newComment,
         image: this.correction.value.photo,
+        type_dangerous_id: this.dangerousId,
       };
     } else if (this.isAdminOrManager && this.actionStatus !== this.correction.value.status) {
       // only modify status
@@ -211,8 +251,9 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: this.correction.value.status,
-        comment_question: this.thisCorrection.comment_question,
+        comment_question: previousComment,
         image: this.thisCorrection.image,
+        type_dangerous_id: this.dangerousId,
       };
     } else if (this.isAdminOrManager && Number(this.correction.value.user_id) !== this.responsibleId) {
       // only modify responsible
@@ -224,8 +265,9 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: this.thisCorrection.status,
-        comment_question: this.thisCorrection.comment_question,
+        comment_question: previousComment,
         image: this.thisCorrection.image,
+        type_dangerous_id: this.dangerousId,
       };
     }
     this.correctionService.updateCorrection(correctionPayload);

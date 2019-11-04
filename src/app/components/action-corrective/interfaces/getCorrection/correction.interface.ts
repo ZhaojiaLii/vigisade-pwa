@@ -11,4 +11,8 @@ export interface Correction {
   comment_question: string;
   image: string;
   user_id: number;
+  date: string;
+  type_dangerous_id: number;
+  dangerous_situation_image: string;
+  dangerous_situation_comment: string;
 }

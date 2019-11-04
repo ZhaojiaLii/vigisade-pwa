@@ -117,6 +117,7 @@
   "ConsultationVisite.Bonne pratique":"Good practice",
 
   "Action corrective mise à jour": "Remedial measure updated",
+  "Rien à afficher": "Nothing to show",
 
   "Atraiter.Filtres de recherche": "Search filter",
   "Atraiter.Date début": "Start date",
@@ -132,6 +133,7 @@
   "Atraiter.ActionsATraiter":"Non-compliance{{value}} to treat",
   "Atraiter.ActionsAValider":"Non-compliance{{value}} to validate",
   "Atraiter.ActionsValidées":"Non-compliance{{value}} validated",
+  "Atraiter.HistoriqueCommentaire": "History of comments",
 
   "Tous les champs sont obligatoires.": "All fields are mandatory.",
 
