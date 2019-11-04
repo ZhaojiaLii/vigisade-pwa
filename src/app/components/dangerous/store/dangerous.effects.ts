@@ -48,7 +48,10 @@ export class DangerousEffects {
 
             // return of(createDangerousSituationSuccess({status: 200}));
           }
-          return of(createDangerousSituationFail({error: error.message}));
+          return of(createDangerousSituationFail({
+            error: error.message,
+            dangerousSituation: action.dangerousSituation
+          }));
         }
         ),
         tap(() => this.toastr.error(this.translateService.instant('SituationDangereuse.Situation dangereuse synchronisee')))

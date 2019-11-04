@@ -15,7 +15,7 @@ export const createDangerousSituationSuccess = createAction(
 
 export const createDangerousSituationFail = createAction(
   '[dangerous] Create Dangerous Situation Fail',
-  props<{ error: any}>(),
+  props<{ error: any, dangerousSituation: DangerousSituationPayload}>(),
 );
 
 export const setLoadingState = createAction(
