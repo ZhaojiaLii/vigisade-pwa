@@ -51,10 +51,12 @@
     </div>
 
     <div class="card card-full-width shadow-none">
-      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null">
+      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null || thisCorrection.dangerous_situation_comment !== null">
         <!-- element for the history of all the comments -->
-        <app-action-corrective-comment-element [thisCorrection]="thisCorrection"></app-action-corrective-comment-element>
-        <div class="card-body" *ngIf="thisCorrection.image">
+        <app-action-corrective-comment-element
+          [thisCorrection]="thisCorrection"
+        ></app-action-corrective-comment-element>
+        <div class="card-body" *ngIf="thisCorrection.image || thisCorrection.dangerous_situation_image">
           <div>
             <div class="spinner-container" *ngIf="loading">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
@@ -68,16 +70,16 @@
               [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/error.png'"
               class="img-fluid w-100"
               alt="image not found"
-              *ngIf="!isFirstComment"
+              *ngIf="thisCorrection.image"
             />
             <img
               [hidden]="loading"
               (error)="error()"
               (load)="loadingImage()"
-              [src]="thisCorrection.image? (imagePathD + thisCorrection.image) : '../../../../assets/images/error.png'"
+              [src]="thisCorrection.dangerous_situation_image? (imagePathD + thisCorrection.dangerous_situation_image) : '../../../../assets/images/error.png'"
               class="img-fluid w-100"
               alt="image not found"
-              *ngIf="isFirstComment"
+              *ngIf="thisCorrection.dangerous_situation_image && !thisCorrection.image"
             />
           </div>
         </div>
