@@ -7,6 +7,7 @@ import { DelayedRequest } from '../../interfaces/delayed-request.interface';
 import { BufferService } from '../../services/buffer.service';
 import { BufferApiService } from '../../services/api/buffer-api.service';
 import { of } from 'rxjs';
+import { ProfileService } from '../../components/profile/services/profile.service';
 
 @Injectable()
 export class BufferEffects {
@@ -58,11 +59,13 @@ export class BufferEffects {
         );
       }
     }),
+    tap(() => { this.profileService.loadUser(); })
   ), {dispatch: false});
 
   constructor(
     private actions$: Actions,
     private bufferService: BufferService,
     private api: BufferApiService,
+    private profileService: ProfileService,
   ) {}
 }
