@@ -208,7 +208,9 @@ export class ActionCorrectiveComponent implements OnInit {
   }
   sendActionCorrective() {
     let correctionPayload: CreateCorrection;
-    const time = `${new Date().getDate()}/${new Date().getMonth() + 1}`;
+    let  day = (new Date().getDate()).toString();
+    day = Number(day) < 10 ? `0${day}` : `${day}`;
+    const time = `${day}/${new Date().getMonth() + 1}`;
     const executor = this.userName;
     const previousComment = this.thisCorrection.comment_question;
     const newComment = previousComment ?

@@ -68,7 +68,7 @@
     </div>
 
     <div class="card card-full-width shadow-none">
-      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null || thisCorrection.dangerous_situation_comment !== null">
+      <div class="card card-full-width mb-10 shadow-none lineH-24px" *ngIf="thisCorrection.comment_question !== null">
         <!-- element for the history of all the comments -->
         <app-action-corrective-comment-element
           [thisCorrection]="thisCorrection"
@@ -88,15 +88,6 @@
               class="img-fluid w-100"
               alt="image not found"
               *ngIf="thisCorrection.image"
-            />
-            <img
-              [hidden]="loading"
-              (error)="error()"
-              (load)="loadingImage()"
-              [src]="thisCorrection.dangerous_situation_image? (imagePathD + thisCorrection.dangerous_situation_image) : '../../../../assets/images/error.png'"
-              class="img-fluid w-100"
-              alt="image not found"
-              *ngIf="thisCorrection.dangerous_situation_image && !thisCorrection.image"
             />
           </div>
         </div>

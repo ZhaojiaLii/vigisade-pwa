@@ -19,6 +19,7 @@ import { DangerousService } from '../services/dangerous.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { getRandomId } from '../../../data/random.helpers';
 import { BufferService } from '../../../services/buffer.service';
+import { ProfileService } from '../../profile/services/profile.service';
 
 @Injectable()
 export class DangerousEffects {
@@ -31,6 +32,7 @@ export class DangerousEffects {
     private toastr: ToastrService,
     private bufferService: BufferService,
     private translateService: TranslateService,
+    private profileService: ProfileService,
   ) {}
 
   createDangerous$ = createEffect(() => this.actions$.pipe(
@@ -54,7 +56,6 @@ export class DangerousEffects {
           }));
         }
         ),
-        tap(() => this.toastr.error(this.translateService.instant('SituationDangereuse.Situation dangereuse synchronisee')))
       );
     })
   ));
@@ -68,7 +69,10 @@ export class DangerousEffects {
     ofType(createDangerousSituationSuccess),
     switchMap(() => from(this.router.navigate(['/home'])).pipe(
       tap(() => this.toastr.success(this.translateService.instant('SituationDangereuse.Situation dangereuse crée'))),
-      tap(() => this.dangerousService.loadDangerousHistory()),
+      tap(() => {
+        this.dangerousService.loadDangerousHistory();
+        this.profileService.loadUser();
+      }),
     )),
     map(() => setLoadingState({loading: false})),
   ));
