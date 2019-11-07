@@ -197,7 +197,7 @@ export class ActionCorrectiveComponent implements OnInit {
   }
   validForm() {
     if (Number(this.correction.value.user_id) === this.responsibleId && this.actionStatus === this.correction.value.status) {
-      if (this.correction.value.comment !== '' && this.correction.value.photo !== '') {
+      if (this.correction.value.comment !== '') {
         this.sendActionCorrective();
       } else {
         this.toastrService.error(this.translateService.instant('Tous les champs sont obligatoires.'));
@@ -229,8 +229,14 @@ export class ActionCorrectiveComponent implements OnInit {
         image: this.correction.value.photo,
         type_dangerous_id: this.dangerousId,
       };
-    } else if (this.isAdminOrManager && this.correction.value.comment !== '' && this.correction.value.photo !== '') {
-      // only modify photo and comment
+    } else if (
+      this.isAdminOrManager
+      &&
+      (this.correction.value.comment !== '' && this.correction.value.photo !== '')
+      ||
+      (this.correction.value.comment !== '')
+    ) {
+      // only modify comment or photo and comment
       correctionPayload = {
         id: this.thisCorrection.id,
         user_id: this.thisCorrection.user_id,
