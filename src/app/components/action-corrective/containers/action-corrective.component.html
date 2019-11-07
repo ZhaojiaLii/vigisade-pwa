@@ -6,7 +6,6 @@
 <div class="container">
   <div class="row">
     <!-- category name, result time, result place -->
-    <!-- type of dangerous situation, dangerous situation time -->
     <div class="card card-full-width mb-10 shadow-none" *ngIf="!dangerousId">
       <div class="card-body px-30">
         <div class="row align-items-center light-grey mb-20">
@@ -18,9 +17,10 @@
         </p>
       </div>
     </div>
+    <!-- type of dangerous situation, dangerous situation time -->
     <div class="card card-full-width mb-10 shadow-none" *ngIf="dangerousId">
       <div class="card-body px-30">
-        <div class="row align-items-center light-grey mb-20">
+        <div class="row align-items-center light-grey">
           <div class="col-6 font-demiBold">{{type$ | async}}</div>
           <div class="col-6 text-right font-12">{{correctionDate| amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</div>
         </div>
@@ -121,6 +121,16 @@
               <span class="ml-3">{{'SituationDangereuse.Ajouter une photo'|translate}}</span>
             </button>
           </div>
+          <!-- show the photo been uploaded -->
+          <div  *ngIf="correction.value.photo?.length > 0" class="image-preview">
+            <img
+              [hidden]="loading"
+              (error)="error()"
+              (load)="loadingImage()"
+              src="{{correction.value.photo}}"
+              alt="Preview failed"
+              style="width: 100%; height: 10%;">
+          </div>
           <!-- choose responsible and status -->
           <div class="form-row">
             <div class="form-group col-md-6" *ngIf="isAdminOrManager">
@@ -146,16 +156,6 @@
 
           <div class="spinner-container" *ngIf="loading">
             <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-          </div>
-          <!-- show the photo been uploaded -->
-          <div  *ngIf="correction.value.photo?.length > 0" class="image-preview">
-            <img
-              [hidden]="loading"
-              (error)="error()"
-              (load)="loadingImage()"
-              src="{{correction.value.photo}}"
-              alt="Preview failed"
-              style="width: 100%; height: 10%;">
           </div>
         </form>
       </div>
