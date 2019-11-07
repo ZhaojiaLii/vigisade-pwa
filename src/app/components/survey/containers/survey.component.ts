@@ -44,6 +44,8 @@ export class SurveyComponent implements OnInit {
     comment: new FormControl(''),
     photo: new FormControl(''),
   });
+  maxDate = this.maxDateCalculate();
+  minDate = this.minDateCalculate();
 
   /** Data */
   user$: Observable<User> = this.profileService.getUser();
@@ -125,6 +127,17 @@ export class SurveyComponent implements OnInit {
 
   private setDefaultValue(defaultValue): void {
     this.mainForm.patchValue(defaultValue);
+  }
+
+  maxDateCalculate() {
+    return new Date();
+  }
+
+  minDateCalculate() {
+    let  day = (new Date().getDate()).toString();
+    day = Number(day) < 10 ? `0${day}` : `${day}`;
+    const time = `${new Date().getMonth() + 1}/${day}/${new Date().getFullYear() - 1}`;
+    return new Date(time);
   }
 
   addTeamMember(): void {

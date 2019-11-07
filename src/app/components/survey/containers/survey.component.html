@@ -28,7 +28,9 @@
                     <div class="line"></div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" bsDatepicker [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}" class="form-control" appHighlight id="dateSelect" formControlName="date" [class.has-value]="mainForm.controls['date'].value">
+                    <input type="text" bsDatepicker
+                           [bsConfig]="{dateInputFormat: 'DD/MM/YYYY', minDate: minDate, maxDate: maxDate}"
+                           class="form-control" appHighlight id="dateSelect" formControlName="date" [class.has-value]="mainForm.controls['date'].value">
                     <label for="dateSelect">{{'Visite.Date de la visite'|translate}}<span
                             class="light-grey">{{'Visite.(jour, mois, année)'|translate}}</span></label>
                     <div class="line"></div>
