@@ -8,6 +8,8 @@ import { BufferService } from '../../services/buffer.service';
 import { BufferApiService } from '../../services/api/buffer-api.service';
 import { of } from 'rxjs';
 import { ProfileService } from '../../components/profile/services/profile.service';
+import { SurveyService } from '../../components/survey/services/survey.service';
+import { HistoryService } from '../../components/history/services/history.service';
 
 @Injectable()
 export class BufferEffects {
@@ -59,7 +61,11 @@ export class BufferEffects {
         );
       }
     }),
-    tap(() => { this.profileService.loadUser(); })
+    tap(() => {
+      this.surveyService.loadSurveys();
+      this.historyService.loadHistory();
+      this.profileService.loadUser();
+    })
   ), {dispatch: false});
 
   constructor(
@@ -67,5 +73,7 @@ export class BufferEffects {
     private bufferService: BufferService,
     private api: BufferApiService,
     private profileService: ProfileService,
+    private surveyService: SurveyService,
+    private historyService: HistoryService,
   ) {}
 }
