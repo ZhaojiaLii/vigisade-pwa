@@ -100,6 +100,7 @@ export class SurveyEffects {
   createResultFail$ = createEffect(() => this.actions$.pipe(
     ofType(createResultFail),
     tap(() => this.toast.error(this.translateService.instant('Visite.La validation a échouée. Veuillez réessayer dans quelque instant.'))),
+    tap(() => localStorage.setItem('redirect', 'redirect')),
     map(() => setLoadingState({loading: false}))
   ));
 
