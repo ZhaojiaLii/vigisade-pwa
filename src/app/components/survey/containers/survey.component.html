@@ -67,8 +67,7 @@
         class="container-content"
         [ngClass]="{'hide': (selectedCategory$|async)?.surveyCategoryId !== category.surveyCategoryId || (isBestPracticeSelected$|async)}"
     >
-        <div class="row">
-            <div class="card card-full-width mb-10 shadow-none">
+            <div class="card card-full-width shadow-none">
                 <app-survey-question
                     *ngFor="let questionForm of getQuestionForms(category.surveyCategoryId);"
                     [question]="questionForm.question"
@@ -76,7 +75,7 @@
                     [teamMember]="getQuestionMember(questionForm.group.value.teamMemberId)"
                 ></app-survey-question>
             </div>
-        </div>
+
     </div>
     <div
         class="container-content"
@@ -109,7 +108,7 @@
     ></app-survey-submit>
 </div>
 <div *ngIf="survey$|async" class="fixed-footer">
-    <div class="footer-btn" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    <div class="footer-btn" (click)="toggleCollapse(!isCollapsed)" [attr.aria-expanded]="!isCollapsed"
          aria-controls="collapseBasic">
         <div class=""><span class="font-bold">{{countValidTotal()}}</span>/{{countTotal()}}</div>
         <div class="d-flex align-items-center">
@@ -157,8 +156,11 @@
             (click)="selectSurveyCategory(bestPracticeId)"
         >
             <span class="d-flex align-items-center">
-              <embed src="../../../../assets/icons/star.svg">
-              <span class="note-label">{{'Visite.Bonne pratique'|translate}}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="5 0 40 40">
+                    <path fill="#E3A300" fill-rule="evenodd" d="M7.246 6.642L10.103.583a.98.98 0 0 1 1.794 0l2.857 6.059 6.39.977c.82.126 1.146 1.18.553 1.785l-4.623 4.713 1.09 6.657c.141.855-.716 1.507-1.45 1.103L11 18.732l-5.714 3.145c-.734.404-1.591-.248-1.45-1.103l1.09-6.657L.303 9.404C-.29 8.8.037 7.744.856 7.62l6.39-.977z" transform="translate(9 9)"/>
+                    
+                </svg>
+                <span class="note-label">{{'Visite.Bonne pratique'|translate}}</span>
             </span>
             <span
                 class="note"

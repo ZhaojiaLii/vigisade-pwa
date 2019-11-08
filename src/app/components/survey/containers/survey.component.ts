@@ -1,6 +1,6 @@
 import { SurveyService } from '../services/survey.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { UpdateResult } from '../interfaces/updateResultInterface/updateResult.interface';
 import { Survey, TEAM_MODE } from '../interfaces/getSurveys/survey.interface';
 import { combineLatest, Observable } from 'rxjs';
@@ -82,12 +82,20 @@ export class SurveyComponent implements OnInit {
   loading$: Observable<boolean> = this.surveyService.isLoading();
 
   constructor(
+    private renderer: Renderer2,
     private draftService: DraftService,
     private surveyService: SurveyService,
     private historyService: HistoryService,
     private profileService: ProfileService,
   ) {}
-
+  toggleCollapse(isCollapsed): void {
+    this.isCollapsed = isCollapsed;
+    if (this.isCollapsed) {
+      this.renderer.addClass(document.body, 'no-scroll');
+    } else {
+      this.renderer.removeClass(document.body, 'no-scroll');
+    }
+  }
   ngOnInit(): void {
     this.categoryNavigation = true;
     // Initialize questions forms.
@@ -189,6 +197,7 @@ export class SurveyComponent implements OnInit {
 
   selectSurveyCategory(id: number): void {
     this.isCollapsed = false;
+    this.renderer.removeClass(document.body, 'no-scroll');
     this.surveyService.selectSurveyCategory(id);
     this.categorySelected = id;
     if (id !== -1) { this.categoryNavigation = true; }
