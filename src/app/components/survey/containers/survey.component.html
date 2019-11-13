@@ -81,14 +81,12 @@
         class="container-content"
         [ngClass]="{'hide': !(isBestPracticeSelected$|async)}"
     >
-        <div class="row">
-            <div class="card card-full-width mb-10 shadow-none">
-                <app-survey-best-practice
-                    [group]="bestPracticeForm"
-                    [survey]="survey$|async"
-                ></app-survey-best-practice>
-            </div>
-        </div>
+      <div class="card card-full-width shadow-none">
+        <app-survey-best-practice
+          [group]="bestPracticeForm"
+          [survey]="survey$|async"
+        ></app-survey-best-practice>
+      </div>
     </div>
 </div>
 <div class="container mb-50" *ngIf="categoryNavigation">
