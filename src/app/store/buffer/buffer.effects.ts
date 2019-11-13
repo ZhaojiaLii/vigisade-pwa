@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, tap, filter, switchMap, catchError } from 'rxjs/operators';
+import { map, tap, filter, mergeMap, catchError } from 'rxjs/operators';
 import { delayPost, replayPost, replayPostError, replayPostSuccess } from './buffer.actions';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { DelayedRequest } from '../../interfaces/delayed-request.interface';
@@ -43,7 +43,7 @@ export class BufferEffects {
 
   replayPost$ = createEffect(() => this.actions$.pipe(
     ofType(replayPost),
-    switchMap(action => this.api.postDelayedRequest(action.delayedRequest).pipe(
+    mergeMap(action => this.api.postDelayedRequest(action.delayedRequest).pipe(
       map(() => replayPostSuccess({id: action.delayedRequest.id})),
       catchError(error => of(replayPostError({error: error.message}))),
     )),
