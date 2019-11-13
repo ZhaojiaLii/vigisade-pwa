@@ -14,6 +14,8 @@ import { ATraiterComponent } from './components/a-traiter/containers/a-traiter.c
 import { TokenGuard } from './services/guards/token-guard.service';
 import { HistoryComponent } from './components/history/containers/history.component';
 import { HistoryDangerousComponent } from './components/history-dangerous/containers/history-dangerous.component';
+import { ResetPasswordComponent } from './components/login/components/sendRequest/reset-password.component';
+import { ResetPageComponent } from './components/login/components/resetPassword/reset-page.component';
 
 const extraOptions: ExtraOptions = {onSameUrlNavigation: 'reload'};
 
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'sendResetPassword',
+    component: ResetPasswordComponent,
+  },
+  {
+    path: 'resetPassword',
+    component: ResetPageComponent,
   },
   {
     path: 'tutorial',

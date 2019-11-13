@@ -1,6 +1,7 @@
 {
   "Login.Login": "E-mail",
   "Login.Mot de passe": "Mot de passe",
+  "Login.Mot de passe confirm": "Confirmation",
   "Login.Connexion": "Connexion locale",
   "Login.Error": "Erreur de connexion",
   "Login.GoogleConnexion": "Google connexion",
@@ -144,5 +145,6 @@
   "A valider":"A valider",
   "Validé":"Validé",
   "Oui": "Oui",
-  "Non": "Non"
+  "Non": "Non",
+  "Retour": "Retour"
 }

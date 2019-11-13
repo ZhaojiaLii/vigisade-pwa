@@ -2,6 +2,7 @@
   "Login.Login": "Iniciar sesión",
   "Login.Mot de passe": "Contraseña",
   "Login.Connexion": "Conexión local",
+  "Login.Mot de passe confirm": "confirmación",
   "Login.Error": "Conexión fail",
   "Login.GoogleConnexion": "Conéctate con Google",
   "Login.LoginError": "No se puede conectar, comuníquese con un administrador de red",
@@ -143,5 +144,6 @@
   "A valider":"A valider",
   "Validé":"Validé",
   "Oui": "Sí",
-  "Non": "No"
+  "Non": "No",
+  "Retour": "Regreso"
 }
