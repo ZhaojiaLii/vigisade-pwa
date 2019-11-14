@@ -37,8 +37,8 @@
 <!--        <span class="font-14">{{'Login.GoogleConnexion' | translate}}</span>-->
 <!--      </a>-->
     </div>
-    <div class="font-14 font-demiBold text-center mt-3">Votre première connexion / Votre mot de passe oublié</div>
-    <div class="text-center"><u style="color: #0093d0; cursor: pointer;" routerLink="/sendResetPassword">Cliquez ici</u></div>
+    <div class="font-14 font-demiBold text-center mt-3">{{"Login.Première connexion" | translate}}</div>
+    <div class="text-center"><u style="color: #0093d0; cursor: pointer;" routerLink="/sendResetPassword">{{"Login.click" | translate}}</u></div>
   </div>
   <div *ngIf="spinnerEnable$|async" class="spinner-container">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>

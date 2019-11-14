@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoginApiService } from '../services/login-api.service';
 import {
+  askUpdatePassword, askUpdatePasswordFail, askUpdatePasswordSuccess,
   googleLogin,
   googleLoginFail,
   googleLoginSuccess,
@@ -69,6 +70,19 @@ export class LoginEffects {
     ofType(googleLoginSuccess),
     tap(action => this.cookie.setWithExpiryInHours(TOKEN_KEY, action.token, 23))
   ), {dispatch: false});
+
+  askUpdatePassword$ = createEffect(() => this.actions$.pipe(
+    ofType(askUpdatePassword),
+    switchMap(action => {
+      return this.loginApiService.askUpdatePassword(action.username).pipe(
+        map(() => askUpdatePasswordSuccess()),
+        catchError(error => {
+          this.toastrService.error(this.translateService.instant('Login.Error'));
+          return of(askUpdatePasswordFail(error));
+        })
+      );
+    })
+  ));
 
   constructor(
     private actions$: Actions,

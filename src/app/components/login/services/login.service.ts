@@ -1,4 +1,4 @@
-import { googleLogin, login, setToken } from '../store/login.actions';
+import { askUpdatePassword, googleLogin, login, setToken } from '../store/login.actions';
 import { State } from '../../../store/app.state';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -39,5 +39,9 @@ export class LoginService {
     return this.getToken().pipe(
       map(token => !!token)
     );
+  }
+
+  askUpdatePassword(username: string) {
+    this.store.dispatch(askUpdatePassword({username}));
   }
 }
