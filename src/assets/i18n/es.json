@@ -15,6 +15,8 @@
   "Login.resetPassword": "Restablecer contraseña",
   "Login.password incorrect": "Su contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
   "Login.wrong email": "Tu email es incorrecto",
+  "Login.Email not send": "El correo no se pudo enviar",
+  "Login.password reset succees": "Su contraseña ha sido cambiada",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",

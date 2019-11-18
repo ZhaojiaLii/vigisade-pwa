@@ -4,6 +4,7 @@ export interface LoginState {
   loginError: any;
   spinnerEnable: boolean;
   username: string | null;
+  success: boolean;
 }
 
 export const loginInitialState = {
@@ -12,4 +13,5 @@ export const loginInitialState = {
   loginError: null,
   spinnerEnable: false,
   username: null,
+  success: false,
 };

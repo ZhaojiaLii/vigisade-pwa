@@ -53,13 +53,23 @@ export class LoginApiService {
     );
   }
 
-  askUpdatePassword(username: string) {
+  askUpdatePassword(username: string): Observable<any> {
     return this.http.post(
-      '/api/ask_update_password',
+      '/api/user/ask_update_password',
       {username},
-      {observe: 'response'}
+      {observe: 'response'},
     ).pipe(
-      tap(res => console.log(res)),
+      map(response => response.body)
+    );
+  }
+
+  updatePassword(password: string, token: string): Observable<any> {
+    return this.http.post(
+      '/api/user/update_password',
+      {password, token},
+      {observe: 'response'},
+    ).pipe(
+      map(response => response.body)
     );
   }
 

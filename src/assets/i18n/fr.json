@@ -15,6 +15,8 @@
   "Login.resetPassword": "Réinitialisation du mot de passe",
   "Login.password incorrect": "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
   "Login.wrong email": "Votre email est incorrect",
+  "Login.Email not send": "Le mail n'est pas réussi d'envoyer",
+  "Login.password reset succees": "Votre mot de passe a été modifié",
 
   "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Type": "Type",

@@ -42,6 +42,10 @@ const routes: Routes = [
     component: ResetPageComponent,
   },
   {
+    path: 'resetPassword/:token',
+    component: ResetPageComponent,
+  },
+  {
     path: 'tutorial',
     component: TutorialComponent,
     canActivate: [TokenGuard],
