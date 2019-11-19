@@ -29,3 +29,11 @@ export const getSpinnerEnable = createSelector(
     return state.spinnerEnable;
   },
 );
+
+export const getUsername = createSelector(
+  getLoginState,
+  (state: LoginState) => {
+    return state.username;
+  }
+);
+

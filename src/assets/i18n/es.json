@@ -2,10 +2,21 @@
   "Login.Login": "Iniciar sesión",
   "Login.Mot de passe": "Contraseña",
   "Login.Connexion": "Conexión local",
+  "Login.Mot de passe confirm": "confirmación",
   "Login.Error": "Conexión fail",
   "Login.GoogleConnexion": "Conéctate con Google",
   "Login.LoginError": "No se puede conectar, comuníquese con un administrador de red",
   "Login.FormulaireError": "Forma incompleta",
+  "Login.click": "Haga clic aquí",
+  "Login.Première connexion": "Su primer inicio de sesión / su contraseña olvidada",
+  "Login.Demande mot de passe": "Solicitud de cambio de contraseña",
+  "Login.mail send": "Se ha enviado un correo electrónico a la dirección de correo electrónico especificada",
+  "Login.contact admin": "Si no ha recibido un correo electrónico dentro de las 24 horas, comuníquese con su administrador",
+  "Login.resetPassword": "Restablecer contraseña",
+  "Login.password incorrect": "Su contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
+  "Login.wrong email": "Tu email es incorrecto",
+  "Login.Email not send": "El correo no se pudo enviar",
+  "Login.password reset succees": "Su contraseña ha sido cambiada",
 
   "SituationDangereuse.Signaler": "Reportar",
   "SituationDangereuse.Type": "Tipo",
@@ -143,5 +154,6 @@
   "A valider":"A valider",
   "Validé":"Validé",
   "Oui": "Sí",
-  "Non": "No"
+  "Non": "No",
+  "Retour": "Regreso"
 }

@@ -74,11 +74,11 @@ strong, .font-bold {
 .shadow-01 {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
-app-root, app-login {
+app-root, app-login, app-reset-password, app-reset-page {
   height: 100%;
   display: block;
 }
-app-login {
+app-login, app-reset-password, app-reset-page {
   background: #f5f5f5;
   background: -moz-linear-gradient(top, #f5f5f5 50%, #0093d0 100%);
   background: -webkit-linear-gradient(top, #f5f5f5 50%,#0093d0 100%);

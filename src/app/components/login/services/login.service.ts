@@ -1,10 +1,10 @@
-import { googleLogin, login, setToken } from '../store/login.actions';
+import { askUpdatePassword, googleLogin, login, setToken, updatePassword } from '../store/login.actions';
 import { State } from '../../../store/app.state';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { getSpinnerEnable, getToken } from '../store/login.selectors';
+import { getSpinnerEnable, getToken, getUsername } from '../store/login.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,14 @@ export class LoginService {
 
   googleLogin(username: string, password: string): void {
     this.store.dispatch(googleLogin({ username, password }));
+  }
+
+  askUpdatePassword(username: string): void {
+    this.store.dispatch(askUpdatePassword({username}));
+  }
+
+  updatePassword(password: string, token: string): void {
+    this.store.dispatch(updatePassword({password, token}));
   }
 
   setToken(token: string): void {
@@ -40,4 +48,9 @@ export class LoginService {
       map(token => !!token)
     );
   }
+
+  mailSent(): Observable<string> {
+    return this.store.pipe(select(getUsername));
+  }
+
 }

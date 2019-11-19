@@ -1,11 +1,22 @@
 {
   "Login.Login": "E-mail",
   "Login.Mot de passe": "Mot de passe",
+  "Login.Mot de passe confirm": "Confirmation",
   "Login.Connexion": "Connexion locale",
   "Login.Error": "Erreur de connexion",
   "Login.GoogleConnexion": "Google connexion",
   "Login.LoginError": "Connexion impossible, veuillez contacter un administateur réseau",
   "Login.FormulaireError": "Formulaire incomplet ",
+  "Login.click": "Cliquez ici",
+  "Login.Première connexion": "Votre première connexion / Votre mot de passe oublié",
+  "Login.Demande mot de passe": "Demande de changement de mot de passe",
+  "Login.mail send": "Un mail a été envoyé sur l'adresse email indiquée",
+  "Login.contact admin": "Si vous n'avez pas reçu d'email d'ici 24 heures, contactez votre administrateur.",
+  "Login.resetPassword": "Réinitialisation du mot de passe",
+  "Login.password incorrect": "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+  "Login.wrong email": "Votre email est incorrect",
+  "Login.Email not send": "Le mail n'est pas réussi d'envoyer",
+  "Login.password reset succees": "Votre mot de passe a été modifié",
 
   "SituationDangereuse.Signaler": "Signaler",
   "SituationDangereuse.Type": "Type",
@@ -144,5 +155,6 @@
   "A valider":"A valider",
   "Validé":"Validé",
   "Oui": "Oui",
-  "Non": "Non"
+  "Non": "Non",
+  "Retour": "Retour"
 }

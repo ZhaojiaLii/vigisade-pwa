@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { LoginPayload } from '../interfaces/login-payload.interface';
+import { AskUpdatePassword } from '../interfaces/askUpdatePassword.interface';
+import { UpdatePassword } from '../interfaces/updatePassword.interface';
 
 export const login = createAction(
   '[Login] Login',
@@ -43,4 +45,34 @@ export const googleLoginSuccess = createAction(
 export const googleLoginFail = createAction(
   '[Google account login] Login with Google Fail',
   props<{ error: any, spinnerEnable: boolean}>(),
+);
+
+export const askUpdatePassword = createAction(
+  '[Password] ask update password',
+  props<AskUpdatePassword>(),
+);
+
+export const askUpdatePasswordSuccess = createAction(
+  '[Password] ask update password success',
+  props<{ username: string }>(),
+);
+
+export const askUpdatePasswordFail = createAction(
+  '[Password] ask update password fail',
+  props<{error: any}>(),
+);
+
+export const updatePassword = createAction(
+  '[Password] update password',
+  props<UpdatePassword>(),
+);
+
+export const updatePasswordSuccess = createAction(
+  '[Password] update password success',
+  props<{success: boolean}>(),
+);
+
+export const updatePasswordFail = createAction(
+  '[Password] update password fail',
+  props<{error: any}>(),
 );

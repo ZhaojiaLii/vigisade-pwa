@@ -3,6 +3,8 @@ export interface LoginState {
   googleToken: string | null;
   loginError: any;
   spinnerEnable: boolean;
+  username: string | null;
+  success: boolean;
 }
 
 export const loginInitialState = {
@@ -10,4 +12,6 @@ export const loginInitialState = {
   googleToken: null,
   loginError: null,
   spinnerEnable: false,
+  username: null,
+  success: false,
 };

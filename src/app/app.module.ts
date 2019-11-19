@@ -53,6 +53,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HistoryDangerousComponent } from './components/history-dangerous/containers/history-dangerous.component';
 import { HistoryDangerousItemComponent } from './components/history-dangerous/components/history-dangerous-item/history-dangerous-item.component';
 import { ActionCorrectiveCommentElementComponent } from './components/action-corrective/components/action-corrective-comment-element.component';
+import { ResetPasswordComponent } from './components/login/components/sendRequest/reset-password.component';
+import { ResetPageComponent } from './components/login/components/resetPassword/reset-page.component';
 
 registerLocaleData(localeFr);
 
@@ -103,6 +105,8 @@ const ngrxFeatures = [
     HistoryDangerousComponent,
     HistoryDangerousItemComponent,
     ActionCorrectiveCommentElementComponent,
+    ResetPasswordComponent,
+    ResetPageComponent,
   ],
   imports: [
     BrowserModule,
