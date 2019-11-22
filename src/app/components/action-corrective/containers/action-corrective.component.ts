@@ -240,7 +240,7 @@ export class ActionCorrectiveComponent implements OnInit {
         type_dangerous_id: this.dangerousId,
       };
     } else if (this.isAdminOrManager) {
-      // a valider => modify status
+      // a valider => modify status, comment
       // role : manager & admin
       correctionPayload = {
         id: this.thisCorrection.id,
