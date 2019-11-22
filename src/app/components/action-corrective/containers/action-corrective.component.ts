@@ -176,7 +176,9 @@ export class ActionCorrectiveComponent implements OnInit {
     this.correction.valueChanges.subscribe(val => {
       this.disableResponsible = (val.comment === '' &&  val.photo === '');
       // tslint:disable-next-line:max-line-length
-      this.disableCommentPhoto = (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId);
+      // this.disableCommentPhoto = this.thisCorrection.status === 'A valider' ?
+      //   (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId) :
+      //   false;
     });
     // get latest comment
     if (this.thisCorrection && this.thisCorrection.comment_question) {
@@ -213,10 +215,18 @@ export class ActionCorrectiveComponent implements OnInit {
     const time = `${day}/${new Date().getMonth() + 1}`;
     const executor = this.userName;
     const previousComment = this.thisCorrection.comment_question;
-    const newComment = previousComment ?
-      `${previousComment}~${time} - ${executor} - ${this.correction.value.comment}` :
-      `${time} - ${executor} - ${this.correction.value.comment}`;
-    if (!this.isAdminOrManager && this.thisCorrection.status === 'A traiter') {
+    const newComment = this.correction.value.comment === ''
+      ?
+      previousComment
+      :
+      (previousComment
+        ?
+      `${previousComment}~${time} - ${executor} - ${this.correction.value.comment}`
+        :
+      `${time} - ${executor} - ${this.correction.value.comment}`);
+    if (this.thisCorrection.status === 'A traiter') {
+      // a traiter => post comment and photo
+      // role : conductor & manager & admin
       correctionPayload = {
         id: this.thisCorrection.id,
         user_id: Number(this.correction.value.user_id),
@@ -229,28 +239,9 @@ export class ActionCorrectiveComponent implements OnInit {
         image: this.correction.value.photo,
         type_dangerous_id: this.dangerousId,
       };
-    } else if (
-      this.isAdminOrManager
-      &&
-      (this.correction.value.comment !== '' && this.correction.value.photo !== '')
-      ||
-      (this.correction.value.comment !== '')
-    ) {
-      // only modify comment or photo and comment
-      correctionPayload = {
-        id: this.thisCorrection.id,
-        user_id: this.thisCorrection.user_id,
-        survey_id: this.thisCorrection.survey_id,
-        category_id: this.thisCorrection.category_id,
-        question_id: this.thisCorrection.question_id,
-        result_id: this.thisCorrection.result_id,
-        status: 'A valider',
-        comment_question: newComment,
-        image: this.correction.value.photo,
-        type_dangerous_id: this.dangerousId,
-      };
-    } else if (this.isAdminOrManager && this.actionStatus !== this.correction.value.status) {
-      // only modify status
+    } else if (this.isAdminOrManager) {
+      // a valider => modify status
+      // role : manager & admin
       correctionPayload = {
         id: this.thisCorrection.id,
         user_id: this.thisCorrection.user_id,
@@ -259,12 +250,12 @@ export class ActionCorrectiveComponent implements OnInit {
         question_id: this.thisCorrection.question_id,
         result_id: this.thisCorrection.result_id,
         status: this.correction.value.status,
-        comment_question: previousComment,
+        comment_question: newComment,
         image: this.thisCorrection.image,
         type_dangerous_id: this.dangerousId,
       };
     } else if (this.isAdminOrManager && Number(this.correction.value.user_id) !== this.responsibleId) {
-      // only modify responsible
+      // only modify responsible, manager & admin
       correctionPayload = {
         id: this.thisCorrection.id,
         user_id: Number(this.correction.value.user_id),
