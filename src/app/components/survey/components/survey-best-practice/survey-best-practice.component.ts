@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../../interfaces/getSurveys/survey.interface';
 import { compress } from '../../../../data/image.helpers';
@@ -7,7 +7,7 @@ import { compress } from '../../../../data/image.helpers';
   selector: 'app-survey-best-practice',
   templateUrl: './survey-best-practice.component.html',
 })
-export class SurveyBestPracticeComponent {
+export class SurveyBestPracticeComponent implements OnInit {
 
   @Input() group: FormGroup;
 
@@ -46,5 +46,10 @@ export class SurveyBestPracticeComponent {
       this.group.get('comment').updateValueAndValidity();
       this.group.get('photo').updateValueAndValidity();
     }
+  }
+
+  ngOnInit(): void {
+    // hide the block of input if 2 selected
+    this.hide = this.group.value.selection !== '2';
   }
 }

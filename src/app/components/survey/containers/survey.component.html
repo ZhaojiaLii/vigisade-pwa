@@ -110,6 +110,7 @@
          aria-controls="collapseBasic">
         <div class=""><span class="font-bold">{{countValidTotal()}}</span>/{{countTotal()}}</div>
         <div class="d-flex align-items-center">
+            <!-- title number count-->
             <div *ngIf="(selectedCategory$|async) === null && !(isBestPracticeSelected$|async)" class="mr-2">
                 <span class="font-bold">{{'Visite.Visite'|translate}} {{countValidSurveyFields()}}</span>/{{countSurveyFields()}}
             </div>
