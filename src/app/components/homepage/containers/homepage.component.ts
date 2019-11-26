@@ -17,7 +17,68 @@ import { map } from 'rxjs/operators';
 import { ProfileComplete } from '../interfaces/profileComplete.interface';
 import { SurveyService } from '../../survey/services/survey.service';
 
+// component for redirect from homepage to dangerous situation after posting visit
+@Component({
+  selector: 'app-redirect-dangerous',
+  templateUrl: './redirect-dangerous-popin.html',
+})
+export class RedirectDangerousComponent {
+  constructor(
+    private router: Router,
+  ) {}
+  redirect() {
+    this.router.navigate(['/dangerous']);
+  }
+}
 
+// component for first login for selecting Direction, Zone and Entity
+@Component({
+  selector: 'app-dze-select',
+  templateUrl: './profile-complete-select.component.html',
+})
+export class DZESelectComponent {
+  profileCompleteForm = new FormGroup({
+    directionId: new FormControl('', [Validators.required]),
+    areaId: new FormControl('', [Validators.required]),
+    entityId: new FormControl('', [Validators.required]),
+  });
+  direction$: Observable<Direction[]> = this.dataService.getDirections();
+  area$: Observable<Area[]> = combineLatest([this.profileCompleteForm.valueChanges, this.direction$]).pipe(
+    map(([changes, directions]: [ProfileComplete, Direction[]]) => {
+      if (!directions || directions.length === 0 || !changes || !changes.directionId) {
+        return [];
+      }
+      const selectedDirection = directions.find(direction => direction.id === Number(changes.directionId));
+      return selectedDirection ? selectedDirection.area : [];
+    }),
+  );
+  entity$: Observable<Entity[]> = combineLatest([this.profileCompleteForm.valueChanges, this.area$]).pipe(
+    map(([changes, areas]: [ProfileComplete, Area[]]) => {
+      if (!areas || areas.length === 0 || !changes || !changes.areaId) {
+        return [];
+      }
+      const selectedArea = areas.find(area => area.id === Number(changes.areaId));
+      return selectedArea ? selectedArea.entity : [];
+    })
+  );
+
+  constructor(
+    private dataService: DataService,
+    private profileService: ProfileService,
+  ) {}
+
+  sendForm() {
+    const formData: Partial<User> = {
+      directionId: Number(this.profileCompleteForm.get('directionId').value),
+      areaId: Number(this.profileCompleteForm.get('areaId').value),
+      entityId: Number(this.profileCompleteForm.get('entityId').value),
+      language: 'fr',
+    };
+    this.profileService.updateUser(formData);
+  }
+}
+
+// component for homepage
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -91,62 +152,4 @@ export class HomepageComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'app-redirect-dangerous',
-  templateUrl: './redirect-dangerous-popin.html',
-})
-export class RedirectDangerousComponent {
-  constructor(
-    private router: Router,
-  ) {}
-  redirect() {
-    this.router.navigate(['/dangerous']);
-  }
 
-}
-
-@Component({
-  selector: 'app-dze-select',
-  templateUrl: './profile-complete-select.component.html',
-})
-export class DZESelectComponent {
-  profileCompleteForm = new FormGroup({
-    directionId: new FormControl('', [Validators.required]),
-    areaId: new FormControl('', [Validators.required]),
-    entityId: new FormControl('', [Validators.required]),
-  });
-  direction$: Observable<Direction[]> = this.dataService.getDirections();
-  area$: Observable<Area[]> = combineLatest([this.profileCompleteForm.valueChanges, this.direction$]).pipe(
-    map(([changes, directions]: [ProfileComplete, Direction[]]) => {
-      if (!directions || directions.length === 0 || !changes || !changes.directionId) {
-        return [];
-      }
-      const selectedDirection = directions.find(direction => direction.id === Number(changes.directionId));
-      return selectedDirection ? selectedDirection.area : [];
-    }),
-  );
-  entity$: Observable<Entity[]> = combineLatest([this.profileCompleteForm.valueChanges, this.area$]).pipe(
-    map(([changes, areas]: [ProfileComplete, Area[]]) => {
-      if (!areas || areas.length === 0 || !changes || !changes.areaId) {
-        return [];
-      }
-      const selectedArea = areas.find(area => area.id === Number(changes.areaId));
-      return selectedArea ? selectedArea.entity : [];
-    })
-  );
-
-  constructor(
-    private dataService: DataService,
-    private profileService: ProfileService,
-  ) {}
-
-  sendForm() {
-    const formData: Partial<User> = {
-      directionId: Number(this.profileCompleteForm.get('directionId').value),
-      areaId: Number(this.profileCompleteForm.get('areaId').value),
-      entityId: Number(this.profileCompleteForm.get('entityId').value),
-      language: 'fr',
-    };
-    this.profileService.updateUser(formData);
-  }
-}

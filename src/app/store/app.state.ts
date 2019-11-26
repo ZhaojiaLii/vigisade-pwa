@@ -20,7 +20,7 @@ export interface State {
     profile: ProfileState;
     correction: CorrectionState;
     survey: SurveyState;
-    users: AllUsersState
+    users: AllUsersState;
 }
 
 
