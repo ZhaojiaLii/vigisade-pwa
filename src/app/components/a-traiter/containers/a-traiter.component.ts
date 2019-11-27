@@ -11,6 +11,9 @@ import { map } from 'rxjs/operators';
 import { HistorySearch } from '../../history/interfaces/history-search.interface';
 import { User } from '../../profile/interfaces/user';
 import { ROLES } from '../../../data/user.helpers';
+import { ATraiterSearch } from '../interfaces/a-traiter.search';
+import { HistoryService } from '../../history/services/history.service';
+import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 
 @Component({
   selector: 'app-a-traiter',
@@ -50,21 +53,32 @@ export class ATraiterComponent implements OnInit {
     }),
   );
   creators$: Observable<{id: number, name: string, email: string}[]> = combineLatest(
-    [this.correctionService.getCorrection(), this.correctionService.getAllUsers()]).pipe(
-    map(([corrections, users]: [Correction[], User[]]) => {
-       if (corrections && users) {
-         const uniqueCorrectionId = [];
-         return corrections.map(correction => ({
-           id: correction.user_id,
-           name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
-           email: users.find(user => user.id === correction.user_id).mail,
-         })).filter(creator => {
-           if (uniqueCorrectionId.includes(creator.id)) {
-             return false;
-           }
-           uniqueCorrectionId.push(creator.id);
-           return true;
-         });
+    [
+      this.correctionService.getCorrection(),
+      this.correctionService.getAllUsers(),
+      this.correctionService.getDangerousCorrection(),
+      this.searchForm.valueChanges,
+      this.historyService.getHistory(),
+    ]).pipe(
+    map(([corrections, users, dangerous, searchParam, history]: [Correction[], User[], Correction[], ATraiterSearch, GetResult]) => {
+      if ((corrections || dangerous) && users && history) {
+        console.log(corrections);
+        if (searchParam.areaId && !searchParam.entityId) {
+          // get corrections filtered by selected areaId
+          const correctionToHandle =  corrections.filter(correction => {
+            return history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParam.areaId);
+          });
+          return this.getCreators(correctionToHandle, users, []);
+        } else if (searchParam.entityId) {
+          // get corrections filtered by selected entityId
+          const correctionToHandle =  corrections.filter(correction => {
+            return history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParam.entityId);
+          });
+          return this.getCreators(correctionToHandle, users, []);
+        } else {
+          // get corrections and dangerous situations
+          return this.getCreators(corrections, users, dangerous);
+        }
        }
     }),
   );
@@ -72,6 +86,7 @@ export class ATraiterComponent implements OnInit {
     private correctionService: ActionCorrectiveService,
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
+    private historyService: HistoryService,
   ) {
   }
 
@@ -103,6 +118,22 @@ export class ATraiterComponent implements OnInit {
         };
         this.correctionService.setSearch(searchByAtraiter);
       }
+    });
+  }
+
+  getCreators( corrections, users, dangerous) {
+    const uniqueCorrectionId = [];
+    const allCorrection = [...corrections, ...dangerous];
+    return allCorrection.map(correction => ({
+      id: correction.user_id,
+      name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
+      email: users.find(user => user.id === correction.user_id).mail,
+    })).filter(creator => {
+      if (uniqueCorrectionId.includes(creator.id)) {
+        return false;
+      }
+      uniqueCorrectionId.push(creator.id);
+      return true;
     });
   }
 
