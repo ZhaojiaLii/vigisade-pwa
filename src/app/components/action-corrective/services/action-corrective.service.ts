@@ -7,7 +7,7 @@ import {
   loadAllUsers,
   loadCorrection,
   setATraiterSearch,
-  updateCorrection
+  updateCorrection,
 } from '../store/correction.actions';
 import { UpdateCorrection } from '../interfaces/updateCorrection/updateCorrection.interface';
 import { CreateCorrection } from '../interfaces/createCorrection/createCorrection.interface';
@@ -18,16 +18,19 @@ import {
   getCorrectionCategory,
   getCorrectionQuestion,
   getCorrectionResult,
-  getCorrectionSurvey, getDesktopATraiterByDate,
-  getFilteredUserAtraiter, getMobileATraiterByDate,
-  getUserMobileCorrection,
+  getCorrectionSurvey,
+  getDangerousCorrection,
+  getDesktopATraiterByDate,
+  getFilteredUserAtraiter,
+  getMobileATraiterByDate,
   getRoutingState,
+  getUserMobileCorrection,
 } from '../store/correction.selector';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { map } from 'rxjs/operators';
 import { Result } from '../../survey/interfaces/results/result.interface';
-import {User} from '../../profile/interfaces/user';
+import { User } from '../../profile/interfaces/user';
 import { ATraiterSearch } from '../../a-traiter/interfaces/a-traiter.search';
 
 @Injectable({
@@ -51,6 +54,10 @@ export class ActionCorrectiveService {
 
   getCorrection(): Observable<Correction[]> {
     return this.store.pipe(select(getCorrection));
+  }
+
+  getDangerousCorrection(): Observable<Correction[]> {
+    return this.store.pipe(select(getDangerousCorrection));
   }
 
   getDesktopCorrection(): Observable<Correction[]> {
