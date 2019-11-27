@@ -99,6 +99,12 @@ export class SurveyComponent implements OnInit {
   ngOnInit(): void {
     this.categoryNavigation = true;
     // Initialize questions forms.
+    this.userEntity$.subscribe(val => {
+      if (val) {
+        this.userEntity = val;
+        this.defaultValue = {entity: this.userEntity.id, place: '', client: '', date: ''};
+      }
+    });
     combineLatest([
       this.profileService.getUser(),
       this.surveyService.getSurveyOfUser(),
@@ -120,16 +126,10 @@ export class SurveyComponent implements OnInit {
         this.initFormFromDraft(draft);
       } else {
         this.initFormFromScratch(user.entityId);
+        this.setDefaultValue(this.defaultValue);
       }
 
       this.surveyTeamMode = survey.surveyTeam;
-    });
-    this.userEntity$.subscribe(val => {
-      if (val) {
-        this.userEntity = val;
-        this.defaultValue = {entity: this.userEntity.id, place: '', client: '', date: ''};
-        this.setDefaultValue(this.defaultValue);
-      }
     });
   }
 
@@ -229,7 +229,6 @@ export class SurveyComponent implements OnInit {
       : this.teamMembersForms.reduce((sum, form) => {
           return sum + (form.status === 'VALID' ? 1 : 0);
         }, 0);
-
     return (+this.mainForm.get('entity').valid)
       + (+this.mainForm.get('place').valid)
       + (+this.mainForm.get('client').valid)
@@ -294,9 +293,12 @@ export class SurveyComponent implements OnInit {
       const question = this.questions
         .find(q => q.surveyQuestionId.toString() === questionDraft.id);
       const questionGroup = buildQuestionForm(question, questionDraft.teamMemberId);
+      // if the comment is '', add a space to make it as ' ' to avoid form patchValue failure
+      questionDraft.comment = questionDraft.comment === '' ? ' ' : questionDraft.comment;
       questionGroup.patchValue(questionDraft);
       this.questionsForms.push({question, group: questionGroup});
     });
+    draft.bestPractice.comment = draft.bestPractice.comment === '' ? ' ' : draft.bestPractice.comment;
     this.bestPracticeForm.patchValue(draft.bestPractice);
   }
 }
