@@ -4,7 +4,7 @@ import { HistoryService } from '../services/history.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ProfileService } from '../../profile/services/profile.service';
 import { User } from '../../profile/interfaces/user';
-import { filter, map, pairwise, startWith } from 'rxjs/operators';
+import { map, pairwise, startWith } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Area } from '../../shared/interfaces/area.interface';
 import { Entity } from '../../shared/interfaces/entity.interface';
@@ -12,6 +12,7 @@ import { HistorySearch } from '../interfaces/history-search.interface';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
 import { ROLES } from '../../../data/user.helpers';
 import { HistoryResult } from '../../survey/interfaces/getResultInterface/history-result.interface';
+import { ActionCorrectiveService } from '../../action-corrective/services/action-corrective.service';
 
 @Component({
   selector: 'app-history',
@@ -46,21 +47,26 @@ export class HistoryComponent implements OnInit {
       return selectedArea ? selectedArea.entity : [];
     }),
   );
-  creators$: Observable<{id: number, name: string}[]> = this.historyService.getHistory().pipe(
-    filter(history => history && !!history.result),
-    map((history: GetResult) => {
-      const uniqueHistoryId = [];
-      return history.result.map(result => ({
-        id: result.resultUserId,
-        name: result.resultUserfirstName + ' ' + result.resultUserlastName,
-      })).filter(creator => {
-        if (uniqueHistoryId.includes(creator.id)) {
-          return false;
-        }
-        uniqueHistoryId.push(creator.id);
-        return true;
-      });
-    }),
+  creators$: Observable<{id: number, name: string, email: string}[]> = combineLatest([
+    this.correctionService.getAllUsers(),
+    this.historyService.getHistory(),
+  ]).pipe(
+    map(([users, history]: [User[], GetResult]) => {
+      if (users && history) {
+        const uniqueHistoryId = [];
+        return history.result.map(result => ({
+          id: result.resultUserId,
+          name: result.resultUserfirstName + ' ' + result.resultUserlastName,
+          email: users.find(user => user.id === result.resultUserId).mail,
+        })).filter(creator => {
+          if (uniqueHistoryId.includes(creator.id)) {
+            return false;
+          }
+          uniqueHistoryId.push(creator.id);
+          return true;
+        });
+      }
+    })
   );
 
   roles = ROLES;
@@ -71,6 +77,7 @@ export class HistoryComponent implements OnInit {
     private historyService: HistoryService,
     private deviceService: DeviceDetectorService,
     private profileService: ProfileService,
+    private correctionService: ActionCorrectiveService,
   ) {}
 
   ngOnInit() {

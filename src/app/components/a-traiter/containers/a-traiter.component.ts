@@ -61,8 +61,7 @@ export class ATraiterComponent implements OnInit {
       this.historyService.getHistory(),
     ]).pipe(
     map(([corrections, users, dangerous, searchParam, history]: [Correction[], User[], Correction[], ATraiterSearch, GetResult]) => {
-      if ((corrections || dangerous) && users && history) {
-        console.log(corrections);
+      if ((corrections || dangerous) && users && history && searchParam) {
         if (searchParam.areaId && !searchParam.entityId) {
           // get corrections filtered by selected areaId
           const correctionToHandle =  corrections.filter(correction => {
@@ -94,7 +93,7 @@ export class ATraiterComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-    }, 2000);
+      }, 2000);
     this.status = null;
     this.correctionService.loadCorrection();
     this.entityToken = true;
@@ -117,24 +116,28 @@ export class ATraiterComponent implements OnInit {
           status: 'A traiter',
         };
         this.correctionService.setSearch(searchByAtraiter);
+      } else {
+        this.resetSearch();
       }
     });
   }
 
   getCreators( corrections, users, dangerous) {
-    const uniqueCorrectionId = [];
-    const allCorrection = [...corrections, ...dangerous];
-    return allCorrection.map(correction => ({
-      id: correction.user_id,
-      name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
-      email: users.find(user => user.id === correction.user_id).mail,
-    })).filter(creator => {
-      if (uniqueCorrectionId.includes(creator.id)) {
-        return false;
-      }
-      uniqueCorrectionId.push(creator.id);
-      return true;
-    });
+    if (corrections && dangerous) {
+      const uniqueCorrectionId = [];
+      const allCorrection = [...corrections, ...dangerous];
+      return allCorrection.map(correction => ({
+        id: correction.user_id,
+        name: correction.resultUserfirstName + ' ' + correction.resultUserlastName,
+        email: users.find(user => user.id === correction.user_id).mail,
+      })).filter(creator => {
+        if (uniqueCorrectionId.includes(creator.id)) {
+          return false;
+        }
+        uniqueCorrectionId.push(creator.id);
+        return true;
+      });
+    }
   }
 
   search(): void {
