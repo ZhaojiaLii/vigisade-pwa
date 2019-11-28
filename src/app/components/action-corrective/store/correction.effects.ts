@@ -12,12 +12,13 @@ import {
   loadCorrectionSuccess,
   updateCorrection,
   updateCorrectionFail,
-  updateCorrectionSuccess
+  updateCorrectionSuccess,
 } from './correction.actions';
 import { ActionCorrectiveApiService } from '../services/action-corrective-api.service';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ProfileService } from '../../profile/services/profile.service';
+import { ActionCorrectiveService } from '../services/action-corrective.service';
 
 @Injectable()
 export class CorrectionEffects {
@@ -25,6 +26,7 @@ export class CorrectionEffects {
   constructor(
     private actions$: Actions,
     private correctionApi: ActionCorrectiveApiService,
+    private correctionService: ActionCorrectiveService,
     private user: ProfileService,
   ) {}
 

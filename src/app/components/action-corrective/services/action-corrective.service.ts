@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
 import {
   createCorrection,
-  isFromHomepage,
+  isFromHomepage, isFromHomepageNavigated,
   loadAllUsers,
   loadCorrection,
   setATraiterSearch,
@@ -118,6 +118,10 @@ export class ActionCorrectiveService {
 
   fromHomepage(): void {
     this.store.dispatch(isFromHomepage());
+  }
+
+  fromHomepageNavigated(): void {
+    this.store.dispatch(isFromHomepageNavigated());
   }
 
   getRoutingState(): Observable<boolean> {

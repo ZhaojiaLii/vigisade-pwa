@@ -17,12 +17,14 @@ const httpOptions = {
 })
 export class ActionCorrectiveApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) { }
   updateCorrection(updateCorrectionPayload: UpdateCorrection): Observable<any> {
     return this.http.post(
         '/api/corrective-action/update/',
       JSON.stringify(updateCorrectionPayload),
-    ).pipe();
+    );
   }
 
   createCorrection(createCorrectionPayload: CreateCorrection): Observable<any> {
@@ -30,18 +32,18 @@ export class ActionCorrectiveApiService {
       '/api/corrective-action/create/',
       createCorrectionPayload,
       httpOptions,
-    ).pipe();
+    );
   }
 
   loadCorrection(): Observable<Correction[]> {
     return this.http.get<Correction[]>(
       '/api/corrective-action/'
-    ).pipe();
+    );
   }
 
   loadAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(
       '/api/user/all/',
-    ).pipe();
+    );
   }
 }

@@ -47,7 +47,7 @@
                             formControlName="userId">
                             <option style='display: none' value=''></option>
                             <option *ngFor="let creator of creators$|async" value="{{creator.id}}">
-                                {{creator.name}}
+                                {{creator.name !== ' ' ? creator.name : creator.email}}
                             </option>
                         </select>
                     </div>

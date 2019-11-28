@@ -136,38 +136,34 @@ export const getFilteredUserAtraiter = createSelector(
       } else if (!dangerous && corrections) {
         all = [...corrections];
       }
-      if (searchParams.areaId || searchParams.entityId) {
+      if (searchParams && (searchParams.areaId || searchParams.entityId)) {
         return  corrections.filter(correction => {
-          if (searchParams) {
-            return (
-                !searchParams.startDate
-                || moment(correction.date).format('YYYY-MM-DD')
-                >= moment(searchParams.startDate).format('YYYY-MM-DD')
-              )
-              && (
-                !searchParams.endDate
-                || moment(correction.date).format('YYYY-MM-DD')
-                <= moment(searchParams.endDate).format('YYYY-MM-DD')
-              )
-              && (
-                !searchParams.status
-                || correction.status === searchParams.status || correction.status === 'Corrigé'
-              )
-              && (
-                !searchParams.areaId
-                || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
-              )
-              && (
-                !searchParams.entityId
-                || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
-              )
-              && (
-                !searchParams.responsible
-                || correction.user_id === Number(searchParams.responsible)
-              );
-          } else {
-            return correction;
-          }
+          return (
+              !searchParams.startDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              >= moment(searchParams.startDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.endDate
+              || moment(correction.date).format('YYYY-MM-DD')
+              <= moment(searchParams.endDate).format('YYYY-MM-DD')
+            )
+            && (
+              !searchParams.status
+              || correction.status === searchParams.status || correction.status === 'Corrigé'
+            )
+            && (
+              !searchParams.areaId
+              || history.result.find(result => result.resultId === correction.result_id).resultArea === Number(searchParams.areaId)
+            )
+            && (
+              !searchParams.entityId
+              || history.result.find(result => result.resultId === correction.result_id).resultEntity === Number(searchParams.entityId)
+            )
+            && (
+              !searchParams.responsible
+              || correction.user_id === Number(searchParams.responsible)
+            );
         });
       } else {
         return all.filter(correction => {

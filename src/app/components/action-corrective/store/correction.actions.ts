@@ -71,3 +71,7 @@ export const isFromHomepage = createAction(
   '[Navigate] From Homepage click A traiter',
 );
 
+export const isFromHomepageNavigated = createAction(
+  '[Navigate] From Homepage click A traiter finished',
+);
+
