@@ -25,7 +25,6 @@ export class SurveyQuestionComponent implements OnChanges {
 
       Object.keys(values).forEach((key: string) => {
         const control = this.group.get(key);
-
         if (control && control.dirty && !control.valid) {
           this.showError = true;
         }
@@ -44,7 +43,8 @@ export class SurveyQuestionComponent implements OnChanges {
 
   updateValidators(required: boolean): void {
     if (required) {
-      this.group.get('comment').setValidators([Validators.required, Validators.minLength(1)]);
+      // can not enter just spaces
+      this.group.get('comment').setValidators([Validators.required, Validators.pattern(/[a-zA-Z0-9_]+/)]);
       this.group.get('comment').updateValueAndValidity();
     } else {
       this.group.get('comment').clearValidators();
