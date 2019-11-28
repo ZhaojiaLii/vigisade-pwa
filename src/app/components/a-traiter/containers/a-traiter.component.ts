@@ -24,6 +24,7 @@ export class ATraiterComponent implements OnInit {
   countCorrection$: Observable<number>;
   routingState$: Observable<boolean> = this.correctionService.getRoutingState();
   loading = false;
+  isFromHomepage = false;
   isDesktop = false;
   roles = ROLES;
   status: string;
@@ -93,6 +94,20 @@ export class ATraiterComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
+      if (!this.isFromHomepage) {
+        this.resetSearch();
+      } else {
+        this.searchForm.patchValue({
+          areaId: null,
+          endDate: null,
+          entityId: null,
+          responsible: null,
+          startDate: null,
+          status: 'A traiter',
+        });
+        this.search();
+      }
+      this.correctionService.fromHomepageNavigated();
       }, 2000);
     this.status = null;
     this.correctionService.loadCorrection();
@@ -105,21 +120,7 @@ export class ATraiterComponent implements OnInit {
       this.correction$ = this.correctionService.getMobileCorrectionByDate();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
-    this.routingState$.subscribe(state => {
-      if (state) {
-        const searchByAtraiter = {
-          areaId: '',
-          endDate: '',
-          entityId: '',
-          responsible: '',
-          startDate: '',
-          status: 'A traiter',
-        };
-        this.correctionService.setSearch(searchByAtraiter);
-      } else {
-        this.resetSearch();
-      }
-    });
+    this.routingState$.subscribe(state => { this.isFromHomepage  = state; });
   }
 
   getCreators( corrections, users, dangerous) {
