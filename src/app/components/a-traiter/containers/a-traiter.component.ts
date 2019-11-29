@@ -29,6 +29,9 @@ export class ATraiterComponent implements OnInit {
   roles = ROLES;
   status: string;
   entityToken = true;
+  today = new Date();
+  startDateDefault = new Date('2019-1-1');
+  startDateSelected = new Date('2019-1-1');
   searchForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -63,6 +66,10 @@ export class ATraiterComponent implements OnInit {
     ]).pipe(
     map(([corrections, users, dangerous, searchParam, history]: [Correction[], User[], Correction[], ATraiterSearch, GetResult]) => {
       if ((corrections || dangerous) && users && history && searchParam) {
+        // if startDate selected, set as minDate of end date
+        if (searchParam.startDate) {
+          this.startDateSelected = new Date(searchParam.startDate);
+        }
         if (searchParam.areaId && !searchParam.entityId) {
           // get corrections filtered by selected areaId
           const correctionToHandle =  corrections.filter(correction => {

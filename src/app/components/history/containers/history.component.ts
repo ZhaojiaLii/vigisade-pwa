@@ -30,6 +30,9 @@ export class HistoryComponent implements OnInit {
     entityId: new FormControl(''),
     userId: new FormControl(''),
   });
+  today = new Date();
+  startDateDefault = new Date('2019-1-1');
+  startDateSelected = new Date('2019-1-1');
   entityToken = true;
   user$: Observable<User> = this.profileService.getUser();
   areas$: Observable<Area[]> = this.profileService.getUserAreas();
@@ -38,6 +41,9 @@ export class HistoryComponent implements OnInit {
     this.searchForm.valueChanges,
   ]).pipe(
     map(([areas, changes]: [Area[], HistorySearch]) => {
+      if (changes.startDate) {
+        this.startDateSelected = new Date(changes.startDate);
+      }
       if (!areas || areas.length === 0 || !changes || !changes.areaId) {
         return [];
       }

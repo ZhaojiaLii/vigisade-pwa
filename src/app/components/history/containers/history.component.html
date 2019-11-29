@@ -11,10 +11,10 @@
                 <hr/>
                 <div class="row align-items-center light-grey mb-20">
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date début'|translate}} :
-                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate">
+                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="startDate"  [minDate]="startDateDefault" [maxDate]="today">
                     </div>
                     <div class="col-6 font-demiBold">{{'HistoriqueVisites.Date fin'|translate}} :
-                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate">
+                      <input type="text" bsDatepicker class="form-control" style="border: solid 1px lightgrey" formControlName="endDate" [minDate]="startDateSelected" [maxDate]="today">
                     </div>
                 </div>
                 <div class="row align-items-center light-grey mb-20" *ngIf="(user$|async)?.roles?.includes(roles.admin)">
