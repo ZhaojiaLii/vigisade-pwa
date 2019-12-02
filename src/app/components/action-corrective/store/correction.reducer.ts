@@ -3,7 +3,7 @@ import { allUsersInitialState, AllUsersState, correctionInitialState, Correction
 import {
   createCorrection,
   createCorrectionFail,
-  createCorrectionSuccess,
+  createCorrectionSuccess, isFromActionCorrective, isFromActionCorrectiveNavigated,
   isFromHomepage, isFromHomepageNavigated,
   loadAllUsers,
   loadAllUsersFail,
@@ -31,6 +31,8 @@ export const createCorrectionReducer = createReducer(
   on(setATraiterSearch, (state, {searchParams}) => ({...state, search: searchParams})),
   on(isFromHomepage, (state) => ({...state, fromHomepage: true})),
   on(isFromHomepageNavigated, (state) => ({...state, fromHomepage: false})),
+  on(isFromActionCorrective, (state) => ({...state, fromActionCorrective: true})),
+  on(isFromActionCorrectiveNavigated, (state) => ({...state, fromActionCorrective: false})),
 );
 
 export const createAllUsersReducer = createReducer(

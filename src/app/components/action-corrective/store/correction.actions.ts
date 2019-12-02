@@ -75,3 +75,11 @@ export const isFromHomepageNavigated = createAction(
   '[Navigate] From Homepage click A traiter finished',
 );
 
+export const isFromActionCorrective = createAction(
+  '[Navigate] From Action Corrective click A traiter',
+);
+
+export const isFromActionCorrectiveNavigated = createAction(
+  '[Navigate] From Action Corrective click A traiter finished',
+);
+

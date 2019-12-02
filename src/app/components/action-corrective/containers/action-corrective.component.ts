@@ -272,6 +272,7 @@ export class ActionCorrectiveComponent implements OnInit {
     this.correctionService.updateCorrection(correctionPayload);
     this.toastrService.success(this.translateService.instant('Action corrective mise à jour'));
     this.router.navigate(['/atraiter']);
+    this.correctionService.fromActionCorrective();
     window.scroll(0, 0);
   }
 
