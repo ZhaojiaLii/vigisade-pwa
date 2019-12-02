@@ -107,7 +107,7 @@
   "HistoriqueVisites.Créateur":"Créateur",
   "HistoriqueVisites.Rechercher":"Rechercher",
   "HistoriqueVisites.Réinitialiser":"Réinitialiser",
-  "HistoriqueVisites.Aucun contrôle trouvé": "Aucun contrôle trouvé",
+  "HistoriqueVisites.Aucun contrôle trouvé": "Aucune visite",
   "HistoriqueVisites.contrôle trouvé":"contrôle{{value}} trouvé{{value}}",
   "HistoriqueVisites.résultat(s) trouvé(s)":"résultat(s) trouvé(s)",
   "HistoriqueVisites.En cours":"En cours",
