@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { DangerousService } from '../services/dangerous.service';
 import { DangerousSituationType } from '../interfaces/dangerous-situation-type.interface';
 import { DataService } from '../../../services/data.service';
-import { compress } from '../../../data/image.helpers';
 import { Router } from '@angular/router';
+import { ImageCheckEncodeService } from '../../../services/image-check-encode.service';
 
 @Component({
   selector: 'app-dangerous',
@@ -19,30 +19,18 @@ export class DangerousSituationComponent {
     comment: new FormControl('', [Validators.required, Validators.minLength(1)]),
     photo: new FormControl(''),
   });
-  loading = false;
+  imageLoading = false;
 
   constructor(
     private dataService: DataService,
     private dangerousService: DangerousService,
     private router: Router,
+    private imageCompressService: ImageCheckEncodeService,
   ) {}
 
-  updateImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
-        this.dangerousSituationGroup.patchValue({photo: dataUrl});
-      });
-    }
-    this.loading = true;
+  encode(event: any) {
+    this.imageLoading = this.imageCompressService.encode(event, this.dangerousSituationGroup);
   }
-
-  // createDangerous() {
-  //   this.dangerousService.createDangerousSituation({
-  //     typeSituationDangerousID: Number(this.dangerousSituationGroup.value.type),
-  //     dangerousSituationComment: this.dangerousSituationGroup.value.comment,
-  //     dangerousSituationPhoto: this.dangerousSituationGroup.value.photo,
-  //   });
-  // }
 
   createDangerous() {
     const POST = {
@@ -74,11 +62,11 @@ export class DangerousSituationComponent {
     }
   }
 
-  loadingImage() {
-    this.loading = false;
+  imageLoaded() {
+    this.imageLoading = false;
   }
 
   error() {
-    this.loading = false;
+    this.imageLoading = false;
   }
 }

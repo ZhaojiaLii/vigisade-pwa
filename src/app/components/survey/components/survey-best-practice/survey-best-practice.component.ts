@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../../interfaces/getSurveys/survey.interface';
-import { compress } from '../../../../data/image.helpers';
+import { ImageCheckEncodeService } from '../../../../services/image-check-encode.service';
 
 @Component({
   selector: 'app-survey-best-practice',
@@ -15,19 +15,19 @@ export class SurveyBestPracticeComponent implements OnInit {
 
   showError = false;
   isCollapsed = true;
-  imageloading = false;
+  imageLoading = false;
   hide = true;
 
+  constructor(
+    private imageCompressService: ImageCheckEncodeService,
+  ) {}
+
   encode(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
-        this.group.patchValue({photo: dataUrl});
-      });
-    }
-    this.imageloading = true;
+    this.imageLoading = this.imageCompressService.encode(event, this.group);
   }
+
   imageLoaded() {
-    this.imageloading = false;
+    this.imageLoading = false;
   }
 
   updateValidators(required: boolean): void {

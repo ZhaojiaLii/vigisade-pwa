@@ -35,7 +35,7 @@
         </div>
         <div class="mx-30 mb-25">
           <input type="hidden" value="" formControlName="photo">
-          <input style="display: none" type="file" accept="image/*" (change)="updateImage($event)" #uploadImage>
+          <input style="display: none" type="file" accept="image/*" (change)="encode($event)" #uploadImage>
           <button class="btn shadow-01 d-block w-100 d-flex align-items-center justify-content-center" (click)="uploadImage.click()">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
                 <g fill="#363636" fill-rule="evenodd" stroke="#363636">
@@ -47,14 +47,14 @@
               <span class="ml-3">{{'SituationDangereuse.Ajouter une photo'|translate}}</span>
           </button>
         </div>
-        <div class="spinner-container" *ngIf="loading">
+        <div class="spinner-container" *ngIf="imageLoading">
           <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
         </div>
         <div *ngIf="dangerousSituationGroup.value.photo?.length > 0" class="image-preview">
           <img
-            [hidden]="loading"
+            [hidden]="imageLoading"
             (error)="error()"
-            (load)="loadingImage()"
+            (load)="imageLoaded()"
             src="{{dangerousSituationGroup.value.photo}}"
             alt="Preview failed"
             style="width: 100%; height: 10%;">

@@ -37,14 +37,14 @@
         <p class="px-10 font-14 mb-30">{{resultQuestion? resultQuestion.resultQuestionResultComment : 'Question commentaire'}}</p>
         <div *ngIf="resultQuestion">
           <div *ngIf="resultQuestion.resultQuestionResultPhoto">
-            <div class="spinner-container" *ngIf="loading">
+            <div class="spinner-container" *ngIf="imageLoaded">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             </div>
           </div>
         </div>
         <div *ngIf="resultQuestion">
           <div *ngIf="resultQuestion.resultQuestionResultPhoto">
-            <img [hidden]="loading" (load)="loadingImage()" (error)="error()" src="{{resultQuestion? (imagePath + resultQuestion.resultQuestionResultPhoto) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
+            <img [hidden]="imageLoaded" (load)="loadingImage()" (error)="error()" src="{{resultQuestion? (imagePath + resultQuestion.resultQuestionResultPhoto) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
           </div>
         </div>
       </div>
@@ -54,14 +54,14 @@
         <div class="mb-25">{{thisCorrection.dangerous_situation_comment}}</div>
         <div *ngIf="thisCorrection">
           <div *ngIf="thisCorrection.dangerous_situation_image">
-            <div class="spinner-container" *ngIf="loading">
+            <div class="spinner-container" *ngIf="imageLoaded">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             </div>
           </div>
         </div>
         <div *ngIf="thisCorrection">
           <div *ngIf="thisCorrection.dangerous_situation_image">
-            <img [hidden]="loading" (load)="loadingImage()" (error)="error()" src="{{thisCorrection.dangerous_situation_image ? (imagePathD + thisCorrection.dangerous_situation_image) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
+            <img [hidden]="imageLoaded" (load)="loadingImage()" (error)="error()" src="{{thisCorrection.dangerous_situation_image ? (imagePathD + thisCorrection.dangerous_situation_image) : '../../../../assets/images/img-test-correction.jpg'}}" class="img-fluid w-100" alt="image not found"/>
           </div>
         </div>
       </div>
@@ -75,13 +75,13 @@
         ></app-action-corrective-comment-element>
         <div class="card-body" *ngIf="thisCorrection.image || thisCorrection.dangerous_situation_image">
           <div>
-            <div class="spinner-container" *ngIf="loading">
+            <div class="spinner-container" *ngIf="imageLoaded">
               <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             </div>
           </div>
           <div>
             <img
-              [hidden]="loading"
+              [hidden]="imageLoaded"
               (error)="error()"
               (load)="loadingImage()"
               [src]="thisCorrection.image? (imagePathAC + thisCorrection.image) : '../../../../assets/images/error.png'"
@@ -127,7 +127,7 @@
           <!-- show the photo been uploaded -->
           <div  *ngIf="correction.value.photo?.length > 0" class="image-preview">
             <img
-              [hidden]="loading"
+              [hidden]="imageLoaded"
               (error)="error()"
               (load)="loadingImage()"
               src="{{correction.value.photo}}"
@@ -157,7 +157,7 @@
             </div>
           </div>
 
-          <div class="spinner-container" *ngIf="loading">
+          <div class="spinner-container" *ngIf="imageLoaded">
             <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
           </div>
         </form>
