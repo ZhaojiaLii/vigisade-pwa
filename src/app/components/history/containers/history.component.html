@@ -74,10 +74,10 @@
             </div>
         </div>
     </form>
-    <div *ngIf="(history$|async)?.length > 0" class="row">
+    <div *ngIf="(history$|async)?.length >= 0" class="row">
         <div [ngPlural]="(history$|async)?.length" class="total">
             <ng-template ngPluralCase="=0">
-                Aucun {{'HistoriqueVisites.contrôle trouvé'|translate:{value: ''} }}
+                {{'HistoriqueVisites.Aucun contrôle trouvé'|translate}}
             </ng-template>
             <ng-template ngPluralCase="=1">
                 1 {{'HistoriqueVisites.contrôle trouvé'|translate:{value: ''} }}
