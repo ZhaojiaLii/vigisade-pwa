@@ -97,7 +97,7 @@
                         <span class="ml-3">{{'Visite.Ajouter une photo'|translate}}</span>
                     </button>
                 </div>
-                <div class="spinner-container" *ngIf="imageloading">
+                <div class="spinner-container" *ngIf="imageLoading">
                   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
                 </div>
                 <div *ngIf="group.value.photo?.length > 0" class="image-preview">

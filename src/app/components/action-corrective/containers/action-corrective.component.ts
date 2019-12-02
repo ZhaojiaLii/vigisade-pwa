@@ -10,7 +10,7 @@ import { HistoryService } from '../../history/services/history.service';
 import { User } from '../../profile/interfaces/user';
 import { ProfileService } from '../../profile/services/profile.service';
 import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.interface';
-import { compress, IMAGE_PATH } from '../../../data/image.helpers';
+import { IMAGE_PATH } from '../../../data/image.helpers';
 import { Result } from '../../survey/interfaces/results/result.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { ROLES } from '../../../data/user.helpers';
@@ -20,6 +20,7 @@ import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { DataService } from '../../../services/data.service';
 import 'rxjs-compat/add/operator/filter';
 import { map } from 'rxjs/operators';
+import { ImageCheckEncodeService } from '../../../services/image-check-encode.service';
 
 @Component({
   selector: 'app-action-corrective',
@@ -68,7 +69,7 @@ export class ActionCorrectiveComponent implements OnInit {
   disableCommentPhoto = true;
   public status = [];
 
-  loading = false;
+  imageLoaded = false;
   constructor(
     private correctionService: ActionCorrectiveService,
     private surveyService: SurveyService,
@@ -80,6 +81,7 @@ export class ActionCorrectiveComponent implements OnInit {
     private translateService: TranslateService,
     private deviceService: DeviceDetectorService,
     private dataService: DataService,
+    private imageCheckCompressService: ImageCheckEncodeService,
   ) {
     this.router.events.filter((event: any) => event instanceof NavigationEnd)
       .subscribe(event => {
@@ -164,7 +166,6 @@ export class ActionCorrectiveComponent implements OnInit {
     this.user$.subscribe(user => {
       if (user) {
         this.userId = user.id;
-        // this.correction.patchValue({user_id: this.userId});
         this.isAdminOrManager = user.roles.includes(ROLES.admin) || user.roles.includes(ROLES.manager);
       }
     });
@@ -175,10 +176,6 @@ export class ActionCorrectiveComponent implements OnInit {
 
     this.correction.valueChanges.subscribe(val => {
       this.disableResponsible = (val.comment === '' &&  val.photo === '');
-      // tslint:disable-next-line:max-line-length
-      // this.disableCommentPhoto = this.thisCorrection.status === 'A valider' ?
-      //   (this.thisCorrection.status === val.status) && (Number(this.correction.value.user_id) === this.responsibleId) :
-      //   false;
     });
     // get latest comment
     if (this.thisCorrection && this.thisCorrection.comment_question) {
@@ -189,13 +186,7 @@ export class ActionCorrectiveComponent implements OnInit {
     }
   }
   encode(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
-        this.correction.patchValue({photo: dataUrl});
-      });
-    }
-    this.loading = true;
-    setTimeout(() => { this.loading = false; }, 5000);
+    this.imageLoaded = this.imageCheckCompressService.encode(event, this.correction);
   }
   validForm() {
     if (Number(this.correction.value.user_id) === this.responsibleId && this.actionStatus === this.correction.value.status) {
@@ -277,10 +268,10 @@ export class ActionCorrectiveComponent implements OnInit {
   }
 
   loadingImage() {
-    this.loading = false;
+    this.imageLoaded = false;
   }
 
   error() {
-    this.loading = false;
+    this.imageLoaded = false;
   }
 }

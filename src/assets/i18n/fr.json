@@ -97,6 +97,7 @@
   "Visite.Sécurité": "Sécurité",
   "Visite.Qualité": "Qualité",
   "Visite.Environnement": "Environnement",
+  "Visite.ImageInputError": "veuillez sélectionner une image",
 
 
   "HistoriqueVisites.Filtres de recherche":"Filtres de recherche",
