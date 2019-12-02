@@ -58,7 +58,7 @@ export class HistoryComponent implements OnInit {
     this.historyService.getHistory(),
   ]).pipe(
     map(([users, history]: [User[], GetResult]) => {
-      if (users && history) {
+      if (users && history && history.result) {
         const uniqueHistoryId = [];
         return history.result.map(result => ({
           id: result.resultUserId,
@@ -88,7 +88,6 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     // Refresh history when opening them.
-    // this.historyService.loadHistory();
     this.historyService.getHistoryOrderedByDate().subscribe();
     this.isDesktop = this.deviceService.isDesktop();
     this.searchForm.valueChanges.pipe(
