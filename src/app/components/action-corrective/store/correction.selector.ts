@@ -14,11 +14,20 @@ import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.
 export const getCorrectionState = createFeatureSelector<CorrectionState>('correction');
 export const getAllUsersState = createFeatureSelector<AllUsersState>('users');
 
-export const getRoutingState = createSelector(
+export const getHomepageRoutingState = createSelector(
   getCorrectionState,
   (state: CorrectionState) => {
     if (state) {
       return state.fromHomepage;
+    }
+  }
+);
+
+export const getActionCorrectiveRoutingState = createSelector(
+  getCorrectionState,
+  (state: CorrectionState) => {
+    if (state) {
+      return state.fromActionCorrective;
     }
   }
 );

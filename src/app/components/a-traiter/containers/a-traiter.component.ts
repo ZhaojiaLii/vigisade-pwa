@@ -22,9 +22,11 @@ import { GetResult } from '../../survey/interfaces/getResultInterface/getResult.
 export class ATraiterComponent implements OnInit {
   correction$: Observable<Correction[]>;
   countCorrection$: Observable<number>;
-  routingState$: Observable<boolean> = this.correctionService.getRoutingState();
+  homeRoutingState$: Observable<boolean> = this.correctionService.getHomeRoutingState();
+  actionRoutingState$: Observable<boolean> = this.correctionService.getActionRoutingState();
   loading = false;
   isFromHomepage = false;
+  isFromActionCorrective = false;
   isDesktop = false;
   roles = ROLES;
   status: string;
@@ -101,9 +103,10 @@ export class ATraiterComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      if (!this.isFromHomepage) {
+      // init the default status of the filter and the list
+      if (!this.isFromHomepage && !this.isFromActionCorrective) {
         this.resetSearch();
-      } else {
+      } else if (this.isFromHomepage) {
         this.searchForm.patchValue({
           areaId: null,
           endDate: null,
@@ -115,7 +118,8 @@ export class ATraiterComponent implements OnInit {
         this.search();
       }
       this.correctionService.fromHomepageNavigated();
-      }, 2000);
+      this.correctionService.fromActionCorrectiveNavigated();
+      }, 1000);
     this.status = null;
     this.correctionService.loadCorrection();
     this.entityToken = true;
@@ -127,7 +131,8 @@ export class ATraiterComponent implements OnInit {
       this.correction$ = this.correctionService.getMobileCorrectionByDate();
       this.countCorrection$ = this.correctionService.countMobileCorrection();
     }
-    this.routingState$.subscribe(state => { this.isFromHomepage  = state; });
+    this.homeRoutingState$.subscribe(state => { this.isFromHomepage  = state; });
+    this.actionRoutingState$.subscribe(state => { this.isFromActionCorrective  = state; });
   }
 
   getCreators( corrections, users, dangerous) {

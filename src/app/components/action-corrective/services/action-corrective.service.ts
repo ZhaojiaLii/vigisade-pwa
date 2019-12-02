@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { State } from '../../../store/app.state';
 import {
-  createCorrection,
+  createCorrection, isFromActionCorrective, isFromActionCorrectiveNavigated,
   isFromHomepage, isFromHomepageNavigated,
   loadAllUsers,
   loadCorrection,
@@ -23,8 +23,8 @@ import {
   getDesktopATraiterByDate,
   getFilteredUserAtraiter,
   getMobileATraiterByDate,
-  getRoutingState,
-  getUserMobileCorrection,
+  getHomepageRoutingState,
+  getUserMobileCorrection, getActionCorrectiveRoutingState,
 } from '../store/correction.selector';
 import { Survey } from '../../survey/interfaces/getSurveys/survey.interface';
 import { Correction } from '../interfaces/getCorrection/correction.interface';
@@ -124,7 +124,19 @@ export class ActionCorrectiveService {
     this.store.dispatch(isFromHomepageNavigated());
   }
 
-  getRoutingState(): Observable<boolean> {
-    return this.store.pipe(select(getRoutingState));
+  fromActionCorrective(): void {
+    this.store.dispatch(isFromActionCorrective());
+  }
+
+  fromActionCorrectiveNavigated(): void {
+    this.store.dispatch(isFromActionCorrectiveNavigated());
+  }
+
+  getHomeRoutingState(): Observable<boolean> {
+    return this.store.pipe(select(getHomepageRoutingState));
+  }
+
+  getActionRoutingState(): Observable<boolean> {
+    return this.store.pipe(select(getActionCorrectiveRoutingState));
   }
 }
