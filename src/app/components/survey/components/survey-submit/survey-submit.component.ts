@@ -110,10 +110,10 @@ export class SurveySubmitComponent {
         resultValidated: true,
         resultTeamMember: teamMembers,
         resultQuestion: questions,
-        resultBestPracticeTypeId: this.bestPracticeForm.value.type,
+        resultBestPracticeTypeId: this.bestPracticeForm.value.selection === '2' ? '' : this.bestPracticeForm.value.type,
         resultBestPracticeDone: this.bestPracticeForm.value.selection,
-        resultBestPracticeComment: this.bestPracticeForm.value.comment,
-        resultBestPracticePhoto: this.bestPracticeForm.value.photo,
+        resultBestPracticeComment: this.bestPracticeForm.value.selection === '2' ? '' : this.bestPracticeForm.value.comment,
+        resultBestPracticePhoto: this.bestPracticeForm.value.selection === '2' ? '' : this.bestPracticeForm.value.photo,
       };
       this.surveyService.setLoadingState(true);
       this.surveyService.createResult(result);
