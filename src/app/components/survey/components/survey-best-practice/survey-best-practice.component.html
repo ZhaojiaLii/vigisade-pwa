@@ -100,7 +100,7 @@
                 <div class="spinner-container" *ngIf="imageLoading">
                   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
                 </div>
-                <div *ngIf="group.value.photo?.length > 0" class="image-preview">
+                <div *ngIf="group.value.photo?.length > 0 && hide" class="image-preview">
                     <img src="{{group.value.photo}}" alt="Preview failed" style="width: 100%; height: 10%;" (load)="imageLoaded()">
                 </div>
             </form>
