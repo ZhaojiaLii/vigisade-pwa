@@ -34,7 +34,7 @@ export class SurveyBestPracticeComponent implements OnInit {
     if (required) {
       this.hide = true;
       this.group.get('type').setValidators([Validators.required]);
-      this.group.get('comment').setValidators([Validators.required, Validators.minLength(1)]);
+      this.group.get('comment').setValidators([Validators.required, Validators.pattern(/[a-zA-Z0-9_]+/)]);
       this.group.get('type').updateValueAndValidity();
       this.group.get('comment').updateValueAndValidity();
       this.group.get('photo').updateValueAndValidity();
