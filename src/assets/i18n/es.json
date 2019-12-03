@@ -107,7 +107,7 @@
   "HistoriqueVisites.Créateur":"Creador",
   "HistoriqueVisites.Rechercher":"Buscar",
   "HistoriqueVisites.Réinitialiser":"Reinicializar",
-  "HistoriqueVisites.Aucun contrôle trouvé": "No se ha encontrado ningún control",
+  "HistoriqueVisites.Aucun contrôle trouvé": "Ninguna visita",
   "HistoriqueVisites.contrôle trouvé":"Visita{{value}} encontrada{{value}}",
   "HistoriqueVisites.résultat(s) trouvé(s)":"resultado(s) obtenido(s)",
   "HistoriqueVisites.En cours":"En transcurso",

@@ -107,7 +107,7 @@
   "HistoriqueVisites.Créateur":"Author",
   "HistoriqueVisites.Rechercher":"Search",
   "HistoriqueVisites.Réinitialiser":"Reset",
-  "HistoriqueVisites.Aucun contrôle trouvé": "No control found",
+  "HistoriqueVisites.Aucun contrôle trouvé": "No visit",
   "HistoriqueVisites.contrôle trouvé":"Inspection{{value}} found",
   "HistoriqueVisites.résultat(s) trouvé(s)":"result(s) found",
   "HistoriqueVisites.En cours":"In progress",
