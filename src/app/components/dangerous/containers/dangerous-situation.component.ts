@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DangerousService } from '../services/dangerous.service';
@@ -11,15 +11,16 @@ import { ImageCheckEncodeService } from '../../../services/image-check-encode.se
   selector: 'app-dangerous',
   templateUrl: './dangerous-situation.component.html',
 })
-export class DangerousSituationComponent {
+export class DangerousSituationComponent implements OnInit {
 
   types$: Observable<DangerousSituationType[]> = this.dataService.getDangerousSituationTypes();
   dangerousSituationGroup = new FormGroup({
     type: new FormControl('', [Validators.required]),
-    comment: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    comment: new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z0-9_]+/)]),
     photo: new FormControl(''),
   });
   imageLoading = false;
+  showError = false;
 
   constructor(
     private dataService: DataService,
@@ -27,6 +28,16 @@ export class DangerousSituationComponent {
     private router: Router,
     private imageCompressService: ImageCheckEncodeService,
   ) {}
+
+  ngOnInit(): void {
+    this.dangerousSituationGroup.valueChanges.subscribe(val => {
+      this.showError = true;
+      const regExp = /[a-zA-Z0-9_]+/;
+      if (val.comment.match(regExp)) {
+        this.showError = false;
+      }
+    });
+  }
 
   encode(event: any) {
     this.imageLoading = this.imageCompressService.encode(event, this.dangerousSituationGroup);
