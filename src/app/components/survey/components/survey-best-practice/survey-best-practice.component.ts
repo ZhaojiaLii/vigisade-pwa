@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../../interfaces/getSurveys/survey.interface';
-import { ImageCheckEncodeService } from '../../../../services/image-check-encode.service';
+import { ImageEncoderService } from '../../../../services/image-encoder.service';
 
 @Component({
   selector: 'app-survey-best-practice',
@@ -19,7 +19,7 @@ export class SurveyBestPracticeComponent implements OnInit {
   hide = true;
 
   constructor(
-    private imageCompressService: ImageCheckEncodeService,
+    private imageCompressService: ImageEncoderService,
   ) {}
 
   encode(event: any) {

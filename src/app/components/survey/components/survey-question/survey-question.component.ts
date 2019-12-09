@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Question } from '../../interfaces/getSurveys/question.interface';
 import { TeamMemberType } from '../../interfaces/form/team-member-type.interface';
-import { compress } from '../../../../data/image.helpers';
+import { getDataUrlFromFile } from '../../../../data/image.helpers';
 
 @Component({
   selector: 'app-survey-question',
@@ -34,7 +34,7 @@ export class SurveyQuestionComponent implements OnChanges {
 
   updateImage(event: any) {
     if (event.target.files && event.target.files[0]) {
-      compress(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
+      getDataUrlFromFile(event, {maxSizeMB: 0.07}).subscribe(dataUrl => {
         this.group.patchValue({photo: dataUrl});
       });
     }

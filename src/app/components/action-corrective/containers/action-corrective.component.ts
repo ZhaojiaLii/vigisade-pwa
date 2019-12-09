@@ -20,7 +20,7 @@ import { Correction } from '../interfaces/getCorrection/correction.interface';
 import { DataService } from '../../../services/data.service';
 import 'rxjs-compat/add/operator/filter';
 import { map } from 'rxjs/operators';
-import { ImageCheckEncodeService } from '../../../services/image-check-encode.service';
+import { ImageEncoderService } from '../../../services/image-encoder.service';
 
 @Component({
   selector: 'app-action-corrective',
@@ -81,7 +81,7 @@ export class ActionCorrectiveComponent implements OnInit {
     private translateService: TranslateService,
     private deviceService: DeviceDetectorService,
     private dataService: DataService,
-    private imageCheckCompressService: ImageCheckEncodeService,
+    private imageCheckCompressService: ImageEncoderService,
   ) {
     this.router.events.filter((event: any) => event instanceof NavigationEnd)
       .subscribe(event => {
