@@ -1,10 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="card card-full-width shadow-none" [style.border]="showError ? 'solid red 1px' : ''">
-      <div class="card card-full-width shadow-none p-15">
-        <p style="color: red" *ngIf="showError">
-          {{'Tous les champs sont obligatoires.'|translate}}
-        </p>
+    <div class="card card-full-width shadow-none p-15">
         <div class="list-group-item border-0 bg-transparent d-flex align-items-center pl-0">
         <span class="circle-white-icon shadow-01 bg-warning">
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="10 10 40 40">
@@ -57,15 +53,14 @@
           <div *ngIf="dangerousSituationGroup.value.photo?.length > 0" class="image-preview">
             <img
               [hidden]="imageLoading"
-              (error)="error()"
-              (load)="imageLoaded()"
+              (error)="stopImageLoading()"
+              (load)="stopImageLoading()"
               src="{{dangerousSituationGroup.value.photo}}"
               alt="Preview failed"
               style="width: 100%; height: 10%;">
           </div>
         </form>
       </div>
-    </div>
   </div>
 
   <div class="mx-30 my-45">

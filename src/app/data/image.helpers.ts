@@ -2,7 +2,11 @@ import { from } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 import imageCompression from 'browser-image-compression';
 
-export const compress = (event, options) => from(
+export const isImageFile = fileInput => {
+  return fileInput.target.files[0].type.split('/')[0] === 'image';
+};
+
+export const getDataUrlFromFile = (event, options) => from(
   imageCompression(event.target.files[0], options)
 ).pipe(
   take(1),
